@@ -1,0 +1,679 @@
+\documentstyle[margins]{article}
+\newcommand{\cat}{+\!\!\!\!+}
+\newcommand{\take}{\,\bigtriangleup\,}
+\newcommand{\drop}{\,\bigtriangledown\,}
+\newcommand{\karate}{\!\widehat{\hbox to 10pt{}}\!}
+\newcommand{\rshp}{\widehat{\rho}}
+\newcommand{\one}{<\! 1\!>}
+\newtheorem{definition}{Definition}
+\newcommand{\Size}{\tau\,}
+\newcommand{\Dim}{\delta\,}
+\newcommand{\Ravel}{\,\mbox{\tt rav}\,}
+\newcommand{\Reshape}{\,\widehat{\rho}\,}
+\newcommand{\Reduce}{\,\mbox{\tt red}\,}
+ 
+ 
+\title{A Reduction Semantics for Array Expressions:\\The PSI Compiler
+\thanks{This work was supported by the National Science
+          Foundation's Presidential Faculty Fellow Award Program}}
+\author{Lenore Mullin \and Scott Thibault
+\thanks{L. Mullin, {\tt lenore@cs.umr.edu}, 
+and S. Thibault, {\tt sthib@cs.umr.edu}, Department of
+     Computer Science, University of Missouri-Rolla, Rolla, Missouri 65401
+USA}}
+\date{March 9, 1994}
+\begin{document}
+\include{compiler.title}
+\maketitle
+\section*{Abstract} 
+High Performance Computing is not only concerned with the performance of
+a program on a very fast processor, but also high performance
+on many fast processors perhaps of different speeds and topologies. 
+Scientific computation and modeling often require real time
+visualizations on high resolution graphics terminals. The 
+data structure most widely used in scientific computation is the
+array. Arithmetics operations and permutations are often used
+where its associated algebra transcends many
+scientific disciplines. In order to achieve high performance
+computing, the interfaces with which people interact with computers
+must be rapid and accurate with the ability to move across
+many platforms and adapt quickly to change. If a programming
+language supports an algebra useful to scientists, the programming
+language, and subsequent compiler, must optimize the resources of
+a particular machine or machines. That is, the compiled
+program must allocate the least amount of memory and do the least
+amount of arithmetic. Ideally, we'd like to minimize
+latency and bottlnecking and achieve load balancing of all used
+resources. These issues may be addressed by employing
+The Psi Calculus\cite{mul88,mdst92,mdst93,mdst94,tm93} 
+as a backend compiler to scientific languages. 
+The reduction rules of the Psi Calculus, which
+describe how to simplify array expressions,
+were recently automated in the Psi
+Compiler\cite{tm93}. This paper presents the results of this effort.
+
+
+\section*{Shape Analysis}
+ 
+In order to perform reductions on array expressions,  the shapes of all 
+variables and partial results must be known.  The only 
+given shapes are those of the variables and are acquired while parsing the 
+array declarations.  The shape of each partial result is computed in terms
+of these given shapes.  This process occurs from the innermost of the expression
+outward (a postfix order).  We will see in the next section that the process 
+of reduction occurs from the outermost inward (an infix order)
+\footnote{Order is irrelevant since the $\psi$-calculus has the Church-Rosser
+Property.}.  
+So these
+are conceded distinct processes and require that the entire expression tree
+be retained.
+ 
+Given that we have a complete expression tree, we can compute the shape of 
+every node in
+the tree.  The shape at a given node in the tree represents the resulting 
+shape of the expression represented by the sub-tree rooted in the given
+node.  The leaves of the tree will be variable accesses and the shape of them
+will be know from the variable declarations.  Visiting the nodes in a postfix 
+manner ensures that when a node is visited that the shapes of it's arguments
+(children) have already been computed.
+The shape of the internal nodes is computed in terms of the shapes
+of it's children by the following rules\cite{mul88}:
+\footnote{The Appendix presents a brief introduction to a Mathematics
+of Arrays(MOA) and the psi calculus.}
+\begin{center}
+Shape Calculation
+\end{center}
+\begin{itemize}
+\item
+Dimension: $\rho(\delta\xi) \equiv \Theta$
+\item
+Shape: $\rho(\rho\xi) \equiv <\delta\xi>$
+\item
+Psi: $\rho(\vec{v}\psi\xi_{r}) \equiv  (\tau\vec{v})\drop (\rho\xi_{r})$
+\item
+Concatenation: $\rho(\xi_{l}\cat\xi_{r}) \equiv  ((1\take (\rho\xi_{l}))+(1\take (\rho\xi_{r})))
+\cat (1\drop (\rho\xi_{l}))$
+\item
+Algebraic operators: $\rho(\xi_{l}\;\hbox{op}\;\xi_{r}) \equiv  \rho\xi_{l}
+\equiv \rho\xi_{r}$
+\item
+Scalar extension: $\rho(\sigma\;\hbox{op}\;\xi) \equiv  \rho\xi$
+\item
+Iota (scalar): $\rho(\iota\sigma) \equiv  <\!\sigma\! >$
+\item
+Iota (vector): $\rho(\iota\vec{v}) \equiv \vec{v}\cat (\rho\vec{v})$
+\item
+Take: $\rho(\sigma\take\xi) \equiv  <\! |\sigma |\! >\cat (1\drop (\rho\xi))$
+\item
+Drop: $\rho(\sigma\drop\xi) \equiv ((1\take (\rho\xi))-|\sigma |)
+\cat (1\drop (\rho\xi))$
+\item
+Omega: $\rho(\xi_{l}\: _{\mbox{op}}\Omega_{<\sigma_{l} \sigma_{r}>} \xi_{r})
+	\equiv \vec{u}\cat\vec{v}\cat\vec{x}\cat\vec{w}$
+ 
+where
+\begin{eqnarray*}
+m & \equiv &  \mbox{min }(((\delta\xi_{l})-\sigma_{l}),((\delta\xi_{r})-\sigma_{r})) \\
+\vec{u} & \equiv & (-m)\drop((-\sigma_{l})\drop\rho\xi_{l}) \\
+\vec{v} & \equiv & (-m)\drop((-\sigma_{r})\drop\rho\xi_{r}) \\
+\vec{x} & \equiv & (-m)\take((-\sigma_{l})\drop\rho\xi_{l}) \\
+\vec{w} & \equiv & \rho(((\vec{i}\cat\vec{k})\psi\xi_{l})\mbox{op}
+	((\vec{j}\cat\vec{k})\psi\xi_{r})) \\
+ & & \mbox{for } \;\;0\leq^{*}\vec{i}<^{*}\vec{u},\\
+& & 0\leq^{*}\vec{j}<^{*}\vec{v}, \;\;
+	0\leq^{*}\vec{k}<^{*}\vec{x} \\
+\end{eqnarray*}
+\end{itemize}
+ 
+Having these rules we can compute the shape of every node in the tree.  When
+each node has an expression for it's shape, shape analysis is complete and we
+can continue with the reduction of the expression.
+ 
+\section*{Reduction}
+ 
+All  array operators (excluding the algebraic operators) are 
+available to allow the designer to shift things around and access sub-arrays
+of an array.  If an assignment statement involves no algebraic operators and
+only array operators then no data is changed. It is only relocated in the 
+resulting array.  Since the data is only being relocated, no temporary 
+variables should be required for execution of the assignment.  In all previous
+work temporary variables are used for each array operation during the 
+execution of an expression.  The process of reduction involves reducing an 
+array expression from one that uses
+complex array operators to one that only involves memory accesses.  Thus we
+present a method of reduction to generate an efficient implementation of
+an array expression.
+ 
+As an example lets look at the assignment of a MOA expression to an array.
+$$A=B\cat(<\! 1\; 2\! > \drop C)$$ where $\rho B=<\! 2\; 4\! >$, $\rho 
+C=<\! 4\; 6\! >$
+and $A$ is conformable.  It's easy to see that we can realize this assignment 
+without any temporaries by the following expressions.
+$$\begin{array}{llll}
+\vec{i}\psi A & = & \vec{i}\psi B &;\forall <\! 0 \; 0\! >\leq^{*}\vec{i}
+<^{*}<\! 2\; 4\! > \\
+(\vec{i}+<\! 2\; 0\! >)\psi A & = & (\vec{i}+<\! 1\; 2\! >)\psi C &
+;\forall <\! 0\; 0\! >\leq^{*}\vec{i}<^{*}<\! 3\; 4\! >
+\end{array}$$
+We would ideally like the
+compiler to be able to generate these two expressions and avoid the use of
+the temporary variables.  This is in fact possible.
+ 
+All array expressions in MOA have the property that they can be reduced
+to a normal form.
+The resulting normal form of an expression involves only memory accesses
+and algebraic operators.  Furthermore, deriving the normal form of an 
+expression is a mechanical process that is easily implemented on 
+computational machines.
+So the normal form is indeed what we need the 
+compiler to find, and it can be achieved mechanically.
+ 
+The goal for the compiler will be to input an expression and reduce it into
+separate expressions (one for each variable in the expression) with the
+array operators eliminated.  The input expression is in the form
+$A=B$ where $B$ is an expression.
+We want each output statement to be in the
+form
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}, \;\;(\vec{v}+\vec{l})\psi A=
+(\vec{v}+\vec{i})\psi B$$
+In this expression $\vec{b}$ refers to the bound, $\vec{l}$ refers to the
+location of the assignment in the complete result (since the expressions 
+are reduced to separate expression, each reduced expression represents only
+one part of the result), $\vec{i}$ is the top left-hand corner of the
+sub-array that is to be assigned and $B$ is an array variable.  
+If this is the output we desire and
+we're given an input expression $A=\xi$ then we'll start the reduction process
+by assuming that the reduced expression is just
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}, (\vec{v}+\vec{l})\psi A=
+(\vec{v}+\vec{i})\psi \xi$$ where $\vec{b}\equiv\rho\xi, \vec{l}\equiv^{*}0$,
+and $\vec{i}\equiv^{*}0$.  This expression is correct and is
+in the right form.  However, it may not be the reduced, normal form.  If the 
+top node of the expression tree for $\xi$ is a variable access then this is 
+the normal form and we're done.  If the top node is an operator then the
+expression needs more work to find the reduced expression(s).  In this
+case we need to eliminate the top operator by using a rewrite rule,
+creating one or two new expressions.
+ 
+This process is probably best seen by an example.  The example given earlier
+was $$A=B\cat(<\! 1\; 2\! > \drop C)$$ $\rho B=<\! 2\; 4\! >$, $\rho 
+C=<\! 4\; 6\! >$
+and $A$ is conformable.  Our starting assumption is 
+$$\forall 0\leq^{*}\vec{v}<^{*}<\! 5\; 4\!>, (\vec{v}+<\! 0\; 0\!>)\psi A=
+(\vec{v}+<\! 0\; 0\!>)\psi (B\cat(<\! 1\; 2\! >\drop C))$$. 
+This expression is not free from array operators
+so it's not in normal form.  We notice though that the expression can be
+rewritten, eliminating the $\cat$, as
+$$\begin{array}{llll}
+\forall 0\leq^{*}\vec{v}<^{*}<\! 2\; 4\!>, & (\vec{v}+<\! 0\; 0\!>)\psi A 
+& = & (\vec{v}+<\! 0\; 0\!>)\psi B  \\
+\forall 0\leq^{*}\vec{v}<^{*}<\! 3\; 4\!>, & (\vec{v}+<\! 2\; 0\;>)\psi A 
+& = & (\vec{v}+<\! 0\; 0\!>)\psi (<\! 1\; 2\! >\drop C)
+\end{array}$$
+The first expression here is in normal form since it contains no array 
+operators (simple $\psi$ operations are only for memory access).  The 
+second expression is not in normal form so we continue reducing that
+expression.  That can be done by noticing that we can rewrite this expression,
+eliminating the $\drop$, as
+$$\forall 0\leq^{*}\vec{v}<^{*}<\! 3\; 4\!>, (\vec{v}+<\! 2\; 0\!>)\psi A  = 
+(\vec{v}+<\! 1\; 2\!>)\psi C$$
+This expression is in normal form so now the reduction is complete and the
+final result is the two expressions
+$$\begin{array}{llll}
+\forall 0\leq^{*}\vec{v}<^{*}<\! 2\; 4\!>,& (\vec{v}+<\! 0\; 0\!>)\psi A 
+& = & (\vec{v}+<\! 0\; 0\!>)\psi B  \\
+\forall 0\leq^{*}\vec{v}<^{*}<\! 3\; 4\!>,& (\vec{v}+<\! 2\; 0\!>)\psi A 
+& = & (\vec{v}+<\! 1\; 2\!>)\psi C
+\end{array}$$
+These are equivalent to the expressions given in the first example at the
+beginning of this section.
+ 
+The only mystery in this process is rewriting the expression in order to 
+eliminate the outermost operator (the top node of the sub-tree).  This
+elimination can be systematically done based on a set of rules for each
+operator.  Each operator is eliminated such that one or two expressions are
+produced.
+Each rule for an operator consists of an expression for computing
+the new bound, location, and indexes, for the one or two new expressions.  
+The expressions in each rule are dependent only on the shapes of the arguments
+and the function represented by that rule.  The shapes are already known from
+shape analysis.  The rewrite rules that the compiler uses during the reduction
+are given in the next section.
+ 
+Thus we have a deterministic way to perform the reduction of an array 
+expression based on our previous results from shape analysis.  We start
+with the assumption that the reduced expression is 
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}, (\vec{v}+\vec{l})\psi A=
+(\vec{v}+\vec{i})\psi \xi$$ where $\vec{b}\equiv\rho\xi, \vec{l}\equiv^{*}0$,
+$\vec{i}\equiv^{*}0$, $A$ is the result and $\xi$ is the expression.  
+We now examine the outermost operator, if it is
+not a simple variable access we apply the rule for that operator generating
+one or two new expressions, otherwise we are done.  If we generate new
+expressions then we examine the outermost operator of these expressions and
+follow the same process in a recursive manner until no new expressions are
+generated.  When this process is complete, we have a set of expressions 
+that represent the reduced form of the original expression.
+ 
+\section*{Reduction Rules}
+\begin{figure}
+\framebox[6.5in][l]{\parbox{6.2in}{\obeylines
+program := \{ procedure\_definition \} \\
+procedure\_definition := PROCEDURE\_name "(" formal\_parameter\_list ")" block\_body \\
+formal\_parameter\_list := parameter\_definition \{ "," parameter\_definition \} \\
+parameter\_definition := "int" PARAMETER\_name \verb+|+
+	"array" PARAMETER\_name array\_definition \\
+array\_definition := "$\karate$" INTEGER\_number "$<$" \{ INTEGER\_number \verb+|+ 
+	INTEGER\_PARAMETER\_name \} "$>$" \\
+block\_body := "\{" definition\_part statement\_list "\}"
+definition\_part := \{ constant\_definition\_part \verb+|+ variable\_definition\_part \verb+|+
+	global\_definition \} \\
+constant\_definition\_part := constant\_definition ";" \verb+|+ 
+	constant\_scalar\_definition ";" \\
+constant\_definition := "const" "array" VARIABLE\_name array\_definition "="
+	vector\_constant \\
+constant\_scalar\_definition := "const" "array" VARIABLE\_name "$\karate$0 $<>$=" number \\
+vector\_constant := "$<$" \{ number \} "$>$" \\
+variable\_definition\_part := variable\_definition ";" \\
+variable\_definition := array VARIABLE\_name array\_definition \\
+global\_definition := "global" VARIABL\_name ";" \\
+statement\_list := \{ statement ";" \} \\
+statement := assignment\_statement \verb+|+ for\_statement \verb+|+ allocate\_statement \\
+allocate\_statement := "allocate" identifier variable\_access \\
+for\_statement := for "(" term "$<$=" variable\_access "$<$" term ")" "\{" 
+	statement\_list "\}" \\
+assignment\_statement := variable\_access "=" expression \\
+variable\_access := VARIABLE\_name \verb+|+ PARAMETER\_name \\
+expression := factor \{ operator expression \} \\
+operator := "+" \verb+|+ "-" \verb+|+ "*" \verb+|+ "/" \verb+|+ "psi" \verb+|+ "take" \verb+|+ "drop" \verb+|+ "cat" \verb+|+ "pdrop" \verb+|+
+	"ptake" \verb+|+ operator "omega" constant\_vector \\
+unary\_operator := "iota" \verb+|+ "dim" \verb+|+ "shp" \verb+|+ "+ red" \verb+|+ "- red" \verb+|+ "* red" \verb+|+ 
+	"/ red" \verb+|+ "tau" \verb+|+ "rav" \\
+factor := term  \verb+|+ "(" expression ")" \verb+|+ unary\_operator factor \\
+term := variable\_access \verb+|+ constant\_vector \\
+variable\_access := identifier; \\
+identifier := letter \{ letter \verb+|+ digit \verb+|+ '\_' \} \\
+constant\_vector := "$<$" \{ number \} "$>$" \\
+}}
+\caption{The MOA compiler input language specification}
+\label{bnf}
+\end{figure}
+The compiler is built using standard techniques, plus the added function
+of performing shape analysis and the reduction.  The shape analysis is
+performed as the input program is being parsed.  The shape of an expression
+is calculated from the shapes of it's arguments by the definitions listed
+in the previous section.  When an expression has been completely parsed
+it is reduced to a normal form by successively eliminating the outermost
+operator in the expression.  The elimination is performed based on the
+definition of the operator.  The rules used for the functions in our
+grammar (Figure \ref{bnf}) follow.
+
+In the last section the general form that expressions were reduced to assumed
+that the dimensions of the arrays were equal.  Thus the length of $\vec{v}$
+would be the same as the length of $\vec{l}$, and $\vec{i}$.  However
+in general this won't be true so instead the following general form is
+used.
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}, \;\;(\vec{v}+\vec{l})\psi(\vec{m}\psi 
+        A)=(\vec{v}+\vec{i})\psi(\vec{n}\psi \xi)$$
+In this form $\vec{l}\cat\vec{m}$ is a full index representing the location
+in $A$ and $\vec{i}\cat\vec{n}$ is a full  index representing the location
+in $\xi$.  This allows $\tau\vec{v}$ to be smaller than the dimension of either
+array.
+
+
+ 
+\begin{itemize}
+\item{Dim}
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}, \;\;(\vec{v}+\vec{l})\psi(\vec{m}\psi 
+	A)=(\vec{v}+\vec{i})\psi(\vec{n}\psi (\delta\xi))\Rightarrow$$
+$$
+\forall 0\leq^{*}\vec{v}<^{*}\vec{b}, \;\;(\vec{v}+\vec{l})\psi(\vec{m}\psi A)=
+(\vec{v}+\vec{i})\psi(\vec{n}\psi \xi.dim)$$
+ 
+\item{Shape}
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}, \;\;(\vec{v}+\vec{l})\psi(\vec{m}\psi
+	A)=(\vec{v}+\vec{i})\psi(\vec{n}\psi (\rho\xi))\Rightarrow$$
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}, \;\;(\vec{v}+\vec{l})\psi(\vec{m} \psi
+	A)=(\vec{v}+\vec{i})\psi(\vec{n}\psi \xi.shape)$$
+ 
+\item{Psi}
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}, \;\;(\vec{v}+\vec{l})\psi(\vec{m}\psi 
+	A)=(\vec{v}+\vec{i})\psi(\vec{n}\psi(\vec{j}\psi\xi))\Rightarrow$$
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}', \;\;(\vec{v}+\vec{l}')\psi(\vec{m}'
+	\psi A)=(\vec{v}+\vec{i}')\psi(\vec{n}'\psi\xi)$$
+where $\vec{b}', \vec{l}', \vec{m}', \vec{i}',$ and $\vec{n}'$ are defined by
+\begin{eqnarray*}
+\vec{b}' & \equiv & \vec{b} \\
+\vec{l}' & \equiv & \vec{l} \\
+\vec{m}' & \equiv & \vec{m} \\
+\vec{i}' & \equiv & \vec{i} \\
+\vec{n}' & \equiv & \vec{j}\cat\vec{n}
+\end{eqnarray*}
+ 
+\item{Take}
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}, \;\;(\vec{v}+\vec{l})\psi(\vec{m}\psi 
+	A)=(\vec{v}+\vec{i})\psi(\vec{n}\psi(\vec{j}\take\xi))\Rightarrow$$
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}', \;\;(\vec{v}+\vec{l}')\psi(\vec{m}'
+	\psi A)=(\vec{v}+\vec{i}')\psi(\vec{n}'\psi\xi)$$
+where $\vec{b}', \vec{l}', \vec{m}', \vec{i}',$ and $\vec{n}'$ are defined by
+\begin{eqnarray*}
+\vec{b}' & \equiv & \vec{b} \\
+\vec{l}' & \equiv & \vec{l} \\
+\vec{m}' & \equiv & \vec{m} \\
+\vec{x} & \equiv & ((\vec{j}<0)(\vec{j}+((\tau\vec{j})\take\rho\xi))+
+	(\tau\vec{j}\take\vec{i}))\cat ((\tau\vec{j})\drop\vec{i}) \\
+\vec{i}' & \equiv & (\tau n)\drop\vec{x} \\
+\vec{n}' & \equiv & (\tau n)\take\vec{x}
+\end{eqnarray*}
+ 
+\item{Drop}
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}, \;\;(\vec{v}+\vec{l})\psi(\vec{m}\psi 
+	A)=(\vec{v}+\vec{i})\psi(\vec{n}\psi(\vec{j}\drop\xi))\Rightarrow$$
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}', \;\;(\vec{v}+\vec{l}')\psi(\vec{m}'
+	\psi A)=(\vec{v}+\vec{i}')\psi(\vec{n}'\psi\xi)$$
+where $\vec{b}', \vec{l}', \vec{m}', \vec{i}',$ and $\vec{n}'$ are defined by
+\begin{eqnarray*}
+\vec{b}' & \equiv & \vec{b} \\
+\vec{l}' & \equiv & \vec{l} \\
+\vec{m}' & \equiv & \vec{m} \\
+\vec{x} & \equiv & ((\vec{j}>0)(\vec{j})+((\tau\vec{j})\take\vec{i}))\cat
+	((\tau\vec{j})\drop\vec{i}) \\
+\vec{i}' & \equiv & (\tau n)\drop\vec{x} \\
+\vec{n}' & \equiv & (\tau n)\take\vec{x}
+\end{eqnarray*}
+ 
+\item{Cat}
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}, \;\;(\vec{v}+\vec{l})\psi(\vec{m}\psi 
+	A)=(\vec{v}+\vec{i})\psi(\vec{n}\psi(\xi_{l}\cat\xi_{r}))\Rightarrow$$
+$$\forall 0\leq^{*}\vec{v_{l}}<^{*}\vec{b_{l}}, \;\;(\vec{v_{l}}+\vec{l_{l}})
+	\psi(\vec{m_{l}}\psi A)=
+	(\vec{v_{l}}+\vec{i_{l}})\psi(\vec{n_{l}}\psi \xi_{l}),$$
+$$\forall 0\leq^{*}\vec{v_{r}}<^{*}\vec{b_{r}}, \;\;(\vec{v_{r}}+\vec{l_{r}})
+	\psi(\vec{m_{r}}\psi A)=
+	(\vec{v_{r}}+\vec{i_{r}})\psi(\vec{n_{r}}\psi \xi_{r})$$
+where $\vec{b_{l}}, \vec{l_{l}}, \vec{m_{l}}', \vec{i_{l}}, \vec{n_{l}}, 
+	\vec{b_{r}}, \vec{l_{r}} \vec{m_{r}}, \vec{i_{r}},$ and 
+	$\vec{n_{r}}$ are defined by
+\begin{eqnarray*}
+\vec{b'} & \equiv & [( 1\take(((\rho\vec{n})\rshp 1)\cat\vec{b}))\lfloor
+	(( 1\take\rho\xi_{l})-( 1\take(\vec{n}\cat\vec{i})))]
+	\cat( 1\drop(((\rho\vec{n})\rshp 1)\cat\vec{b})) \\
+\vec{b_{l}} & \equiv & ((\vec{b}'[0]>0)(((\tau\vec{n})\drop\vec{b}')[0]))\cat
+	((\tau\vec{n}+1)\drop\vec{b}') \\
+\vec{l_{l}} & \equiv & \vec{l} \\
+\vec{m_{l}} & \equiv & \vec{m} \\
+\vec{x_{l}} & \equiv & (( 1\take\rho\xi_{l})\lfloor( 1\take
+	(\vec{n}\cat\vec{i})))\cat
+	( 1\drop(\vec{n}\cat\vec{i})) \\
+\vec{i_{l}} & \equiv & (\tau n)\drop\vec{x_{l}} \\
+\vec{n_{l}} & \equiv & (\tau n)\take\vec{x_{l}} \\
+\vec{b_{r}} & \equiv & (( 1\take\vec{b})-( 1\take\vec{b_{l}}))\cat
+	( 1\drop\vec{b}) \\
+\vec{l_{r}} & \equiv & (( 1\take\vec{l})+( 1\take\vec{b_{l}}))\cat
+	( 1\drop\vec{l}) \\
+\vec{m_{r}} & \equiv & \vec{m} \\
+\vec{x_{r}} & \equiv & (( 1\take(\vec{n}\cat\vec{i}))-
+	( 1\take\vec{x_{l}}))\cat( 1\drop(\vec{n}\cat\vec{i})) \\
+\vec{i_{r}} & \equiv & (\tau n)\drop\vec{x_{r}} \\
+\vec{n_{r}} & \equiv & (\tau n)\take\vec{x_{r}} \\
+\end{eqnarray*}
+ 
+\item{Omega (binary)}
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}, \;\;(\vec{v}+\vec{l})\psi(\vec{m}\psi 
+	A)=(\vec{v}+\vec{i})\psi(\vec{n}\psi
+	(\xi_{l}\: _{\mbox{op}}\Omega_{<\;\sigma_{l} \sigma_{r}\;>}
+	\xi_{r}))\Rightarrow$$
+Forall $(h\take(\vec{n}\cat\vec{i}))\leq^{*}\vec{j}<^{*}
+	(h\take(\vec{b_{0}}+(\vec{n}\cat\vec{i})))$
+$$\forall 0\leq^{*}\vec{v}<^{*}\vec{b}', \;\;(\vec{v}+\vec{l}')\psi(\vec{m}'
+	\psi A)=(\vec{v}-\vec{i}')\psi(\vec{n}'\psi 
+	[((((\delta\xi_{l})-\sigma_{l})\take\vec{j})\psi\xi_{l}) \mbox{op}
+	((((\delta\xi_{r})-\sigma_{r})\take\vec{j})\psi\xi_{r})]) $$
+where $m, h, d_{1}, \vec{b_{0}}, \vec{b}', \vec{l}', \vec{m}', \vec{i}',$ and 
+	$\vec{n}'$ are defined by
+\begin{eqnarray*}
+m & = & ((\delta\xi_{l})-\sigma_{l})\lfloor ((\delta\xi_{r})-\sigma_{r}) \\
+h & \equiv & ((\delta\xi_{r})-\sigma_{r}+(\delta\xi_{l})-\sigma_{l}-m \\
+d_{1} & = & \delta [\xi_{l}\: _{\mbox{op}}\Omega _{<\;\sigma_{l} \sigma_{r}\;>}
+	\xi_{r}] \\
+\vec{b_{0}} & \equiv & ((d1-(\tau\vec{b}))\rshp 1)\cat\vec{b} \\
+\vec{b}' & \equiv & h\drop\vec{b_{0}} \\
+\vec{l}' & \equiv & h\drop(\vec{m}\cat\vec{l}) \\
+\vec{m}' & \equiv & (h\take(\vec{m}\cat\vec{l}))-(h\take(\vec{n}\cat\vec{i})) \\
+\vec{i}' & \equiv & h\drop(\vec{n}\cat\vec{i}) \\
+\vec{n}' & \equiv & \Theta \\
+\end{eqnarray*}
+\end{itemize}
+ 
+\section*{The Compiler Implementation}
+\begin{figure}                  
+\framebox[6.5in][l]{\parbox{6.2in}{
+\begin{tabbing}
+\obeylines
+test(array A$\karate$2 $<\! 5\; 4\!>$, array C$\karate$2 $<\! 4\; 6\!>$)\\
+\\
+\{ \= \\
+\>  const array B$\karate$2 $<\! 2\; 4\!>=<\! 1\; 2\; 3\; 
+	4\; 1\; 2\; 3\; 4\! >$;\\
+\\
+\>  A=B cat ($<\! 1\; 2\!>$ drop C);\\
+\} \\
+\end{tabbing}
+}}
+\caption{An example input file for the MOA compiler}
+\label{ex_moa}
+\end{figure}
+\begin{figure}[h]
+\framebox[6.5in][l]{\parbox{6.2in}{
+\begin{tabbing} 
+\obeylines
+\#include \verb+<+stdlib.h\verb+>+\\
+\#include "moalib.e"\\
+test(float \_A[], float \_C[])\\
+ 
+\{ \= \\
+\>  int \= i0;\\
+\>  int i1;\\
+\>  int step1[2];\\
+\>  int step2[2];\\
+\>  int shift,offset;\\
+\>  float \_B[]=\{1.000000, 2.000000, 3.000000, 4.000000, 
+	1.000000, 2.000000, 3.000000, 4.000000\};\\
+\>  shift=0*4+0;\\
+\>  offset=0*4+0;\\
+\>  for (i0=0; i0<2; i0++) \{ \\
+\>\>    for \= (i1=0; i1<4; i1++) \{ \\
+\>\>\>      *(\_A+shift)=*(\_B+offset); \\
+\>\>\>      shift++; \\
+\>\>\>      offset++;\\
+\>\>    \}\\
+\>  \}\\
+\>  shift=2*4+0;\\
+\>  offset=1*6+2;\\
+\>  step1[0]=2;\\
+\>  for (i0=0; i0<3; i0++) \{\\
+\>\>    for (i1=0; i1<4; i1++) \{\\
+\>\>\>      *(\_A+shift)=*(\_C+offset);\\
+\>\>\>      shift++;\\
+\>\>\>      offset++;\\
+\>\>    \}\\
+\>\>    offset+=step1[0];\\
+\>  \}\\
+\}\\
+\end{tabbing}
+}}
+\caption{The output of the MOA compiler for the example}
+\label{ex_C}
+\end{figure}
+A preliminary compiler has been implemented to realize these reduction 
+techniques.  The compiler was written in the C language and can be
+used on several platforms.  These platforms include networks of Sun, Next,
+and SGI workstations, and the Connection Machine CM-5.
+The compiler excepts an input program of
+array expressions written in MOA notation.  The compiler compiles the 
+input program directly into C output.  The input language is described in
+figure \ref{bnf}.  Notice that all that remains after the psi reductions is
+the manipulation of address pointers for B and C.
+ 
+The procedure definition provides an interface to C programs by allowing
+integers and pointers to arrays to be passed as parameters to the MOA 
+procedure.
+ 
+Now we can write a procedure {\it test} to implement the expressions we used
+in the reduction section.  The input program for our example is shown in
+figure \ref{ex_moa}.  The resulting C output from compiling the $test$ 
+procedure is shown in figure \ref{ex_C}.
+
+
+\section*{Conclusion}
+Our decomposition and mapping technologies to one or more processors also
+employs the Psi Calculus \cite{mdst92,mdst93,mdst94}.  
+The techniques employed in 
+\cite{mdst93} were extended and scaled to a CM-5, a topic of our most
+recent  paper\cite{mdst94}.  
+Our recent efforts are to interface scientific languages such as
+Fortran 90 and to benchmark our performance with other Fortran 90 compilers.
+We are also decomposing problems using PVM.  We will determine if our
+automatic techniques compare to PVM's performance and versatility.  Future
+work is to support heterogeneous processing and load balancing.
+ 
+\clearpage
+
+\bibliographystyle{plain}
+\bibliography{compiler}
+
+\clearpage
+\appendix
+
+\section*{Appendix A: Introduction to the Psi Calculus}
+
+The definitions that follow are all that is needed to follow the
+proofs within this paper. For full definitions and typing
+see\cite{mul88,hai91}.
+Angle brackets $<\;>$ and square brackets $[\;]$ are used to help visualize
+the dimensionality of an array. For example, 3 is a scalar hence
+no brackets are used. If we wanted to denote a one component
+vector we'd say $<3>$, a one row one column matrix by $[3]$, etc.
+Multiple brackets show dimensionality, i.e. $[[2\;3\;4]]$ illustrates
+a 1 by 1 by 3 array. We call this information shape or form and denote
+it by $<1\;1\;3>$. Scalars are denoted by lower case alphabetics or $\sigma$,
+vectors by lower case alphabetics with an arrow above and higher
+dimensional arrays by capital letters or $\xi$. $<\;>$ and $\Theta$ denote
+the empty vector. A superscript  denotes the dimensionality.
+All objects in the $\psi$ calculus are arrays, e.g. scalars are
+0-dimensional arrays, vectors are 1-dimensional arrays, matrices
+are 2-dimensional arrays, etc..
+\begin{definition}
+The unary prefix operation $\delta$ returns the dimensionality
+of an array.
+\[ \delta A^{n} \equiv n\].
+\end{definition}
+\begin{definition}
+An array, $A$ has a shape, denoted by $\rho A$, which is a
+vector whose entries are the lengths of each of A's dimensions.
+\[ \rho A \equiv < s_{0}, \ldots,  s_{(\delta A)-1}> \]
+where the $s_j$'s are non-negative integers, $0 \leq j < (\delta A)-1$
+\end{definition}
+\begin{definition}
+The total number of components of an array, $\tau A$, is defined whenever
+\[ \tau A \equiv \pi ( \rho A )  \equiv \prod_{i=0}^{(\delta A)-1} (\rho A)_{i}
+\]
+\end{definition}
+\begin{definition}
+Concatenation of two vectors $\vec x \cat \vec y$ is defined whenever
+\[
+\rho \vec x \cat \vec y \equiv < (\tau \vec x ) + (\tau \vec y)>\]
+and $\forall i$, s.t. $0 \leq i < ((\tau \vec x ) + (\tau \vec y))$
+\[
+(\vec x \cat \vec y)[i] \equiv \left\{
+\begin{array}{ll}
+\vec x [i] & \mbox{if $ 0 \leq i < (\tau \vec x )$} \\
+\vec y [i - (\tau \vec x)] &
+\mbox{if $ (\tau \vec x) \leq i < ((\tau \vec x) + (\tau \vec y)) $ }
+\end{array}
+\right. \]
+\end{definition}
+\begin{definition}
+Mapping valid index vectors to lexicographic coordinates is done using
+$\gamma$. If we assume  $\tau \vec i \equiv \tau \vec s \equiv j$.
+$\gamma$ is defined whenever
+\begin{eqnarray*}
+\gamma(<\;>\;;\;<\;>) &\equiv &0 \\
+\gamma(<i>\;;\;<s>) &\equiv& i \\
+\gamma(<i_{0} \cdots i_{j-1}>\;;\;<s_{0} \cdots s_{j-1}>) & \equiv &
+i_{j-1} + ( s_{j-1} \times \gamma ( <i_{0} \cdots i_{j-2}>\;;\;< s_{0} \cdots
+s_{j-2}>))
+\end{eqnarray*}
+noting that $0 \leq ^{*} \vec i <^{*} (\rho A) \Rightarrow
+0 \leq  \gamma( \vec i\;;\;(\rho A ) < ( \tau A)$.
+\end{definition}
+\begin{definition}
+The reshape operator $\Reshape$ restructures an array
+having the same contents to a new shape or {\em form}.
+Given a vector $\vec v$ containing non-negative integers,
+$\vec v \Reshape A $ is well defined providing
+$\pi \vec v \equiv \pi <\rho A >$.
+\end{definition}
+\begin{definition}
+The $\Ravel$ operator flattens an array into a vector having the
+same content s.t. $\rho \Ravel A \equiv <\pi (\rho A)>$.
+\end{definition}
+\begin{definition} Take $\bigtriangleup$ and drop $\bigtriangledown$ are
+needed to define the indexing function $\psi$. Given $n$ a non negative
+integer s.t. $ 0 \leq n < ( \tau \vec v )$
+\begin{eqnarray*}
+\rho (n \bigtriangleup \vec v )\equiv <n> \\ \rho n (\bigtriangledown \vec v )
+\equiv < ( \tau \vec v ) - n >
+\end{eqnarray*}
+and $\forall i,j$ s.t. $ 0 \leq i < n$ and $0 \leq j < (\tau \vec v)-n$
+\begin{eqnarray*}
+( n \bigtriangleup \vec v ) [i] \equiv \vec v [i] \\
+( n \bigtriangledown \vec v) [i] \equiv \vec v [n+1]
+\end{eqnarray*}
+\end{definition}
+We define the $\psi$ function to
+take any valid index of an array and return a scalar or subsection
+of an array, e.g. a row or plane.
+We showed in \cite{hai91} how $\psi$ was defined inductively on its
+first argument as follows:
+\begin{definition}
+The indexing function $\psi$ is defined whenever
+\begin{itemize}
+\item $\Theta \psi A \equiv A$
+\item Given: $\vec i$ is a valid index vector,
+$\vec s $ is  an array shape and
+$\vec c$  denotes the components of an array with shape $\vec s$.
+\[\psi \equiv \lambda \vec i \lambda \vec s \lambda \vec c.\; {\bf if}\;[\tau (\vec i)\ = 0, \;\vec s \Reshape \vec c\;, \psi ( 1 \bigtriangledown 
+\vec i,
+1 \bigtriangledown \vec s, ( \pi 1 \bigtriangledown \vec s )
+\bigtriangleup ( \vec i [0] \times ( \pi 1 \bigtriangledown \vec s ))
+\bigtriangledown \vec c )] \]
+\item The shape or {\em form} of $\vec i \psi A$, is defined
+whenever
+\[ \rho (\vec i \psi A) \equiv (\tau \vec i ) \bigtriangledown (\rho A ) \]
+\end{itemize}
+\end{definition}
+\begin{definition} Index generation on scalars or vectors is defined
+whenever
+\begin{eqnarray*}
+\rho (\iota n) \equiv <n> &\;& \rho (\iota \vec v) \equiv
+\vec v \cat (\rho \vec v)
+\end{eqnarray*}
+and $\forall i$ s.t. $0 \leq i < n$ and
+$\forall \vec i$ s.t. $0 \leq^{*} \vec i <^{*} \vec v$
+\begin{eqnarray*}
+(\iota n) [i] \equiv i &\;&
+\vec i \psi  (\iota \vec v) \equiv \vec i
+\end{eqnarray*}
+\end{definition}
+\begin{definition} $\xi_{l} R^{*} \xi_{r}$ is defined whenever $R$ is a scalar 
+relation, and $\rho\xi_{l}\equiv\rho\xi_{r}$.  $\xi_{l} R^{*} \xi_{r}$ is
+true iff $$\forall\vec{i}\;\mbox{s.t.}\; 0\leq^{*}\vec{i}<^{*}\rho\xi_{l},\;\;
+(\vec{i}\psi\xi_{l}) R (\vec{i}\psi\xi_{r})$$ is true.  Furthermore if
+$\sigma$ is a scalar, we write $\sigma R^{*} \xi$ to mean, for all valid
+$\vec{i},\;\;\sigma R(\vec{i}\psi\xi)$.  This is also equivalent to
+$\xi R^{*}\sigma$.
+\end{definition}
+\begin{definition}
+$a\lfloor b\equiv \mbox{min}(a,b)$
+\end{definition}
+
+\end{document}

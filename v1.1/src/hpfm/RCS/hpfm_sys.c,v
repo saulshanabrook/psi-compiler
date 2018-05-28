@@ -1,0 +1,46 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.1
+date	94.09.27.02.05.10;	author psi;	state Exp;
+branches;
+next	;
+
+
+desc
+@system utility functions specific to the hpfm front/back ends
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@/* Copyright (c) 1993 University of Missouri-Rolla
+   All rights reserved.
+   
+   hpfm_sys - system utility functions specific to the hpfm front/back ends
+
+   5/94 - Scott Thibault - created
+
+*/
+
+#include "../psi.h"
+#include "../sys.h"
+
+extern ident_t const1_i;
+extern vect_t const1_v;
+
+
+unmark_statics()
+
+{
+  const1_i.type&=NMARK;
+  const1_v.op&=NMARK;
+}
+@

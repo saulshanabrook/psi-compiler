@@ -1,0 +1,51 @@
+Moa Compiler 0.3 input grammar specification.
+
+Uppercase words indicate a type of an object.
+
+program := { procedure_definition }
+procedure_definition := PROCEDURE_name "(" formal_parameter_list ")" block_body
+formal_parameter_list := parameter_definition { "," parameter_definition }
+parameter_definition := "int" PARAMETER_name | 
+	"array" PARAMETER_name array_definition
+array_definition := "^" INTEGER_number "<" { INTEGER_number | 
+	INTEGER_PARAMETER_name } ">"
+block_body := "{" definition_part statement_list "}"
+definition_part := { constant_definition_part | variable_definition_part |
+	global_definition }
+constant_definition_part := constant_definition ";" | 
+	constant_scalar_definition ";"
+constant_definition := "const" "array" VARIABLE_name array_definition "="
+	vector_constant
+constant_scalar_definition := "const" "array" VARIABLE_name "^0 <>=" number
+vector_constant := "<" { number } ">"
+variable_definition_part := variable_definition ";"
+variable_definition := array VARIABLE_name array_definition
+global_definition := "global" VARIABLE_name ";"
+statement_list := { statement ";" }
+statement := assignment_statement | for_statement | allocate_statement |
+	procedure_call
+procedure_call := PROCEDURE_name "(" actual_parameter_list ");"
+actual_parameter_list := variable_access { "," variable_access }
+allocate_statement := "allocate" identifier variable_access
+for_statement := for "(" term "<=" variable_access "<" term ")" "{" 
+	statement_list "}"
+assignment_statement := variable_access "=" expression |
+       term "take" identifier "=" expression |
+       term "drop" identifier "=" expression
+variable_access := VARIABLE_name | PARAMETER_name
+expression := factor { operator expression }
+operator := simple_op | omega_op
+simple_op := "+" | "-" | "*" | "/" | "psi" | "take" | "drop" | "cat" | "pdrop" 
+	| "ptake" | "rotate" | "transpose"
+omega_op := simple_op "omega" constant_vector | 
+	"[" omega_op "]" "omega" constant_vector
+unary_operator := simple_unop | omega_unop
+simple_unop := "iota" | "dim" | "shp" | "+ red" | "- red" | "* red" | "/ red" 
+	| "tau" | "rav" | "reverse"
+omega_unop := simple_unop "omega" constant_vector | 
+	"[" omega_unop "]" "omega" constant_vector
+factor := term  | "(" expression ")" | unary_operator factor
+term := variable_access | constant_vector
+variable_access := identifier;
+identifier := letter { letter | digit | '_' }
+constant_vector := "<" { number } ">"

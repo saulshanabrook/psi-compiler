@@ -1,0 +1,364 @@
+
+code.c,1054
+#define NOTALLOCATED(38,1289
+typedef struct step_node step_node42,1481
+} steps_t;steps_t46,1586
+typedef struct names names48,1598
+} name_t;name_t51,1660
+void declare_utils 66,2132
+void declare_var 85,2519
+print_ident(102,2949
+print_op(151,4125
+print_s(178,4634
+void allocate_vect(264,6546
+embed_const_vect(298,7511
+print_rav(341,8576
+code_vect(453,12067
+recursive_assign(593,16821
+void code_idx_array 705,19566
+addto_allocs(714,19761
+addto_dynamics(728,20049
+allocate_array(743,20429
+do_shapes(797,21873
+int my_gamma2(817,22457
+int my_gamma(866,23830
+int do_location(917,25115
+do_gamma(947,25981
+add_steps(966,26427
+do_loop_open(1096,29853
+do_loop_close(1126,30539
+iota_loop_open(1185,31786
+iota_loop_close(1217,32506
+global_assign(1242,33005
+do_assign(1421,37763
+int start_loop(1438,38090
+end_loop(1472,38981
+open_forall(1488,39246
+close_forall(1520,40225
+allocate_actuals(1545,40763
+reduced_t *separate_reduced(1565,41216
+code_expr(1610,42042
+code_reduced(1673,43550
+code_c(1741,45181
+code_c_rec(1754,45384
+
+dist.c,565
+#define OUT_LEFT 33,827
+#define OUT_RIGHT 34,846
+#define NO_OUT 35,866
+dist_t *find_dist(51,1520
+int dist_compare(68,1777
+reduced_t *copy_list(85,2103
+inv_gamma(112,2583
+vect_t *build_vect(146,3292
+int check_zero(169,3794
+index_vect(191,4249
+if_bounded(224,4934
+close_while(275,6320
+reduced_t *combine_distributed(321,7386
+vect_t *dist_lhs(370,8661
+vect_t *dist_rhs(553,13449
+dist_assign(715,17836
+code_dist(1027,24618
+code_global_int(1116,26610
+dist_array(1241,29733
+init_dist_arrays(1365,33243
+allocate_utils(1409,34331
+dist_init(1439,35217
+
+extended.c,65
+reduce_extended(3,18
+code_extended 7,101
+mark_extended 11,138
+
+ident.c,458
+#define NULL 29,678
+#define TRUE 33,714
+#define FALSE 34,729
+#define MYMIN(37,753
+#define MYMAX(38,794
+ident_t *make_ident(53,1184
+s_expr_t *make_s_expr(91,2083
+print_s_expr(154,3349
+ident_t *red_ident(170,3816
+s_expr_t *red_s_expr(238,5255
+s_expr_t *compactor(278,6147
+s_expr_t *force_divide 461,11049
+s_expr_t *simplify_s_expr(479,11565
+s_expr_t *s_op(498,11851
+vect_t *s_vect(512,12099
+int ident_compare(528,12415
+int s_compare(692,16713
+
+lex.c,331
+#define MAXKEY 17,281
+#define uchar 18,300
+#define TRUE 20,341
+#define FALSE 21,356
+typedef struct symbol symbol24,380
+} symbol_t;symbol_t29,497
+char *what_name(44,723
+skip_line(56,844
+nextchar(76,1167
+int key(90,1324
+symbol_t *insert(106,1518
+define(127,1894
+search(137,2077
+get_symbol(167,2598
+lex_init(305,4810
+
+main.c,77
+#define TRUE 24,384
+#define FALSE 25,399
+void cleanup(34,540
+main(45,702
+
+moa_func.c,954
+#define NULL 26,440
+#define TRUE 30,476
+#define FALSE 31,491
+parser_t *psi_access(39,652
+parser_t *psi_iota(96,2484
+parser_t *psi_dim(127,3335
+parser_t *psi_tau(145,3794
+parser_t *psi_shp(185,4736
+parser_t *psi_rav(206,5262
+parser_t *psi_take(254,6441
+parser_t *psi_drop(280,7179
+parser_t *psi_ptake(309,8039
+parser_t *psi_pdrop(332,8586
+parser_t *psi_reverse(355,9200
+parser_t *psi_transpose(372,9546
+parser_t *psi_reshape(378,9707
+parser_t *psi_rotate(389,10152
+expr_t *scalar_extend(409,10600
+parser_t *psi_op(424,10874
+parser_t *psi_plus(460,11903
+parser_t *psi_minus(465,11995
+parser_t *psi_times(470,12089
+parser_t *psi_div(475,12183
+parser_t *psi_psi(481,12340
+parser_t *psi_cat(509,13007
+parser_t *psi_omega1(547,13948
+parser_t *psi_omega2(624,15784
+parser_t *psi_red_op(746,19575
+parser_t *psi_red_plus(839,21641
+parser_t *psi_red_minus(844,21720
+parser_t *psi_red_times(849,21801
+parser_t *psi_red_div(854,21882
+
+moalib.c,53
+int min(7,174
+int max(13,227
+void *get_mem(19,280
+
+output.c,92
+print_gen_ident(17,276
+print_vector(59,1207
+rec_print_expr(146,3168
+print_expr(245,5284
+
+parse.c,1247
+#define MAXCONST 30,552
+#define MAXSYMHASH 31,574
+#define TRUE 33,610
+#define FALSE 34,625
+#define sym_key(37,649
+unmark_statics(62,1556
+ident_t **ret_table(70,1647
+clear_syms(79,1768
+ident_t *find_sym(93,1990
+psi_insert_sym(110,2309
+search_parameters(128,2800
+report(152,3201
+expect(162,3396
+int expect_name(177,3688
+double expect_number(192,3929
+convert_shp(222,4432
+parser_t *var_access(258,5288
+ident_t *vector_const2(281,5784
+parser_t *term(343,7419
+int is_unop(360,7692
+op_t *operator(380,8077
+int isop(523,11618
+parser_t *factor(542,11899
+parser_t *expression(572,12511
+statement_t *assignment(592,12808
+statement_t *assignment_part(627,13554
+statement_t *allocate(673,14672
+statement_t *forall_statement(699,15224
+expr_t *actual(726,15744
+statement_t *actual_list(749,16160
+statement_t *call_statement(778,16726
+statement_t *statement(797,17084
+statement_t *statement_list(833,17821
+array_def(855,18354
+var_def(897,19365
+var_def_part(912,19612
+vector_const(924,19784
+const_def(952,20370
+const_def_part(982,20967
+global_def(992,21092
+def_part(1010,21367
+statement_t *blockbody(1022,21620
+param_def(1035,21838
+formal_list(1084,22856
+proc_def(1097,23044
+directive(1232,26038
+programx(1284,27455
+
+part.c,182
+rule_t *add_rule(31,642
+rule_t *find_rule(48,893
+build_rule(68,1235
+dist_t *resolve_rules(85,1645
+partition_reduced(158,3638
+rec_partition(194,4291
+dist_t *partition(225,4822
+
+pgimain.c,81
+#define TRUE 24,384
+#define FALSE 25,399
+void cleanup(34,540
+psi_main(45,702
+
+poly.c,295
+#define TRUE 51,1758
+#define FALSE 52,1773
+poly_t *new_poly(61,1939
+void free_poly(76,2160
+poly_t *poly_copy(89,2324
+poly_t *poly_add(115,2724
+poly_t *poly_times(184,3975
+poly_t *poly_scale(243,4998
+poly_t *poly_expand(312,6458
+poly_t *poly_constant(331,6859
+void poly_print(348,7131
+
+psi.c,730
+#define NULL 34,855
+#define TRUE 38,891
+#define FALSE 39,906
+#define NONASSOCIATIVE(42,930
+int is_recursive(69,1959
+reduced_t *reverse_list(92,2483
+add_allocation(115,2867
+addto_reduced(129,3111
+int empty(160,3982
+expr_t *dup_expr(187,4561
+block_rav(208,5046
+assign_rav(283,7969
+expr_t *red_scalar_extend(311,8702
+red_take(331,9111
+red_drop(347,9561
+red_pdrop(359,9881
+red_ptake(371,10157
+red_reverse(380,10438
+expr_t *red_psi(395,10900
+red_cat(416,11478
+int purify(451,12658
+redall(470,13244
+forall(564,15758
+expr_t *psi_assign(668,18754
+int find_temp(960,26207
+check_combined_temps(994,26914
+reduced_t *combine_reduced(1067,29018
+psi_reduce(1201,32863
+reduction_init(1257,34147
+psi_init(1266,34298
+
+scalar.c,611
+typedef struct BTN BTN31,599
+    } BinaryTreeNode_t;BinaryTreeNode_t36,722
+    } FractionalPolygon_t;FractionalPolygon_t41,838
+s_expr_t *StandardizeSExpr(87,2394
+int bFindUniqueIdentifiers(139,3686
+void IdentifierFound(204,5155
+BinaryTreeNode_t **ppbtnGetBinaryTreeNode 240,6382
+ident_t *pidGetBinaryTreeByIndex 285,7583
+void IndexIdentifiers 322,8506
+FractionalPolygon_t *pfpSExprToFractionalPolygon(353,9339
+FractionalPolygon_t *pfpFractionalPolygonTimes(447,12280
+FractionalPolygon_t *pfpFractionalPolygonAdd(494,13958
+s_expr_t *psePolyToSExpr(549,15665
+void FreeFractionalPolygon(650,18800
+
+sys.c,966
+#define NULL 35,799
+#define TRUE 39,835
+#define FALSE 40,850
+#define TMP_BLOCK_SIZE 44,928
+#define MAX_EXPR 47,1024
+#define MAX_VECT 48,1046
+#define MAX_IDENT 49,1068
+#define MAX_S_EXPR 50,1091
+typedef struct mem_block mem_block55,1216
+} mem_block_t;mem_block_t59,1324
+expr_t *get_expr_mem(89,2067
+expr_free(124,2701
+vect_t *get_vect(135,2872
+vect_free(161,3289
+ident_t *get_ident(172,3461
+ident_free(197,3890
+s_expr_t *get_s_expr(208,4069
+s_expr_free(230,4427
+void psi_error(240,4574
+void fatal(248,4728
+void *get_mem(257,4867
+void *get_tmp_mem(275,5213
+void free_tmp_mem(306,5847
+statement_t *get_statement(324,6175
+clear_saves(351,6675
+expr_t *copy_expr(360,6831
+dotab(372,7006
+dotabf(382,7171
+do_ptab(395,7419
+stats(405,7543
+mark_ident(417,7946
+mark_ident_list(446,8706
+mark_vect(457,8877
+mark_expr(473,9193
+mark_s_expr(496,9723
+collect_reduced(508,9981
+collect_garbage(545,10774
+collect_mem(597,11887
+mem_init(658,13042
+
+values.c,109
+int bGetIdentValue(30,795
+int bGetDim(91,2355
+int bGetShp(114,2967
+int bGetSingleDimParserValue(137,3603
+
+vect.c,829
+#define NULL 27,601
+#define TRUE 31,637
+#define FALSE 32,652
+#define NOTALLOCATED(35,676
+int real_vect(47,1072
+int real_expr(63,1431
+double rav_value(81,1870
+vect_t *const_op(152,3949
+int static_value(311,8171
+vect_t *simplify_vect(341,9015
+vect_t *make_vect(441,11789
+vect_t *vect_len(508,13925
+vect_t *vect_op(525,14270
+vect_t *vect_take(546,14678
+propagate_take(564,15039
+vect_t *vect_drop(660,17175
+update_locs(684,17724
+propagate_drop(721,18514
+vect_t *vect_cat(808,20404
+propagate_cat(837,21023
+vect_t *vect_unop(864,21527
+vect_t *expand_vect(888,22089
+int vect_compare(923,22936
+print_scalar(940,23322
+vect_assign(991,24304
+int static_shps(1023,25143
+s_expr_t *red_rav(1039,25597
+vect_t *purify_vect(1167,28428
+vect_t *force_vect(1246,30758
+vect_t *vect2array(1289,31869
+void tau(1317,32573

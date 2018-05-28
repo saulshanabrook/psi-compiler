@@ -1,0 +1,213 @@
+Overview of Compilers
+
+\begin{itemize} 
+\item Organization of the Project \\ \\
+
+This project consist of four segments.  The first segment traverses abstract
+syntax trees (ASTs) produced by {\em pghpf }  and passes relevant information to
+functions provided by the second segment, which creates equivalent abstract
+syntax trees that the Psi compiler can recognize.  The third segment
+traverses a data structure of Psi "statements" and passes relevant information
+to functions provided by the fourth segment, which creates equivalent
+abstract syntax trees that are inserted into the program being processed
+by the first segment.  \\ \\
+
+The introduction of a true interface would cause this program to be broken
+up into five logical segments.  The first segment would convert ASTs of the
+target compiler into ASTs of this interface.  The second segment would
+convert ASTs of the interface into ASTs of the Psi compiler.  The third
+segment would convert ASTs of the Psi compiler to ASTs of the interface.  The
+fourth segment would convert ASTs of the interface to ASTs of the target
+compiler.  Finally, a fifth segment would consist of several modules needed
+to support the interface, including functions to create ASTs, and symbol
+table implementation and routines.\\ \\
+
+\item PGI Compiler\\ \\
+
+  The goal of the project was to demonstrate the Psi compiler's effectiveness
+  in simplifying array expressions used in traditional benchmarks.  We
+  obtained access to the source code for {\em pghpf } , the High Performance
+  Fortran (HPF) compiler produced by The Portland Group, Inc. (PGI)\\ \\
+
+  The top level function for my project is called PGI_PSI_AST.  We inserted
+  a call to this function in the pghpf source code immediately after an
+  HPF program has been parsed and put into AST form, but before any
+  optimization of the program takes place by pghpf.  This is because the
+  output of the fourth segment of my program could potentially create
+  several loops that could be merged by pghpf's optimizer.\\ \\
+
+  The first segment of my project traverses a PGI statement list and
+  removes assignment statements from this list.  It then verifies
+  that this statement is one that can be converted to an equivalent
+  Psi expression that the Psi compiler's reduction engine can handle.
+  For example, at this time it appears that the Psi compiler won't
+  accept an assignment statement where the LHS is an array section.
+  PGI statements are not nested.  For example, a node for a DO statement
+  does not contain a sublist corresponding to the body of the loop.
+  Rather, it just contains the loop index information.  The statement
+  list will contain a ENDDO statement after the loop body.  This allowed
+  me to process any assignment statement in the program without having
+  to encode this code segment using recursion, particularly in the form of
+  statement list stacks.  In the future, one desirable
+  feature of the interface would be to analyze this statement list and
+  look for reductions that could be applied to several lines.  For
+  example, consider the following code segment:\\ \\
+
+  TEMP1 = CSHIFT(B, shift = 5)\newline  
+  TEMP2 = CSHIFT(C, shift = 3)\newline 
+  A = TEMP1 + TEMP2\\ \\
+
+  As is, my project wouldn't eliminate the use of the temporary arrays.
+  If it could inspect the statement list and verify that the specified
+  values of TEMP1 and TEMP2 weren't used as R-values elsewhere in the program,
+  it could eliminate these three statements and then replace this segment
+  with the reduced code for:\\ \\
+
+  A = CSHIFT(B, shift = 5) + CSHIFT(C, shift = 3)\\ \\
+
+  This would allow programmers to not have to "bunch up" expressions
+  into a single statement.  For now, we have had to do this with the
+  benchmarks.  In summary, my function that processes single PGI
+  assignment statements (PGI_CONV_AST) has one PGI statement as its
+  input, and produces a PGI statement list as its output.\\ \\
+
+\item  PGI Representation\\ \\
+
+  In this representation, the nodes of the statement list exist primarily
+  to implement a doubly linked list.  Each node of a list points to an AST node.
+  Thus, a statement is treated like an expression.  Each AST node consists
+  of 7 32-bit words.  Information is then packed into this node via C
+  macros.  To accommodate the wide variety types of ASTs, a particular
+  piece of the node may be used to represent different fields based on
+  the ASTs type.  For example, the section used to hold the optype of
+  an arithmetic expression is also used to hold the initial expression
+  for the index variable of a do loop.\\ \\
+
+  The symbol table is represented in a similar fashion, with each symbol
+  table entry consisting of 10 32-bit words.  Symbol table routines are
+  also implemented with C macros.  There are also similar, but distinct,
+  structures for function argument lists, triple lists (e.g., for forall
+  statements), and array subscript information.  Despite the semantic
+  differences between these objects, every one of them is referred to by
+  a 16-bit, unsigned integer.  Although the use of well-named macros made
+  programming for this compiler very easy, with the data structure
+  information well hidden, the homogeny of the representation made tracing
+  errors a tedious process, as they usually compiled.\\ \\
+
+  \item Psi Compiler and Psi Representation\\ \\
+
+  The Psi Compiler was written by former students of Dr. Mullin.  The
+  core of the compiler was written without a front end {\it per se } .
+  However, students wrote a parser that could handle a subset of the
+  Mathematics of Arrays (MOA).  The core {\em does }  incorporate a
+  back end, however, and it is this feature that has been the primary
+  impediment to my progress.  The code generation is in C, and the
+  programmers of the module that implements the reduction rules of the Psi
+  Calculus clearly had this end in mind, as I will discuss in length.\\ \\
+
+  The input to the reduction engine of the Psi compiler is an assignment
+  statement.  However, the LHS can only take a particular form, and
+  reductions are done on the RHS expression.  The output is a statement
+  list that corresponds to the procedural steps that would have to be
+  taken in order to complete the assignment.  There is a research group
+  currently discussing whether and how the reduction engine should be
+  rewritten.  One of the primary goals is to keep expressions as
+  expressions, much as the Psi Calculus does.  In this approach, the
+  output of reducing the RHS would be the equivalent expression in
+  {\bf normal form } .  This would have the advantages of:
+    \begin{itemize} 
+    \item  aiding in proving the correctness of the reduction engine;
+    \item  easing the addition of reduction rules to the engine;
+    \item  allowing for a uniform processing of the output.
+    \end{itemize} 
+  \\ \\
+  The Psi compiler utilizes numerous data structures.  The {\bf expr_t } 
+  type is used to represent array expressions.  It consists of many
+  fields, but not all fields are used for all types of expressions.  For
+  forall expressions, the index, bound, and stride fields are used to
+  describe the index variable's behavior.  For array access expressions,
+  these fields describe how to access the array, often in terms of
+  a forall index variable.  In addition, larger expressions can be formed
+  using the op, left, and right fields.  All expressions use the shape
+  field.\\ \\
+
+  The {\bf ident_t }  type is generally used to represent a symbol table
+  entry.  It contains fields for the name, type and value of an
+  identifier.  It is also used for what I feel are some unrelated
+  representations.  For example, the contents of a vector are stored
+  in an ident_t rather than a vect_t.  The ident_t type has a field
+  {\em array }  which is a struct of fields that are never all used
+  at the same time.  It allows the contents of a vector to be stored
+  in either an array of doubles, or an array of scalar expressions.
+  I never understood why this distinction needed to have been made
+  when a scalar expression {\em can }  be a double.  Also, the
+  designers have allowed one to build identifier expressions, but
+  only with strict left-to-right evaluation.  It seems to me that this
+  is a counterintuitive and undesirable feature.\\ \\
+
+  The {\bf vect_t }  type allows one to construct vector expressions without
+  using the bulky expr_t structure.  The {\bf s_expr_t }  type allows
+  one to build scalar expressions.  This too allows one to avoid using the
+  expr_t type.  The existence of these types may have made it easier for
+  the original programmers to create ASTs, but it makes traversing
+  the results much more difficult, since just about every expression
+  contains at some level each of these types.  In addition, while I
+  have no problem with several types having a shape component, it was
+  somewhat confusing that the type of the shape depends on the type
+  of the structure in which it appears!  expr_t's have a vect_t shape,
+  vect_t's have an s_expr_t shape, and the shape of the ident_t's array
+  field is an array of ident_t's.  When you consider that shapes have 
+  shapes themselves, you realize just how confusing this approach is.
+  I would hope that the future designers of this compiler try to
+  homogenize these representations to some degree, or at least use C++ and
+  create overloaded shape constructor functions.\\ \\
+
+  Finally, the {\bf statement_t }  type is used as an intermediate
+  representation for code generation.  That is, the reduction engine
+  not only applies rules to the incoming expression, but also translates
+  that abstract syntax tree into another language.  This type is used
+  to implement a linked list, with each node containing a pointer to
+  a node of some type depending on the type of statement.  Usually, the
+  type of a statement is {\bf reduced_t } .  This field will often have
+  a subfield (of type {\bf assign_t } ) which represents an assignment
+  similar to the one that was passed to the engine.  However, 
+  more than one may be assignment returned.  Additionally, reduced_t's
+  can be used to implement forall loops, in which case you will find
+  inside this node a list of reduced_t's which represent the body of
+  the loop.\\ \\
+
+  \item  PSI_PGI / PGI_PSI stacks\\ \\
+
+  To allow communication between the two compilers, I implemented
+  a pair of stacks which are manipulated by {\em driver }  routines.
+  I have tried my best to maintain the hiding of information.  Most
+  parameter passing occurs at the atomic level (constants and identifiers.)
+  Larger expressions obtain the data for subexpressions/operands/arguments
+  from the stack.
+  Occasionally, I felt that it was more efficient (and conceptually
+  clearer) to pass constants over.  One such context was the dimension
+  for array operations.  However, as the Psi compiler expands and becomes
+  more comprehensive, this will have to be changed.  For example, the
+  shift amount of a circular-shift (cshift) should be any scalar expression.
+  While the design of the Psi data structures allows for this expression,
+  the compiler rejects this usage.  This is surprising, since I have found
+  that even the current back end of the Psi compiler allows for arbitrary
+  scalar expressions within vectors, and assumes that reduction created
+  scalar expression trees, even for constants.  Anyways, I have
+  written my PSI_PGI code to accommodate this anticipated change.\\ \\
+
+  The PGI_PSI stack nodes are of type {\bf parser_t } , which is essentially
+  an ident_t and an expr_t joined together.  I feel that the parser module
+  is the best developed of all the modules of the Psi compiler; there are
+  many functions available for the construction of parser_t's from other
+  data types (including identifiers and vectors).  If the rest of the
+  compiler were written as diligently as the one that creates parser_t's,
+  programming for this software would be an easier task.\\ \\
+
+  The PSI_PGI stack nodes are of type UINT16 as defined in pghpf.  Recall
+  that this type is used to represent all PGI objects.  It is really
+  used as an index of a lookup table; the macros "select" the correct
+  table.  I use them to pass atomic objects, array indexing, and all
+  types of expressions (scalar, vector, and array).\\ \\ 
+\end{itemize} 
+

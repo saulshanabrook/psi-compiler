@@ -1,0 +1,14 @@
+5/93 - version 0.0 released
+	Initial release.
+6/93 - version 0.1
+	Bugs listed in report/bugs0.0 were fixed
+	New parser was added with a new grammer
+	Internal data structures changed considerably.
+	Support for arrays with variable shapes (not tested).
+	A looping construct was added.
+	Capability for dynamic array allocation was added.
+	Added to special case operators ptake and pdrop.
+	Omega can now take it self as a parameter.
+7/93 - version 0.2
+	Added new functions shp, dim, iota, and op red (op=+, -, *, or /).
+	Added new functions tau, and rav

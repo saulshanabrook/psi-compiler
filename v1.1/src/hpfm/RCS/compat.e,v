@@ -1,0 +1,29 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	94.09.27.02.04.00;	author psi;	state Exp;
+branches;
+next	;
+
+
+desc
+@externals for code.c
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@extern parser_t *make_compatable (parser_t *arg, psiop_t func);
+extern parser_t *non_psi (parser_t *arg1, parser_t *arg2);
+extern parser_t *unon_psi (parser_t *arg1);
+extern parser_t *unon2_psi (parser_t *arg1);
+statement_t *hpfm_reduce(parser_t *result, parser_t *expr, statement_t *statement);
+@

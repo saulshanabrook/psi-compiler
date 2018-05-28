@@ -1,0 +1,86 @@
+
+some changes...
+to handle EXT_OP as a type for reduced_t.type:
+  code.c:
+    code_reduced was changed.  added EXT_OP to case.
+    calls code_extended.
+  part.c:
+    partition_reduced was changed.  added EXT_OP to case.
+    nothing done.
+  sys.c:
+    collect_reduced was changed. added EXT_OP to case.
+    mark_expr(node->d.frag);  (see things that do not work).
+  psi.c:
+    combine_reduced was changed. added if statement for EXT_OP.
+    not sure if right.
+
+to handle EXT_OP as a op for expr_t.op:
+  psi.c:
+    assign was changed.  added EXT_OP to case.
+    calls reduce_extended.
+
+
+SOME of the things that are known to not work:
+  hpfm_transpose in hpfm_func.c does not create new shape for result.
+  array_constructors have a problem if there's just one number.  the
+    shape is wrong i believe.
+  there's a problem in non_psi in hpfm_func.c.  it uses the shape of arg2
+    as the shape of the result expression.  seems to cause problems if
+    arg2 is a scalar.  (shape?  what shape?)
+  arrays are not declared in the FORTRAN 90 output.
+  in collect_reduced (see changes to sys.c) mark_expr seems to have a
+    problem somewhere along down the line.  it chokes on the shape of the
+    shape (yes, shape of the shape) of one of my "TEMPF90??" ident_t's.
+    you can dbx hpfm and run tom2.hpf to see what i mean.  obviously
+    somewhere i'm doing something wrong.  i suspect it's in make_compatable.
+
+notes:
+  i ran out of time.  i had hoped to get things working much better than
+  they were, along with fixing all the things that don't work.  since i
+  never really finished reverse, it's implementation is not part of the
+  F90 code.c. it shouldn't be too hard to fix, right?  ha ha ha.  (*sigh*)   
+
+  psi.c needs to be changed if it is to be used for the old moa compiler
+  (the one that reads in moa and spits out c) since psi.c was changed to
+  call reduce_extended in the case of EXT_OP.  reduce_extended is 
+  declared as an external at the top of psi.c and since this function
+  doesn't exist in the old moa compiler, the c compiler gripes.
+
+the general way all my hpfm changes work:
+  after an assignment is parsed, psi_reduce is called.  this is the only
+  time for this assignment that psi_reduce will call combine_reduced(
+  reverse_list...) since along down the line when i call another psi_reduce
+  which in turn calls add_to_reduced, there is no need to call 
+  combine_reduced yet.  as long as everything is add_to_reduce'd for an
+  assignment, i didn't see any reason to call combine_reduced more than
+  once.  anyway, the first call to psi_reduce calls assign, which calles
+  reduce_extended when it comes accorss an EXT_OP op.  if the ext_op
+  is UNRECOGNIZED, the left and right subtrees are reduce_extended and
+  if it's the top of the assignment, the assignment is add_to_reduce'd.
+  (to accomodate TEMPF900=CSHIFT(A,3)  TEMPF901=CSHIFT(B,3) followed by  
+  C=TEMPF900**TEMPF901 which would be UNRECOGNIZED).  FUNC and SPLIT 
+  just reduce_extended the left and right subtrees.  HPFASSIGN has two
+  cases.  if expr->right->op=EXT_OP as in the case of a tree representing
+  TEMPF900=A**B, then a node is added to global reduce of type EXT_OP
+  and the right subtree is reduce_extended. (the left only contains the
+  result (i.e. TEMPF900))  if expr->right-op!=EXT_OP as in the case of
+  TEMPF900=CSHIFT(A,3), then psi_reduce is called, but the variable
+  passed, of type statement_t, is not changed much (i.e.
+  statement->d.reduced is not set to anything.  combine_reduced is not
+  called.  etc.... this will be done in the top call to psi_reduce.)
+
+  the tree is built by using normal moa_func.c calls when an operator is
+  recognized, and by using hpfm_func.c calls when a function is recognized.
+  all other unrecognized things call either non_psi or unon_psi.  these
+  latter two are responsible for producing the correct shape for the
+  expression and writing the appropriate string to ext_str.  make_compatable
+  is responsible for creating the neccesary temporary assignments that
+  split up expressions into things we can handle and things we can't.
+
+  i will of course not claim that this way is good/bad/whatever.  i just
+  hope that it might work eventually.  
+ 
+  if anything goes wrong.  let me rephrase.  something will of course go
+  wrong.  my experience is that when this happens, it's because somewhere i
+  set the shape of some thing in the wrong way or didn't set it at all.  
+  

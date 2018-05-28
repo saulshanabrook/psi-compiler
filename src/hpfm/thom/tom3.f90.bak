@@ -1,0 +1,44 @@
+SUBROUTINE test (A , B , C , D , E )
+USE MOALIB
+  INTEGER :: D 
+
+! MOA
+! Variable declarations
+!
+  INTEGER, DIMENSION (0:10*10-1) :: B
+  INTEGER, DIMENSION (0:10*10-1) :: TEMPF900
+  INTEGER :: shift
+  INTEGER :: offset0
+  INTEGER :: i0
+  INTEGER :: i1
+
+! MOA
+! array assignment
+!
+
+  TEMPF900=A**E
+  shift=0+0*((10))
+  offset0=3+0*10
+  DO i0 = 0, 10-1
+    DO i1 = 0, 7-1
+      B(shift)=TEMPF900(offset0)
+      offset0=offset0+((1))
+      shift=shift+(1)
+    END DO
+    offset0=offset0+(3)
+    shift=shift+(3)
+  END DO
+  shift=7+0*10
+  offset0=0+0*10
+  DO i0 = 0, 10-1
+    DO i1 = 0, 3-1
+      B(shift)=TEMPF900(offset0)
+      offset0=offset0+((1))
+      shift=shift+(1)
+    END DO
+    offset0=offset0+(7)
+    shift=shift+(7)
+  END DO
+
+
+END SUBROUTINE test 

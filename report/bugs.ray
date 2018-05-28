@@ -1,0 +1,12 @@
+"Features" that I've found
+==========================
+
+Sockets aren't released when program is finished running
+  Fixed with MPI?
+
+If two or more people try to start a program at the same time they 
+try to grab each other's nards...I mean nodes.  :-)
+
+Long expressions don't compile: Out of s_expr blocks!
+
+

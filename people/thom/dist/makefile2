@@ -1,0 +1,40 @@
+CC= cc
+MC= ../../src/mc
+COPTIONS = -g
+CLIBNAMES = -lmoautil -lnsl -lsocket -lthread -lmpi -lm
+MFLAGS=
+
+# Use these for Sun
+CINCLUDEPATHS = -I/usr/local/psi/include -I/software/all/mpi/include
+CLIBPATHS = -L/usr/local/psi/lib/sun -L/software/all/mpi/lib/solaris/ch_p4
+
+CFLAGS = $(COPTIONS) $(CINCLUDEPATHS)
+CLIBS = $(CLIBPATHS) $(CLIBNAMES)
+
+T1MCOUTS = test1_node.c 
+T1MCOBJS = test1_node.o 
+T1OBJS   = test1_node_main.o 
+T1EXES   = test1_node
+
+MCOUTS = $(T1MCOUTS)
+MCOBJS = $(T1MCOBJS)
+OBJS   = $(T1OBJS)
+EXES   = $(T1EXES)
+
+all:   $(T1EXES)
+test1: $(T1EXES)
+
+test1_node: test1_node.o test1_node_main.o
+	$(CC) $(CFLAGS) -o test1_node test1_node.o test1_node_main.o $(CLIBS)
+
+test1_node_main.o: test1_node_main.c
+	$(CC) $(CFLAGS) -c test1_node_main.c
+
+test1_node.o: test1_node.c
+	$(CC) $(CFLAGS) -c test1_node.c
+
+test1_node.c : test1.m
+	$(MC) test1.m -o test1_node.c
+
+clean:
+	rm -f $(T1MCOUTS) $(T1EXES) $(T1OBJS) $(T1MCOBJS)

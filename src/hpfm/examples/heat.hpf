@@ -1,0 +1,16 @@
+SUBROUTINE heat2d(n,A,L)
+  INTEGER :: n
+  REAL, DIMENSION (n,n) :: A
+  REAL, DIMENSION (1) :: L
+  
+  INTEGER :: b1,b2
+  REAL, DIMENSION (n,n) :: A2
+  REAL, DIMENSION (1) :: L2
+
+  b1=n-1
+  b2=n-2
+  L2=(/ -4 /)*L+(/ 1 /)
+
+  A2(2:b1,2:b1)=(A(2:b1,3:n)+A(2:b1,1:b2)+A(3:n,2:b1)+A(1:b2,2:b1))*L(1)
+  A(2:b1,2:b1)=(A*L2(1)+A2)(2:b1,2:b1)
+END SUBROUTINE

@@ -1,0 +1,51 @@
+This is TeX, C Version 3.14t3 (format=lplain 94.9.12)  3 NOV 1994 02:17
+**mpiguid.tex
+(/usr/local/lib/tex/inputs/latex.tex
+LaTeX Version 2.09 <7 Dec 1989>
+LaTeX Version 2.09 <7 Dec 1989>
+LaTeX error.  See LaTeX manual for explanation.
+              Type  H <return>  for immediate help.
+! Missing \begin{document}.
+\@latexerr ...for immediate help.}\errmessage {#1}
+                                                  
+<to be read again> 
+                   p
+l.1407 \let\@@p
+               ar=\par
+? quit
+OK, entering \batchmode...
+LaTeX error.  See LaTeX manual for explanation.
+              Type  H <return>  for immediate help.
+! Missing \begin{document}.
+\@latexerr ...for immediate help.}\errmessage {#1}
+                                                  
+<to be read again> 
+                   i
+l.1409 \let\@@i
+               nput=\input
+You're in trouble here.  Try typing  <return>  to proceed.
+If that doesn't work, type  X <return>  to quit.
+
+! I can't find file `'.
+<to be read again> 
+                   \let 
+l.1410 \let
+           \@@end=\end
+Please type another input file name
+! Emergency stop.
+<to be read again> 
+                   \let 
+l.1410 \let
+           \@@end=\end
+*** (job aborted, file error in nonstop mode)
+
+ 
+Here is how much of TeX's memory you used:
+ 6 strings out of 4463
+ 60 string characters out of 63241
+ 23264 words of memory out of 262141
+ 1972 multiletter control sequences out of 9500
+ 18996 words of font info for 72 fonts, out of 72000 for 255
+ 14 hyphenation exceptions out of 607
+ 7i,0n,3p,92b,7s stack positions out of 300i,40n,60p,3000b,4000s
+No pages of output.

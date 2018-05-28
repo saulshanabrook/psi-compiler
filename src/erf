@@ -1,0 +1,149 @@
+ljw_ctr = 1
+main.c, 53, #1, Starting main.. 
+moa_func.c, 635, #2, Starting psi_omega2.. 
+moa_func.c, 639, #3: --------------
+                 vect_t: x60cdc var: sigl 
+moa_func.c, 639, #4: op:  0 
+moa_func.c, 639, #5: flags: 0 
+moa_func.c, 639, #6: index: x1380d0 
+moa_func.c, 639, #7: loc:   x1380d0 
+moa_func.c, 639, #8: shp:   x10cb68 
+moa_func.c, 639, #9: left:   x0 
+moa_func.c, 639, #10: ident:   x81fd0 
+moa_func.c, 639, #11: right:   x0 
+moa_func.c, 640, #12: --------------
+                 vect_t: x60d1c var: sigr 
+moa_func.c, 640, #13: op:  0 
+moa_func.c, 640, #14: flags: 0 
+moa_func.c, 640, #15: index: x10cbe0 
+moa_func.c, 640, #16: loc:   x10cc08 
+moa_func.c, 640, #17: shp:   x10cbb8 
+moa_func.c, 640, #18: left:   x0 
+moa_func.c, 640, #19: ident:   x81fd0 
+moa_func.c, 640, #20: right:   x0 
+moa_func.c, 645, #21: --------------
+                 vect_t: x60d7c var: c_sigl 
+moa_func.c, 645, #22: op:  0 
+moa_func.c, 645, #23: flags: 0 
+moa_func.c, 645, #24: index: x1380d0 
+moa_func.c, 645, #25: loc:   x1380d0 
+moa_func.c, 645, #26: shp:   x1380e4 
+moa_func.c, 645, #27: left:   x0 
+moa_func.c, 645, #28: ident:   x822e8 
+moa_func.c, 645, #29: right:   x0 
+moa_func.c, 646, #30: --------------
+                 vect_t: x60ddc var: c_sigr 
+moa_func.c, 646, #31: op:  0 
+moa_func.c, 646, #32: flags: 0 
+moa_func.c, 646, #33: index: x1380d0 
+moa_func.c, 646, #34: loc:   x1380d0 
+moa_func.c, 646, #35: shp:   x1380e4 
+moa_func.c, 646, #36: left:   x0 
+moa_func.c, 646, #37: ident:   x82330 
+moa_func.c, 646, #38: right:   x0 
+moa_func.c, 651, #39: --------------
+                 vect_t: x60e3c var: u_x 
+moa_func.c, 651, #40: op:  0 
+moa_func.c, 651, #41: flags: 0 
+moa_func.c, 651, #42: index: x1380d0 
+moa_func.c, 651, #43: loc:   x1380d0 
+moa_func.c, 651, #44: shp:   x10cc44 
+moa_func.c, 651, #45: left:   x0 
+moa_func.c, 651, #46: ident:   x81f40 
+moa_func.c, 651, #47: right:   x0 
+moa_func.c, 665, #48: --------------
+                 ident: x82600 var: fa 
+moa_func.c, 665, #49: string: forall_i0 
+moa_func.c, 665, #50: type: 1 
+moa_func.c, 665, #51: value: 0.000000 
+moa_func.c, 665, #52: index: 0 
+moa_func.c, 665, #53: flags: 0 
+moa_func.c, 667, #54,   
+moa_func.c, 669, #55,   
+moa_func.c, 671, #56,   
+moa_func.c, 673, #57,   
+moa_func.c, 675, #58,   
+moa_func.c, 677, #59,   
+moa_func.c, 679, #60,   
+moa_func.c, 681, #61,   
+moa_func.c, 685, #62,   
+moa_func.c, 687, #63,   
+moa_func.c, 691, #64,   
+moa_func.c, 696, #65,   
+moa_func.c, 699, #66,   
+moa_func.c, 701, #67,   
+moa_func.c, 703, #68,   
+moa_func.c, 711, #69,   
+moa_func.c, 719, #70,   
+moa_func.c, 733, #71,   
+moa_func.c, 738, #72: arg1 = x141c38, arg2 = x141c68 
+moa_func.c, 742, #73,   
+moa_func.c, 753, #74,   
+moa_func.c, 758, #75,   
+moa_func.c, 760, #76,   
+output.c, 290, #77, # 
+output.c, 292, #78, About to do do_ptab(0) 
+output.c, 294, #79, After do_ptab(0) 
+output.c, 297, #80,   
+output.c, 299, #81,   
+output.c, 305, #82,   
+psi.c, 169, #83, In empty, see if it is an empty array. 
+psi.c, 176, #84, See if (vect->ident->type==CONST_ARRAY) 
+psi.c, 178, #85, Yes, (vect->ident->type==CONST_ARRAY) 
+psi.c, 179, #86: --------------
+                 ident: x81f40 var: vect->ident 
+psi.c, 179, #87: string:  
+psi.c, 179, #88: type: 2 
+psi.c, 179, #89: value: 0.000000 
+psi.c, 179, #90: index: 0 
+psi.c, 179, #91: flags: 0 
+psi.c, 179, #92: Ident->array.dim = x1379c0 
+psi.c, 179, #93: Ident->array.cnst = x149f80 
+psi.c, 179, #94: Ident->array.rav = x0 
+psi.c, 179, #95: Ident->array.shp = x141ca8 
+psi.c, 179, #96: Ident->array.rule = x0 
+psi.c, 181, #97, for (i=0; i<vect->ident->array.shp[0]->value; i++) 
+psi.c, 181, #98, for (i=0; i<vect->ident->array.shp[0]->value; i++) 
+psi.c, 181, #99, for (i=0; i<vect->ident->array.shp[0]->value; i++) 
+output.c, 315, #100,   
+output.c, 322, #101,   
+output.c, 324, #102,   
+output.c, 326, #103,   
+output.c, 344, #104,   
+output.c, 346, #105,   
+output.c, 350, #106,   
+output.c, 352, #107,   
+output.c, 354, #108,   
+output.c, 356, #109,   
+output.c, 168, #110, case NOP: 
+output.c, 35, #111, case ARRAY: 
+output.c, 358, #112,   
+output.c, 360, #113,   
+output.c, 362, #114,   
+output.c, 364, #115,   
+output.c, 366, #116,   
+output.c, 368, #117,   
+output.c, 370, #118,   
+output.c, 372, #119: expr = x513f8 
+output.c, 195, #120, case FORALL 
+output.c, 259, #121, case PSI 
+output.c, 259, #122, case PSI 
+output.c, 168, #123, case NOP: 
+output.c, 35, #124, case ARRAY: 
+output.c, 168, #125, case NOP: 
+output.c, 47, #126, case IOTA: 
+output.c, 49, #127: ident = x81f88 
+output.c, 50, #128: --------------
+                 ident: x81f88 var: ident 
+output.c, 50, #129: string:  
+output.c, 50, #130: type: 4 
+output.c, 50, #131: value: 0.000000 
+output.c, 50, #132: index: 0 
+output.c, 50, #133: flags: 0 
+output.c, 50, #134: Ident->array.dim = x0 
+output.c, 50, #135: Ident->array.cnst = x0 
+output.c, 50, #136: Ident->array.rav = x0 
+output.c, 50, #137: Ident->array.shp = x0 
+output.c, 50, #138: Ident->array.rule = x0 
+output.c, 51, #139: ident->array = xefffeea8 
+output.c, 52, #140: ident->array.shp = x0 

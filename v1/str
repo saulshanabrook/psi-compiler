@@ -1,0 +1,1 @@
+makefile:	cp *.c *.e *.h makefile VERSION ../../mc_release

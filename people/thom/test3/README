@@ -1,0 +1,37 @@
+heat.m:
+
+  The heat equation is Ut=Uxx+Uyy.  This equation has
+the known solution of zero for the initial conditions U(i,j)=sin(ih)*sin(jh)
+where h is 2*pi/N and N is the grid size.  The moal source in heat.m and the
+driver program in heat_main.c.  To run the program type make heat or make all
+and then run the resulting heat program.  The results should tend to zero.
+
+mm.m:
+ 
+  The moal program mm.m is matrix multiplication.  The example is mostly meant
+for looking at the C output of the compiler in mm.c but if you type make mm
+it will build an executable mm that calls the routine with an example array.
+
+lu.m:
+
+  This is a routine that performs LU decomposition.  The driver module is in
+lu_main.m.  You can run it by typing make lu and then run lu.
+
+compete.m:
+
+  This file contains 3 routines for a competitive learning neural network.
+The comments in compete.m describe what it does.  You can build the program
+with make compete.  There are some example vectors in nn.input that can be
+used to try the program.  You run the network by running 
+compete n_in n_out filename
+where n_in is the length of the input vectors, n_out is the number of outputs
+you desire and filename is the file that contains input vectors.  The file
+containing the input vectors must have the number of vectors in the file on
+the first line and the vectors on each successive line.  To run the example
+in nn.input type
+compete 5 3 nn.input
+The driver program will print the initial outputs of the network then call
+the learning procedure several times and then print the outputs of the network
+again.  If you look at nn.input you'll see there are 3 groups of very similar
+vectors.  We expect the vectors to be categorized into 3 different outputs.
+You should see this when you run the program.

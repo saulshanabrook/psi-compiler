@@ -1,0 +1,56 @@
+head	1.2;
+access;
+symbols;
+locks
+	psi:1.2; strict;
+comment	@ * @;
+
+
+1.2
+date	94.10.28.01.25.14;	author psi;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	94.09.06.07.30.22;	author psi;	state Exp;
+branches;
+next	;
+
+
+desc
+@function stubs for functions that exist only in versions of the compiler
+that parse a source language other than MOA
+@
+
+
+1.2
+log
+@added stub for mark_extended
+@
+text
+@#include "psi.h"
+
+reduce_extended(expr_t *expr, expr_t *result, int top, char *op, int inright)
+{
+}
+
+code_extended (reduced_t *node)
+{
+}
+
+mark_extended (statement_t *node)
+{
+}
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@a3 1
+
+d8 2
+d11 1
+@

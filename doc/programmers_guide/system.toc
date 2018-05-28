@@ -1,0 +1,25 @@
+\contentsline {section}{\numberline {1}Overview}{2}
+\contentsline {section}{\numberline {2}Programming Style}{3}
+\contentsline {section}{\numberline {3}Data Structures}{4}
+\contentsline {subsection}{\numberline {3.1}Tokens (symbol\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t,emit\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t)}{4}
+\contentsline {subsection}{\numberline {3.2}The Symbol Table}{4}
+\contentsline {subsection}{\numberline {3.3}Identifiers (ident\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t)}{4}
+\contentsline {subsection}{\numberline {3.4}Scalar Expressions (s\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}expr\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t)}{6}
+\contentsline {subsection}{\numberline {3.5}Vector Expressions (vect\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t)}{6}
+\contentsline {subsection}{\numberline {3.6}Array Expressions (expr\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t,parser\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t,forall\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t)}{7}
+\contentsline {subsection}{\numberline {3.7}Compound Operators (op\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t)}{8}
+\contentsline {subsection}{\numberline {3.8}Statements (assign\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t,reduced\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t,loop\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t,statement\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t)}{8}
+\contentsline {subsection}{\numberline {3.9}Distributed Arrays (rule\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t,dist\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t)}{9}
+\contentsline {subsection}{\numberline {3.10}Normalized Polynomials (poly\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t)}{9}
+\contentsline {subsection}{\numberline {3.11}Garbage Collection (save\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t)}{10}
+\contentsline {subsection}{\numberline {3.12}Code Generation (name\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t,steps\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t)}{10}
+\contentsline {section}{\numberline {4}Module Descriptions}{10}
+\contentsline {subsection}{\numberline {4.1}lex.c}{10}
+\contentsline {subsection}{\numberline {4.2}parser.c}{10}
+\contentsline {subsection}{\numberline {4.3}moa\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}func.c}{11}
+\contentsline {subsection}{\numberline {4.4}psi.c}{11}
+\contentsline {subsection}{\numberline {4.5}part.c}{11}
+\contentsline {subsection}{\numberline {4.6}code.c}{12}
+\contentsline {subsection}{\numberline {4.7}dist.c}{12}
+\contentsline {subsection}{\numberline {4.8}vect.c}{13}
+\contentsline {subsection}{\numberline {4.9}ident.c}{14}

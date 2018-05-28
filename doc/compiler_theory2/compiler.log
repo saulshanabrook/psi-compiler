@@ -1,0 +1,106 @@
+This is TeX, C Version 3.14t3 (format=lplain 92.1.30)  27 MAY 1995 19:53
+**compiler.tex
+(compiler.tex
+LaTeX Version 2.09 <14 January 1991>
+(/usr/local/lib/tex/inputs/latexdist/article.sty
+Document Style `article' <16 Mar 88>.
+(/usr/local/lib/tex/inputs/latexdist/art10.sty)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+) (margins.sty)
+\c@definition=\count87
+ (compiler.aux
+(compiler.title.aux)) (compiler.title.tex (/usr/local/lib/tex/inputs/epsf.sty
+\epsffilein=\read0
+\epsfxsize=\dimen99
+\epsfysize=\dimen100
+\epsftsize=\dimen101
+\epsfrsize=\dimen102
+\epsftmp=\dimen103
+\pspoints=\dimen104
+)
+[1
+
+
+]) [2
+
+] [3] [4]
+Underfull \hbox (badness 10000) in paragraph at lines 295--295
+\tenrm array[]definition := "$ [] $" IN-TE-GER[]number "$\tenmi <$\tenrm " $\te
+nsy f$ \tenrm IN-TE-GER[]number []\tentt |
+
+\hbox(7.5+2.5)x448.07378, glue set 11.5092
+.\tenrm a
+.\tenrm r
+.\tenrm r
+.\tenrm a
+.\kern-0.27779
+.etc.
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 295--295
+
+
+\hbox(0.0+0.0)x448.07378
+.\glue(\rightskip) 0.0
+
+
+Overfull \hbox (9.12256pt too wide) in paragraph at lines 295--296
+[][] 
+
+\hbox(189.65+184.65)x460.63243
+.\hbox(0.0+0.0)x0.0
+.\hbox(189.65+184.65)x469.75499
+..\hbox(374.29999+0.0)x469.75499, shifted 184.65
+...\vbox(374.29999+0.0)x469.75499 []
+.\penalty 10000
+.\glue(\parfillskip) 0.0 plus 1.0fil
+.\glue(\rightskip) 0.0
+
+[5] [6] [7]
+Overfull \hbox (9.12256pt too wide) in paragraph at lines 460--461
+[][] 
+
+\hbox(58.9+53.9)x460.63243
+.\hbox(0.0+0.0)x0.0
+.\hbox(58.9+53.9)x469.75499
+..\hbox(112.79999+0.0)x469.75499, shifted 53.9
+...\vbox(112.79999+0.0)x469.75499 []
+.\penalty 10000
+.\glue(\parfillskip) 0.0 plus 1.0fil
+.\glue(\rightskip) 0.0
+
+
+Overfull \hbox (9.12256pt too wide) in paragraph at lines 502--503
+[][] 
+
+\hbox(207.9+202.9)x460.63243
+.\hbox(0.0+0.0)x0.0
+.\hbox(207.9+202.9)x469.75499
+..\hbox(410.79999+0.0)x469.75499, shifted 202.9
+...\vbox(410.79999+0.0)x469.75499 []
+.\penalty 10000
+.\glue(\parfillskip) 0.0 plus 1.0fil
+.\glue(\rightskip) 0.0
+
+[8] [9] [10] (compiler.bbl) [11
+
+] [12
+
+] [13] (compiler.aux (compiler.title.aux)) ) 
+Here is how much of TeX's memory you used:
+ 249 strings out of 4463
+ 2394 string characters out of 63209
+ 51860 words of memory out of 262141
+ 2169 multiletter control sequences out of 9500
+ 19164 words of font info for 73 fonts, out of 72000 for 255
+ 14 hyphenation exceptions out of 607
+ 13i,9n,17p,186b,297s stack positions out of 300i,40n,60p,3000b,4000s
+
+Output written on compiler.dvi (13 pages, 48140 bytes).

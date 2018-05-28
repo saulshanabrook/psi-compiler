@@ -1,0 +1,7 @@
+void PGI_PSI_TRANSPOSE(void) {
+  parser_t *arg1, *arg2;
+
+  arg1 = pop_ast();
+  arg2 = NULL;
+  push_ast(psi_transpose(arg1,arg2));
+}

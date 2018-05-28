@@ -1,0 +1,125 @@
+\documentstyle[margins]{article}
+
+\title{MOA Compiler Interface}
+\author{}
+
+\begin{document}
+\maketitle
+
+\section{Introduction}
+
+  The MOA compiler is split up into several modules each responsible for
+a particular group of tasks.  In order to use your parser and lexical analyzer
+with the MOA compiler you will need to interface with these modules.  The 
+following is a brief description of all the modules and types you will need.  
+
+\begin{tabular}{lcl}
+psi.h &	: & Contains the types used for representing MOA expressions. \\
+ & & These include ident\_t, s\_expr\_t, vect\_t, expr\_t, and parser\_t \\
+ops.h &	: & Defines a type that represents complex operators. \\
+sys.o &	: & This contains system related procedures. \\
+ident.o	& : & All functions that manipulate ident\_t and s\_expr\_t objects. \\
+vect.o & : & All functions that manipulate vect\_t objects. \\
+moa\_func.o & : & Contains functions for building MOA expressions and  \\
+ & & performing shape analysis. \\
+psi.o &	: & All the routines for reducing array expressions and \\
+ & & performing code generation for expressions.
+\end{tabular}
+
+  You will need to call functions from the sys, moa\_func, and psi modules.
+Each module has a .e file associated with it.  This file contains external
+definitions for that module, and you will need to include it, with the
+include directive, in any C file you write that calls a function from that
+module.  Your parser will also need to include psi.h and ops.h in order to
+use those types.
+
+\section{Writing the Parser}
+ 
+  You should write a main C file that will call all the initialization 
+procedures, open output file, and call your parser to start parsing the program.
+The output file to be opened should to be the file pointer cfile that has
+already been declared in the sys module.  The following initialization
+functions need to be called in this order before starting to parse the 
+input file.
+\begin{verbatim}
+  mem_init();
+  psi_init();
+\end{verbatim}
+
+\subsection{Handling Procedure Declarations}
+  Next you will construct a parser that interfaces with the MOA compiler.
+For each procedure in the input file that you parse, you should print a C
+procedure header for that procedure to the output file.  You should also 
+initialize the following variables to zero that have been declared in other 
+modules.
+
+\begin{verbatim}
+ max_dim=0;
+ forall_num=0;
+ red_num=0;
+ temp_array_num=0;
+ const_array_num=0;
+ vect_tmp_num=0;
+ scalar_num=0;
+ temp_used=FALSE;
+\end{verbatim}
+
+  You then need to open a temporary files vfile and tfile that are already 
+declared in the sys module.  The code generation will print variable 
+declarations to the vfile and code to the tfile.  Also print C variable 
+declarations for every array declaration you parse to the vfile.  If there is a
+declaration of an array with an unknown size you will print the appropriate 
+malloc statement to the tfile.  You will also need to allocate and initialize 
+an ident\_t structure for each declaration in the input file.  Next build a MOA
+expression tree by calling the functions in the moa\_func module as you parse 
+expressions.  When you parse the end of the procedure you should close both
+vfile and tfile.  The following code then needs to be performed to allocated
+a couple of variables that are used during code generation.
+
+\begin{verbatim}
+  for (i=0; i<max_dim; i++) {
+    fprintf(cfile,"  int i%d;\n",i);
+  }
+  fprintf(cfile,"  int step1[%d];\n",max_dim);
+  fprintf(cfile,"  int step2[%d];\n",max_dim);
+\end{verbatim}
+
+Now copy vfile and tfile to the output file.
+
+\subsection{Handling The Procedure Body}
+
+  There are only two statements that can appear in the procedure body, a
+forall statement and an assigment statement.  When parsing the forall statement
+you will need to call 
+start\_loop with loop\_variable, left\_bound, right\_bound as arguments and
+save the return value in a variable.  All of the input variables should be 
+pointers to expr\_t type objects as shown in psi.e.  The return value is an
+integer.  The parser can now parse the body of the forall loop and at the end
+of the loop body should call end\_loop(depth) where depth is the return value
+you saved from start\_loop.  For the assignment statement you can simply
+parse the variable on the left hand side and the expression on the right hand
+side.  This will give you two things of type expr\_t, the result and the
+expression.  After each assignment you should call as
+psi\_assign(expression,result) and this will reduced and generated code for the
+assignment.
+
+\subsection{Building the MOA Expressions}
+
+  You will need to use the moa\_func module in order to build MOA expressions
+of expr\_t type.  All of the functions in moa\_func.c accept and return
+parameters of type parser\_t except the psi\_access function.  When you
+parse a declaration of an array you should have created an object of ident\_t
+type for it.  When an variable is referenced in an expression you can call
+psi\_access with that ident\_t object and it will return a parser\_t object that
+you can use in building the expression.  The functions in moa\_func need to be
+called in posfix order so that when any operator is encountered you already 
+have a parser\_t object for the expressions that are the left and right
+arguments.  Now calling the moa\_func with these arguments will return a 
+parser\_t for a new expression that is the arguments combined with the operator.
+
+  There is also an extra argument to the psi\_omega2 function that is type
+op\_t.  The structure describes a complex operator that is created by the 
+omega function.  It is basically a linked list of omega operators with an
+non-omega function at the tail.
+
+\end{document}

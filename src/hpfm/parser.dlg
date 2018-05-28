@@ -1,0 +1,1719 @@
+<<
+/* parser.dlg -- DLG Description of scanner
+ *
+ * Generated from: hpfm.g
+ *
+ * Terence Parr, Will Cohen, and Hank Dietz: 1989-1994
+ * Purdue University Electrical Engineering
+ * With AHPCRC, University of Minnesota
+ * ANTLR Version 1.20
+ */
+
+#include <stdio.h>
+#define ANTLR_VERSION	120
+#include "charbuf.h" 
+#include "psi.h"
+#include "dist.h"
+#include "op.h"
+#include "sys.h"
+#include "f90.h"
+
+#include "dist.e"
+#include "vect.e"
+#include "psi.e"
+#include "ident.e"
+#include "moa_func.e"
+#include "sys.e"
+#include "sym.e"
+#include "part.e"
+#include "compat.e"
+#include "hpfm_func.e"
+
+#define FNAMELEN 20
+
+extern FILE *cfile,*infile,*vfile,*tfile;
+extern int ntab;
+
+vect_t const1_v;
+ident_t const1_i;
+char line[1024];
+char f90line[1024];
+int curtempf90;
+char f90func [FNAMELEN];
+char arch_module [20];
+#define LL_K 4
+#include "antlr.h"
+#include "tokens.h"
+#include "dlgdef.h"
+LOOKAHEAD
+void zzerraction()
+{
+	(*zzerr)("invalid token");
+	zzadvance();
+	zzskip();
+}
+>>
+
+
+%%START
+
+@
+	<<
+		NLA = 1;
+	>>
+
+.NOT.
+	<<
+		NLA = NOT1;
+	>>
+
+.AND.
+	<<
+		NLA = AND1;
+	>>
+
+.OR.
+	<<
+		NLA = OR1;
+	>>
+
+.EQV.
+	<<
+		NLA = EQV1;
+	>>
+
+.NEQV.
+	<<
+		NLA = NEQV1;
+	>>
+
+TRUE
+	<<
+		NLA = TRUE1;
+	>>
+
+FALSE
+	<<
+		NLA = FALSE1;
+	>>
+
+.EQ.|==
+	<<
+		NLA = EQ1;
+	>>
+
+.NE.|/=
+	<<
+		NLA = NE1;
+	>>
+
+.LT.|<
+	<<
+		NLA = LT1;
+	>>
+
+.LE.|<=
+	<<
+		NLA = LE1;
+	>>
+
+.GT.|>
+	<<
+		NLA = GT1;
+	>>
+
+.GE.|>=
+	<<
+		NLA = GE1;
+	>>
+
+\(/
+	<<
+		NLA = LEFTCONS1;
+	>>
+
+/\)
+	<<
+		NLA = RIGHTCONS1;
+	>>
+
+\(
+	<<
+		NLA = LEFTPAREN1;
+	>>
+
+\)
+	<<
+		NLA = RIGHTPAREN1;
+	>>
+
+\*\*
+	<<
+		NLA = POWER1;
+	>>
+
+\*
+	<<
+		NLA = TIMES1;
+	>>
+
+//
+	<<
+		NLA = DSLASH1;
+	>>
+
+/
+	<<
+		NLA = SLASH1;
+	>>
+
+\+
+	<<
+		NLA = PLUS1;
+	>>
+
+\-
+	<<
+		NLA = MINUS1;
+	>>
+
+\=
+	<<
+		NLA = EQUAL1;
+	>>
+
+,
+	<<
+		NLA = COMMA1;
+	>>
+
+::
+	<<
+		NLA = DCOLON1;
+	>>
+
+:
+	<<
+		NLA = COLON1;
+	>>
+
+%
+	<<
+		NLA = PERCENT1;
+	>>
+
+;
+	<<
+		NLA = SEMI1;
+	>>
+
+KIND
+	<<
+		NLA = KIND1;
+	>>
+
+MASK
+	<<
+		NLA = MASK1;
+	>>
+
+LEN
+	<<
+		NLA = LEN1;
+	>>
+
+PUBLIC
+	<<
+		NLA = PUBLIC1;
+	>>
+
+.
+	<<
+		NLA = PERIOD1;
+	>>
+
+IN
+	<<
+		NLA = IN1;
+	>>
+
+OUT
+	<<
+		NLA = OUT1;
+	>>
+
+INOUT
+	<<
+		NLA = INOUT1;
+	>>
+
+OPTIONAL
+	<<
+		NLA = OPTIONAL1;
+	>>
+
+IMPLICIT
+	<<
+		NLA = IMPLICIT1;
+	>>
+
+EQUIVALENCE
+	<<
+		NLA = EQUIVALENCE1;
+	>>
+
+NULLIFY
+	<<
+		NLA = NULLIFY1;
+	>>
+
+IF
+	<<
+		NLA = IF1;
+	>>
+
+ELSE
+	<<
+		NLA = ELSE1;
+	>>
+
+DEFAULT
+	<<
+		NLA = DEFAULT1;
+	>>
+
+CYCLE
+	<<
+		NLA = CYCLE1;
+	>>
+
+ASSIGN
+	<<
+		NLA = ASSIGN1;
+	>>
+
+PRIVATE
+	<<
+		NLA = PRIVATE1;
+	>>
+
+SEQUENCE
+	<<
+		NLA = SEQUENCE1;
+	>>
+
+TYPE
+	<<
+		NLA = TYPE1;
+	>>
+
+END
+	<<
+		NLA = END1;
+	>>
+
+PARAMETER
+	<<
+		NLA = PARAMETER1;
+	>>
+
+ALLOCATABLE
+	<<
+		NLA = ALLOCATABLE1;
+	>>
+
+EXTERNAL
+	<<
+		NLA = EXTERNAL1;
+	>>
+
+INTENT
+	<<
+		NLA = INTENT1;
+	>>
+
+UNKNOWN
+	<<
+		NLA = UNKNOWN1;
+	>>
+
+TARGET
+	<<
+		NLA = TARGET1;
+	>>
+
+NONE
+	<<
+		NLA = NONE1;
+	>>
+
+COMMON
+	<<
+		NLA = COMMON1;
+	>>
+
+DEALLOCATE
+	<<
+		NLA = DEALLOCATE1;
+	>>
+
+THEN
+	<<
+		NLA = THEN1;
+	>>
+
+SELECT
+	<<
+		NLA = SELECT1;
+	>>
+
+DO
+	<<
+		NLA = DO1;
+	>>
+
+EXIT
+	<<
+		NLA = EXIT1;
+	>>
+
+CONTINUE
+	<<
+		NLA = CONTINUE1;
+	>>
+
+POINTER
+	<<
+		NLA = POINTER1;
+	>>
+
+DIMENSION
+	<<
+		NLA = DIMENSION1;
+	>>
+
+INTEGER
+	<<
+		NLA = INTEGER1;
+	>>
+
+REAL
+	<<
+		NLA = REAL1;
+	>>
+
+DOUBLE
+	<<
+		NLA = DOUBLE1;
+	>>
+
+PERCISION
+	<<
+		NLA = PERCISION1;
+	>>
+
+COMPLEX
+	<<
+		NLA = COMPLEX1;
+	>>
+
+CHARACTER
+	<<
+		NLA = CHARACTER1;
+	>>
+
+LOGICAL
+	<<
+		NLA = LOGICAL1;
+	>>
+
+INTRINSIC
+	<<
+		NLA = INTRINSIC1;
+	>>
+
+SAVE
+	<<
+		NLA = SAVE1;
+	>>
+
+DATA
+	<<
+		NLA = DATA1;
+	>>
+
+LIST
+	<<
+		NLA = LIST1;
+	>>
+
+STAT
+	<<
+		NLA = STAT1;
+	>>
+
+WHERE
+	<<
+		NLA = WHERE1;
+	>>
+
+ELSEWHERE
+	<<
+		NLA = ELSEWHERE1;
+	>>
+
+CASE
+	<<
+		NLA = CASE1;
+	>>
+
+WHILE
+	<<
+		NLA = WHILE1;
+	>>
+
+GO
+	<<
+		NLA = GO1;
+	>>
+
+TO
+	<<
+		NLA = TO1;
+	>>
+
+STOP
+	<<
+		NLA = STOP1;
+	>>
+
+PAUSE
+	<<
+		NLA = PAUSE1;
+	>>
+
+IOSTAT
+	<<
+		NLA = IOSTAT1;
+	>>
+
+STATUS
+	<<
+		NLA = STATUS1;
+	>>
+
+POISITION
+	<<
+		NLA = POISITION1;
+	>>
+
+ACTION
+	<<
+		NLA = ACTION1;
+	>>
+
+READ
+	<<
+		NLA = READ1;
+	>>
+
+PRINT
+	<<
+		NLA = PRINT1;
+	>>
+
+REC
+	<<
+		NLA = REC1;
+	>>
+
+EOR
+	<<
+		NLA = EOR1;
+	>>
+
+REWIND
+	<<
+		NLA = REWIND1;
+	>>
+
+OPENED
+	<<
+		NLA = OPENED1;
+	>>
+
+NAMED
+	<<
+		NLA = NAMED1;
+	>>
+
+READWRITE
+	<<
+		NLA = READWRITE1;
+	>>
+
+FORMAT
+	<<
+		NLA = FORMAT1;
+	>>
+
+ONLY
+	<<
+		NLA = ONLY1;
+	>>
+
+PROCEDURE
+	<<
+		NLA = PROCEDURE1;
+	>>
+
+CALL
+	<<
+		NLA = CALL1;
+	>>
+
+FUNCTION
+	<<
+		NLA = FUNCTION1;
+	>>
+
+CONTAINS
+	<<
+		NLA = CONTAINS1;
+	>>
+
+OPEN
+	<<
+		NLA = OPEN1;
+	>>
+
+ERR
+	<<
+		NLA = ERR1;
+	>>
+
+ACCESS
+	<<
+		NLA = ACCESS1;
+	>>
+
+BLANK
+	<<
+		NLA = BLANK1;
+	>>
+
+DELIM
+	<<
+		NLA = DELIM1;
+	>>
+
+WRITE
+	<<
+		NLA = WRITE1;
+	>>
+
+FMT
+	<<
+		NLA = FMT1;
+	>>
+
+ADVANCE
+	<<
+		NLA = ADVANCE1;
+	>>
+
+BACKSPACE
+	<<
+		NLA = BACKSPACE1;
+	>>
+
+INQUIRE
+	<<
+		NLA = INQUIRE1;
+	>>
+
+NUMBER
+	<<
+		NLA = NUMBER1;
+	>>
+
+SEQUENTIAL
+	<<
+		NLA = SEQUENTIAL1;
+	>>
+
+FORMATTED
+	<<
+		NLA = FORMATTED1;
+	>>
+
+NEXTREC
+	<<
+		NLA = NEXTREC1;
+	>>
+
+PROGRAM
+	<<
+		NLA = PROGRAM1;
+	>>
+
+INTERFACE
+	<<
+		NLA = INTERFACE1;
+	>>
+
+OPERATOR
+	<<
+		NLA = OPERATOR1;
+	>>
+
+RECURSIVE
+	<<
+		NLA = RECURSIVE1;
+	>>
+
+ENTRY
+	<<
+		NLA = ENTRY1;
+	>>
+
+UNIT
+	<<
+		NLA = UNIT1;
+	>>
+
+FILE
+	<<
+		NLA = FILE1;
+	>>
+
+FORM
+	<<
+		NLA = FORM1;
+	>>
+
+RECL
+	<<
+		NLA = RECL1;
+	>>
+
+PAD
+	<<
+		NLA = PAD1;
+	>>
+
+CLOSE
+	<<
+		NLA = CLOSE1;
+	>>
+
+NML
+	<<
+		NLA = NML1;
+	>>
+
+SIZE
+	<<
+		NLA = SIZE1;
+	>>
+
+ENDFILE
+	<<
+		NLA = ENDFILE1;
+	>>
+
+EXIST
+	<<
+		NLA = EXIST1;
+	>>
+
+DIRECT
+	<<
+		NLA = DIRECT1;
+	>>
+
+UNFORMATED
+	<<
+		NLA = UNFORMATED1;
+	>>
+
+MODULE
+	<<
+		NLA = MODULE1;
+	>>
+
+USE
+	<<
+		NLA = USE1;
+	>>
+
+BLOCK
+	<<
+		NLA = BLOCK1;
+	>>
+
+ASSIGNMENT
+	<<
+		NLA = ASSIGNMENT1;
+	>>
+
+RESULT
+	<<
+		NLA = RESULT1;
+	>>
+
+SUBROUTINE
+	<<
+		NLA = SUBROUTINE1;
+	>>
+
+DYNAMIC
+	<<
+		NLA = DYNAMIC1;
+	>>
+
+HPF
+	<<
+		NLA = HPF1;
+	>>
+
+INHERIT
+	<<
+		NLA = INHERIT1;
+	>>
+
+ONTO
+	<<
+		NLA = ONTO1;
+	>>
+
+REALLIGN
+	<<
+		NLA = REALLIGN1;
+	>>
+
+ALIGN
+	<<
+		NLA = ALIGN1;
+	>>
+
+EXTRINSIC
+	<<
+		NLA = EXTRINSIC1;
+	>>
+
+HPF_LOCAL
+	<<
+		NLA = HPF_LOCAL1;
+	>>
+
+NEW
+	<<
+		NLA = NEW1;
+	>>
+
+PROCESSORS
+	<<
+		NLA = PROCESSORS1;
+	>>
+
+TEMPLATE
+	<<
+		NLA = TEMPLATE1;
+	>>
+
+CYCLIC
+	<<
+		NLA = CYCLIC1;
+	>>
+
+DISTRIBUTE
+	<<
+		NLA = DISTRIBUTE1;
+	>>
+
+FORALL
+	<<
+		NLA = FORALL1;
+	>>
+
+INDEPENDENT
+	<<
+		NLA = INDEPENDENT1;
+	>>
+
+NO
+	<<
+		NLA = NO1;
+	>>
+
+PURE
+	<<
+		NLA = PURE1;
+	>>
+
+REDISTRIBUTE
+	<<
+		NLA = REDISTRIBUTE1;
+	>>
+
+WITH
+	<<
+		NLA = WITH1;
+	>>
+
+ABS
+	<<
+		NLA = ABS1;
+	>>
+
+AIMAG
+	<<
+		NLA = AIMAG1;
+	>>
+
+AINT
+	<<
+		NLA = AINT1;
+	>>
+
+ANINT
+	<<
+		NLA = ANINT1;
+	>>
+
+CEILING
+	<<
+		NLA = CEILING1;
+	>>
+
+CMPLX
+	<<
+		NLA = CMPLX1;
+	>>
+
+CONJG
+	<<
+		NLA = CONJG1;
+	>>
+
+DBLE
+	<<
+		NLA = DBLE1;
+	>>
+
+DIM
+	<<
+		NLA = DIM1;
+	>>
+
+DPROD
+	<<
+		NLA = DPROD1;
+	>>
+
+INT
+	<<
+		NLA = INT1;
+	>>
+
+FLOOR
+	<<
+		NLA = FLOOR1;
+	>>
+
+MAX
+	<<
+		NLA = MAX1;
+	>>
+
+MIN
+	<<
+		NLA = MIN1;
+	>>
+
+MOD
+	<<
+		NLA = MOD1;
+	>>
+
+MODULO
+	<<
+		NLA = MODULO1;
+	>>
+
+NINT
+	<<
+		NLA = NINT1;
+	>>
+
+SIGN
+	<<
+		NLA = SIGN1;
+	>>
+
+ACOS
+	<<
+		NLA = ACOS1;
+	>>
+
+ASIN
+	<<
+		NLA = ASIN1;
+	>>
+
+ATAN
+	<<
+		NLA = ATAN1;
+	>>
+
+ATAN2
+	<<
+		NLA = ATAN21;
+	>>
+
+COS
+	<<
+		NLA = COS1;
+	>>
+
+COSH
+	<<
+		NLA = COSH1;
+	>>
+
+EXP
+	<<
+		NLA = EXP1;
+	>>
+
+LOG
+	<<
+		NLA = LOG1;
+	>>
+
+LOG10
+	<<
+		NLA = LOG101;
+	>>
+
+SIN
+	<<
+		NLA = SIN1;
+	>>
+
+SINH
+	<<
+		NLA = SINH1;
+	>>
+
+SQRT
+	<<
+		NLA = SQRT1;
+	>>
+
+TAN
+	<<
+		NLA = TAN1;
+	>>
+
+TANH
+	<<
+		NLA = TANH1;
+	>>
+
+ACHAR
+	<<
+		NLA = ACHAR1;
+	>>
+
+ADJUSTL
+	<<
+		NLA = ADJUSTL1;
+	>>
+
+ADJUSTR
+	<<
+		NLA = ADJUSTR1;
+	>>
+
+CHAR
+	<<
+		NLA = CHAR1;
+	>>
+
+IACHAR
+	<<
+		NLA = IACHAR1;
+	>>
+
+ICHAR
+	<<
+		NLA = ICHAR1;
+	>>
+
+INDEX
+	<<
+		NLA = INDEX1;
+	>>
+
+LEN_TRIM
+	<<
+		NLA = LEN_TRIM1;
+	>>
+
+LGE
+	<<
+		NLA = LGE1;
+	>>
+
+LGT
+	<<
+		NLA = LGT1;
+	>>
+
+LLE
+	<<
+		NLA = LLE1;
+	>>
+
+LLT
+	<<
+		NLA = LLT1;
+	>>
+
+REPEAT
+	<<
+		NLA = REPEAT1;
+	>>
+
+SCAN
+	<<
+		NLA = SCAN1;
+	>>
+
+TRIM
+	<<
+		NLA = TRIM1;
+	>>
+
+VERIFY
+	<<
+		NLA = VERIFY1;
+	>>
+
+SELECTED_INT_KIND
+	<<
+		NLA = SELECTED_INT_KIND1;
+	>>
+
+SELECTED_REAL_KIND
+	<<
+		NLA = SELECTED_REAL_KIND1;
+	>>
+
+DIGITS
+	<<
+		NLA = DIGITS1;
+	>>
+
+EPSILON
+	<<
+		NLA = EPSILON1;
+	>>
+
+HUGE
+	<<
+		NLA = HUGE1;
+	>>
+
+MAXEXPONENT
+	<<
+		NLA = MAXEXPONENT1;
+	>>
+
+MINEXPONENT
+	<<
+		NLA = MINEXPONENT1;
+	>>
+
+PRECISION
+	<<
+		NLA = PRECISION1;
+	>>
+
+RADIX
+	<<
+		NLA = RADIX1;
+	>>
+
+RANGE
+	<<
+		NLA = RANGE1;
+	>>
+
+TINY
+	<<
+		NLA = TINY1;
+	>>
+
+EXPONENT
+	<<
+		NLA = EXPONENT1;
+	>>
+
+FRACTION
+	<<
+		NLA = FRACTION1;
+	>>
+
+NEAREST
+	<<
+		NLA = NEAREST1;
+	>>
+
+RRSPACING
+	<<
+		NLA = RRSPACING1;
+	>>
+
+SCALE
+	<<
+		NLA = SCALE1;
+	>>
+
+SET_EXPONENT
+	<<
+		NLA = SET_EXPONENT1;
+	>>
+
+SPACING
+	<<
+		NLA = SPACING1;
+	>>
+
+BIT_SIZE
+	<<
+		NLA = BIT_SIZE1;
+	>>
+
+BTEST
+	<<
+		NLA = BTEST1;
+	>>
+
+IAND
+	<<
+		NLA = IAND1;
+	>>
+
+IBCLR
+	<<
+		NLA = IBCLR1;
+	>>
+
+IBITS
+	<<
+		NLA = IBITS1;
+	>>
+
+IBSET
+	<<
+		NLA = IBSET1;
+	>>
+
+IEOR
+	<<
+		NLA = IEOR1;
+	>>
+
+IOR
+	<<
+		NLA = IOR1;
+	>>
+
+ISHFT
+	<<
+		NLA = ISHFT1;
+	>>
+
+ISHFTC
+	<<
+		NLA = ISHFTC1;
+	>>
+
+TRANSFER
+	<<
+		NLA = TRANSFER1;
+	>>
+
+DOT_PRODUCT
+	<<
+		NLA = DOT_PRODUCT1;
+	>>
+
+MATMUL
+	<<
+		NLA = MATMUL1;
+	>>
+
+ALL
+	<<
+		NLA = ALL1;
+	>>
+
+ANY
+	<<
+		NLA = ANY1;
+	>>
+
+COUNT
+	<<
+		NLA = COUNT1;
+	>>
+
+MAXVAL
+	<<
+		NLA = MAXVAL1;
+	>>
+
+MINVAL
+	<<
+		NLA = MINVAL1;
+	>>
+
+PRODUCT
+	<<
+		NLA = PRODUCT1;
+	>>
+
+SUM
+	<<
+		NLA = SUM1;
+	>>
+
+ALLOCATED
+	<<
+		NLA = ALLOCATED1;
+	>>
+
+LBOUND
+	<<
+		NLA = LBOUND1;
+	>>
+
+SHAPE
+	<<
+		NLA = SHAPE1;
+	>>
+
+UBOUND
+	<<
+		NLA = UBOUND1;
+	>>
+
+MERGE
+	<<
+		NLA = MERGE1;
+	>>
+
+PACK
+	<<
+		NLA = PACK1;
+	>>
+
+SPREAD
+	<<
+		NLA = SPREAD1;
+	>>
+
+UNPACK
+	<<
+		NLA = UNPACK1;
+	>>
+
+RESHAPE
+	<<
+		NLA = RESHAPE1;
+	>>
+
+CONCAT
+	<<
+		NLA = CONCAT1;
+	>>
+
+CSHIFT
+	<<
+		NLA = CSHIFT1;
+	>>
+
+EOSHIFT
+	<<
+		NLA = EOSHIFT1;
+	>>
+
+TRANSPOSE
+	<<
+		NLA = TRANSPOSE1;
+	>>
+
+MAXLOC
+	<<
+		NLA = MAXLOC1;
+	>>
+
+MINLOC
+	<<
+		NLA = MINLOC1;
+	>>
+
+ASSOCIATED
+	<<
+		NLA = ASSOCIATED1;
+	>>
+
+DATE_AND_TIME
+	<<
+		NLA = DATE_AND_TIME1;
+	>>
+
+SYSTEM_CLOCK
+	<<
+		NLA = SYSTEM_CLOCK1;
+	>>
+
+RANDOM_NUMBER
+	<<
+		NLA = RANDOM_NUMBER1;
+	>>
+
+RANDOM_SEED
+	<<
+		NLA = RANDOM_SEED1;
+	>>
+
+MVBITS
+	<<
+		NLA = MVBITS1;
+	>>
+
+ILEN
+	<<
+		NLA = ILEN1;
+	>>
+
+NUMBER_OF_PROCESSORS
+	<<
+		NLA = NUMBER_OF_PROCESSORS1;
+	>>
+
+PROCESSORS_SHAPE
+	<<
+		NLA = PROCESSORS_SHAPE1;
+	>>
+
+ALL_PREFIX
+	<<
+		NLA = ALL_PREFIX1;
+	>>
+
+ALL_SCATTER
+	<<
+		NLA = ALL_SCATTER1;
+	>>
+
+ALL_SUFFIX
+	<<
+		NLA = ALL_SUFFIX1;
+	>>
+
+ANY_PREFIX
+	<<
+		NLA = ANY_PREFIX1;
+	>>
+
+ANY_SCATTER
+	<<
+		NLA = ANY_SCATTER1;
+	>>
+
+ANY_SUFFIX
+	<<
+		NLA = ANY_SUFFIX1;
+	>>
+
+COPY_PREFIX
+	<<
+		NLA = COPY_PREFIX1;
+	>>
+
+COPY_SCATTER
+	<<
+		NLA = COPY_SCATTER1;
+	>>
+
+COPY_SUFFIX
+	<<
+		NLA = COPY_SUFFIX1;
+	>>
+
+COUNT_PREFIX
+	<<
+		NLA = COUNT_PREFIX1;
+	>>
+
+COUNT_SCATTER
+	<<
+		NLA = COUNT_SCATTER1;
+	>>
+
+COUNT_SUFFIX
+	<<
+		NLA = COUNT_SUFFIX1;
+	>>
+
+GRADE_DOWN
+	<<
+		NLA = GRADE_DOWN1;
+	>>
+
+GRADE_UP
+	<<
+		NLA = GRADE_UP1;
+	>>
+
+HPF_ALLIGNMENT
+	<<
+		NLA = HPF_ALLIGNMENT1;
+	>>
+
+HPF_TEMPLATE
+	<<
+		NLA = HPF_TEMPLATE1;
+	>>
+
+HPF_DISTRIBUTION
+	<<
+		NLA = HPF_DISTRIBUTION1;
+	>>
+
+IALL
+	<<
+		NLA = IALL1;
+	>>
+
+IALL_PREFIX
+	<<
+		NLA = IALL_PREFIX1;
+	>>
+
+IALL_SCATTER
+	<<
+		NLA = IALL_SCATTER1;
+	>>
+
+ICALL_SUFFIX
+	<<
+		NLA = ICALL_SUFFIX1;
+	>>
+
+IANY_PREFIX
+	<<
+		NLA = IANY_PREFIX1;
+	>>
+
+IANY_SCATTER
+	<<
+		NLA = IANY_SCATTER1;
+	>>
+
+IANY_SUFFIX
+	<<
+		NLA = IANY_SUFFIX1;
+	>>
+
+IPARITY_PREFIX
+	<<
+		NLA = IPARITY_PREFIX1;
+	>>
+
+IPARITY_SCATTER
+	<<
+		NLA = IPARITY_SCATTER1;
+	>>
+
+IPARITY_SUFFIX
+	<<
+		NLA = IPARITY_SUFFIX1;
+	>>
+
+LEADZ
+	<<
+		NLA = LEADZ1;
+	>>
+
+MAXVAL_PREFIX
+	<<
+		NLA = MAXVAL_PREFIX1;
+	>>
+
+MAXVAL_SCATTER
+	<<
+		NLA = MAXVAL_SCATTER1;
+	>>
+
+MAXVAL_SUFFIX
+	<<
+		NLA = MAXVAL_SUFFIX1;
+	>>
+
+PARITY
+	<<
+		NLA = PARITY1;
+	>>
+
+PARITY_PREFIX
+	<<
+		NLA = PARITY_PREFIX1;
+	>>
+
+PARITY_SCATTER
+	<<
+		NLA = PARITY_SCATTER1;
+	>>
+
+PARITY_SUFFIX
+	<<
+		NLA = PARITY_SUFFIX1;
+	>>
+
+POPCNT
+	<<
+		NLA = POPCNT1;
+	>>
+
+POPPAR
+	<<
+		NLA = POPPAR1;
+	>>
+
+PRODUCT_PREFIX
+	<<
+		NLA = PRODUCT_PREFIX1;
+	>>
+
+PRODUCT_SCATTER
+	<<
+		NLA = PRODUCT_SCATTER1;
+	>>
+
+PRODUCT_SUFFIX
+	<<
+		NLA = PRODUCT_SUFFIX1;
+	>>
+
+SUM_PREFIX
+	<<
+		NLA = SUM_PREFIX1;
+	>>
+
+SUM_SCATTER
+	<<
+		NLA = SUM_SCATTER1;
+	>>
+
+SUM_SUFFIX
+	<<
+		NLA = SUM_SUFFIX1;
+	>>
+
+RAV
+	<<
+		NLA = RAV1;
+	>>
+
+REVERSE
+	<<
+		NLA = REVERSE1;
+	>>
+
+IOTA
+	<<
+		NLA = IOTA1;
+	>>
+
+CAT_PARTS
+	<<
+		NLA = CAT_PARTS1;
+	>>
+
+REVERSE_PARTS
+	<<
+		NLA = REVERSE_PARTS1;
+	>>
+
+TRANSPOSE_PARTS
+	<<
+		NLA = TRANSPOSE_PARTS1;
+	>>
+
+INDEX_PARTS
+	<<
+		NLA = INDEX_PARTS1;
+	>>
+
+CSHIFT_PARTS
+	<<
+		NLA = CSHIFT_PARTS1;
+	>>
+
+PRODUCT_PARTS
+	<<
+		NLA = PRODUCT_PARTS1;
+	>>
+
+SUM_PARTS
+	<<
+		NLA = SUM_PARTS1;
+	>>
+
+[\t\ ]
+	<<
+		NLA = 325;
+		zzskip();  
+	>>
+
+[!]~[\n]
+	<<
+		NLA = 326;
+		zzskip();  
+	>>
+
+[\n]
+	<<
+		NLA = 327;
+		zzskip(); zzline++;  
+	>>
+
+[0-9]+
+	<<
+		NLA = NUMBER1;
+	>>
+
+[0-9]+\.[0-9]+
+	<<
+		NLA = FLOAT1;
+	>>
+
+[a-zA-Z][_a-zA-Z0-9]*
+	<<
+		NLA = NAME1;
+		{int index; search(zzlextext,&index);}  
+	>>
+
+!HPF$
+	<<
+		NLA = 330;
+	>>
+
+%%

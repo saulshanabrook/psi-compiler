@@ -1,0 +1,134 @@
+19a20,22
+> #define	DEBUG
+> #include "q.h"
+> #include "qd.h"
+110c113
+< psi_insert_sym(ident_t *ident, int index)
+---
+> insert_sym(ident_t *ident, int index)
+242,243c245
+<   (*ident_p)->array.shp=
+<     (ident_t **) get_mem(shp->shp->ident->value*sizeof(ident_t *));
+---
+>   (*ident_p)->array.shp= dbmalloc(ident_t **,get_mem,shp->shp->ident->value*sizeof(ident_t *));
+245,246c247
+<     s=red_rav(shp,i);
+<     (*ident_p)->array.shp[i]=make_ident(s);
+---
+>     s=red_rav(shp,i); (*ident_p)->array.shp[i]=make_ident(s);
+311c312
+<   ret->array.shp=(ident_t **) get_mem(sizeof(ident_t *));
+---
+>   ret->array.shp=dbmalloc(ident_t **,get_mem,sizeof(ident_t *));
+318c319
+<     ret->array.rav=(s_expr_t **) get_mem(i*sizeof(s_expr_t *));
+---
+>     ret->array.rav=dbmalloc(s_expr_t **,get_mem,i*sizeof(s_expr_t *));
+332c333
+<     ret->array.cnst=(double *) get_mem(i*sizeof(double));
+---
+>     ret->array.cnst=dbmalloc(double *,get_mem,i*sizeof(double));
+335a337
+> q1(" ");
+384c386
+<   op=(op_t *) get_mem(sizeof(op_t));
+---
+>   op=dbmalloc(op_t *,get_mem,sizeof(op_t));
+390a393
+>     q3("op->func=NULL; [op = x%lx, func = x%lx]",op,NULL);
+407a411
+> 	q3("op->func=psi_red_plus; [op = x%lx, func = x%lx]",op,psi_red_plus);
+410a415
+> 	q3("op->func=psi_plus; [op = x%lx, func = x%lx]",op,psi_plus);
+418a424
+> 	q3("op->func=psi_red_minus; [op = x%lx, func = x%lx]",op,psi_red_minus);
+421a428
+> 	q3("op->func=psi_minus; [op = x%lx, func = x%lx]",op,psi_minus);
+429a437
+> 	q3("op->func=psi_red_times; [op = x%lx, func = x%lx]",op,psi_red_times);
+432a441
+> 	q3("op->func=psi_times; [op = x%lx, func = x%lx]",op,psi_times);
+440a450
+> 	q3("op->func=psi_red_div; [op = x%lx, func = x%lx]",op,psi_red_div);
+443a454
+> 	q3("op->func=psi_div; [op = x%lx, func = x%lx]",op,psi_div);
+448a460
+>       q3("op->func=psi_psi; [op = x%lx, func = x%lx]",op,psi_psi);
+453a466
+>       q3("op->func=psi_iota; [op = x%lx, func = x%lx]",op,psi_iota);
+458a472
+>       q3("op->func=psi_shp; [op = x%lx, func = x%lx]",op,psi_shp);
+463a478
+>       q3("op->func=psi_dim; [op = x%lx, func = x%lx]",op,psi_dim);
+468a484
+>       q3("op->func=psi_tau; [op = x%lx, func = x%lx]",op,psi_tau);
+473a490
+>       q3("op->func=psi_rav; [op = x%lx, func = x%lx]",op,psi_rav);
+478a496
+>       q3("op->func=psi_take; [op = x%lx, func = x%lx]",op,psi_take);
+483a502
+>       q3("op->func=psi_drop; [op = x%lx, func = x%lx]",op,psi_drop);
+488a508
+>       q3("op->func=psi_ptake; [op = x%lx, func = x%lx]",op,psi_ptake);
+493a514
+>       q3("op->func=psi_pdrop; [op = x%lx, func = x%lx]",op,psi_pdrop);
+498a520
+>       q3("op->func=psi_cat; [op = x%lx, func = x%lx]",op,psi_cat);
+503a526
+>       q3("op->func=psi_reverse; [op = x%lx, func = x%lx]",op,psi_reverse);
+791c814
+<   ret->str=(char *) get_mem(strlen(call_str)+1);
+---
+>   ret->str=dbmalloc(char *,get_mem,strlen(call_str)+1);
+825,829d847
+< /*
+<   printf("PRINTING STATEMENT...   "); fflush(stdout);
+<   code_c_rec(statement);
+<   printf("THAT'S IT?!?!?... ");
+< */
+872c890
+<     } else ident->array.shp=(ident_t **) get_mem(tau*sizeof(ident_t *));
+---
+>     } else ident->array.shp=dbmalloc(ident_t **,get_mem,tau*sizeof(ident_t *));
+909c927
+<   psi_insert_sym(ident,index);
+---
+>   insert_sym(ident,index);
+935c953
+<   ident->array.cnst=(double *) get_mem(tau*sizeof(double));
+---
+>   ident->array.cnst=dbmalloc(double *,get_mem,tau*sizeof(double));
+948a967
+>   fflush(vfile);
+975c994
+<     psi_insert_sym(ident,index);
+---
+>     insert_sym(ident,index);
+1077c1096
+<   psi_insert_sym(ident,index);
+---
+>   insert_sym(ident,index);
+1150c1169
+<   code_c(body,partition(body));
+---
+> /* FOOBAR Off to code generation, is this appropriate. */
+1151a1171,1177
+> #ifndef DIAG_CODE_C
+>   code_c(body,partition(body)); 
+> #endif
+> #ifdef DIAG_CODE_C
+>   diag_code_c(body,partition(body)); 
+> #endif
+>   
+1259c1285
+<     host_name=(char *) get_mem(strlen(tmp)*sizeof(char));
+---
+>     host_name=dbmalloc(char *,get_mem,strlen(tmp)*sizeof(char));
+1275c1301
+<     picl_file=(char *) get_mem(strlen(tmp)*sizeof(char));
+---
+>     picl_file=dbmalloc(char *,get_mem,strlen(tmp)*sizeof(char));
+
+
+
+

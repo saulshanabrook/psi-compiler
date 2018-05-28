@@ -1,0 +1,39 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	94.09.06.07.32.21;	author psi;	state Exp;
+branches;
+next	;
+
+
+desc
+@contains external functions declarations for moalib.c
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@/* Copyright (c) 1993 University of Missouri-Rolla
+   All rights reserved.
+
+   moalib.h - prototypes for functions in moalib.c
+
+*/
+
+#ifndef TRUE
+#define TRUE 1
+#define FALSE 0
+#endif
+
+extern int min(int a, int b);
+extern int max(int a, int b);
+extern void *get_mem(long size);
+@

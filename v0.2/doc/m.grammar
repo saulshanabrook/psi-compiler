@@ -1,0 +1,35 @@
+Moa Compiler 0.2 input grammer specification.
+
+Uppercase words indicate a type of an object.
+
+program := { procedure_definition }
+procedure_definition := PROCEDURE_name "(" formal_parameter_list ")" block_body
+formal_parameter_list := parameter_definition { "," parameter_definition }
+parameter_definition := "int" PARAMETER_name | 
+	"array" PARAMETER_name array_definition
+array_definition := "^" INTEGER_number "<" { INTEGER_number | 
+	INTEGER_PARAMETER_name } ">"
+block_body := "{" definition_part statement_list "}"
+definition_part := { constant_definition_part | variable_definition_part |
+	global_definition }
+constant_definition_part := constant_definition ";"
+constant_definition := "const" "array" VARIABLE_name array_definition "="
+	vector_constant
+vector_constant := "<" { number } ">"
+variable_definition_part := variable_definition ";"
+variable_definition := array VARIABLE_name array_definition
+global_definition := "global" VARIABL_name ";"
+statement_list := { statement ";" }
+statement := assignment_statement | forall_statement
+forall_statement := forall "(" term "<=" variable_access "<" term ")" "{" 
+	statement_list "}"
+assignment_statement := variable_access "=" expression
+variable_access := VARIABLE_name | PARAMETER_name
+expression := factor { operator expression }
+operator := "+" | "-" | "*" | "/" | "psi" | "take" | "drop" | "cat" | "pdrop" |
+	"ptake" | operator "omega" constant_vector
+unary_operator := "iota" | "dim" | "shp" | "+ red" | "- red" | "* red" | 
+	"/ red" | "tau" | "rav"
+factor := term  | "(" expression ")" | unary_operator factor
+term := variable_access | constant_vector
+constant_vector := "<" { number } ">"

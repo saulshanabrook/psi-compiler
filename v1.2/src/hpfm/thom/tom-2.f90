@@ -1,0 +1,6 @@
+SUBROUTINE test (A, B)
+  INTEGER, DIMENSION(10,10) :: A, B
+  INTEGER, DIMENSION(0,0) :: A1
+
+  A1 = (A(1:0,1:0) * B(1:0,1:0))
+END SUBROUTINE test

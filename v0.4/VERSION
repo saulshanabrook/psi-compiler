@@ -1,0 +1,59 @@
+5/93 - version 0.0
+	Initial release.
+6/93 - version 0.1
+	Bugs listed in report/bugs0.0 were fixed
+	New parser was added with a new grammer
+	Internal data structures changed considerably.
+	Support for arrays with variable shapes (not tested).
+	A looping construct was added.
+	Capability for dynamic array allocation was added.
+	Added to special case operators ptake and pdrop.
+	Omega can now take it self as a parameter.
+7/93 - version 0.2
+	Added new functions shp, dim, iota, and op red (op=+, -, *, or /).
+	Added new functions tau, and rav
+8/93 - version 0.3i
+	Added the allocate statement for dynamic allocation.
+	Restructed compiler to maintain the entire procedure body of reduced
+	  expressions before code generation in order to do analysis for
+	  partititoning.
+	Parallel code generation was introduced.  For this purpose the 
+	  global statement was added to the grammar to indicated data that
+	  should be replicated on all processors and also the compiler
+	  directives procs, arch, usehost, and hostless were introduced.
+	Added pdrop for the lhs of an assigment and an implict ptake for
+	  the lhs.
+10/93   Added routines to detect assignments with the same bounds and location
+	  and merge the assignments into one loop.
+	offset and shift are now initialized with the base address plus
+	  the initial position in the array so assignments are now
+	  *shift=*offset to save the addition in the old version that was
+	  *(result+shift)=*(source+offset)
+11/93   Expressions for the stepping values are now forced to be computed  
+	  before the loop and stored in a temporary scalar variable so the
+	  computation isn't done at each iteration.
+	The parser now generates a string representing the input as it is
+	  parsed and is used by code.c to put a comment in the output file
+	  displaying the input expression before it's coresponding code.
+	The output module was added that prints expression trees to rfile
+	  if the global prove variable is true.  psi.c uses output.c to 
+	  trace the reduction be printing the expression at each step of 
+	  the reduction.
+	The command line parameters were changed to use -o for the output
+	  file and -r for a reduction file that the output module writes to.
+	  If -r is given on the command line then the global prove variable
+	  is true and the reduction is saved, otherwise prove is false.
+	  If -o is not given as an option than the compiled output is sent
+	  to a temporary file thats removed on exit.
+	Fixed psi_psi, vect_drop, vect_take, and make_s_expr to work with
+	  scalar arrays or vectors.
+3/94	Parallel code generation was only valid for 1d arrays.  This was
+	  re-implemented to provide support for multi-dimensional arrays.
+5/94 - version 0.4
+	Added the -g option to generate the reduced output in MOA notation.
+6/94	Made several structural changes to separate the reduction code
+	  from the parser and code generator so that these modules can
+	  easily be interchanged.
+	Fixed -o to stdout was not working.
+7/94	Added ParaGraph support for newtorks using the picl directive.
+5/95    Added more documentation and fixed lots of bugs

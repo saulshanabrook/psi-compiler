@@ -1,0 +1,64 @@
+<html><head><title>Description of my Work</title></head>
+<body>
+<center><h2>Description of my Work</h2></center><p>
+
+<h3>What I Did Not Do</h3>
+<p>
+<tt>
+When asked what I am doing for my Masters Project, I (and others)
+often use the phrase <i>providing an interface to the PSI compiler</i>.
+To use that as the title for this writeup would be misleading.  In
+December 1995, I was given the parameters of my assignment.  The
+input:  an HPF AST.  The output:  an HPF AST.  The side effects:  PSI
+reductions on the original AST.  Even with these sparse specifications,
+it is clear that an interface would be desirable.  Separation of
+concerns, extensibility, modularity, portability; each of these
+doctrines would be addressed with such a development.  However, several
+factors contributed to this approach not being taken:<p>
+
+<ul>
+<li> My inexperience with compilers.  It would require most of my efforts to
+comprehend the two compilers involved in the project; to design part of yet
+another would have resulted in a substantial increase in time and work.<p>
+
+<li> Approaching deadlines.  Even if I had sufficient background to design
+such an interface, to do so comprehensively would have taken time away
+from the more crucial task of feeding programs to and from the endpoints.
+I suspect that if benchmarks had been completed midway through the Spring
+semester as planned, I would have become involved in the design of the
+actual interface that is necessary for future research.<p>
+
+<li> My inexperience with programming languages.  Ideally, we would like
+the interface to the PSI compiler to be extensible to any programming
+language that can express array operations.  It is hard to say at this
+point whether I could have designed an interface that would port to any
+other language, or could support other array features.  As I mention
+later in this writeup, my original approach had to be abandoned because
+I was only considering a handful of functions that I would have to
+support.<p>
+
+<li> My incomplete knowledge concerning the PSI Calculus reduction rules.
+There is no question that any intermediate representation I might have
+chosen would have more greatly resembled the procedural, brute-force
+array operations of Fortran 77, rather than the elegant, recursive
+interpretations found in MOA.  Certainly, we want this representation
+to "sit close" to the reduction engine, for purposes of portability
+and extensibility.<p>
+</ul>
+
+
+<h3>What I Did Do</h3>
+<p>
+My primary goal was to convert pghpf ASTs to an equivalent Psi expression,
+and then to convert the Psi statement lists to equivalent pghpf statements.
+I used stacks on both sides to maintain information hiding (although I
+breached that once or twice in order to save time).  I made my approach
+consistent enough so that my modules could be expanded by other students
+as is deemed necessary.  In this paper, I don't simply describe the final
+product; the amount of code currently being used in my modules is relatively
+small (hundreds of lines), and the project is currently still being worked on.
+Rather, I discuss the dead-ends I've reached and the backtracking I've done in
+order to handle the awkward output of the Psi compiler, and also some of the
+issues one should consider when designing the true interface to the Psi
+compiler.
+</html>

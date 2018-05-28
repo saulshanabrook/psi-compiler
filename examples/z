@@ -1,0 +1,13 @@
+#  <1> take (<0> drop tmp_vect0[])=<1 1> take ((<forall_i0[0]>++<0>) drop ) stride=<1 1>
+
+Reducing:
+a3=w take  omega <1.000000 1.000000> y
+#(<2>++abs(<tmp_vect0[0]>)) take (<0 0> drop _a3[])=(<2>++abs(<tmp_vect0[0]>)) take (<0 0> drop 
+  forall (forall_i0 in <2>) {
+    ((forall_i0[] Psi ) Tk )
+  }) stride=<1 1>
+#  (<1>++<(abs(tmp_vect0[0]))>) take ((<forall_i0[0]>++<0>) drop _a3[])=<(abs(tmp_vect0[0]))> take (<0> drop ((forall_i0[] Psi ) Tk )) stride=<1>
+#      <1> take (<0> drop tmp_vect1[])=<1 1> take ((<forall_i0[0]>++<0>) drop ) stride=<1 1>
+
+#    (<1>++<(abs(tmp_vect0[0]))>) take ((<forall_i0[0]>++<0>) drop _a3[])=<(abs(tmp_vect0[0]))> take (((<tmp_vect1[0]>+<30>)*(0><tmp_vect1[0]>)) drop ) stride=<1>
+

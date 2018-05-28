@@ -1,0 +1,22 @@
+organization of files in /u2/psi/Compiler/mc/tom/test
+
+ README       -- this file
+ <name>m.m    -- test files written in moa source
+ <name>m.c    -- the above test files compiled into c source
+ <name>m.f    -- the above test files compiled into f90 source
+ <name>c.c    -- hand written c equivalents of compiled moa files
+ <name>f.f    -- hand written f90 equivalents of compiled moa files
+ <name>main.c -- test driver for tests on c generated source
+ <name>main.f -- test driver for tests on f90 generated source
+ <name>m.dat  -- data files from exe's originating from compiled moa source
+ <name>c.dat  -- data files from exe's originating from hand written c source
+ <name>f.dat  -- data files from exe's originating from hand written f90 source
+ <name>e.dat  -- result of comparing <name>m.dat with <name>c/f.dat
+ error.c      -- source for error comparison program
+ doerror      -- the error comparison program
+ make<name>.c -- makefile to create <name>m.c, compile <name>m.c <name>c.c and
+                 <name>main.c, call <name> (exe file) to generate data files,
+                 and call doerror to compare data files, generating <name>e.dat
+
+IF YOU ARE COMPILING THIS AT ALBANY, IT MIGHT BE BEST TO CHANGE THE
+MAKEFILES SO THAT THE C COMPILER IS gcc INSTEAD OF cc

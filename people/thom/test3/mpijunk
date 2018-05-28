@@ -1,0 +1,62 @@
+From lenore@cs.umr.edu Tue Oct 25 15:35 CDT 1994
+Received: from sun7.cs.umr.edu (sun7 [131.151.6.57]) via ESMTP by sunserver.cs.umr.edu (8.6.9/D.3.00) id PAA11218; Tue, 25 Oct 1994 15:35:28 -0500
+Received: from (lenore@localhost) by sun7.cs.umr.edu (8.6.9/M.3.00) id PAA15453; Tue, 25 Oct 1994 15:35:27 -0500
+From: "Dr. Lenore Mullin" <lenore@cs.umr.edu>
+Message-Id: <199410252035.PAA15453@sun7.cs.umr.edu>
+Subject: Re: hi
+To: tony@Aurora.CS.MsState.Edu (Tony Skjellum)
+Date: Tue, 25 Oct 1994 15:35:26 -0500 (CDT)
+Cc: tmcmahon@cs.umr.edu (Thom McMahon)
+In-Reply-To: <9410251620.AA22127@Aurora.CS.MsState.Edu> from "Tony Skjellum" at Oct 25, 94 11:20:06 am
+X-Mailer: ELM [version 2.4 PL24alpha3]
+MIME-Version: 1.0
+Content-Transfer-Encoding: 7bit
+Content-Type: text/plain; charset=US-ASCII
+Content-Length: 1254
+Status: RO
+
+Great, I'll forward this to Tom McMahon. This should be
+fun!
+
+> 
+> 
+> ----- Begin Included Message -----
+> 
+> From lenore@cs.umr.edu Tue Oct 25 10:41:32 1994
+> From: "Dr. Lenore Mullin" <lenore@cs.umr.edu>
+> Subject: Re: hi
+> To: tony@Aurora.CS.MsState.Edu (Tony Skjellum)
+> Date: Tue, 25 Oct 1994 10:50:00 -0500 (CDT)
+> X-Mailer: ELM [version 2.4 PL24alpha3]
+> Content-Type: text
+> Content-Length: 309
+> 
+> 
+> Hi,
+> How did the conference go? My students enjoyed themselves.
+> Tom is planning to put the MPI into our HPF support, i.e.
+> Fortran 90 with MPI support, We would then be ready
+> to program some HPF(with our extensions) for meaningful
+> problems. Is anyone there using HPF? Do you have
+> a HPF compiler there? 
+> Lenore
+> 
+> 
+> ----- End Included Message -----
+> 
+> 
+> We have HPF efforts going on here, yes.  Especially involving
+> NAS benchmarks, and one CFD application.
+> 
+> Paula Vaughan, paula@erc.msstate.edu, prototypes compilers, looks
+> 		at NAS benchmarks  (she works for Donna Reese, dreese@
+> 					erc.msstate.edu)
+> Shyam Neerarambam, shyam@erc.msstate.edu, works on CFD with HPF
+> 		(his graduate advisor is Roger Briley, briley@erc.msstate.edu)
+> 
+> Both efforts would undoubtedly like to try your approach...
+> -Tony
+> 
+> 
+
+

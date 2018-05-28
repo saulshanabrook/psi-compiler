@@ -1,0 +1,1062 @@
+%! a2ps 3.0
+
+/$a2psdict 100 dict def
+$a2psdict begin
+% Initialize page description variables.
+/inch {72 mul} bind def
+/landscape true def
+/twinpage true def
+/sheetheight 11 inch def
+/sheetwidth 8.5 inch def
+/margin 1.2 inch def
+/noborder false def
+/noheader false def
+/headersize 0.22 inch def
+/bodyfontsize 6.8 def
+/lines 73 def
+/columns 85 def
+/date (Feb 22 1995 19:31:32) def
+%!  PostScript Source Code
+%
+%  File: imag:/users/local/a2ps/header.ps
+%  Created: Tue Nov 29 12:14:02 1988 by miguel@imag (Miguel Santana)
+%  Version: 2.0
+%  Description: PostScript prolog for a2ps ascii to PostScript program.
+% 
+%  Edit History:
+%  - Original version by evan@csli (Evan Kirshenbaum).
+%  - Modified by miguel@imag to:
+%    1) Correct an overflow bug when printing page number 10 (operator
+%	cvs).
+%    2) Define two other variables (sheetwidth, sheetheight) describing
+%	the physical page (by default A4 format).
+%    3) Minor changes (reorganization, comments, etc).
+%  - Modified by tullemans@apolloway.prl.philips.nl
+%    1) Correct stack overflows with regard to operators cvs and copy.
+%       The resulting substrings where in some cases not popped off 
+%       the stack, what can result in a stack overflow.
+%    2) Replaced copypage and erasepage by showpage. Page througput
+%       degrades severely (see red book page 140) on our ps-printer
+%       after printing sheet 16 (i.e. page 8) of a file which was 
+%       actually bigger. For this purpose the definitions of startdoc
+%       and startpage are changed.
+%  - Modified by Tim Clark <T.Clark@uk.ac.warwick> to:
+%    1) Print one page per sheet (portrait) as an option.
+%    2) Reduce size of file name heading, if it's too big.
+%    3) Save and restore PostScript state at begining/end. It now uses
+%	conventional %%Page %%Trailer markers.
+%    4) Print one wide page per sheet in landscape mode as an option.
+%  - Modified by miguel@imag.fr to
+%    1) Add new option to print n copies of a file.
+%    2) Add new option to suppress heading printing.
+%    3) Add new option to suppress page surrounding border printing.
+%    4) Add new option to change font size. Number of lines and columns
+%	are now automatically adjusted, depending on font size and
+%	printing mode used.
+%    5) Minor changes (best layout, usage message, etc).
+%
+
+% Copyright (c) 1988, Miguel Santana, miguel@imag.imag.fr
+%
+% Permission is granted to copy and distribute this file in modified
+% or unmodified form, for noncommercial use, provided (a) this copyright
+% notice is preserved, (b) no attempt is made to restrict redistribution
+% of this file, and (c) this file is not distributed as part of any
+% collection whose redistribution is restricted by a compilation copyright.
+%
+
+
+% General macros.
+/xdef {exch def} bind def
+/getfont {exch findfont exch scalefont} bind def
+
+% Page description variables and inch function are defined by a2ps program.
+
+% Character size for differents fonts.
+   landscape
+   { /filenamefontsize 12 def }
+   { /filenamefontsize 16 def }
+ifelse
+/datefontsize filenamefontsize 0.8 mul def
+/headermargin filenamefontsize 0.25 mul def
+/bodymargin bodyfontsize 0.7 mul def
+
+% Font assignment to differents kinds of "objects"
+/filenamefontname /Helvetica-Bold def
+/stdfilenamefont filenamefontname filenamefontsize getfont def
+/datefont /Helvetica datefontsize getfont def
+/bodyfont /Courier bodyfontsize getfont def
+
+% Logical page attributs (a half of a real page or sheet).
+/pagewidth
+   bodyfont setfont (0) stringwidth pop columns mul bodymargin dup add add
+   def
+/pageheight
+   bodyfontsize lines mul bodymargin dup add add headersize add
+   def
+
+% Coordinates for upper corner of a logical page and for sheet number.
+% Coordinates depend on format mode used.
+% In twinpage mode, coordinate x of upper corner is not the same for left
+% and right pages: upperx is an array of two elements, indexed by sheetside.
+/rightmargin margin 3 div def
+/leftmargin margin 2 mul 3 div def
+/topmargin margin twinpage {3} {2} ifelse div def
+landscape
+{  % Landscape format
+   /uppery rightmargin pageheight add bodymargin add def
+   /sheetnumbery sheetwidth leftmargin pageheight add datefontsize add sub def
+   twinpage
+   {  % Two logical pages
+      /upperx [ topmargin			% upperx for left page
+		dup 2 mul pagewidth add		% upperx for right page
+	      ] def
+      /sheetnumberx sheetheight topmargin sub def
+   }
+   {  /upperx [ topmargin dup ] def
+      /sheetnumberx sheetheight topmargin sub datefontsize sub def
+   }
+   ifelse
+}
+{  % Portrait format
+   /uppery topmargin pageheight add def
+   /upperx [ leftmargin dup ] def
+   /sheetnumberx sheetwidth rightmargin sub datefontsize sub def
+   /sheetnumbery
+	 sheetheight 
+	 topmargin pageheight add datefontsize add headermargin add
+      sub
+      def
+
+}
+ifelse
+
+% Strings used to make easy printing numbers
+/pnum 12 string def
+/empty 12 string def
+
+% Other initializations.
+/datewidth date stringwidth pop def
+/filenameroom
+         pagewidth
+	 filenamefontsize 4 mul datewidth add (Page 999) stringwidth pop add
+      sub
+   def
+
+
+% Function startdoc: initializes printer and global variables.
+/startdoc
+    { /sheetside 0 def			% sheet side that contains current page
+      /sheet 1 def			% sheet number
+   } bind def
+
+% Function newfile: init file name and reset page number for each new file.
+/newfile
+    { cleanup
+      /filename xdef
+      /filenamewidth filename stringwidth pop def
+      /filenamefont
+	 filenamewidth filenameroom gt
+	 {
+	       filenamefontname
+	       filenamefontsize filenameroom mul filenamewidth div
+	    getfont
+	 }
+	 {  stdfilenamefont }
+	 ifelse
+	 def
+      /pagenum 1 def
+    } bind def
+
+% Function printpage: Print a physical page.
+/printpage
+    { /sheetside 0 def
+      twinpage
+      {  noborder not
+	    { sheetnumber }
+	 if
+      }
+      {  noheader noborder not and
+	    { sheetnumber }
+	 if
+      }
+      ifelse
+      showpage 
+%      pagesave restore
+      /sheet sheet 1 add def
+    } bind def
+
+% Function cleanup: terminates printing, flushing last page if necessary.
+/cleanup
+    { twinpage sheetside 1 eq and
+         { printpage }
+      if
+    } bind def
+
+%
+% Function startpage: prints page header and page border and initializes
+% printing of the file lines.
+/startpage
+    { sheetside 0 eq
+	{ % /pagesave save def
+	  landscape
+	    { sheetwidth 0 inch translate	% new coordinates system origin
+	      90 rotate				% landscape format
+	    } if
+	} if
+      noborder not { printborder } if
+      noheader not { printheader } if
+	 upperx sheetside get  bodymargin  add
+	    uppery
+	    bodymargin bodyfontsize add  noheader {0} {headersize} ifelse  add
+	 sub
+      moveto
+      bodyfont setfont
+    } bind def
+
+% Function printheader: prints page header.
+/printheader
+    { upperx sheetside get  uppery headersize sub 1 add  moveto
+      datefont setfont
+      gsave
+        datefontsize headermargin rmoveto
+	date show					% date/hour
+      grestore
+      gsave
+	pagenum pnum cvs pop
+	   pagewidth (Page 999) stringwidth pop sub
+	   headermargin
+	rmoveto
+        (Page ) show pnum show				% page number
+      grestore
+      empty pnum copy pop
+      gsave
+        filenamefont setfont
+	      filenameroom filename stringwidth pop sub 2 div datewidth add
+	      bodymargin 2 mul 
+	   add 
+	   headermargin
+	rmoveto
+        filename show						% file name
+      grestore
+    } bind def
+
+% Function printborder: prints border page.
+/printborder 
+    { upperx sheetside get uppery moveto
+      gsave					% print the four sides
+        pagewidth 0 rlineto			% of the square
+        0 pageheight neg rlineto
+        pagewidth neg 0 rlineto
+        closepath stroke
+      grestore
+      noheader not
+         { 0 headersize neg rmoveto pagewidth 0 rlineto stroke }
+      if
+    } bind def
+
+%
+% Function endpage: adds a sheet number to the page (footnote) and prints
+% the formatted page (physical impression). Activated at the end of each
+% source page (lines reached or FF character).
+/endpage
+   { /pagenum pagenum 1 add def
+     twinpage  sheetside 0 eq  and
+        { /sheetside 1 def }
+        { printpage }
+     ifelse
+   } bind def
+
+% Function sheetnumber: prints the sheet number.
+/sheetnumber
+    { sheetnumberx sheetnumbery moveto
+      datefont setfont
+      sheet pnum cvs
+	 dup stringwidth pop (0) stringwidth pop sub neg 0 rmoveto show
+      empty pnum copy pop
+    } bind def
+
+% Function s: print a source line
+/s  { gsave
+        show
+      grestore
+      0 bodyfontsize neg rmoveto
+    } bind def
+%%EndProlog
+
+/docsave save def
+startdoc
+(_psi.sem.c) newfile
+/sheet 1 def
+%%Page: 1 1
+startpage
+(1     #include <stdio.h>) s
+(2     #include <stdlib.h>) s
+(3     #include "psi.h") s
+(4     #include "dist.h") s
+(5     #include "sys.h") s
+(6     #include "ops.h") s
+(7      ) s
+(8     #include "code.e") s
+(9     #include "part.e") s
+(10    #include "dist.e") s
+(11    #include "psi.e") s
+(12    #include "vect.e") s
+(13    #include "ident.e") s
+(14    #include "sys.e") s
+(15    #include "moa_func.e") s
+(16    #define MAXCONST 1024) s
+(17    #define MAXSYMHASH 512) s
+(18    #ifndef TRUE) s
+(19    #define TRUE 1) s
+(20    #define FALSE 0) s
+(21    #endif) s
+(22     ) s
+(23    #define sym_key\(i\) \(\(i\)%MAXSYMHASH\)) s
+(24     ) s
+(25    extern char *what_name\(\);) s
+(26    extern int line_no; /* current line number */) s
+(27    extern int syntax_report;  /* suppress syntax errors when FALSE */) s
+(28    extern int prove; /* TRUE if reductions are to be output */) s
+(29     ) s
+(30    int shp_num=0;) s
+(31    double const_numbers[MAXCONST];) s
+(32    int const_vars[MAXCONST];) s
+(33    ident_t *sym_hash[MAXSYMHASH];  /* hash table of identifiers */) s
+(34    ident_t dumb_var;               /* dummy variable */) s
+(35    char buf[256];                  /* temporary string storage */) s
+(36    char expr_str[1024];  /* current line being parsed */) s
+(37    char call_str[1024];  /* a procedure call */) s
+(38    ) s
+(39    int find_index\(char *name\) ) s
+(40    {) s
+(41            uchar isname;) s
+(42            int index;) s
+(43            search\(name,&isname,&index\);) s
+(44            return index;) s
+(45    }) s
+(46    void arg_dec_int\(char *name\)) s
+(47    {) s
+(48      ident=get_ident\(\);) s
+(49      SETPARAMETER\(ident->flags\);) s
+(50      if \(host\) {) s
+(51        fprintf\(hostfile,"int "\);) s
+(52        fprintf\(vfile,"  int "\);) s
+(53      } else fprintf\(cfile,"int "\);) s
+(54      ident->type=VARIABLE;) s
+(55      SETSHAPE\(ident->flags\);) s
+(56      sprintf\(ident->string,"_%s",name\);) s
+(57      if \(host\) {) s
+(58        fprintf\(hostfile,ident->string\);) s
+(59        fprintf\(vfile,ident->string\);) s
+(60      } else fprintf\(cfile,ident->string\);) s
+(61      if \(host\)) s
+(62        fprintf\(vfile,";\\n"\);) s
+(63      insert_sym\(ident,find_index\(name\)\);) s
+(64     ) s
+(65      if \(!HASSHAPE\(ident->flags\)\) {) s
+(66        report\("Parameters must have a specified shape"\);) s
+(67      }) s
+(68    }) s
+(69    ) s
+(70    ident_t *var_dec_array\(char *name,int number\)) s
+(71    {) s
+(72      ident_t *ident;) s
+(73      ident=get_ident;) s
+endpage
+startpage
+(74      ident->type=ARRAY;) s
+(75      ident->real=TRUE;) s
+(76      sprintf\(ident->string,"_%s",name\);) s
+(77        i=0;) s
+(78        /*array_def\(ident\);*/) s
+(79        ident->array.dim=get_ident\(\);) s
+(80        ident->array.dim->type=CONSTANT;) s
+(81        ident->array.dim->value=number;) s
+(82    }) s
+(83    ) s
+(84    ident_t *var_dec_array_2\(char *name,int tauvec, int tau, ident_t *ident\)) s
+(85    {  ) s
+(86      int i;) s
+(87    ) s
+(88      if \(tau==0\) {) s
+(89        ident->array.shp=NULL;) s
+(90      } else ident->array.shp=\(ident_t **\) get_mem\(tau*sizeof\(ident_t *\)\);) s
+(91      /* {check to make sure tauvec == tau, issue error... */) s
+(92      for \(i=0; i<tau; i++\) {) s
+(93        if \(const_vars[i] == -1\) {) s
+(94           ident->array.shp[i]=get_ident\(\);) s
+(95           ident->array.shp[i]->type=CONSTANT;) s
+(96           ident->array.shp[i]->value=const_numbers[i];) s
+(97        } else {) s
+(98          ident->array.shp[i]=find_sym\(const_vars[i],FALSE\);) s
+(99          if \(ident->array.shp[i]==NULL\) {) s
+(100           report\("undeclared variable"\);) s
+(101           ident->array.shp[i]=&dumb_var;) s
+(102         }) s
+(103         if \(!ISPARAMETER\(ident->array.shp[i]->flags\)\)) s
+(104           report\("only formal parameters are allowed in the shape definition"\);) s
+(105       }) s
+(106     }) s
+(107     SETSHAPE\(ident->flags\);) s
+(108     insert_sym\(ident,find_index\(name\)\); ) s
+(109     return ident;) s
+(110   }) s
+(111   ) s
+(112   ident_t *var_dec_array_3\(ident_t *ident\)) s
+(113   {) s
+(114           UNSETSHAPE\(ident->flags\);) s
+(115           SETDYNAMIC\(ident->flags\);) s
+(116           return ident;) s
+(117   }) s
+(118   ident_t *const_dec_array\(char *name,int number\)) s
+(119   {) s
+(120     ident_t *ident;) s
+(121     ident=get_ident;) s
+(122     SETUSED\(ident->flags\);) s
+(123        ident->type=EMBEDED_ARRAY;) s
+(124       sprintf\(ident->string,"_%s",name\);) s
+(125       array_def\(ident\);) s
+(126   ) s
+(127     ident->type=ARRAY;) s
+(128     ident->real=TRUE;) s
+(129       i=0;) s
+(130       /*array_def\(ident\);*/) s
+(131       ident->array.dim=get_ident\(\);) s
+(132       ident->array.dim->type=CONSTANT;) s
+(133       ident->array.dim->value=number;) s
+(134   }) s
+(135   ) s
+(136   ident_t *const_dec_array_2\(int tauvec, int tau, ident_t *ident\)) s
+(137   {  ) s
+(138     int i;) s
+(139   ) s
+(140     if \(tau==0\) {) s
+(141       ident->array.shp=NULL;) s
+(142     } else ident->array.shp=\(ident_t **\) get_mem\(tau*sizeof\(ident_t *\)\);) s
+(143     /* {check to make sure tauvec == tau, issue error... */) s
+(144     for \(i=0; i<tau; i++\) {) s
+(145       if \(const_vars[i] == -1\) {) s
+(146          ident->array.shp[i]=get_ident\(\);) s
+endpage
+%%Page: 2 2
+startpage
+(147          ident->array.shp[i]->type=CONSTANT;) s
+(148          ident->array.shp[i]->value=const_numbers[i];) s
+(149       } else {) s
+(150         ident->array.shp[i]=find_sym\(const_vars[i],FALSE\);) s
+(151         if \(ident->array.shp[i]==NULL\) {) s
+(152           report\("undeclared variable"\);) s
+(153           ident->array.shp[i]=&dumb_var;) s
+(154         }) s
+(155         if \(!ISPARAMETER\(ident->array.shp[i]->flags\)\)) s
+(156           report\("only formal parameters are allowed in the shape definition"\);) s
+(157       }) s
+(158     }) s
+(159     SETSHAPE\(ident->flags\); ) s
+(160     return ident;) s
+(161   }) s
+(162   ) s
+(163   ident_t *const_dec_array_3\(char *name,ident_t *ident\) ) s
+(164   {) s
+(165     int tau,i;) s
+(166     double num;) s
+(167    ) s
+(168     tau=1;) s
+(169     for \(i=0; i<ident->array.dim->value; i++\) {) s
+(170       tau*=ident->array.shp[i]->value;) s
+(171     }) s
+(172     fprintf\(vfile,"  double %s[]={",ident->string,tau\);) s
+(173     ident->array.cnst=\(double *\) get_mem\(tau*sizeof\(double\)\);) s
+(174     for \(i=0; i<tau; i++\) {) s
+(175       num=const_numbers[i];) s
+(176       ident->array.cnst[i]=num;) s
+(177       if \(i==0\)) s
+(178         fprintf\(vfile,"%f",num\);) s
+(179       else {) s
+(180         if \(!\(i%5\)\)) s
+(181           fprintf\(vfile,",\\n    %f",num\);) s
+(182         else) s
+(183           fprintf\(vfile,", %f",num\);) s
+(184       }) s
+(185      }) s
+(186      fprintf\(vfile,"\);\\n"\);) s
+(187   ) s
+(188       insert_sym\(ident,find_index\(name\)\);) s
+(189   }) s
+(190   ) s
+(191   ident_t *const_dec_array_4\(char *name,ident_t *ident,float number\)) s
+(192   {) s
+(193       ident->type=CONSTANT;) s
+(194       ident->real=TRUE;) s
+(195       ident->value=number;) s
+(196       insert_sym\(ident,find_index\(name\)\);) s
+(197   }) s
+(198   ) s
+(199   ident_t *arg_dec_array\(char *name,int number\)) s
+(200   {) s
+(201     ident_t *ident;) s
+(202   ) s
+(203     ident=get_ident\(\);) s
+(204     SETPARAMETER\(ident->flags\);) s
+(205       if \(host\) {) s
+(206         fprintf\(hostfile,"double "\);) s
+(207         fprintf\(vfile,"  double *"\);) s
+(208       } else fprintf\(cfile,"double "\);) s
+(209       ident->type=ARRAY;) s
+(210     sprintf\(ident->string,"_%s",name\);) s
+(211     if \(host\) {) s
+(212       fprintf\(hostfile,ident->string\);) s
+(213       fprintf\(vfile,ident->string\);) s
+(214     } else fprintf\(cfile,ident->string\);) s
+(215    ) s
+(216       if \(host\) {) s
+(217         fprintf\(hostfile,"[]"\);) s
+(218       } else fprintf\(cfile,"[]"\);) s
+(219       i=0;) s
+endpage
+startpage
+(220       /*array_def\(ident\);*/) s
+(221       ident->array.dim=get_ident\(\);) s
+(222       ident->array.dim->type=CONSTANT;) s
+(223       ident->array.dim->value=number;) s
+(224   }) s
+(225   ) s
+(226   ident_t *arg_dec_array_2\(char *name,int tauvec, int tau, ident_t *ident\)) s
+(227   {  ) s
+(228     int i;) s
+(229   ) s
+(230     if \(tau==0\) {) s
+(231       ident->array.shp=NULL;) s
+(232     } else ident->array.shp=\(ident_t **\) get_mem\(tau*sizeof\(ident_t *\)\);) s
+(233     /* {check to make sure tauvec == tau, issue error... */) s
+(234     for \(i=0; i<tau; i++\) {) s
+(235       if \(const_vars[i] == -1\) {) s
+(236          ident->array.shp[i]=get_ident\(\);) s
+(237          ident->array.shp[i]->type=CONSTANT;) s
+(238          ident->array.shp[i]->value=const_numbers[i];) s
+(239       } else {) s
+(240         ident->array.shp[i]=find_sym\(const_vars[i],FALSE\);) s
+(241         if \(ident->array.shp[i]==NULL\) {) s
+(242           report\("undeclared variable"\);) s
+(243           ident->array.shp[i]=&dumb_var;) s
+(244         }) s
+(245         if \(!ISPARAMETER\(ident->array.shp[i]->flags\)\)) s
+(246           report\("only formal parameters are allowed in the shape definition"\);) s
+(247       }) s
+(248     }) s
+(249     SETSHAPE\(ident->flags\); ) s
+(250     if \(host\)) s
+(251       fprintf\(vfile,";\\n"\);) s
+(252    ) s
+(253     insert_sym\(ident,find_index\(name\)\);) s
+(254    ) s
+(255     if \(!HASSHAPE\(ident->flags\)\) {) s
+(256       report\("Parameters must have a specified shape"\);) s
+(257     }) s
+(258     if\(tau!=tauvec\) {) s
+(259           report\("Number of components in shape does not match dimension"\);) s
+(260     }) s
+(261     return ident;) s
+(262   }) s
+(263   ) s
+(264   ident_t *arg_dec_array_3\(char *name,ident_t *ident\)) s
+(265   {) s
+(266           UNSETSHAPE\(ident->flags\);) s
+(267           SETDYNAMIC\(ident->flags\);) s
+(268           insert_sym\(ident,find_index\(name\)\);) s
+(269           return ident;) s
+(270   }) s
+(271   ) s
+(272   statement_t *assignment_psi\(ident_t *ident, char *name,parse_t *expr\)) s
+(273   {) s
+(274           uchar isname;) s
+(275           int index; ) s
+(276           statement_t *assign,*alloc,*ret;) s
+(277     ident_t *tmp;) s
+(278           vector_t *loc;) s
+(279     parser_t *result;) s
+(280   ) s
+(281           expr_str[0]=0;) s
+(282   ) s
+(283           loc=get_vect\(\);) s
+(284       loc->ident=ident;) s
+(285       loc->loc=&s_const0;) s
+(286       loc->index=&s_const0;) s
+(287       loc->shp=get_s_expr\(\);) s
+(288       loc->shp->ident=get_ident\(\);) s
+(289       loc->shp->ident->type=CONSTANT;) s
+(290       loc->shp->ident->real=FALSE;) s
+(291       loc->shp->ident->value=loc->ident->array.shp[0]->value;) s
+(292         sprintf\(expr_str+strlen\(expr_str\)," psi "\);) s
+endpage
+%%Page: 3 3
+startpage
+(293           search\(name,&isname,&index\);) s
+(294           reduction_init\(\);) s
+(295   ) s
+(296     assign=get_statement\(ASSIGN\);) s
+(297   ) s
+(298     strcat\(expr_str,name\);) s
+(299     tmp=find_sym\(index,TRUE\);) s
+(300     expect\(EQUAL1\);) s
+(301     sprintf\(expr_str+strlen\(expr_str\),"="\);) s
+(302     assign->str=\(char *\) get_tmp_mem\(strlen\(expr_str\)+1\);) s
+(303     strcpy\(assign->str,expr_str\);) s
+(304     if \(prove\)) s
+(305       fprintf\(rfile,"Reducing:\\n%s\\n",expr_str\);) s
+(306    ) s
+(307     result=psi_access\(tmp\);) s
+(308     result->psi->loc=loc;) s
+(309     result->psi->bound=expr->psi->shp;) s
+(310     assign->d.assign->expr=expr->psi;) s
+(311     assign->d.assign->result=result->psi;) s
+(312     psi_reduce\(assign,TRUE\);) s
+(313           return\(assign\);) s
+(314   }) s
+(315   ) s
+(316   statement_t *assignment_pdrop\(ident_t *ident, char *name,parse_t *expr\)) s
+(317   {) s
+(318           uchar isname;) s
+(319           int index; ) s
+(320           statement_t *assign,*alloc,*ret;) s
+(321     ident_t *tmp;) s
+(322           vector_t *loc;) s
+(323     parser_t *result;) s
+(324   ) s
+(325           expr_str[0]=0;) s
+(326   ) s
+(327           loc=get_vect\(\);) s
+(328       loc->ident=ident;) s
+(329       loc->loc=&s_const0;) s
+(330       loc->index=&s_const0;) s
+(331       loc->shp=get_s_expr\(\);) s
+(332       loc->shp->ident=get_ident\(\);) s
+(333       loc->shp->ident->type=CONSTANT;) s
+(334       loc->shp->ident->real=FALSE;) s
+(335       loc->shp->ident->value=loc->ident->array.shp[0]->value;) s
+(336         sprintf\(expr_str+strlen\(expr_str\)," pdrop "\);) s
+(337           search\(name,&isname,&index\);) s
+(338           reduction_init\(\);) s
+(339   ) s
+(340     assign=get_statement\(ASSIGN\);) s
+(341         tmp=find_sym\(index,TRUE\);) s
+(342         expr=psi_access\(tmp\);) s
+(343         loc=make_vect\(expr->psi\);) s
+(344       sprintf\(expr_str+strlen\(expr_str\),name\);) s
+(345       sprintf\(expr_str+strlen\(expr_str\)," drop "\);) s
+(346       name=what_name\(\);) s
+(347       index=expect_name\(\);) s
+(348   ) s
+(349     strcat\(expr_str,name\);) s
+(350     tmp=find_sym\(index,TRUE\);) s
+(351     expect\(EQUAL1\);) s
+(352     sprintf\(expr_str+strlen\(expr_str\),"="\);) s
+(353     assign->str=\(char *\) get_tmp_mem\(strlen\(expr_str\)+1\);) s
+(354     strcpy\(assign->str,expr_str\);) s
+(355     if \(prove\)) s
+(356       fprintf\(rfile,"Reducing:\\n%s\\n",expr_str\);) s
+(357    ) s
+(358     result=psi_access\(tmp\);) s
+(359     result->psi->loc=loc;) s
+(360     result->psi->bound=expr->psi->shp;) s
+(361     assign->d.assign->expr=expr->psi;) s
+(362     assign->d.assign->result=result->psi;) s
+(363     psi_reduce\(assign,TRUE\);) s
+(364           return\(assign\);) s
+(365   }) s
+endpage
+startpage
+(366   ) s
+(367   statement_t *assignment_normal\(char *name,parse_t *expr\)) s
+(368   {) s
+(369           uchar isname;) s
+(370           int index; ) s
+(371           statement_t *assign,*alloc,*ret;) s
+(372     ident_t *tmp;) s
+(373     parser_t *result;) s
+(374           vect_t *loc;) s
+(375   ) s
+(376           expr_str[0]=0;) s
+(377           loc = NULL;) s
+(378           reduction_init\(\);) s
+(379           search\(name,&isname,&index\);) s
+(380     assign=get_statement\(ASSIGN\);) s
+(381     strcat\(expr_str,name\);) s
+(382     tmp=find_sym\(index,TRUE\);) s
+(383     expect\(EQUAL1\);) s
+(384     sprintf\(expr_str+strlen\(expr_str\),"="\);) s
+(385     assign->str=\(char *\) get_tmp_mem\(strlen\(expr_str\)+1\);) s
+(386     strcpy\(assign->str,expr_str\);) s
+(387     if \(prove\)) s
+(388       fprintf\(rfile,"Reducing:\\n%s\\n",expr_str\);) s
+(389    ) s
+(390     result=psi_access\(tmp\);) s
+(391     result->psi->loc=loc;) s
+(392     result->psi->bound=expr->psi->shp;) s
+(393     assign->d.assign->expr=expr->psi;) s
+(394     assign->d.assign->result=result->psi;) s
+(395     psi_reduce\(assign,TRUE\);) s
+(396           return\(assign\);) s
+(397   }) s
+(398   ) s
+(399   void declaration_footer\(\)) s
+(400   {) s
+(401           dual_fprintf\("\)\\n\\n"\);) s
+(402           if\(nprocs>1\) {) s
+(403                   /* initialize int and float scalar parameters */) s
+(404                   search_parameters\(\);) s
+(405           }) s
+(406   }) s
+(407   ) s
+(408   dual_fprintf\(char *msg\)) s
+(409   {) s
+(410           fprintf\(cfile,msg\);) s
+(411           if\(host\) fprintf\(hostfile,msg\);) s
+(412   }) s
+(413   ) s
+(414   executable_header\(\)) s
+(415   {) s
+(416     dumb_var.type=CONSTANT;) s
+(417     dumb_var.value=0;) s
+(418     SETPARAMETER\(dumb_var.flags\);) s
+(419     ) s
+(420     fprintf\(cfile,"#include <stdlib.h>\\n"\);) s
+(421     fprintf\(cfile,"#include \\"moalib.e\\"\\n\\n"\);) s
+(422   }) s
+(423   ) s
+(424   exectutable_post_declaration\(\)) s
+(425   {) s
+(426     if\(picl\) {) s
+(427       fpprintf\(cfile,"#include \\"picl.h\\"\\n\\n"\);) s
+(428       if\(host\) ) s
+(429         fprintf\(cfile,"#include \\"picl.h\\"\\n\\n"\);) s
+(430     }) s
+(431   }) s
+(432   ) s
+(433   executable_footer\(\)) s
+(434   {) s
+(435      if \(host\) fclose\(hostfile\);) s
+(436   }) s
+(437   ) s
+(438   parser_t *expression_unary_operator\(char *name, parser_t *expr2,) s
+endpage
+%%Page: 4 4
+startpage
+(439           parser_t *\(*func\)\(\)\)) s
+(440   {) s
+(441           strcat\(expr_str,name\);) s
+(442           return \(*func\)\(expr2\);) s
+(443   }) s
+(444   ) s
+(445   parser_t *expression_binary_operator\(parser_t *expr1,char *name, parser_t *expr) s
+(      2,) s
+(446           parser_t *\(*func\)\(\)\)) s
+(447   {) s
+(448           strcat\(expr_str,name\);) s
+(449           return \(*func\)\(expr1,expr2\);) s
+(450   }) s
+(451   ) s
+(452   parser_t *expression_name\(char *name\)) s
+(453   {) s
+(454           int index;) s
+(455           uchar isname;) s
+(456     ident_t *ident,*tmp;) s
+(457    ) s
+(458     strcat\(expr_str,name\);) s
+(459     search\(name,&isname,&index\);) s
+(460     ident=find_sym\(index,TRUE\);) s
+(461     if \(!HASSHAPE\(ident->flags\)\) {) s
+(462       report\("Illegal use of dynamic array \(shape not defined yet\)."\);) s
+(463     }) s
+(464           return psi_access \(find_sym\(index,FALSE\)\)\);) s
+(465   }) s
+(466   ) s
+(467   statement_t *for_statement\(parser_t *expr1,parser_t *expr2,) s
+(468           parser_t *expr3,statement_t *state1\)) s
+(469   {) s
+(470           statement_t *loop;) s
+(471   ) s
+(472           loop=get_statement\(LOOP\);) s
+(473           loop->d.loop->lower=expr1->psi;) s
+(474           loop->d.loop->var=expr2->psi;) s
+(475           loop->d.loop->upper=expr3->psi;) s
+(476           loop->d.loop->body=state1;) s
+(477           return loop;) s
+(478   }) s
+(479   ) s
+(480   procedure_header\(\)) s
+(481   {) s
+(482     int i;) s
+(483     char buf[1024];) s
+(484     int index;) s
+(485     char *name;) s
+(486     statement_t *body;) s
+(487   ) s
+(488     clear_syms\(\); ) s
+(489     /* reset the counts of utility variables used */) s
+(490     max_dim=0;) s
+(491     max_combined=0;) s
+(492     forall_num=0;) s
+(493     red_num=0;) s
+(494     const_array_num=0;) s
+(495    ) s
+(496     /* open temporary files */) s
+(497     if \(\(tfile=fopen\("temp$$$$.moa","wt"\)\)==NULL\) {) s
+(498       fatal\("Couldn't create temporary file."\);) s
+(499     }) s
+(500    ) s
+(501     if \(\(vfile=fopen\("vtemp$$$$.moa","wt"\)\)==NULL\) {) s
+(502       fatal\("Couldn't create temporary file."\);) s
+(503     }) s
+(504    ) s
+(505     if \(host\) {) s
+(506       if \(\(hfile=fopen\("htemp$$$$.moa","wt"\)\)==NULL\)) s
+(507         fatal\("Couldn't create temporary file."\);) s
+(508     }) s
+(509    ) s
+(510     fprintf\(vfile,"  double *shift;\\n"\);) s
+endpage
+startpage
+(511   }) s
+(512   ) s
+(513   procedure_post_declaration\(\)) s
+(514   {) s
+(515           clear_saves\(\);) s
+(516   }) s
+(517   ) s
+(518   procedure_footer\(\)) s
+(519   {) s
+(520     int i;) s
+(521     code_c\(body,partition\(body\)\);) s
+(522    ) s
+(523     fclose\(tfile\);) s
+(524     fclose\(vfile\);) s
+(525     if \(host\)  fclose\(hfile\);) s
+(526    ) s
+(527     /* allocate utility variables */) s
+(528     for \(i=0; i<max_combined; i++\) {) s
+(529       fprintf\(cfile,"  double *offset%d;\\n",i\);) s
+(530     }) s
+(531    ) s
+(532     for \(i=0; i<max_dim; i++\) {) s
+(533       fprintf\(cfile,"  int i%d;\\n",i\);) s
+(534       if \(host\) fprintf\(hostfile,"  int i%d;\\n",i\);) s
+(535     }) s
+(536    ) s
+(537     /* copy temporary files to the output */) s
+(538    ) s
+(539     if \(\(vfile=fopen\("vtemp$$$$.moa","r"\)\)==NULL\) {) s
+(540       fatal\("Couldn't open temporary file."\);) s
+(541     }) s
+(542     fgets\(buf,1024,vfile\);) s
+(543     while \(!feof\(vfile\)\) {) s
+(544       fputs\(buf,cfile\);) s
+(545       fgets\(buf,1024,vfile\);) s
+(546     }) s
+(547     fclose\(vfile\);) s
+(548     fputs\("\\n",cfile\);) s
+(549    ) s
+(550    ) s
+(551     if \(n_procs>1\) {) s
+(552       if \(genmpi\) fprintf \(cfile,"  NODE_INIT\(argc,argv\);\\n"\);) s
+(553       else fprintf\(cfile,"  NODE_INIT\(%d\);\\n\\n",n_procs\);) s
+(554     }) s
+(555    ) s
+(556     if \(host\) {) s
+(557       fprintf\(hostfile,"\\n  HOST_INIT\(%d\);\\n\\n",n_procs\);) s
+(558     }) s
+(559    ) s
+(560     if \(picl\) {) s
+(561       fprintf\(cfile,"  TRACE_START\(\\"%s\\"\);\\n",picl_file\);) s
+(562       if \(host\)) s
+(563         fprintf\(hostfile,"  TRACE_START\(\\"%s\\"\);\\n",picl_file\);) s
+(564     }) s
+(565    ) s
+(566     if \(host\) {) s
+(567       if \(\(hfile=fopen\("htemp$$$$.moa","r"\)\)==NULL\) {) s
+(568         fatal\("Couldn't open temporary file."\);) s
+(569       }) s
+(570       fgets\(buf,1024,hfile\);) s
+(571       while \(!feof\(hfile\)\) {) s
+(572         fputs\(buf,hostfile\);) s
+(573         fgets\(buf,1024,hfile\);) s
+(574       }) s
+(575       fclose\(hfile\);) s
+(576     }) s
+(577    ) s
+(578     if \(\(tfile=fopen\("temp$$$$.moa","r"\)\)==NULL\) {) s
+(579       fatal\("Couldn't open temporary file."\);) s
+(580     }) s
+(581     fgets\(buf,1024,tfile\);) s
+(582     while \(!feof\(tfile\)\) {) s
+(583       fputs\(buf,cfile\);) s
+endpage
+%%Page: 5 5
+startpage
+(584       fgets\(buf,1024,tfile\);) s
+(585     }) s
+(586     fclose\(tfile\);) s
+(587    ) s
+(588     if \(picl\) {) s
+(589       fprintf\(cfile,"  TRACE_END\(\);\\n"\);) s
+(590       if \(host\)) s
+(591         fprintf\(hostfile,"  TRACE_END\(\);\\n"\);) s
+(592     }) s
+(593    ) s
+(594     if \(genmpi\) fprintf \(cfile,"  NODE_CLEANUP\(\);\\n"\);) s
+(595     fprintf\(cfile,"}\\n"\);) s
+(596     if \(host\) {) s
+(597       fprintf\(hostfile,"}\\n"\);) s
+(598     }) s
+(599    ) s
+(600     free_tmp_mem\(\);    /* free any temporary memory used for this procdure */) s
+(601     fprintf\(cfile,"\\n\\n"\);) s
+(602   }) s
+(603   ) s
+(604   void vector_const2_number\(int float\) ) s
+(605   {) s
+(606           int i;) s
+(607           i=vector_const2_num;) s
+(608       const_numbers[i]=expect_number\(\);) s
+(609       if\(vector_const2_sprint\) {) s
+(610          sprintf\(expr_str+strlen\(expr_str\),"%f ",const_numbers[i]\);) s
+(611       }) s
+(612       const_vars[i]=-1;) s
+(613       if \(i<MAXCONST-1\) {) s
+(614         vector_const2_num++;) s
+(615       } else {) s
+(616         /*if \(first\) */) s
+(617         report\("Constant to large"\);) s
+(618         /*first=FALSE;*/) s
+(619       }) s
+(620     }) s
+(621   }) s
+(622   ) s
+(623   void vector_const2_init\(\)) s
+(624   {) s
+(625           if\(vector_const2_sprint\) sprintf\(expr_str+strlen\(expr_str\),"<"\);) s
+(626           vector_const2_rav=FALSE;) s
+(627           vector_const2_num=0;) s
+(628   }) s
+(629   ) s
+(630   void vector_const2_footer\(\)) s
+(631   {) s
+(632           if\(vector_const2_sprint\) sprintf\(expr_str+strlen\(expr_str\),">"\);) s
+(633   }) s
+(634   ) s
+(635   ident_t *vector_const2_ident\(\)  ) s
+(636   /* this routine will create ident type for previously parsed vector */) s
+(637   {) s
+(638           ident_t *ret;) s
+(639     int i,use_rav;) s
+(640    ) s
+(641           use_rav=vector_const2_rav;) s
+(642     ret=get_ident\(\);) s
+(643     ret->array.dim=&const1;) s
+(644     ret->array.shp=\(ident_t **\) get_mem\(sizeof\(ident_t *\)\);) s
+(645     ret->array.shp[0]=get_ident\(\);) s
+(646     ret->array.shp[0]->type=CONSTANT;) s
+(647     ret->array.shp[0]->real=FALSE;) s
+(648     ret->array.shp[0]->value=i;) s
+(649     if \(use_rav\) {) s
+(650       ret->type=RAV;) s
+(651       ret->array.rav=\(s_expr_t **\) get_mem\(i*sizeof\(s_expr_t *\)\);) s
+(652       i--;) s
+(653       for \(; i>=0; i--\) {) s
+(654         ret->array.rav[i]=get_s_expr\(\);) s
+(655         if \(const_vars[i]>=0\) {) s
+(656           ret->array.rav[i]->ident=find_sym\(const_vars[i],TRUE\);) s
+endpage
+startpage
+(657         } else {) s
+(658           ret->array.rav[i]->ident=get_ident\(\);) s
+(659           ret->array.rav[i]->ident->type=CONSTANT;) s
+(660           ret->array.rav[i]->ident->value=const_numbers[i];) s
+(661         }) s
+(662       }) s
+(663     } else {) s
+(664       ret->type=CONST_ARRAY;) s
+(665       ret->array.cnst=\(double *\) get_mem\(i*sizeof\(double\)\);) s
+(666       i--;) s
+(667       for \(; i>=0; i--\) ret->array.cnst[i]=const_numbers[i];) s
+(668     }) s
+(669     SETGLOBAL\(ret->flags\);) s
+(670     return\(ret\);) s
+(671   }) s
+(672   ) s
+(673   void vector_const2_name\(char *float\) ) s
+(674   {) s
+(675           int i;) s
+(676           i=vector_const2_num;) s
+(677         use_rav=TRUE;) s
+(678         sprintf\(expr_str+strlen\(expr_str\),"%s",what_name\(\)\);) s
+(679         const_vars[i]=expect_name\(\);) s
+(680       sprintf\(expr_str+strlen\(expr_str\)," "\);) s
+(681       if \(i<MAXCONST-1\) {) s
+(682         vector_const2_num++;) s
+(683       } else {) s
+(684         /*if \(first\) */report\("Constant to large"\);) s
+(685         /*first=FALSE;*/) s
+(686       }) s
+(687     }) s
+(688   }) s
+(689   ) s
+(690   directive_trace\(\)) s
+(691   {) s
+(692      /* have parallel programs print information while running */) s
+(693      para_trace=TRUE;) s
+(694   }) s
+(695   ) s
+(696   directive_procs\(int number\)) s
+(697   {) s
+(698       /* number of processors */) s
+(699       n_procs=number;) s
+(700   }  ) s
+(701   ) s
+(702   directive_arch\(char *option\)) s
+(703   {) s
+(704       /* archtecture type */) s
+(705       if \(strcmp\(option,"mpimac"\)==0\) {) s
+(706         if \(host\) fatal \("mpi not allowed with host"\);) s
+(707         else genmpi=TRUE;) s
+(708       }) s
+(709       fprintf\(cfile,"#include \\"%s.h\\"\\n\\n",option\);) s
+(710       if \(host\) fprintf\(hostfile,"#include \\"%s.h\\"\\n\\n",option\);) s
+(711   }) s
+(712   ) s
+(713   directive_hostname\(char *option\) ) s
+(714   {) s
+(715       /* name of a host file */) s
+(716       if \(genmpi\) fatal \("host not allowed with mpi"\);) s
+(717       host_name=\(char *\) get_mem\(strlen\(option\)*sizeof\(char\)\);) s
+(718       strcpy\(host_name,option\);) s
+(719       if \(\(hostfile=fopen\(host_name,"wt"\)\)==NULL\) {) s
+(720         fatal\("Couldn't open host output file"\);) s
+(721       }) s
+(722       fprintf\(hostfile,"#include \\"moalib.e\\"\\n\\n"\);) s
+(723       host=TRUE;) s
+(724   }) s
+(725   ) s
+(726   directive_picl\(char *option\)) s
+(727   {) s
+(728       /* generate picl trace files */) s
+(729       picl_file=\(char *\) get_mem\(strlen\(option\)*sizeof\(char\)\);) s
+endpage
+%%Page: 6 6
+startpage
+(730       strcpy\(picl_file,option\);) s
+(731       picl=TRUE;) s
+(732   }) s
+(733   ) s
+(734   declaration_name\(char *name\)) s
+(735   {) s
+(736     dual_fprintf\(name\); ) s
+(737     dual_fprintf\("\("\);) s
+(738     if\(genmpi\) fprtinf\(cfile,"int argc, char *argv[],"\);) s
+(739   }) s
+endpage
+
+%%Trailer
+cleanup
+docsave restore end

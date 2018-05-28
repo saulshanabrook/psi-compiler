@@ -1,0 +1,584 @@
+%! a2ps 3.0
+
+/$a2psdict 100 dict def
+$a2psdict begin
+% Initialize page description variables.
+/inch {72 mul} bind def
+/landscape true def
+/twinpage true def
+/sheetheight 11 inch def
+/sheetwidth 8.5 inch def
+/margin 1.2 inch def
+/noborder false def
+/noheader false def
+/headersize 0.22 inch def
+/bodyfontsize 6.8 def
+/lines 73 def
+/columns 85 def
+/date (Feb 22 1995 19:31:25) def
+%!  PostScript Source Code
+%
+%  File: imag:/users/local/a2ps/header.ps
+%  Created: Tue Nov 29 12:14:02 1988 by miguel@imag (Miguel Santana)
+%  Version: 2.0
+%  Description: PostScript prolog for a2ps ascii to PostScript program.
+% 
+%  Edit History:
+%  - Original version by evan@csli (Evan Kirshenbaum).
+%  - Modified by miguel@imag to:
+%    1) Correct an overflow bug when printing page number 10 (operator
+%	cvs).
+%    2) Define two other variables (sheetwidth, sheetheight) describing
+%	the physical page (by default A4 format).
+%    3) Minor changes (reorganization, comments, etc).
+%  - Modified by tullemans@apolloway.prl.philips.nl
+%    1) Correct stack overflows with regard to operators cvs and copy.
+%       The resulting substrings where in some cases not popped off 
+%       the stack, what can result in a stack overflow.
+%    2) Replaced copypage and erasepage by showpage. Page througput
+%       degrades severely (see red book page 140) on our ps-printer
+%       after printing sheet 16 (i.e. page 8) of a file which was 
+%       actually bigger. For this purpose the definitions of startdoc
+%       and startpage are changed.
+%  - Modified by Tim Clark <T.Clark@uk.ac.warwick> to:
+%    1) Print one page per sheet (portrait) as an option.
+%    2) Reduce size of file name heading, if it's too big.
+%    3) Save and restore PostScript state at begining/end. It now uses
+%	conventional %%Page %%Trailer markers.
+%    4) Print one wide page per sheet in landscape mode as an option.
+%  - Modified by miguel@imag.fr to
+%    1) Add new option to print n copies of a file.
+%    2) Add new option to suppress heading printing.
+%    3) Add new option to suppress page surrounding border printing.
+%    4) Add new option to change font size. Number of lines and columns
+%	are now automatically adjusted, depending on font size and
+%	printing mode used.
+%    5) Minor changes (best layout, usage message, etc).
+%
+
+% Copyright (c) 1988, Miguel Santana, miguel@imag.imag.fr
+%
+% Permission is granted to copy and distribute this file in modified
+% or unmodified form, for noncommercial use, provided (a) this copyright
+% notice is preserved, (b) no attempt is made to restrict redistribution
+% of this file, and (c) this file is not distributed as part of any
+% collection whose redistribution is restricted by a compilation copyright.
+%
+
+
+% General macros.
+/xdef {exch def} bind def
+/getfont {exch findfont exch scalefont} bind def
+
+% Page description variables and inch function are defined by a2ps program.
+
+% Character size for differents fonts.
+   landscape
+   { /filenamefontsize 12 def }
+   { /filenamefontsize 16 def }
+ifelse
+/datefontsize filenamefontsize 0.8 mul def
+/headermargin filenamefontsize 0.25 mul def
+/bodymargin bodyfontsize 0.7 mul def
+
+% Font assignment to differents kinds of "objects"
+/filenamefontname /Helvetica-Bold def
+/stdfilenamefont filenamefontname filenamefontsize getfont def
+/datefont /Helvetica datefontsize getfont def
+/bodyfont /Courier bodyfontsize getfont def
+
+% Logical page attributs (a half of a real page or sheet).
+/pagewidth
+   bodyfont setfont (0) stringwidth pop columns mul bodymargin dup add add
+   def
+/pageheight
+   bodyfontsize lines mul bodymargin dup add add headersize add
+   def
+
+% Coordinates for upper corner of a logical page and for sheet number.
+% Coordinates depend on format mode used.
+% In twinpage mode, coordinate x of upper corner is not the same for left
+% and right pages: upperx is an array of two elements, indexed by sheetside.
+/rightmargin margin 3 div def
+/leftmargin margin 2 mul 3 div def
+/topmargin margin twinpage {3} {2} ifelse div def
+landscape
+{  % Landscape format
+   /uppery rightmargin pageheight add bodymargin add def
+   /sheetnumbery sheetwidth leftmargin pageheight add datefontsize add sub def
+   twinpage
+   {  % Two logical pages
+      /upperx [ topmargin			% upperx for left page
+		dup 2 mul pagewidth add		% upperx for right page
+	      ] def
+      /sheetnumberx sheetheight topmargin sub def
+   }
+   {  /upperx [ topmargin dup ] def
+      /sheetnumberx sheetheight topmargin sub datefontsize sub def
+   }
+   ifelse
+}
+{  % Portrait format
+   /uppery topmargin pageheight add def
+   /upperx [ leftmargin dup ] def
+   /sheetnumberx sheetwidth rightmargin sub datefontsize sub def
+   /sheetnumbery
+	 sheetheight 
+	 topmargin pageheight add datefontsize add headermargin add
+      sub
+      def
+
+}
+ifelse
+
+% Strings used to make easy printing numbers
+/pnum 12 string def
+/empty 12 string def
+
+% Other initializations.
+/datewidth date stringwidth pop def
+/filenameroom
+         pagewidth
+	 filenamefontsize 4 mul datewidth add (Page 999) stringwidth pop add
+      sub
+   def
+
+
+% Function startdoc: initializes printer and global variables.
+/startdoc
+    { /sheetside 0 def			% sheet side that contains current page
+      /sheet 1 def			% sheet number
+   } bind def
+
+% Function newfile: init file name and reset page number for each new file.
+/newfile
+    { cleanup
+      /filename xdef
+      /filenamewidth filename stringwidth pop def
+      /filenamefont
+	 filenamewidth filenameroom gt
+	 {
+	       filenamefontname
+	       filenamefontsize filenameroom mul filenamewidth div
+	    getfont
+	 }
+	 {  stdfilenamefont }
+	 ifelse
+	 def
+      /pagenum 1 def
+    } bind def
+
+% Function printpage: Print a physical page.
+/printpage
+    { /sheetside 0 def
+      twinpage
+      {  noborder not
+	    { sheetnumber }
+	 if
+      }
+      {  noheader noborder not and
+	    { sheetnumber }
+	 if
+      }
+      ifelse
+      showpage 
+%      pagesave restore
+      /sheet sheet 1 add def
+    } bind def
+
+% Function cleanup: terminates printing, flushing last page if necessary.
+/cleanup
+    { twinpage sheetside 1 eq and
+         { printpage }
+      if
+    } bind def
+
+%
+% Function startpage: prints page header and page border and initializes
+% printing of the file lines.
+/startpage
+    { sheetside 0 eq
+	{ % /pagesave save def
+	  landscape
+	    { sheetwidth 0 inch translate	% new coordinates system origin
+	      90 rotate				% landscape format
+	    } if
+	} if
+      noborder not { printborder } if
+      noheader not { printheader } if
+	 upperx sheetside get  bodymargin  add
+	    uppery
+	    bodymargin bodyfontsize add  noheader {0} {headersize} ifelse  add
+	 sub
+      moveto
+      bodyfont setfont
+    } bind def
+
+% Function printheader: prints page header.
+/printheader
+    { upperx sheetside get  uppery headersize sub 1 add  moveto
+      datefont setfont
+      gsave
+        datefontsize headermargin rmoveto
+	date show					% date/hour
+      grestore
+      gsave
+	pagenum pnum cvs pop
+	   pagewidth (Page 999) stringwidth pop sub
+	   headermargin
+	rmoveto
+        (Page ) show pnum show				% page number
+      grestore
+      empty pnum copy pop
+      gsave
+        filenamefont setfont
+	      filenameroom filename stringwidth pop sub 2 div datewidth add
+	      bodymargin 2 mul 
+	   add 
+	   headermargin
+	rmoveto
+        filename show						% file name
+      grestore
+    } bind def
+
+% Function printborder: prints border page.
+/printborder 
+    { upperx sheetside get uppery moveto
+      gsave					% print the four sides
+        pagewidth 0 rlineto			% of the square
+        0 pageheight neg rlineto
+        pagewidth neg 0 rlineto
+        closepath stroke
+      grestore
+      noheader not
+         { 0 headersize neg rmoveto pagewidth 0 rlineto stroke }
+      if
+    } bind def
+
+%
+% Function endpage: adds a sheet number to the page (footnote) and prints
+% the formatted page (physical impression). Activated at the end of each
+% source page (lines reached or FF character).
+/endpage
+   { /pagenum pagenum 1 add def
+     twinpage  sheetside 0 eq  and
+        { /sheetside 1 def }
+        { printpage }
+     ifelse
+   } bind def
+
+% Function sheetnumber: prints the sheet number.
+/sheetnumber
+    { sheetnumberx sheetnumbery moveto
+      datefont setfont
+      sheet pnum cvs
+	 dup stringwidth pop (0) stringwidth pop sub neg 0 rmoveto show
+      empty pnum copy pop
+    } bind def
+
+% Function s: print a source line
+/s  { gsave
+        show
+      grestore
+      0 bodyfontsize neg rmoveto
+    } bind def
+%%EndProlog
+
+/docsave save def
+startdoc
+(_psi.y) newfile
+/sheet 1 def
+%%Page: 1 1
+startpage
+(1     %{) s
+(2     /* This is inserted in resulting .C file */) s
+(3     #include <stdio.h>) s
+(4     #include <stdlib.h>) s
+(5     #include "psi.h") s
+(6     #include "dist.h") s
+(7     #include "sys.h") s
+(8     #include "ops.h") s
+(9      ) s
+(10    #include "code.e") s
+(11    #include "part.e") s
+(12    #include "dist.e") s
+(13    #include "psi.e") s
+(14    #include "vect.e") s
+(15    #include "ident.e") s
+(16    #include "sys.e") s
+(17    #include "moa_func.e") s
+(18    ) s
+(19    extern int line_num;) s
+(20    extern op_t *op;) s
+(21    FILE *cfile;) s
+(22    %}) s
+(23    %union {) s
+(24      unsigned int wval;) s
+(25      double fval;) s
+(26      char *cval;) s
+(27    ) s
+(28      ident_t *ident;) s
+(29      statement_t *statement;) s
+(30      reduced_t *reduced;) s
+(31      parser_t *parser;) s
+(32      vect_t *loc;) s
+(33      op_t *op;) s
+(34      s_expr_t *s_expr;) s
+(35    }) s
+(36    ) s
+(37    /* token definitions */) s
+(38    %token <wval> FOR1) s
+(39    %token <cval> NAME1) s
+(40    %token <fval> NUMBER1) s
+(41    %token <wval> ARRAY1) s
+(42    %token <wval> INT1) s
+(43    %token <wval> FLOAT1) s
+(44    %token <wval> PSI1) s
+(45    %token <wval> TAKE1) s
+(46    %token <wval> DROP1) s
+(47    %token <wval> CAT1) s
+(48    %token <wval> PDROP1) s
+(49    %token <wval> PTAKE1) s
+(50    %token <wval> CONST1) s
+(51    %token <wval> IOTA1) s
+(52    %token <wval> DIM1) s
+(53    %token <wval> SHP1) s
+(54    %token <wval> TAU1) s
+(55    %token <wval> RAV1) s
+(56    %token <cval> LTE1) s
+(57    %token <wval> RED1) s
+(58    %token <wval> OMEGA1) s
+(59    %token <wval> TRACE1) s
+(60    %token <wval> PROCS1) s
+(61    %token <wval> ARCH1) s
+(62    %token <wval> HOSTNAME1) s
+(63    %token <wval> PICL1) s
+(64    ) s
+(65    %left PSI1 TAKE1 DROP1 CAT1 PDROP1 PTAKE1 '+' '-' '*' '/') s
+(66    %right UNEG IOTA1 DIM1 SHP1 TAU1 RAV1 RED1 ) s
+(67    ) s
+(68    %type <wval> vector_const2_opt ) s
+(69    %type <parser> expression) s
+(70    %type <statement> assignment) s
+(71    %%) s
+(72    ) s
+(73    executable_program : /* replaces programx\(\); */) s
+endpage
+startpage
+(74            { executable_header\(\); }) s
+(75            directives_opt) s
+(76            { executable_post_declaration\(\); }) s
+(77            procedure_mand) s
+(78            { executable_footer\(\); }) s
+(79            ;) s
+(80    ) s
+(81    directives_opt:) s
+(82            | '$' TRACE1 {directive_trace\(\); }) s
+(83            | '$' PROCS1 NUMBER1 { directive_procs\($3\);}) s
+(84            | '$' ARCH1 NAME1 {directive_arch\($3\);}) s
+(85            | '$' HOSTNAME1 NAME1 {directive_hostname\($3\);}) s
+(86            | '$' PICL1 NAME1 {directive_picl\($3\);}) s
+(87            ;) s
+(88    ) s
+(89    procedure_mand:) s
+(90                                    {procedure_header\(\);}) s
+(91            declaration) s
+(92            '{'             ) s
+(93            var_dec_statement) s
+(94            { procedure_post_declaration\(\); }) s
+(95            statement_base ) s
+(96            '}'                     ) s
+(97                                    { procedure_footer\(\); } ) s
+(98            procedure_opt) s
+(99            ;) s
+(100   ) s
+(101   procedure_opt:) s
+(102           | procedure_mand) s
+(103           ;) s
+(104   ) s
+(105   arg_dec: /* from param_def\(\) and array_def*/) s
+(106           INT1 NAME1 { arg_dec_int\($2\); }  ) s
+(107           | ARRAY1 NAME1 '^' NUMBER1 { $<ident>$ = arg_dec_array\($2,$4\); ) s
+(108            $$ = arg_dec_array_3\($<ident>5\); }) s
+(109           | ARRAY1 NAME1 '^' NUMBER1 { $<ident>$ = arg_dec_array\($2,$4\); }) s
+(110           '<' vector_const2_base '>' { $$ = arg_dec_array_2\($2,$7,$4,$<ident>5\); ) s
+(      }) s
+(111   ) s
+(112   var_dec:) s
+(113           ARRAY1 NAME1 '^' NUMBER1 { $$ = var_dec_array\($2,$4\); }) s
+(114           '<' vector_const2_base '>' { $$ = var_dec_array_2\($2,$7,$4,$<ident>5\); ) s
+(      }) s
+(115           | ARRAY1 NAME1 '^' NUMBER1 { $<ident>$ = var_dec_array\($2,$4\); ) s
+(116            $$ = var_dec_array_3\($2,$<ident>5\); }) s
+(117           ;) s
+(118   ) s
+(119   const_dec: ) s
+(120           CONST1 ARRAY1 NAME1 '^' NUMBER1 { $$=const_dec_array\($3,$5\); }) s
+(121           '<' vector_const2_base '>' { $$=const_dec_array_2\($8,$5,$<ident>6\); }) s
+(122           '=' '<'vector_const2_base '>' {$$=const_dec_array_3\($<ident>10\); }) s
+(123           | CONST1 ARRAY1 NAME1 '^' NUMBER1 { $$=const_dec_array\($3,$5\); }) s
+(124           '<' vector_const2_base '>' { $$=const_dec_array_2\($8,$5,$<ident>6\); }) s
+(125           '=' anynumber {$$=const_dec_array_4\($3,$<ident>10,$12\); }) s
+(126           ;) s
+(127   ) s
+(128   anynumber:) s
+(129           NUMBER1 { $$ = $1 }) s
+(130           | '+' NUMBER1 { $$ = $2 }) s
+(131           | '-' NUMBER1 { $$ = 0 - $2 }) s
+(132   ) s
+(133   global_dec:) s
+(134           GLOBAL1 NAME1) s
+(135           ;) s
+(136   ) s
+(137   var_dec_statement:) s
+(138           | var_dec ';' var_dec_statement) s
+(139           | var_dec) s
+(140           | const_dec ';' var_dec_statement) s
+(141           | const_dec) s
+(142           | global_dec ';' var_dec_statement) s
+(143           | global_dec) s
+(144           ;) s
+endpage
+%%Page: 2 2
+startpage
+(145   ) s
+(146           ) s
+(147   arg_list_opt:) s
+(148           | arg_dec arg_list_cont) s
+(149           ;) s
+(150   ) s
+(151   arg_list_cont:) s
+(152           | ',' {dual_fprintf\(","\); } arg_dec arg_list_cont) s
+(153           ;) s
+(154   ) s
+(155   declaration:) s
+(156           NAME1 '\(' { declaration_name\($1\);} ) s
+(157           arg_list_opt ) s
+(158           '\)' {  declaration_footer\(\); } ) s
+(159           ;) s
+(160   ) s
+(161   statement_base:) s
+(162           statement_base_opt) s
+(163           { collect_garbage\(NULL,save_list,NULL\) }) s
+(164           ;) s
+(165   ) s
+(166   statement_base_opt:) s
+(167           | statement_base_mand statement_base_opt) s
+(168           ;) s
+(169   ) s
+(170   statement_base_mand:) s
+(171           assignment) s
+(172           | for_statement) s
+(173           | procedure_call) s
+(174           | '{' statemend_base '}') s
+(175           ;) s
+(176   ) s
+(177   assignment: /* statement_t type */) s
+(178           NAME1 '=' expression ';' ) s
+(179                   { $$=assignment_normal\($1,$3\);}) s
+(180           | '<' vector_const_base '>' PDROP1 NAME1 '=' expression ';') s
+(181                   { $$=assignment_pdrop\($2,$5,$7\); }) s
+(182           | '<' vector_const_base '>' PSI1 NAME1 '=' expression ';') s
+(183                   { $$=assignment_psi\($2,$5,$7\); }) s
+(184           ;) s
+(185   ) s
+(186   for_statement:) s
+(187           FOR1 '\(' expression LTE1 expression '<' expression '\)' ) s
+(188           statement_base { $$ = for_statement\($3,$5,$7,$9\); }) s
+(189           ;) s
+(190   ) s
+(191   procedure_call:) s
+(192           NAME1 '\(' expression '\)' ';') s
+(193           ;) s
+(194   ) s
+(195   vector_const2_base: /* must return an integer == to number of components in vec) s
+(      tor */) s
+(196           { vector_const2_init\(\); }) s
+(197           vector_const2_opt) s
+(198           {$$=vector_const2_num; vector_const2_footer\(\); }) s
+(199           ;) s
+(200   ) s
+(201   vector_const2_mand:) s
+(202           NUMBER1  {vector_const2_number\($1\);}) s
+(203           | NAME1  {vector_const2_name\($1\); }) s
+(204           | '+' NUMBER1 {vector_const2_number\($1\); }) s
+(205           | '-' NUMBER1 {vector_const2_number\(-$1\); }) s
+(206           ;) s
+(207   vector_const2_opt: ) s
+(208           | vector_const2_mand vector_const2_opt  ) s
+(209           ;) s
+(210   ) s
+(211   expression:) s
+(212           NAME1   { $$=expression_name\($1\); }) s
+(213   /*      | NUMBER1) s
+(214           | FLOAT1 */) s
+(215           | '\(' expression '\)') s
+(216                   { strcat\(expr_str,"\("\); $$=$2 strcat\(expr_str,"\)"\);}) s
+endpage
+startpage
+(217           | '<' vector_const2_base '>' ) s
+(218                   { $$=psi_access\($2\); }) s
+(219   /* Binary operators */) s
+(220           | expression '+' expression  ) s
+(221                   { $$=expression_binary_operator\($1," + ",$2,psi_plus\);} ) s
+(222           | expression '-' expression  ) s
+(223                   { $$=expression_binary_operator\($1," - ",$2,psi_minus\);}) s
+(224           | expression '*' expression   ) s
+(225                   { $$=expression_binary_operator\($1," * ",$2,psi_times\);}) s
+(226           | expression '/' expression    ) s
+(227                   { $$=expression_binary_operator\($1," / ",$2,psi_div\);}) s
+(228           | expression PSI1 expression  ) s
+(229                   { $$=expression_binary_operator\($1," psi ",$2,psi_psi\);}) s
+(230           | expression TAKE1 expression) s
+(231                   { $$=expression_binary_operator\($1," take ",$2,psi_take\);}) s
+(232           | expression DROP1 expression) s
+(233                   { $$=expression_binary_operator\($1," drop ",$2,psi_drop\);}) s
+(234           | expression CAT1 expression) s
+(235                   { $$=expression_binary_operator\($1," cat ",$2,psi_cat\);}) s
+(236           | expression PDROP1 expression ) s
+(237                   { $$=expression_binary_operator\($1," pdrop ",$2,psi_pdrop\);}) s
+(238           | expression PTAKE1 expression ) s
+(239                   { $$=expression_binary_operator\($1," ptake ",$2,psi_ptake\);}) s
+(240   /* unary operators */) s
+(241           | '+' expression %prec UNEG ) s
+(242                   { $$ = expression_unary_operator\(" + ", $2,psi_plus\); }) s
+(243           | '-' expression %prec UNEG ) s
+(244                   { $$ = expression_unary_operator\(" - ", $2,psi_minus\); }) s
+(245           | IOTA1 expression      ) s
+(246                   { $$ = expression_unary_operator\(" iota ", $2,psi_iota\); }) s
+(247           | DIM1 expression      ) s
+(248                   { $$ = expression_unary_operator\(" dim ", $2,psi_dim\); }) s
+(249           | SHP1 expression     ) s
+(250                   { $$ = expression_unary_operator\(" shp ", $2,psi_shp\); }) s
+(251           | TAU1 expression    ) s
+(252                   { $$ = expression_unary_operator\(" tau ", $2,psi_tau\); }) s
+(253           | RAV1 expression   ) s
+(254                   { $$ = expression_unary_operator\(" rav ", $2,psi_rav\); }) s
+(255           | '+' RED1 expression   ) s
+(256                   { $$ = expression_unary_operator\(" +red ", $2,psi_red_plus\); }) s
+(257           | '-' RED1 expression   ) s
+(258                   { $$ = expression_unary_operator\(" -red ", $2,psi_red_minus\); }) s
+(259           | '*' RED1 expression  ) s
+(260                    { $$ = expression_unary_operator\(" *red ", $2,psi_red_times\); ) s
+(      }) s
+(261           | '/' RED1 expression  ) s
+(262                   { $$ = expression_unary_operator\(" /red ", $2,psi_red_div\); }) s
+(263           ;) s
+(264   ) s
+(265   %%) s
+(266   ) s
+(267   yyerror \(char *s\)) s
+(268   { ) s
+(269           printf \("Error line %d:  %s\\n", line_num, s\);) s
+(270           return \(0\);) s
+(271   }) s
+(272   ) s
+(273   void main\(\)) s
+(274   {) s
+(275           yyparse\(\);) s
+(276   }) s
+endpage
+
+%%Trailer
+cleanup
+docsave restore end

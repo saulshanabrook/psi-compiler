@@ -1,0 +1,8 @@
+!HPF$ PROCESSORS network(4)
+      SUBROUTINE test (A, B)
+        REAL, DIMENSION(100) :: A, B
+        INTEGER :: I
+!HPF$ DISTRIBUTE A(*)
+!HPF$ DISTRIBUTE B(*)
+        A=B
+      END SUBROUTINE test

@@ -1,0 +1,49 @@
+\begin{thebibliography}{1}
+
+\bibitem{hai91}
+Ga\'etan Hains and Lenore~M.R. Mullin.
+\newblock An algebra of multidimensional arrays.
+\newblock Technical Report 782, Universit\'e de Montr\'eal, 1991.
+\newblock (0) Submitted to the 12th Conference on the Foundations of Software
+  Technology and Theoretical Computer Science, 18-20 December 1992, New Delhi,
+  India (1) Presented at the 2nd Montreal Workshop on Programming Language
+  Theory - Algebraic and Logical Approaches in Programming Languages, December
+  1991.
+
+\bibitem{mdst92}
+L.~Mullin, D.~Dooling, E.~Sandberg, and S.~Thibault.
+\newblock Formal methods for the scheduling, routing and communications
+  protocol of a logarithmic scan on a message passing distributed operating
+  system: Pram algorithms revisited.
+\newblock Technical Report CSEE/92/07-10, University of Vermont, Dept of CSEE,
+  1992.
+\newblock Under Review, IEEE Transactions on Parallel and Distributed
+  Computing.
+
+\bibitem{tm93}
+L.~Mullin and S.~Thibault.
+\newblock The psi compiler project: Backend to massively parallel scientific
+  programming languages.
+\newblock In {\em Fourth International Workshop on Compilers for Parallel
+  Computers}, 1993.
+
+\bibitem{mul88}
+Lenore M.~Restifo Mullin.
+\newblock {\em A Mathematics of Arrays}.
+\newblock {Ph.D.} dissertation, Syracuse University, December 1988.
+
+\bibitem{mdst93}
+L.R. Mullin, D.~Dooling, E.~Sandberg, and S.~Thibault.
+\newblock Formal methods for scheduling and communication protocol.
+\newblock In {\em Proceedings of the Second International Symposium on High
+  Performance Distributed Computing}, july 1993.
+
+\bibitem{mdst94}
+L.R. Mullin, D.~Dooling, E.~Sandberg, and S.~Thibault.
+\newblock Formal methods for portable, scalable, scheduling and communication
+  protocol.
+\newblock Technical Report CSC 94-04, University of Missouri-Rolla, 1994.
+\newblock submitted toProceedings of the Third International Symposium on High
+  Performance Distributed Computing.
+
+\end{thebibliography}

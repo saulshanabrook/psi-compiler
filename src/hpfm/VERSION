@@ -1,0 +1,7 @@
+7/94 - version 0.0
+	Initial creation.  Supports only external subroutine delcarations
+	  containing only variable declarations and array assignments.  The
+	  operators CONCAT,DOT_PRODUCT,MATMUL,PRODUCT,SUM, and CSHIFT have
+	  been implemented and tested (some).  Also take, drop, and psi
+	  is supported through the use of the extended notation of taking
+	  array-sections of any expression not just data objects.

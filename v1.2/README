@@ -1,0 +1,3 @@
+This directory contains experimenting with the psi compiler for PGI.
+
+ast_trans contains AST transformation code.

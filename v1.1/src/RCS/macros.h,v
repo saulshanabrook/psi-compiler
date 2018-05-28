@@ -1,0 +1,30 @@
+head	1.1;
+access
+	rennie;
+symbols;
+locks
+	psi:1.1; strict;
+comment	@ * @;
+
+
+1.1
+date	95.05.26.18.47.21;	author psi;	state Exp;
+branches;
+next	;
+
+
+desc
+@@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@#define iSHAPE(ident) ident->array.shp
+#define vSHAPE(vector) vector->shp
+#define eSHAPE(expr) expr->shp
+#define iDIM(ident) ident->array.dim
+#define eDIM(expr) expr->dim
+@

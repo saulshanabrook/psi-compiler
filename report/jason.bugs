@@ -1,0 +1,12 @@
+1) Scalar constants (i.e. const array six^0 <> = 6) are only passed through
+   to the C code if they are used in a moal expression.  (When they are passed
+   through, they are used as constants in the code and not variables.)  If you
+   declare a scalar constant and use it only in a procedure (function) call,
+   the variable name is used in the resultant C but not declared.
+   Status:  NOT FIXED
+
+2) I went back to try the example files (from the distribution) and 3 of them
+   (heat, compete, and lu) all die of incompatible types on operator + (with
+   the cc portion of the compile).  The other one (mm) compiles fine and then
+   when linking can't find get_mem.  Just thought you should know.
+   Status:  FIXED (for these particular examples) -- Thom McMahon

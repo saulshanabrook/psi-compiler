@@ -1,0 +1,5 @@
+Reducing:
+a10=(( iota ( shp foo)) psi  omega <1.000000 2.000000> foo)
+#<4 3> take (<0 0> drop _a10[])=<4 3> take (<0 0> drop 
+  forall (forall_i0 in <4 3>) {
+    ((forall_i0[] Psi <

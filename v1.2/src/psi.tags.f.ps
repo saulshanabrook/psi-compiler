@@ -1,0 +1,618 @@
+%! a2ps 3.0
+
+/$a2psdict 100 dict def
+$a2psdict begin
+% Initialize page description variables.
+/inch {72 mul} bind def
+/landscape false def
+/twinpage false def
+/sheetheight 11 inch def
+/sheetwidth 8.5 inch def
+/margin 1.2 inch def
+/noborder false def
+/noheader false def
+/headersize 0.29 inch def
+/bodyfontsize 6.8 def
+/lines 99 def
+/columns 127 def
+/date (Feb 13 1995 15:21:09) def
+%!  PostScript Source Code
+%
+%  File: imag:/users/local/a2ps/header.ps
+%  Created: Tue Nov 29 12:14:02 1988 by miguel@imag (Miguel Santana)
+%  Version: 2.0
+%  Description: PostScript prolog for a2ps ascii to PostScript program.
+% 
+%  Edit History:
+%  - Original version by evan@csli (Evan Kirshenbaum).
+%  - Modified by miguel@imag to:
+%    1) Correct an overflow bug when printing page number 10 (operator
+%	cvs).
+%    2) Define two other variables (sheetwidth, sheetheight) describing
+%	the physical page (by default A4 format).
+%    3) Minor changes (reorganization, comments, etc).
+%  - Modified by tullemans@apolloway.prl.philips.nl
+%    1) Correct stack overflows with regard to operators cvs and copy.
+%       The resulting substrings where in some cases not popped off 
+%       the stack, what can result in a stack overflow.
+%    2) Replaced copypage and erasepage by showpage. Page througput
+%       degrades severely (see red book page 140) on our ps-printer
+%       after printing sheet 16 (i.e. page 8) of a file which was 
+%       actually bigger. For this purpose the definitions of startdoc
+%       and startpage are changed.
+%  - Modified by Tim Clark <T.Clark@uk.ac.warwick> to:
+%    1) Print one page per sheet (portrait) as an option.
+%    2) Reduce size of file name heading, if it's too big.
+%    3) Save and restore PostScript state at begining/end. It now uses
+%	conventional %%Page %%Trailer markers.
+%    4) Print one wide page per sheet in landscape mode as an option.
+%  - Modified by miguel@imag.fr to
+%    1) Add new option to print n copies of a file.
+%    2) Add new option to suppress heading printing.
+%    3) Add new option to suppress page surrounding border printing.
+%    4) Add new option to change font size. Number of lines and columns
+%	are now automatically adjusted, depending on font size and
+%	printing mode used.
+%    5) Minor changes (best layout, usage message, etc).
+%
+
+% Copyright (c) 1988, Miguel Santana, miguel@imag.imag.fr
+%
+% Permission is granted to copy and distribute this file in modified
+% or unmodified form, for noncommercial use, provided (a) this copyright
+% notice is preserved, (b) no attempt is made to restrict redistribution
+% of this file, and (c) this file is not distributed as part of any
+% collection whose redistribution is restricted by a compilation copyright.
+%
+
+
+% General macros.
+/xdef {exch def} bind def
+/getfont {exch findfont exch scalefont} bind def
+
+% Page description variables and inch function are defined by a2ps program.
+
+% Character size for differents fonts.
+   landscape
+   { /filenamefontsize 12 def }
+   { /filenamefontsize 16 def }
+ifelse
+/datefontsize filenamefontsize 0.8 mul def
+/headermargin filenamefontsize 0.25 mul def
+/bodymargin bodyfontsize 0.7 mul def
+
+% Font assignment to differents kinds of "objects"
+/filenamefontname /Helvetica-Bold def
+/stdfilenamefont filenamefontname filenamefontsize getfont def
+/datefont /Helvetica datefontsize getfont def
+/bodyfont /Courier bodyfontsize getfont def
+
+% Logical page attributs (a half of a real page or sheet).
+/pagewidth
+   bodyfont setfont (0) stringwidth pop columns mul bodymargin dup add add
+   def
+/pageheight
+   bodyfontsize lines mul bodymargin dup add add headersize add
+   def
+
+% Coordinates for upper corner of a logical page and for sheet number.
+% Coordinates depend on format mode used.
+% In twinpage mode, coordinate x of upper corner is not the same for left
+% and right pages: upperx is an array of two elements, indexed by sheetside.
+/rightmargin margin 3 div def
+/leftmargin margin 2 mul 3 div def
+/topmargin margin twinpage {3} {2} ifelse div def
+landscape
+{  % Landscape format
+   /uppery rightmargin pageheight add bodymargin add def
+   /sheetnumbery sheetwidth leftmargin pageheight add datefontsize add sub def
+   twinpage
+   {  % Two logical pages
+      /upperx [ topmargin			% upperx for left page
+		dup 2 mul pagewidth add		% upperx for right page
+	      ] def
+      /sheetnumberx sheetheight topmargin sub def
+   }
+   {  /upperx [ topmargin dup ] def
+      /sheetnumberx sheetheight topmargin sub datefontsize sub def
+   }
+   ifelse
+}
+{  % Portrait format
+   /uppery topmargin pageheight add def
+   /upperx [ leftmargin dup ] def
+   /sheetnumberx sheetwidth rightmargin sub datefontsize sub def
+   /sheetnumbery
+	 sheetheight 
+	 topmargin pageheight add datefontsize add headermargin add
+      sub
+      def
+
+}
+ifelse
+
+% Strings used to make easy printing numbers
+/pnum 12 string def
+/empty 12 string def
+
+% Other initializations.
+/datewidth date stringwidth pop def
+/filenameroom
+         pagewidth
+	 filenamefontsize 4 mul datewidth add (Page 999) stringwidth pop add
+      sub
+   def
+
+
+% Function startdoc: initializes printer and global variables.
+/startdoc
+    { /sheetside 0 def			% sheet side that contains current page
+      /sheet 1 def			% sheet number
+   } bind def
+
+% Function newfile: init file name and reset page number for each new file.
+/newfile
+    { cleanup
+      /filename xdef
+      /filenamewidth filename stringwidth pop def
+      /filenamefont
+	 filenamewidth filenameroom gt
+	 {
+	       filenamefontname
+	       filenamefontsize filenameroom mul filenamewidth div
+	    getfont
+	 }
+	 {  stdfilenamefont }
+	 ifelse
+	 def
+      /pagenum 1 def
+    } bind def
+
+% Function printpage: Print a physical page.
+/printpage
+    { /sheetside 0 def
+      twinpage
+      {  noborder not
+	    { sheetnumber }
+	 if
+      }
+      {  noheader noborder not and
+	    { sheetnumber }
+	 if
+      }
+      ifelse
+      showpage 
+%      pagesave restore
+      /sheet sheet 1 add def
+    } bind def
+
+% Function cleanup: terminates printing, flushing last page if necessary.
+/cleanup
+    { twinpage sheetside 1 eq and
+         { printpage }
+      if
+    } bind def
+
+%
+% Function startpage: prints page header and page border and initializes
+% printing of the file lines.
+/startpage
+    { sheetside 0 eq
+	{ % /pagesave save def
+	  landscape
+	    { sheetwidth 0 inch translate	% new coordinates system origin
+	      90 rotate				% landscape format
+	    } if
+	} if
+      noborder not { printborder } if
+      noheader not { printheader } if
+	 upperx sheetside get  bodymargin  add
+	    uppery
+	    bodymargin bodyfontsize add  noheader {0} {headersize} ifelse  add
+	 sub
+      moveto
+      bodyfont setfont
+    } bind def
+
+% Function printheader: prints page header.
+/printheader
+    { upperx sheetside get  uppery headersize sub 1 add  moveto
+      datefont setfont
+      gsave
+        datefontsize headermargin rmoveto
+	date show					% date/hour
+      grestore
+      gsave
+	pagenum pnum cvs pop
+	   pagewidth (Page 999) stringwidth pop sub
+	   headermargin
+	rmoveto
+        (Page ) show pnum show				% page number
+      grestore
+      empty pnum copy pop
+      gsave
+        filenamefont setfont
+	      filenameroom filename stringwidth pop sub 2 div datewidth add
+	      bodymargin 2 mul 
+	   add 
+	   headermargin
+	rmoveto
+        filename show						% file name
+      grestore
+    } bind def
+
+% Function printborder: prints border page.
+/printborder 
+    { upperx sheetside get uppery moveto
+      gsave					% print the four sides
+        pagewidth 0 rlineto			% of the square
+        0 pageheight neg rlineto
+        pagewidth neg 0 rlineto
+        closepath stroke
+      grestore
+      noheader not
+         { 0 headersize neg rmoveto pagewidth 0 rlineto stroke }
+      if
+    } bind def
+
+%
+% Function endpage: adds a sheet number to the page (footnote) and prints
+% the formatted page (physical impression). Activated at the end of each
+% source page (lines reached or FF character).
+/endpage
+   { /pagenum pagenum 1 add def
+     twinpage  sheetside 0 eq  and
+        { /sheetside 1 def }
+        { printpage }
+     ifelse
+   } bind def
+
+% Function sheetnumber: prints the sheet number.
+/sheetnumber
+    { sheetnumberx sheetnumbery moveto
+      datefont setfont
+      sheet pnum cvs
+	 dup stringwidth pop (0) stringwidth pop sub neg 0 rmoveto show
+      empty pnum copy pop
+    } bind def
+
+% Function s: print a source line
+/s  { gsave
+        show
+      grestore
+      0 bodyfontsize neg rmoveto
+    } bind def
+%%EndProlog
+
+/docsave save def
+startdoc
+(psi.tags.f) newfile
+/sheet 1 def
+%%Page: 1 1
+startpage
+(1     actual           726 parse.c          expr_t *actual\(\)) s
+(2     actual_list      749 parse.c          statement_t *actual_list\(\)) s
+(3     addto_allocs     718 code.c           addto_allocs\(expr_t *expr\)) s
+(4     addto_dynamics   732 code.c           addto_dynamics\(expr_t *expr\)) s
+(5     addto_reduced    132 psi.c            addto_reduced\(expr_t *expr, expr_t *result, char *op\)) s
+(6     add_allocation   117 psi.c            add_allocation\(expr_t *expr\)) s
+(7     add_rule          31 part.c           rule_t *add_rule\(ident_t *ident, vect_t *shp\)) s
+(8     add_steps        970 code.c           add_steps\(vect_t *bound, vect_t *shp1, vect_t *stride, s_expr_t *dim,) s
+(9     allocate         673 parse.c          statement_t *allocate\(\)) s
+(10    allocate_actuals1539 code.c           allocate_actuals\(reduced_t *list\)) s
+(11    allocate_array   747 code.c           allocate_array\(ident_t *ident\)) s
+(12    allocate_utils  1409 dist.c           allocate_utils\(\)) s
+(13    allocate_vect    267 code.c           void allocate_vect\(ident_t *ident\)) s
+(14    array_def        850 parse.c          array_def\(ident_t *ident\)) s
+(15    assign           663 psi.c            expr_t *assign\(expr_t *expr, expr_t *result, int top, char *op, int inright\)) s
+(16    assignment       592 parse.c          statement_t *assignment\(\)) s
+(17    assignment_part  627 parse.c          statement_t *assignment_part\(vect_t *loc, int index, char *name\)) s
+(18    assign_rav       269 psi.c            assign_rav\(expr_t *rav, expr_t *expr, expr_t *result, ) s
+(19    bFindUniqueIdentifiers 139 scalar.c         int bFindUniqueIdentifiers\(s_expr_t *pseNode\) {) s
+(20    bGetDim           91 values.c         int bGetDim\(parser_t *arg, double *dim\) {) s
+(21    bGetIdentValue    30 values.c         int bGetIdentValue\(ident_t *node, int index, double *value\) {) s
+(22    bGetShp          114 values.c         int bGetShp\(parser_t *arg, int dim, double *shp\) {) s
+(23    bGetSingleDimParserValue 137 values.c         int bGetSingleDimParserValue\(parser_t *arg, int index, double *value\) {) s
+(24    blockbody       1017 parse.c          statement_t *blockbody\(\)) s
+(25    block_rav        209 psi.c            block_rav\(s_expr_t *i, s_expr_t *b, vect_t *s, vect_t *bound, vect_t *index,) s
+(26    build_rule        70 part.c           build_rule\(expr_t *expr, expr_t *res\)) s
+(27    build_vect       146 dist.c           vect_t *build_vect\(char *name, s_expr_t *shp\)) s
+(28    call_statement   778 parse.c          statement_t *call_statement\(char *name\)) s
+(29    check_combined_temps 987 psi.c            check_combined_temps\(reduced_t *ret, reduced_t **non_assigns\)) s
+(30    check_zero       169 dist.c           int check_zero\(vect_t *vect\)) s
+(31    cleanup           34 main.c           void cleanup\(\)) s
+(32    clear_saves      364 sys.c            clear_saves\(\)) s
+(33    clear_syms        79 parse.c          clear_syms\(\)) s
+(34    close_forall    1515 code.c           close_forall\(expr_t *fa_expr\)) s
+(35    close_while      275 dist.c           close_while\(FILE *fd, vect_t *s, vect_t *s_bound, char *cont\)) s
+(36    code_c          1725 code.c           code_c\(statement_t *body, dist_t *dist\)) s
+(37    code_c_rec      1739 code.c           code_c_rec\(statement_t *body\)) s
+(38    code_dist       1027 dist.c           code_dist\(reduced_t *list, expr_t *res, dist_t *l_dist\)) s
+(39    code_expr       1604 code.c           code_expr\(reduced_t *reduced\)) s
+(40    code_extended      7 extended.c       code_extended \(reduced_t *node\)) s
+(41    code_global_int 1116 dist.c           code_global_int\(ident_t *ident\)) s
+(42    code_idx_array   709 code.c           void code_idx_array \(char *where, char *array, char *index\)) s
+(43    code_reduced    1663 code.c           code_reduced\(reduced_t *reduced\)) s
+(44    code_vect        453 code.c           code_vect\(vect_t *vect, vect_t *res, char *op, char *pre ,char *post, ) s
+(45    collect_garbage  569 sys.c            collect_garbage\(reduced_t *reduced, save_t *list, dist_t *dist\)) s
+(46    collect_mem      622 sys.c            collect_mem\(\)) s
+(47    collect_reduced  531 sys.c            collect_reduced\(reduced_t *reduced\)) s
+(48    combine_distributed 321 dist.c           reduced_t *combine_distributed\(reduced_t *reduced\)) s
+(49    combine_reduced 1061 psi.c            reduced_t *combine_reduced\(reduced_t *reduced, expr_t *result, int inloop\)) s
+(50    compactor        271 ident.c          s_expr_t *compactor\(s_expr_t *s, int *changed\)) s
+(51    const_def        947 parse.c          const_def\(\)) s
+(52    const_def_part   977 parse.c          const_def_part\(\)) s
+(53    const_op         152 vect.c           vect_t *const_op\(vect_t *arg, vect_t *res, int size, int op\)) s
+(54    convert_shp      222 parse.c          convert_shp\(ident_t **ident_p, expr_t *expr, ident_t *dim\)) s
+(55    copy_expr        374 sys.c            expr_t *copy_expr\(expr_t *expr\)) s
+(56    copy_list         85 dist.c           reduced_t *copy_list\(reduced_t *list\)) s
+(57    debug_ident        6 debug.c          void debug_ident \(ident_t *ident\)) s
+(58    debug_s_expr      26 debug.c          void debug_s_expr \(s_expr_t *s\)) s
+(59    debug_vect        37 debug.c          void debug_vect \(vect_t *v\)) s
+(60    declare_utils     67 code.c           void declare_utils \(\)) s
+(61    declare_var       86 code.c           void declare_var \(int integer, char *name, int len\)) s
+(62    define           127 lex.c            define\(uchar isname, char *name, int index\)) s
+(63    def_part        1005 parse.c          def_part\(\)) s
+(64    directive       1227 parse.c          directive\(\)) s
+(65    dist_array      1241 dist.c           dist_array\(dist_t *dist\)) s
+(66    dist_assign      715 dist.c           dist_assign\(reduced_t *list, vect_t *loc_adj, vect_t *ip, vect_t *lp,) s
+(67    dist_compare      68 dist.c           int dist_compare\(dist_t *dist1, dist_t *dist2\)) s
+(68    dist_init       1439 dist.c           dist_init\(\)) s
+(69    dist_lhs         370 dist.c           vect_t *dist_lhs\(expr_t *expr, expr_t *res, dist_t *l_dist, vect_t *ip, ) s
+(70    dist_rhs         553 dist.c           vect_t *dist_rhs\(expr_t *expr, dist_t *r_dist, vect_t *ip, vect_t *lp, ) s
+(71    dotab            387 sys.c            dotab\(int adj\)) s
+(72    dotabf           397 sys.c            dotabf\(FILE *fd, int adj\)) s
+(73    do_assign       1416 code.c           do_assign\(expr_t *expr, expr_t *result\)) s
+(74    do_gamma         951 code.c           do_gamma\(expr_t *expr, expr_t *result, int num\)) s
+(75    do_location      921 code.c           int do_location\(expr_t *expr, expr_t *result\)) s
+(76    do_loop_close   1130 code.c           do_loop_close\(s_expr_t *dim, vect_t *bound, s_expr_t *rdim\)) s
+(77    do_loop_open    1100 code.c           do_loop_open\(vect_t *bound, s_expr_t *dim\)) s
+(78    do_ptab          411 sys.c            do_ptab\(int adj\)) s
+(79    do_shapes        801 code.c           do_shapes\(expr_t *expr, expr_t *result\)) s
+(80    dup_expr         189 psi.c            expr_t *dup_expr\(expr_t *expr\)) s
+(81    eDIM               5 macros.h         #define eDIM\(expr\) expr->dim) s
+(82    embed_const_vect 301 code.c           embed_const_vect\(ident_t *ident\)) s
+(83    empty            162 psi.c            int empty\(vect_t *vect\)) s
+(84    end_loop        1467 code.c           end_loop\(int depth\)) s
+(85    error            248 sys.c            void error\(char *msg\)) s
+(86    eSHAPE             3 macros.h         #define eSHAPE\(expr\) expr->shp) s
+(87    expand_vect      884 vect.c           vect_t *expand_vect\(vect_t *vect\)) s
+(88    expect           162 parse.c          expect\(int sym\)) s
+(89    expect_name      177 parse.c          int expect_name\(\)) s
+(90    expect_number    192 parse.c          double expect_number\(\)) s
+(91    expression       572 parse.c          parser_t *expression\(\)) s
+(92    expr_free        125 sys.c            expr_free\(expr_t *expr\)) s
+(93    factor           542 parse.c          parser_t *factor\(\)) s
+(94    fatal            256 sys.c            void fatal\(char *msg\)) s
+(95    find_dist         51 dist.c           dist_t *find_dist\(ident_t *array\)) s
+(96    find_rule         49 part.c           rule_t *find_rule\(ident_t *ident\)) s
+(97    find_sym          93 parse.c          ident_t *find_sym\(int index,int talk\)) s
+(98    find_temp        951 psi.c            int find_temp\(reduced_t *list, char *name, int ex_num\)) s
+(99    forall           560 psi.c            forall\(expr_t *fa_expr, expr_t *result, int top, char *op, int inright\)) s
+endpage
+%%Page: 2 2
+startpage
+(100   forall_statement 699 parse.c          statement_t *forall_statement\(\)) s
+(101   force_vect      1237 vect.c           vect_t *force_vect\(vect_t *vect\)) s
+(102   formal_list     1079 parse.c          formal_list\(\)) s
+(103   FreeFractionalPolygon 650 scalar.c         void FreeFractionalPolygon\(FractionalPolygon_t *pfpNew\) {) s
+(104   free_poly         76 poly.c           void free_poly\(poly_t *p\)) s
+(105   free_tmp_mem     317 sys.c            void free_tmp_mem\(\)) s
+(106   get_expr_mem      89 sys.c            expr_t *get_expr_mem\(int n\)) s
+(107   get_ident        176 sys.c            ident_t *get_ident\(\)) s
+(108   get_mem           21 moalib.c         void *get_mem\(long size\)) s
+(109   get_statement    336 sys.c            statement_t *get_statement\(int kind\)) s
+(110   get_symbol       167 lex.c            get_symbol\(\)) s
+(111   get_s_expr       214 sys.c            s_expr_t *get_s_expr\(\)) s
+(112   get_tmp_mem      285 sys.c            void *get_tmp_mem\(int size\) ) s
+(113   get_vect         137 sys.c            vect_t *get_vect\(\)) s
+(114   GLOBAL           230 psi.h            #define GLOBAL\(x\) \(\(\(x\)&0x20\)!=0\)) s
+(115   global_assign   1245 code.c           global_assign\(reduced_t *global, expr_t *result\)) s
+(116   global_def       987 parse.c          global_def\(\)) s
+(117   HASSHAPE         242 psi.h            #define HASSHAPE\(x\) \(\(\(x\)&0x04\)!=0\)) s
+(118   IdentifierFound  204 scalar.c         void IdentifierFound\(ident_t *pidIdentifier\) {) s
+(119   ident_compare    505 ident.c          int ident_compare\(ident_t *ident1, ident_t *ident2\)) s
+(120   ident_free       202 sys.c            ident_free\(ident_t *ident\)) s
+(121   iDIM               4 macros.h         #define iDIM\(ident\) ident->array.dim) s
+(122   if_bounded       224 dist.c           if_bounded\(vect_t *var, vect_t *lbound, vect_t *rbound, char *res, int out\)) s
+(123   IndexIdentifiers 322 scalar.c         void IndexIdentifiers \(BinaryTreeNode_t *pbtnCurrent\) {) s
+(124   index_vect       191 dist.c           index_vect\(vect_t *vect, char *index\)) s
+(125   init_dist_arrays1365 dist.c           init_dist_arrays\(dist_t *dist\)) s
+(126   insert           106 lex.c            symbol_t *insert\(uchar isname, char *name, int index, int key\)) s
+(127   insert_sym       110 parse.c          insert_sym\(ident_t *ident, int index\)) s
+(128   inv_gamma        112 dist.c           inv_gamma\(char *rav, vect_t *shp, char *res\)) s
+(129   iota_loop_close 1221 code.c           iota_loop_close\(s_expr_t *dim, vect_t *bound\)) s
+(130   iota_loop_open  1189 code.c           iota_loop_open\(vect_t *index, vect_t *bound, s_expr_t *dim\)) s
+(131   ISALLOC          255 psi.h            #define ISALLOC\(x\) \(\(\(x\)&0x08\)!=0\)) s
+(132   ISCODED          250 psi.h            #define ISCODED\(x\) \(\(\(x\)&0x01\)!=0\)) s
+(133   ISDYNAMIC        234 psi.h            #define ISDYNAMIC\(x\) \(\(\(x\)&0x10\)!=0\)) s
+(134   iSHAPE             1 macros.h         #define iSHAPE\(ident\) ident->array.shp) s
+(135   isop             523 parse.c          int isop\(int i\)) s
+(136   ISPARAMETER      246 psi.h            #define ISPARAMETER\(x\) \(\(\(x\)&0x02\)!=0\)) s
+(137   ISSCANNED        259 psi.h            #define ISSCANNED\(x\) \(\(\(x\)&0x10\)!=0\)) s
+(138   ISUSED           238 psi.h            #define ISUSED\(x\) \(\(\(x\)&0x08\)!=0\)) s
+(139   is_recursive      70 psi.c            int is_recursive\(expr_t *expr, ident_t *result, int in_left\)) s
+(140   is_unop          360 parse.c          int is_unop\(int x\)) s
+(141   key               90 lex.c            int key\(char *name\)) s
+(142   lex_init         305 lex.c            lex_init\(\)) s
+(143   main              46 main.c           main\(int argc, char *argv[]\)) s
+(144   make_ident        52 ident.c          ident_t *make_ident\(s_expr_t *s\)) s
+(145   make_s_expr       86 ident.c          s_expr_t *make_s_expr\(vect_t *vect\)) s
+(146   make_vect        442 vect.c           vect_t *make_vect\(expr_t *expr\)) s
+(147   mark_expr        494 sys.c            mark_expr\(expr_t *expr\)) s
+(148   mark_extended     11 extended.c       mark_extended \(statement_t *node\)) s
+(149   mark_ident       435 sys.c            mark_ident\(ident_t *ident\)) s
+(150   mark_ident_list  465 sys.c            mark_ident_list\(ident_t *ident\)) s
+(151   mark_s_expr      518 sys.c            mark_s_expr\(s_expr_t *s_expr\)) s
+(152   mark_vect        477 sys.c            mark_vect\(vect_t *vect\)) s
+(153   max               14 moalib.c         int max\(int a, int b\)) s
+(154   mem_init         684 sys.c            mem_init\(\)) s
+(155   min                7 moalib.c         int min\(int a, int b\)) s
+(156   MYMAX             37 ident.c          #define MYMAX\(x,y\) \(\(x\)>\(y\)\) ? \(x\) : \(y\)) s
+(157   MYMIN             36 ident.c          #define MYMIN\(x,y\) \(\(x\)<\(y\)\) ? \(x\) : \(y\)) s
+(158   my_gamma         870 code.c           int my_gamma\(FILE *out, char *name, vect_t *index, vect_t *shp, s_expr_t *dim\)) s
+(159   my_gamma2        821 code.c           int my_gamma2\(FILE *out, char *name, vect_t *index, vect_t *shp, s_expr_t *dim\)) s
+(160   new_poly          61 poly.c           poly_t *new_poly\(int d\)) s
+(161   NEW_SCALAR       266 psi.h            #define NEW_SCALAR\(i,number\) \\) s
+(162   nextchar          76 lex.c            nextchar\(\)) s
+(163   NONASSOCIATIVE    42 psi.c            #define NONASSOCIATIVE\(op\) \(\(*op=='/'\)||\(*op=='-'\)\)) s
+(164   NOTALLOCATED      39 code.c           #define NOTALLOCATED\(a\) \(\(!ISUSED\(a->flags\)\)&&\(!ISPARAMETER\(a->flags\)\)&&\(a->type!=R) s
+(      AV\)&&\(a->type!=CONST_ARRAY\)&&\(a->type!=CONSTANT\)&&\(a->type!=IOTA\)\)) s
+(165   open_forall     1483 code.c           open_forall\(expr_t *fa_expr\)) s
+(166   param_def       1030 parse.c          param_def\(\)) s
+(167   partition        231 part.c           dist_t *partition\(statement_t *body\)) s
+(168   partition_reduced 162 part.c           partition_reduced\(reduced_t *reduced\)) s
+(169   pfpFractionalPolygonAdd 494 scalar.c         FractionalPolygon_t *pfpFractionalPolygonAdd\(FractionalPolygon_t *pfpLeft,) s
+(170   pfpFractionalPolygonTimes 447 scalar.c         FractionalPolygon_t *pfpFractionalPolygonTimes\(FractionalPolygon_t *pfpLef) s
+(      t,) s
+(171   pfpSExprToFractionalPolygon 353 scalar.c         FractionalPolygon_t *pfpSExprToFractionalPolygon\(s_expr_t *pseNode\) {) s
+(172   pidGetBinaryTreeByIndex 285 scalar.c         ident_t *pidGetBinaryTreeByIndex \(int iIndex, BinaryTreeNode_t *pbtnCurrent\)) s
+(       {) s
+(173   poly_add         115 poly.c           poly_t *poly_add\(poly_t *left, poly_t *right\)) s
+(174   poly_constant    331 poly.c           poly_t *poly_constant\(double c, int d\)) s
+(175   poly_copy         89 poly.c           poly_t *poly_copy\(poly_t *p\)) s
+(176   poly_expand      312 poly.c           poly_t *poly_expand\(int terms, double *p, int var, int d\)) s
+(177   poly_print       348 poly.c           void poly_print\(poly_t *p\)) s
+(178   poly_scale       243 poly.c           poly_t *poly_scale\(double k, int *j, poly_t *p\)) s
+(179   poly_times       184 poly.c           poly_t *poly_times\(poly_t *p1, poly_t *p2\)) s
+(180   ppbtnGetBinaryTreeNode 240 scalar.c         BinaryTreeNode_t **ppbtnGetBinaryTreeNode \(char *sIdentifier\) {) s
+(181   print_expr       247 output.c         print_expr\(int bottom,expr_t *expr, expr_t *result, char *op\)) s
+(182   print_gen_ident   17 output.c         print_gen_ident\(ident_t *ident\)) s
+(183   print_ident      103 code.c           print_ident\(FILE *outfile,ident_t *ident\)) s
+(184   print_op         153 code.c           print_op\(FILE *outfile, int op\)) s
+(185   print_rav        344 code.c           print_rav\(FILE *outfile, vect_t *vect,int i\)) s
+(186   print_s          180 code.c           print_s\(FILE *outfile,s_expr_t *s\)) s
+(187   print_scalar     938 vect.c           print_scalar\(vect_t *expr\)) s
+(188   print_s_expr     149 ident.c          print_s_expr\(FILE *outfile, s_expr_t *s\)) s
+(189   print_vector      60 output.c         print_vector\(vect_t *vect\)) s
+(190   proc_def        1092 parse.c          proc_def\(\)) s
+(191   programx        1279 parse.c          programx\(\)) s
+(192   propagate_cat    833 vect.c           propagate_cat\(vect_t *vect, s_expr_t *location\)) s
+(193   propagate_drop   717 vect.c           propagate_drop\(vect_t *vect, s_expr_t *index\)) s
+(194   propagate_take   560 vect.c           propagate_take\(vect_t *vect, s_expr_t *bound\)) s
+(195   psePolyToSExpr   549 scalar.c         s_expr_t *psePolyToSExpr\(poly_t *ppPoly\) {) s
+endpage
+%%Page: 3 3
+startpage
+(196   psi_access        40 moa_func.c       parser_t *psi_access\(ident_t *ident\)) s
+(197   psi_cat          491 moa_func.c       parser_t *psi_cat\(parser_t *arg1, parser_t *arg2\)) s
+(198   psi_dim          128 moa_func.c       parser_t *psi_dim\(parser_t *arg1\)) s
+(199   psi_div          458 moa_func.c       parser_t *psi_div\(parser_t *left, parser_t *right\)) s
+(200   psi_drop         280 moa_func.c       parser_t *psi_drop\(parser_t *arg1, parser_t *arg2\)) s
+(201   psi_init        1253 psi.c            psi_init\(\)) s
+(202   psi_iota          97 moa_func.c       parser_t *psi_iota\(parser_t *arg1\)) s
+(203   psi_minus        448 moa_func.c       parser_t *psi_minus\(parser_t *left, parser_t *right\)) s
+(204   psi_omega1       528 moa_func.c       parser_t *psi_omega1\(parser_t *arg2, op_t *op\)) s
+(205   psi_omega2       604 moa_func.c       parser_t *psi_omega2\(parser_t *arg1, parser_t *arg2, op_t *op\)) s
+(206   psi_op           406 moa_func.c       parser_t *psi_op\(int op, parser_t *arg1, parser_t *arg2\)) s
+(207   psi_pdrop        323 moa_func.c       parser_t *psi_pdrop\(parser_t *arg1, parser_t *arg2\)) s
+(208   psi_plus         443 moa_func.c       parser_t *psi_plus\(parser_t *left, parser_t *right\)) s
+(209   psi_psi          463 moa_func.c       parser_t *psi_psi\(parser_t *arg1, parser_t *arg2\)) s
+(210   psi_ptake        302 moa_func.c       parser_t *psi_ptake\(parser_t *arg1, parser_t *arg2\)) s
+(211   psi_rav          207 moa_func.c       parser_t *psi_rav\(parser_t *arg1\)) s
+(212   psi_reduce      1196 psi.c            psi_reduce\(statement_t *statement,int top\)) s
+(213   psi_red_div      815 moa_func.c       parser_t *psi_red_div\(parser_t *arg\)) s
+(214   psi_red_minus    805 moa_func.c       parser_t *psi_red_minus\(parser_t *arg\)) s
+(215   psi_red_op       708 moa_func.c       parser_t *psi_red_op\(int op, parser_t *arg\)) s
+(216   psi_red_plus     800 moa_func.c       parser_t *psi_red_plus\(parser_t *arg\)) s
+(217   psi_red_times    810 moa_func.c       parser_t *psi_red_times\(parser_t *arg\)) s
+(218   psi_reshape      366 moa_func.c       parser_t *psi_reshape\(parser_t *arg1, parser_t *arg2\)) s
+(219   psi_reverse      345 moa_func.c       parser_t *psi_reverse\(parser_t *arg1\)) s
+(220   psi_rotate       371 moa_func.c       parser_t *psi_rotate\(parser_t *arg1, parser_t *arg2\)) s
+(221   psi_shp          186 moa_func.c       parser_t *psi_shp\(parser_t *arg1\)) s
+(222   psi_take         255 moa_func.c       parser_t *psi_take\(parser_t *arg1, parser_t *arg2\)) s
+(223   psi_tau          146 moa_func.c       parser_t *psi_tau\(parser_t *arg1\)) s
+(224   psi_times        453 moa_func.c       parser_t *psi_times\(parser_t *left, parser_t *right\)) s
+(225   psi_transpose    361 moa_func.c       parser_t *psi_transpose\(parser_t *arg1, parser_t *arg2\)) s
+(226   purify           444 psi.c            int purify\(expr_t *expr, expr_t *result\)) s
+(227   purify_vect     1166 vect.c           vect_t *purify_vect\(vect_t *vect\)) s
+(228   rav_value         81 vect.c           double rav_value\(vect_t *vect, int i, int *simple\)) s
+(229   real_expr         63 vect.c           int real_expr\(expr_t *expr\)) s
+(230   real_vect         47 vect.c           int real_vect\(vect_t *vect\)) s
+(231   recursive_assign 592 code.c           recursive_assign\(vect_t *vect, vect_t *res, char *op\)) s
+(232   RECV               4 uni.h            #define RECV\(ptr,size,proc\)) s
+(233   rec_partition    199 part.c           rec_partition\(statement_t *body\)) s
+(234   rec_print_expr   148 output.c         rec_print_expr\(expr_t *expr\)) s
+(235   redall           465 psi.c            redall\(expr_t *fa_expr, expr_t *result, int top, char *op, int inright\)) s
+(236   reduce_extended    3 extended.c       reduce_extended\(expr_t *expr, expr_t *result, int top, char *op, int inright\)) s
+(237   reduction_init  1243 psi.c            reduction_init\(\)) s
+(238   red_cat          408 psi.c            red_cat\(expr_t *arg1, expr_t *arg2\)) s
+(239   red_drop         357 psi.c            red_drop\(expr_t *arg1, expr_t *arg2\)) s
+(240   red_ident        164 ident.c          ident_t *red_ident\(ident_t *ident\)) s
+(241   red_pdrop        334 psi.c            red_pdrop\(expr_t *arg1, expr_t *arg2\)) s
+(242   red_psi          386 psi.c            expr_t *red_psi\(expr_t *arg1, expr_t *arg2, s_expr_t *r_dim\)) s
+(243   red_ptake        348 psi.c            red_ptake\(expr_t *arg1, expr_t *arg2\)) s
+(244   red_rav         1040 vect.c           s_expr_t *red_rav\(vect_t *vect, int i\)) s
+(245   red_reverse      371 psi.c            red_reverse\(expr_t *arg2\)) s
+(246   red_scalar_extend 298 psi.c            expr_t *red_scalar_extend\(expr_t *expr\)) s
+(247   red_s_expr       232 ident.c          s_expr_t *red_s_expr\(s_expr_t *s\)) s
+(248   red_take         318 psi.c            red_take\(expr_t *arg1, expr_t *arg2\)) s
+(249   report           152 parse.c          report\(char *text\)) s
+(250   resolve_rules     88 part.c           dist_t *resolve_rules\(\)) s
+(251   ret_table         70 parse.c          ident_t **ret_table\(int *size\)) s
+(252   reverse_list      94 psi.c            reduced_t *reverse_list\(reduced_t *list\)) s
+(253   SCALAR           265 psi.h            #define SCALAR\(s\) \(\(\(s\)->op==NOP\)&&\(\(s\)->ident->type==CONSTANT\)\)) s
+(254   scalar_extend    391 moa_func.c       expr_t *scalar_extend\(expr_t *scalar, vect_t *shp\)) s
+(255   search           137 lex.c            search\(char *name, uchar *isname, int *index\)) s
+(256   search_parameters 128 parse.c          search_parameters\(\)) s
+(257   separate_reduced1559 code.c           reduced_t *separate_reduced\(reduced_t *list\)) s
+(258   SETALLOC         256 psi.h            #define SETALLOC\(x\) x|=0x08) s
+(259   SETCODED         251 psi.h            #define SETCODED\(x\) x|=0x01) s
+(260   SETDYNAMIC       235 psi.h            #define SETDYNAMIC\(x\) x|=0x10) s
+(261   SETGLOBAL        231 psi.h            #define SETGLOBAL\(x\) x|=0x20) s
+(262   SETPARAMETER     247 psi.h            #define SETPARAMETER\(x\) x|=0x02) s
+(263   SETSCANNED       260 psi.h            #define SETSCANNED\(x\) x|=0x10) s
+(264   SETSHAPE         243 psi.h            #define SETSHAPE\(x\) x|=0x04) s
+(265   SETUSED          239 psi.h            #define SETUSED\(x\) x|=0x08) s
+(266   simplify_s_expr  451 ident.c          s_expr_t *simplify_s_expr\(s_expr_t *s\)) s
+(267   simplify_vect    342 vect.c           vect_t *simplify_vect\(vect_t *vect\)) s
+(268   skip_line         56 lex.c            skip_line\(\)) s
+(269   StandardizeSExpr  87 scalar.c         s_expr_t *StandardizeSExpr\(s_expr_t *pseRoot\) {) s
+(270   start_loop      1433 code.c           int start_loop\(expr_t *var, expr_t *left, expr_t *right\)) s
+(271   statement        797 parse.c          statement_t *statement\(\)) s
+(272   statement_list   828 parse.c          statement_t *statement_list\(\)) s
+(273   static_shps     1023 vect.c           int static_shps\(vect_t *vect\)) s
+(274   static_value     312 vect.c           int static_value\(vect_t *vect\)) s
+(275   stats            422 sys.c            stats\(\)) s
+(276   sym_key           37 parse.c          #define sym_key\(i\) \(\(i\)%MAXSYMHASH\)) s
+(277   s_compare        670 ident.c          int s_compare\(s_expr_t *s1, s_expr_t *s2\)) s
+(278   s_expr_free      237 sys.c            s_expr_free\(s_expr_t *s_expr\)) s
+(279   s_op             471 ident.c          s_expr_t *s_op\(int op, s_expr_t *left, s_expr_t *right\)) s
+(280   s_vect           487 ident.c          vect_t *s_vect\(s_expr_t *s\)) s
+(281   tau             1309 vect.c           void tau\(FILE *fd, expr_t *expr\)) s
+(282   term             343 parse.c          parser_t *term\(\)) s
+(283   unmark_statics    62 parse.c          unmark_statics\(\)) s
+(284   UNSETALLOC       257 psi.h            #define UNSETALLOC\(x\) x&=~\(0x08\)) s
+(285   UNSETCODED       252 psi.h            #define UNSETCODED\(x\) x&=~\(0x01\)) s
+(286   UNSETDYNAMIC     236 psi.h            #define UNSETDYNAMIC\(x\) x&=~\(0x10\)) s
+(287   UNSETGLOBAL      232 psi.h            #define UNSETGLOBAL\(x\) x&=~\(0x20\)) s
+(288   UNSETPARAMETER   248 psi.h            #define UNSETPARAMETER\(x\) x&=~\(0x02\)) s
+(289   UNSETSCANNED     261 psi.h            #define UNSETSCANNED\(x\) x&=~\(0x10\)) s
+(290   UNSETSHAPE       244 psi.h            #define UNSETSHAPE\(x\) x&=~\(0x04\)) s
+(291   UNSETUSED        240 psi.h            #define UNSETUSED\(x\) x&=~\(0x08\)) s
+(292   update_locs      680 vect.c           update_locs\(vect_t *vect, s_expr_t *drop\)) s
+(293   var_access       258 parse.c          parser_t *var_access\(\)) s
+(294   var_def          892 parse.c          var_def\(\)) s
+endpage
+%%Page: 4 4
+startpage
+(295   var_def_part     907 parse.c          var_def_part\(\)) s
+(296   vect2array      1281 vect.c           vect_t *vect2array\(char *name,vect_t *vect\)) s
+(297   vector_const     919 parse.c          vector_const\(ident_t *ident\)) s
+(298   vector_const2    281 parse.c          ident_t *vector_const2\(\)) s
+(299   vect_assign      990 vect.c           vect_assign\(vect_t *vect, vect_t *res, char *op\)) s
+(300   vect_cat         804 vect.c           vect_t *vect_cat\(vect_t *left, vect_t *right\)) s
+(301   vect_compare     919 vect.c           int vect_compare\(vect_t *vect1, vect_t *vect2\) ) s
+(302   vect_drop        656 vect.c           vect_t *vect_drop\(vect_t *left, vect_t *right\)) s
+(303   vect_free        164 sys.c            vect_free\(vect_t *vect\)) s
+(304   vect_len         503 vect.c           vect_t *vect_len\(vect_t *vect\)) s
+(305   vect_op          521 vect.c           vect_t *vect_op\(int op, vect_t *left, vect_t *right\)) s
+(306   vect_take        542 vect.c           vect_t *vect_take\(vect_t *left, vect_t *right\)) s
+(307   vect_unop        860 vect.c           vect_t *vect_unop\(int op, vect_t *vect\)) s
+(308   vSHAPE             2 macros.h         #define vSHAPE\(vector\) vector->shp) s
+(309   what_name         44 lex.c            char *what_name\(\)) s
+endpage
+
+%%Trailer
+cleanup
+docsave restore end

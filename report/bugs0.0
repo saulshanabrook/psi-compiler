@@ -1,0 +1,127 @@
+From lenore@cs.umr.edu Tue Jun  8 16:26:57 1993
+Received: from mullin.cs.umr.edu by mcs213k.cs.umr.edu (5.61/1.34)
+	id AA22636; Tue, 8 Jun 93 16:26:55 -0500
+Received: by mullin (NeXT-1.0 (From Sendmail 5.52)/1.34)
+	id AA02623; Tue, 8 Jun 93 16:27:05 PDT
+Date: Tue, 8 Jun 93 16:27:05 PDT
+From: lenore@cs.umr.edu
+Message-Id: <9306082327.AA02623@mullin>
+To: sthib@cs.umr.edu
+Subject: compiler bugs
+Status: O
+
+>From normand@vlsi.polymtl.ca Mon Jun  7 13:17:13 1993
+Received: from vlsi.polymtl.ca by mcs213k.cs.umr.edu (5.61/1.34)
+	id AA13385; Mon, 7 Jun 93 13:17:09 -0500
+Received: from  daphnis.vlsi.polymtl.ca (daphnis.vlsi.polymtl.ca) by vlsi.polymtl.ca (4.1/SMI-4.1.1)
+	id AA06184; Mon, 7 Jun 93 14:19:56 EDT
+Date: Mon, 7 Jun 93 14:19:56 EDT
+From: normand@vlsi.polymtl.ca (Normand Belanger)
+Message-Id: <9306071819.AA06184@vlsi.polymtl.ca>
+To: lenore@cs.umr.edu, sthib@cs.umr.edu
+Subject: compiler
+Status: RO
+
+	Hi!
+
+I tried your compiler and I found a few minor bugs. I included an input file
+and the compiler output at the end of this message. I put the description of
+the bugs as comments in the compiler output along with two suggestions to
+improve efficiency of the generated code. I don't know if you want to consider
+those suggestions right now so I included them just in case.
+
+	Normand
+
+---- cut here for infile  -----
+
+~ Res  = 2 : 8 ,  8 ;
+~ Xi = 2 : 8 ,  8 : 5 , 5 , 5 , 5 , 0 , 0 , 0 , 0 , 5 , 5 , 5 , 5 , 0 , 0 , 0 , 0 , 5 , 5 , 5 , 5 , 0 , 0 , 0 , 0 , 0 , 5 , 5 , 5 , 5 , 5 , 5 , 5 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 , 0 ;
+~ mone = 1 : 1 : -1 ;
+~ one =   1 : 1 :  1 ;
+{ 
+ Res  = ( ( mone D Xi ) C ( mone T Xi ) ) + Xi + ( ( one D Xi ) C ( one T Xi ) ) ;
+}
+
+--- cut here for infile ----
+
+---The compiler output for the above ---
+
+#include <stdio.h>
+
+main()
+{
+  int shift,offset;
+  float Res[64];
+  float Xi[64] = {5,5,5,5,0,0,0,0,5,5,5,5,0,0,0,0,5,5,5,5,0,0,0,0,0,5,5,5,5,5,5,5,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
+  float mone[1] = {-1};
+  float one[1] = {1};
+ {
+  temp0[64];  /* BUG: missing "float" keyword */
+  int i0;
+  int i1;
+
+  shift=0*8+0;
+  offset=0*8+0;  /* BUG: a negative argument to Drop does not seem to work ??? */
+  for (i0=0; i0<7; i0++) { /* SUGGESTION: one loop "for (i=0; i<56; i++)" would be more
+                                          efficient (same comment could be said below) */
+    for (i1=0; i1<8; i1++) {
+      *(temp0+shift)=*(Xi+offset);
+      shift++;
+      offset++;
+    }
+  }
+
+  shift=7*8+0;
+  offset=7*8+0;
+  for (i1=0; i1<8; i1++) {
+    *(temp0+shift)=*(Xi+offset);    /* BUG: intermediate step in temp0 (see below)*/
+    shift++;
+    offset++;
+  }
+
+
+/************************************************************************************
+SUGGESTION: adding the base address of the array before
+
+  shift=temp0+7*8+0;
+  offset=Xi+7*8+0;
+  for (i1=0; i1<8; i1++) {
+    *shift=*offset;
+    shift++;
+    offset++;
+  }
+************************************************************************************/
+
+  shift=0*8+0;
+  offset=0*8+0;
+  for (i0=0; i0<8; i0++) {
+    for (i1=0; i1<8; i1++) {
+      *(temp0+shift)+=*(Xi+offset);    /* BUG: intermediate step in temp0 (see below)*/
+      shift++;
+      offset++;
+    }
+  }
+
+  shift=0*8+0;
+  offset=1*8+0;
+  for (i0=0; i0<7; i0++) {
+    for (i1=0; i1<8; i1++) {
+      *(Res+shift)+=*(Xi+offset);   /* BUG: final computations in Res without using temp0 */
+      shift++;
+      offset++;
+    }
+  }
+
+  shift=7*8+0;
+  offset=0*8+0;
+  for (i1=0; i1<8; i1++) {
+    *(Res+shift)+=*(Xi+offset);     /* BUG: final computations in Res without using temp0 */
+    shift++;
+    offset++;
+  }
+
+ }
+
+}
+
+

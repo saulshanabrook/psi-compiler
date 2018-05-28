@@ -1,0 +1,139 @@
+SUBROUTINE test (A , B )
+USE MPINET
+USE MOALIB
+
+! MOA
+! Variable declarations
+!
+  REAL :: temp1
+  REAL, DIMENSION (:), POINTER :: B
+  REAL, DIMENSION (:), ALLOCATABLE, TARGET :: DIST_B
+  REAL, DIMENSION (:), POINTER :: A
+  REAL, DIMENSION (:), ALLOCATABLE, TARGET :: DIST_A
+  INTEGER :: p_,offset
+  LOGICAL :: p_cont
+  INTEGER, DIMENSION (0:2) :: p
+  INTEGER :: shift
+  INTEGER :: offset0
+  INTEGER :: i0
+  INTEGER :: i1
+  INTEGER :: i2
+
+  !  Communications for Initial Data
+
+  IF (MY_PROC()>0)    ALLOCATE (DIST_B(0:25-1))
+  i1=25
+  IF (MY_PROC()==0) THEN
+    i0=100
+    DO i2=0, 0
+      p(i2)=0
+    END DO
+    p(0)=1
+    p_cont=.TRUE.
+    DO
+      p_=p(0+0)
+      offset=((25)*(p(0+0)))
+      call SEND(B(offset:offset+i1-1),i2,p_)
+      p(0+0)=p(0+0)+1
+      IF (p(0+0)>=4) p_cont=.FALSE.
+      IF (.NOT. p_cont) EXIT
+    END DO
+  ELSE
+    call RECV(DIST_B,i1,0)
+    B => DIST_B
+  END IF
+  IF (MY_PROC()>0)    ALLOCATE (DIST_A(0:25-1))
+  i1=25
+  IF (MY_PROC()==0) THEN
+    i0=100
+    DO i2=0, 0
+      p(i2)=0
+    END DO
+    p(0)=1
+    p_cont=.TRUE.
+    DO
+      p_=p(0+0)
+      offset=((25)*(p(0+0)))
+      call SEND(A(offset:offset+i1-1),i2,p_)
+      p(0+0)=p(0+0)+1
+      IF (p(0+0)>=4) p_cont=.FALSE.
+      IF (.NOT. p_cont) EXIT
+    END DO
+  ELSE
+    call RECV(DIST_A,i1,0)
+    A => DIST_A
+  END IF
+
+  ! Procedure body
+
+  ! MOA
+  ! array assignment
+  !
+
+  offset0=0
+  DO i0 = 0, 25-1
+    temp1=B(offset0)
+    offset0=offset0+1
+    shift=shift+1
+  END DO
+  offset0=0
+  DO i0 = 0, 25-1
+    temp1=temp1*B(offset0)
+    offset0=offset0+1
+    shift=shift+1
+  END DO
+  offset0=0
+  DO i0 = 0, 25-1
+    temp1=temp1+A(offset0)
+    offset0=offset0+1
+    shift=shift+1
+  END DO
+  shift=0
+  DO i0 = 0, 25-1
+    A(shift)=temp1
+    shift=shift+1
+  END DO
+
+
+  !  Communications for Collecting Data
+
+  i1=25
+  IF (MY_PROC()==0) THEN
+    i0=100
+    DO i2=0, 0
+      p(i2)=0
+    END DO
+    p(0)=1
+    p_cont=.TRUE.
+    DO
+      p_=p(0+0)
+      offset=((25)*(p(0+0)))
+      call RECV(B(offset:offset+i1-1),i2,p_)
+      p(0+0)=p(0+0)+1
+      IF (p(0+0)>=4) p_cont=.FALSE.
+      IF (.NOT. p_cont) EXIT
+    END DO
+  ELSE
+    call SEND(B,i1,0)
+  END IF
+  i1=25
+  IF (MY_PROC()==0) THEN
+    i0=100
+    DO i2=0, 0
+      p(i2)=0
+    END DO
+    p(0)=1
+    p_cont=.TRUE.
+    DO
+      p_=p(0+0)
+      offset=((25)*(p(0+0)))
+      call RECV(A(offset:offset+i1-1),i2,p_)
+      p(0+0)=p(0+0)+1
+      IF (p(0+0)>=4) p_cont=.FALSE.
+      IF (.NOT. p_cont) EXIT
+    END DO
+  ELSE
+    call SEND(A,i1,0)
+  END IF
+  call NODE_CLEANUP ()
+END SUBROUTINE test 

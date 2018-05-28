@@ -1,0 +1,521 @@
+  This took a lot of time, I hope it is helpful.
+
+  I looked at the network code and after getting an extrem headache I 
+  decided to change my approach.  I dug up my original notes (this code
+  was actually designed on paper before implementation!) and here is
+  a better description of whats going on.  I also labeled the corresponding
+  parts in the C code.
+
+
+  Intoduction:
+    A distributed array can be described by three vectors.  
+    Let e be the shape of local sub-array on each processor.
+      (ex. <8 6> array on 4 processors -> e=<2 6>)
+    Let g be the shape of the abstract processor array which is the
+      same dimension as the distributed array.
+      (ex. <8 6> array on 4 processors -> g=<4 1>)
+                                             ^ ^
+                                             | |- columns are not distributed
+      row distributed over four processors  --
+    Let c be the shape of the cyclic structure of the array.
+      (ex. <8 6> array on 4 processors -> c=<1 1>, If you wanted to 
+      distribute the rows of a <32 6> on 2 processors cyclicly, which the 
+      compiler does not do, you could with the following 
+      e=<4 6>,g=<2 1>,c=<4 1>
+      this would be distributes blocks of <4 6> on 2 processors cyclicly,
+      to get 32 rows on 2 processors in blocks of 4 you need to cycle 4 times
+      hence c=<4 1>)
+
+    The shape of the distributed array could be thought of as being 
+      c cat g cat e.
+      (for the cyclic example the distributed shape would be <4 1 2 1 4 6>
+       which has the same number of components as <32 6>)
+
+    The compiler reduces all expressions to something like A=B but this
+    is a functional representation and does not account for the fact that
+    A and B are not on the same processor.  The operational assignement
+    can be done in three stages.  
+    
+    Algorithm:
+    Stage one is to, for each processor, 
+    determine what sub-array of the assignement is done on that processor.
+    The assignment specifies a sub-array that is being assigned to.  Each
+    process owns (stores) a sub-array of the array begin assigned to.  The
+    geometric intersection of the sub-array being assigned to and the 
+    sub-array processor p owns is the part of the assignment that p needs to
+    perform.  For each processor, p, stage one computes the sub-array
+    of the array being assigned that must be done on processor p as well
+    as performing an intersection to determine what sub-array of the 
+    right hand side of the assignment is required for processor p. 
+    From now on let <2 4>:<4 8> denote a sub-array that is equivalent
+    to (<4 8>-<2 4>+<1 1>) take (<2 4> drop ARRAY)
+    Example: shape A and B=<12 30 10> then to compute A=B on 4 processors,
+      processor 0 needs to assign:
+        <0 0 0>:<3 30 10> of A=<0 0 0>:<3 30 10> of B
+      processor 1 needs to assign:
+        <3 0 0>:<6 30 10> of A=<3 0 0>:<6 30 10> of B
+      processor 2 needs to assign:
+        <6 0 0>:<9 30 10> of A=<6 0 0>:<9 30 10> of B
+      processor 3 needs to assign:
+        <9 0 0>:<12 30 10> of A=<9 0 0>:<12 30 10> of B
+
+    End stage one.
+
+    Stage two: Stage one contains a loop (for each p).  Stage two is performed
+    within that loop for each p.  So, the input to stage two is the sub-arrays
+    of the left hand side (lhs) and the (rhs) that need to be assigned on
+    the current p (processor).  Since the rhs may be distributed different
+    than the lhs, the rhs may not all be stored on processor p, even though
+    the lhs is.  The purpose of stage 2 is to gather up all the peices of
+    the rhs from different processor that are needed to perform p's portion
+    of the assignment.  Any particular sub-array of a distributed array
+    is contained on some sub-array of the processor array.  In stage
+    two there is a loop that loops through the sub-array of the processor
+    array.  Example: say the rhs sub-array for processor 1 is 
+    <3 0 0>:<9 30 10> and the array is distributed by c=<1 1 1>,p=<4 1 1>,
+    e=<3 30 10> then the sub-array of the processor array that contains
+    the above mentioned part of the rhs is <1 1 1>:<2 1 1> of the processor
+    array (i.e. processors 1 and 2).
+    The loop s in the code does this loop from zero to the shape of this
+    processor sub-array, and sp is s plus the location of the processor
+    sub-array.  For the previous example <0 0 0> <= s < <2 1 1> and
+    sp will be between <1 1 1> and <2 1 1> inclusive.
+    For each of the blocks an intersection is performed between the sub-array
+    needed for the rhs and the current block.  The result of this 
+    intersection is the sub-array of the rhs on processor s that is needed to
+    perform processor p's portion of the assignment.  This result is also
+    used to determine which part of the lhs is assigned this block that is
+    on processor s.
+    end stage two.
+
+    stage three.  We can now perform the assignment.  At this point
+    we know what sub-array of the rhs on processor s should be assigned to
+    what sub-array of the lhs on processor p.  For stage three each processor
+    examines it processor number to see if it is p or s or nethier.   Lets
+    say I'm node i.  If i=p and i=s then p=s and I own both peices of the
+    lhs and rhs so I can do the assignment without any communication.  Else
+    if i=p then I own the lhs but need to get the rhs side from processor s
+    so I issue a read command.  Else if i=s then I own the rhs but not the
+    lhs so I need to send the rhs peice to processor p.
+    end stage three.
+
+    Whew!
+
+    Well, that was the original algorithm.  Of course I converted for
+    you from it's beautifully cryptic mathematical description 
+    but that would be hard to type here.  There is
+    only one difference between this and the current implementation and
+    that is the mode loop.  You want to make sure all the send are issued
+    before the reads so all three stages are performed twice.  The first
+    time through only sends are performed where needed and the second time
+    throught only receives and assignements are performed where needed.
+
+    Geometric intersection:
+    The above algorithm requires some geometric intersections of 
+    n-dimensional rectangles.  Lets say we need the intersection of
+    rectangle A and B where each rectangle has two parts corresponding
+    to two opposite corners of the rectangle say c1 and c2.  There
+    are five cases for the intersection:
+      case 1 - A is completely inside B
+      B -------
+        | --- |
+        | |A| |
+        | --- |
+        -------
+      case 2 - B is completely inside A
+      A -------
+        | --- |
+        | |B| |
+        | --- |
+        -------
+      case 3 - A is above and left of B and intersect some
+         ------  A
+         |    |
+         |  -------  B
+         |  |     |
+         ---|     |
+            -------
+
+      case 4 - B is above and left of A and intersect some
+         ------  B
+         |    |
+         |  -------  A
+         |  |     |
+         ---|     |
+            -------
+
+      case 5 - A and B are disjoint
+         -------   -------
+         |     |   |     |
+         -------   -------
+         A         B
+
+      The intersection code contains two if's that are used to determine
+      which case to use.  Just before the if's a bunch of temp. vectors
+      usually get created to compute the two corners of each rectangle
+      (sub-array).  After the case is determined the intersection can be
+      determined.
+
+      The labeled code follows.  
+
+      Let me know if it makes sense or if you don't understand something.
+
+      --Scott
+
+
+
+#include <stdlib.h>
+#include "moalib.e"
+
+#include "network.h"
+
+test1()
+
+{
+  double *offset0;
+  int i0;
+  int i1;
+  int i2;
+  double *shift;
+  double *_in1;
+  double *_out1;
+  int tmp_vect0[3];
+  int tmp_vect1[3];
+  int tmp_vect2[3];
+  int tmp_vect3[3];
+  int tmp_vect4[3];
+  int tmp_vect5[3];
+  int tmp_vect6[3];
+  int tmp_vect7[3];
+  int tmp_vect8[3];
+  int tmp_vect9[3];
+  int tmp_vect10[3];
+  int tmp_vect11[3];
+  int tmp_vect12[3];
+  int tmp_vect13[3];
+  int tmp_vect14[3];
+  int scalar0;
+  int scalar1;
+  int scalar2;
+  int scalar3;
+  int j_cont,p_cont,s_cont,out;
+  int p_,sp_,mode,offset;
+  int p[3];
+  int c[3];
+  int s[3];
+  int sp2[3];
+  int ip[3];
+  int lp[3];
+  int bp[3];
+  int ipp[3];
+  int lpp[3];
+  int bpp[3];
+  double *buffer0r[4],*buffer0s[4];
+
+  NODE_INIT(4);
+
+  /* Communications for Initial Data */
+
+  _out1=(double *) get_mem(3*30*10*sizeof(double));
+  i1=3*30*10;
+  RECV_HOST(_out1,i1*sizeof(double));
+  _in1=(double *) get_mem(3*30*10*sizeof(double));
+  i1=3*30*10;
+  RECV_HOST(_in1,i1*sizeof(double));
+  printout (_in1);
+
+/* Procedure body */
+
+/*******
+out1=in1
+********/
+
+------ store e (size of local partition) in tmp_vect0
+  tmp_vect0[0+0]=3;
+  tmp_vect0[1+0]=30;
+  tmp_vect0[2+0]=10;
+
+------ BEGIN STAGE ONE
+------ for each mode
+  for (mode=0; mode<2; mode++) {
+
+------ start at processor <0 0 0 .... >
+    for (i0=0; i0<3; i0++) p[i0]=0;
+    p_cont=TRUE;
+
+------ for each processor
+    do {
+
+------ compute some corner points and misc. stuff for intersection
+------ the code should contain some force_vect calls or something like
+------ that, that forces these vectors to get coded here.  You can look
+------ at that code to figure out exactly what each of these is.
+      tmp_vect1[0+0]=0;
+      tmp_vect1[1+0]=0;
+      tmp_vect1[2+0]=0;
+      tmp_vect2[0+0]=9;
+      tmp_vect2[1+0]=30;
+      tmp_vect2[2+0]=10;
+      tmp_vect3[0+0]=((p[0+0])*(tmp_vect0[0+0]));
+      tmp_vect3[1+0]=((p[1+0])*(tmp_vect0[1+0]));
+      tmp_vect3[2+0]=((p[2+0])*(tmp_vect0[2+0]));
+      tmp_vect4[0+0]=((p[0+0])*(tmp_vect0[0+0])+tmp_vect0[0+0]);
+      tmp_vect4[1+0]=((p[1+0])*(tmp_vect0[1+0])+tmp_vect0[1+0]);
+      tmp_vect4[2+0]=((p[2+0])*(tmp_vect0[2+0])+tmp_vect0[2+0]);
+      tmp_vect5[0+0]=((p[0+0])*(tmp_vect0[0+0])+tmp_vect0[0+0]+-9);
+      tmp_vect5[1+0]=((p[1+0])*(tmp_vect0[1+0])+tmp_vect0[1+0]+-30);
+      tmp_vect5[2+0]=((p[2+0])*(tmp_vect0[2+0])+tmp_vect0[2+0]+-10);
+      tmp_vect6[0+0]=(((-1)*(p[0+0]))*(tmp_vect0[0+0])+(-1)*(tmp_vect0[0+0])+9);
+      tmp_vect6[1+0]=(((-1)*(p[1+0]))*(tmp_vect0[1+0])+(-1)*(tmp_vect0[1+0])+30);
+      tmp_vect6[2+0]=(((-1)*(p[2+0]))*(tmp_vect0[2+0])+(-1)*(tmp_vect0[2+0])+10);
+      
+----- determine which case of intersection this is, some of the cases
+----- were eliminated at compile time because it something about the
+----- sub-arrays being intersected.
+      out=FALSE;
+      for (i0=0; i0<3; i0++) {
+        if (tmp_vect3[i0]>=tmp_vect2[i0]) out=TRUE;
+      }
+      for (i0=0; i0<3; i0++) {
+        if (tmp_vect4[i0]<tmp_vect1[i0]) out=TRUE;
+      }
+
+----- based on the case set the new lhs sub-array (lp=location) and set
+----- the new rhs sub-array (ip=index), bp is the size (bound) of the
+----- result of the intersection.
+      if (out) {
+        ip[0+0]=0;
+        ip[1+0]=0;
+        ip[2+0]=0;
+        lp[0+0]=0;
+        lp[1+0]=0;
+        lp[2+0]=0;
+
+----- if the intersection is empty the bound (bp=bound) is set to zero
+----- so nothing will be done
+        bp[0+0]=0;
+        bp[1+0]=0;
+        bp[2+0]=0;
+      } else {
+        ip[0+0]=(((((p[0+0])*(tmp_vect0[0+0]))>0))*((p[0+0])*(tmp_vect0[0+0])));
+        ip[1+0]=(((((p[1+0])*(tmp_vect0[1+0]))>0))*((p[1+0])*(tmp_vect0[1+0])));
+        ip[2+0]=(((((p[2+0])*(tmp_vect0[2+0]))>0))*((p[2+0])*(tmp_vect0[2+0])));
+        lp[0+0]=(((((p[0+0])*(tmp_vect0[0+0]))>0))*((p[0+0])*(tmp_vect0[0+0]))+tmp_vect1[0+0]);
+        lp[1+0]=(((((p[1+0])*(tmp_vect0[1+0]))>0))*((p[1+0])*(tmp_vect0[1+0]))+tmp_vect1[1+0]);
+        lp[2+0]=(((((p[2+0])*(tmp_vect0[2+0]))>0))*((p[2+0])*(tmp_vect0[2+0]))+tmp_vect1[2+0]);
+        bp[0+0]=(((((tmp_vect5[0+0])>0))*(tmp_vect6[0+0])+tmp_vect4[0+0])-(lp[0+0]));
+        bp[1+0]=(((((tmp_vect5[1+0])>0))*(tmp_vect6[1+0])+tmp_vect4[1+0])-(lp[1+0]));
+        bp[2+0]=(((((tmp_vect5[2+0])>0))*(tmp_vect6[2+0])+tmp_vect4[2+0])-(lp[2+0]));
+      }
+----- END STAGE ONE
+
+----- compute the processor number from it's position in the abstract 
+----- processor array
+
+      p_=p[2+0]+1*(p[1+0]+1*(p[0+0]));
+
+----- some setup stuff I think for the s loop.  Again look for some
+----- force_vect calls.
+
+      tmp_vect7[0+0]=3;
+      tmp_vect7[1+0]=30;
+      tmp_vect7[2+0]=10;
+      tmp_vect8[0+0]=(((ip[0+0]+bp[0+0])-(((ip[0+0])/(tmp_vect7[0+0]))*(tmp_vect7[0+0])))/(tmp_vect7[0+0])+((((ip[0+0]+bp[0+0])-(((ip[0+0])/(tmp_vect7[0+0]))*(tmp_vect7[0+0])))%(tmp_vect7[0+0]))>0));
+      tmp_vect8[1+0]=(((ip[1+0]+bp[1+0])-(((ip[1+0])/(tmp_vect7[1+0]))*(tmp_vect7[1+0])))/(tmp_vect7[1+0])+((((ip[1+0]+bp[1+0])-(((ip[1+0])/(tmp_vect7[1+0]))*(tmp_vect7[1+0])))%(tmp_vect7[1+0]))>0));
+      tmp_vect8[2+0]=(((ip[2+0]+bp[2+0])-(((ip[2+0])/(tmp_vect7[2+0]))*(tmp_vect7[2+0])))/(tmp_vect7[2+0])+((((ip[2+0]+bp[2+0])-(((ip[2+0])/(tmp_vect7[2+0]))*(tmp_vect7[2+0])))%(tmp_vect7[2+0]))>0));
+
+----- BEGIN STAGE TWO
+----- loop through all distributed blocks of the rhs
+----- ip,lp,and bp are used now on.  They are the outputs of stage one
+      s_cont=TRUE;
+      for (i0=0; i0<3; i0++) s[i0]=0;
+      do {
+----- figure out what sp (sp2) is and which cycle if any.
+        c[0+0]=(((tmp_vect7[0+0])*(s[0+0])+ip[0+0])/((4)*(tmp_vect7[0+0])));
+        c[1+0]=(((tmp_vect7[1+0])*(s[1+0])+ip[1+0])/(tmp_vect7[1+0]));
+        c[2+0]=(((tmp_vect7[2+0])*(s[2+0])+ip[2+0])/(tmp_vect7[2+0]));
+        sp2[0+0]=(((ip[0+0])/(tmp_vect7[0+0])+s[0+0])%(4));
+        sp2[1+0]=(((ip[1+0])/(tmp_vect7[1+0])+s[1+0])%(1));
+        sp2[2+0]=(((ip[2+0])/(tmp_vect7[2+0])+s[2+0])%(1));
+
+----- getting ready for the next intersection
+
+        tmp_vect9[0+0]=(bp[0+0]+ip[0+0]);
+        tmp_vect9[1+0]=(bp[1+0]+ip[1+0]);
+        tmp_vect9[2+0]=(bp[2+0]+ip[2+0]);
+        tmp_vect10[0+0]=(((4)*(tmp_vect7[0+0]))*(c[0+0])+(sp2[0+0])*(tmp_vect7[0+0]));
+        tmp_vect10[1+0]=((tmp_vect7[1+0])*(c[1+0])+(sp2[1+0])*(tmp_vect7[1+0]));
+        tmp_vect10[2+0]=((tmp_vect7[2+0])*(c[2+0])+(sp2[2+0])*(tmp_vect7[2+0]));
+        tmp_vect11[0+0]=(((4)*(tmp_vect7[0+0]))*(c[0+0])+(sp2[0+0])*(tmp_vect7[0+0])+tmp_vect7[0+0]);
+        tmp_vect11[1+0]=((tmp_vect7[1+0])*(c[1+0])+(sp2[1+0])*(tmp_vect7[1+0])+tmp_vect7[1+0]);
+        tmp_vect11[2+0]=((tmp_vect7[2+0])*(c[2+0])+(sp2[2+0])*(tmp_vect7[2+0])+tmp_vect7[2+0]);
+        tmp_vect12[0+0]=((-1)*(ip[0+0])+((4)*(tmp_vect7[0+0]))*(c[0+0])+(sp2[0+0])*(tmp_vect7[0+0]));
+        tmp_vect12[1+0]=((-1)*(ip[1+0])+(tmp_vect7[1+0])*(c[1+0])+(sp2[1+0])*(tmp_vect7[1+0]));
+        tmp_vect12[2+0]=((-1)*(ip[2+0])+(tmp_vect7[2+0])*(c[2+0])+(sp2[2+0])*(tmp_vect7[2+0]));
+        tmp_vect13[0+0]=((-1)*(bp[0+0])+(-1)*(ip[0+0])+((4)*(tmp_vect7[0+0]))*(c[0+0])+(sp2[0+0])*(tmp_vect7[0+0])+tmp_vect7[0+0]);
+        tmp_vect13[1+0]=((-1)*(bp[1+0])+(-1)*(ip[1+0])+(tmp_vect7[1+0])*(c[1+0])+(sp2[1+0])*(tmp_vect7[1+0])+tmp_vect7[1+0]);
+        tmp_vect13[2+0]=((-1)*(bp[2+0])+(-1)*(ip[2+0])+(tmp_vect7[2+0])*(c[2+0])+(sp2[2+0])*(tmp_vect7[2+0])+tmp_vect7[2+0]);
+        tmp_vect14[0+0]=(((-4)*(tmp_vect7[0+0]))*(c[0+0])+((-1)*(sp2[0+0]))*(tmp_vect7[0+0])+(-1)*(tmp_vect7[0+0])+bp[0+0]+ip[0+0]);
+        tmp_vect14[1+0]=(((-1)*(tmp_vect7[1+0]))*(c[1+0])+((-1)*(sp2[1+0]))*(tmp_vect7[1+0])+(-1)*(tmp_vect7[1+0])+bp[1+0]+ip[1+0]);
+        tmp_vect14[2+0]=(((-1)*(tmp_vect7[2+0]))*(c[2+0])+((-1)*(sp2[2+0]))*(tmp_vect7[2+0])+(-1)*(tmp_vect7[2+0])+bp[2+0]+ip[2+0]);
+
+------ deterimine the which case this is, again some have been eliminated
+        out=FALSE;
+        for (i0=0; i0<3; i0++) {
+          if (tmp_vect10[i0]>=tmp_vect9[i0]) out=TRUE;
+        }
+        for (i0=0; i0<3; i0++) {
+          if (tmp_vect11[i0]<ip[i0]) out=TRUE;
+        }
+        
+------ compute result of intersect
+        if (out) {
+          ipp[0+0]=0;
+          ipp[1+0]=0;
+          ipp[2+0]=0;
+          lpp[0+0]=0;
+          lpp[1+0]=0;
+          lpp[2+0]=0;
+          bpp[0+0]=0;
+          bpp[1+0]=0;
+          bpp[2+0]=0;
+        } else {
+          ipp[0+0]=((((tmp_vect12[0+0])>0))*(tmp_vect12[0+0])+ip[0+0]);
+          ipp[1+0]=((((tmp_vect12[1+0])>0))*(tmp_vect12[1+0])+ip[1+0]);
+          ipp[2+0]=((((tmp_vect12[2+0])>0))*(tmp_vect12[2+0])+ip[2+0]);
+          lpp[0+0]=((((tmp_vect12[0+0])>0))*(tmp_vect12[0+0])+lp[0+0]);
+          lpp[1+0]=((((tmp_vect12[1+0])>0))*(tmp_vect12[1+0])+lp[1+0]);
+          lpp[2+0]=((((tmp_vect12[2+0])>0))*(tmp_vect12[2+0])+lp[2+0]);
+          bpp[0+0]=(((((tmp_vect13[0+0])>0))*(tmp_vect14[0+0])+tmp_vect11[0+0])-(ipp[0+0]));
+          bpp[1+0]=(((((tmp_vect13[1+0])>0))*(tmp_vect14[1+0])+tmp_vect11[1+0])-(ipp[1+0]));
+          bpp[2+0]=(((((tmp_vect13[2+0])>0))*(tmp_vect14[2+0])+tmp_vect11[2+0])-(ipp[2+0]));
+        }
+
+------ ipp,lpp,bpp now specify the assignment from rhs of processor sp2
+------ to lhs of processor p
+------ END STAGE TWO
+
+------ compute processor number of sp2 from its position in the abstract
+------ processor array
+        sp_=sp2[2+0]+1*(sp2[1+0]+1*(sp2[0+0]));
+
+------ BEGIN STAGE THREE
+------ decide what should be done (nothing,send,receive,assign) based on
+------ my processor number,p_,sp_, and mode
+
+        if ((MY_PROC()==p_)&&(MY_PROC()==sp_)) {
+          if (mode==1) {
+            shift=_out1+((-1)*(tmp_vect3[0+0])+lpp[0+0])*((tmp_vect0[2+0])*(tmp_vect0[1+0]))+((-1)*(tmp_vect3[1+0])+lpp[1+0])*tmp_vect0[2+0]+((-1)*(tmp_vect3[2+0])+lpp[2+0]);
+            offset0=_in1+((-1)*(tmp_vect10[0+0])+ipp[0+0])*((tmp_vect7[2+0])*(tmp_vect7[1+0]))+((-1)*(tmp_vect10[1+0])+ipp[1+0])*tmp_vect7[2+0]+((-1)*(tmp_vect10[2+0])+ipp[2+0]);
+            scalar0=(tmp_vect7[2+0]+(-1)*(bpp[2+0]));
+            scalar1=((tmp_vect7[2+0])*(tmp_vect7[1+0])+((-1)*(tmp_vect7[2+0]))*(bpp[1+0]));
+            scalar2=(tmp_vect0[2+0]+(-1)*(bpp[2+0]));
+            scalar3=((tmp_vect0[2+0])*(tmp_vect0[1+0])+((-1)*(tmp_vect0[2+0]))*(bpp[1+0]));
+            for (i0=0; i0<bpp[0+0]; i0++) {
+              for (i1=0; i1<bpp[1+0]; i1++) {
+                for (i2=0; i2<bpp[2+0]; i2++) {
+                  *(shift)= *(offset0);
+                  offset0+=1;
+                  shift+=1;
+                }
+                offset0+=scalar0;
+                shift+=scalar2;
+              }
+              offset0+=scalar1;
+              shift+=scalar3;
+            }
+          }
+        } else if (MY_PROC()==p_) {
+          if (mode==0) {
+            buffer0r[sp_]=(double *) get_mem((bpp[0+0]*bpp[1+0]*bpp[2+0])*sizeof(double));
+            RECV(buffer0r[sp_],bpp[0+0]*bpp[1+0]*bpp[2+0]*sizeof(double),sp_);
+          }
+          if (mode==1) {
+            shift=_out1+((-1)*(tmp_vect3[0+0])+lpp[0+0])*((tmp_vect0[2+0])*(tmp_vect0[1+0]))+((-1)*(tmp_vect3[1+0])+lpp[1+0])*tmp_vect0[2+0]+((-1)*(tmp_vect3[2+0])+lpp[2+0]);
+            offset0=buffer0r[sp_]+0*((bpp[2+0])*(bpp[1+0]))+0*bpp[2+0]+0;
+            scalar0=(tmp_vect0[2+0]+(-1)*(bpp[2+0]));
+            scalar1=((tmp_vect0[2+0])*(tmp_vect0[1+0])+((-1)*(tmp_vect0[2+0]))*(bpp[1+0]));
+            for (i0=0; i0<bpp[0+0]; i0++) {
+              for (i1=0; i1<bpp[1+0]; i1++) {
+                for (i2=0; i2<bpp[2+0]; i2++) {
+                  *(shift)= *(offset0);
+                  offset0+=1;
+                  shift+=1;
+                }
+                offset0+=0;
+                shift+=scalar0;
+              }
+              offset0+=0;
+              shift+=scalar1;
+            }
+            free(buffer0r[sp_]);
+          }
+        } else if (MY_PROC()==sp_) {
+          if (mode==0) {
+            buffer0s[sp_]=(double *) get_mem((bpp[0+0]*bpp[1+0]*bpp[2+0])*sizeof(double));
+            shift=buffer0s[sp_]+0*((bpp[2+0])*(bpp[1+0]))+0*bpp[2+0]+0;
+            offset0=_in1+((-1)*(tmp_vect10[0+0])+ipp[0+0])*((tmp_vect7[2+0])*(tmp_vect7[1+0]))+((-1)*(tmp_vect10[1+0])+ipp[1+0])*tmp_vect7[2+0]+((-1)*(tmp_vect10[2+0])+ipp[2+0]);
+            scalar0=(tmp_vect7[2+0]+(-1)*(bpp[2+0]));
+            scalar1=((tmp_vect7[2+0])*(tmp_vect7[1+0])+((-1)*(tmp_vect7[2+0]))*(bpp[1+0]));
+            for (i0=0; i0<bpp[0+0]; i0++) {
+              for (i1=0; i1<bpp[1+0]; i1++) {
+                for (i2=0; i2<bpp[2+0]; i2++) {
+                  *(shift)= *(offset0);
+                  offset0+=1;
+                  shift+=1;
+                }
+                offset0+=scalar0;
+                shift+=0;
+              }
+              offset0+=scalar1;
+              shift+=0;
+            }
+            SEND(buffer0s[sp_],(((bpp[2+0])*(bpp[1+0]))*(bpp[0+0]))*sizeof(double),p_);
+          }
+          if (mode==1) {
+            free(buffer0s[sp_]);
+          }
+        }
+
+----- END STAGE THREE
+
+----- close s loop
+        s[2+0]++;
+        if (s[2+0]>=tmp_vect8[2+0]) {
+          s[2+0]=0;
+          s[1+0]++;
+          if (s[1+0]>=tmp_vect8[1+0]) {
+            s[1+0]=0;
+            s[0+0]++;
+            if (s[0+0]>=tmp_vect8[0+0]) s_cont=FALSE;
+            }
+          }
+      } while (s_cont);
+
+------ close p loop
+      p[2+0]++;
+      if (p[2+0]>=1) {
+        p[2+0]=0;
+        p[1+0]++;
+        if (p[1+0]>=1) {
+          p[1+0]=0;
+          p[0+0]++;
+          if (p[0+0]>=4) p_cont=FALSE;
+          }
+        }
+    } while (p_cont);
+    if (mode==0) WAIT;
+  }
+
+----- we're out of here
+
+  printout (_out1);
+
+
+}
+
+
+
+
+
+

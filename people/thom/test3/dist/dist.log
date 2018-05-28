@@ -1,0 +1,31 @@
+This is TeX, Version 3.1415 (C version 6.1) (format=lplain 94.3.14)  2 NOV 1994 18:29
+**dist.tex
+(dist.tex
+LaTeX Version 2.09 <25 March 1992>
+(/usr/local/lib/tex/tex/latex/base/article.sty
+Standard Document Style `article' <14 Jan 92>.
+(/usr/local/lib/tex/tex/latex/base/art10.sty)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+) (margins.sty)
+\c@definition=\count87
+ (dist.aux)
+[1
+
+] [2] [3] (dist.aux) ) 
+Here is how much of TeX's memory you used:
+ 217 strings out of 11864
+ 1978 string characters out of 78376
+ 32933 words of memory out of 262141
+ 2288 multiletter control sequences out of 9500
+ 8817 words of font info for 31 fonts, out of 100000 for 255
+ 14 hyphenation exceptions out of 607
+ 16i,6n,15p,143b,174s stack positions out of 300i,40n,60p,3000b,4000s
+
+Output written on dist.dvi (3 pages, 9012 bytes).

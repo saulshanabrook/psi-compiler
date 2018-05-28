@@ -1,0 +1,10 @@
+SUBROUTINE TEST ()
+  INTEGER, DIMENSION (4) :: A, B, C
+  INTEGER, DIMENSION (8) :: D
+
+  A = (/ 1, 2, 3, 4 /)
+  B = (/ 5, 6, 7, 8 /)
+
+  D=CONCAT(CSHIFT(A,SHIFT=3),B)
+  C=D(5:8)
+END SUBROUTINE 

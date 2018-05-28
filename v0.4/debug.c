@@ -1,0 +1,50 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+#include "psi.h"
+
+void debug_ident (ident_t *ident)
+{
+  if (ident != NULL) {
+    printf ("string:       %s\n", ident->string);
+    printf ("real:         %d\n", ident->real);
+    printf ("type:         %d\n", ident->type);
+    printf ("index:        %d\n", ident->index);
+    printf ("value:        %f\n", ident->value);
+    printf ("proc (ptr):   %d\n", ident->proc);
+    printf ("array {\n");
+    printf ("  dim (ptr):    %d\n", ident->array.dim);
+    printf ("  cnst (ptr):   %d\n", ident->array.cnst);
+    printf ("  rav (ptr):    %d\n", ident->array.rav);
+    printf ("  shp (ptr):    %d\n", ident->array.shp);
+    printf ("  rule (ptr):   %d\n", ident->array.rule);
+    printf ("flags:        %d\n", ident->flags);
+    printf ("next (ptr):   %d\n", ident->next);
+  }
+}
+
+void debug_s_expr (s_expr_t *s)
+{
+  if (s != NULL) {
+    printf ("op:           %d\n", s->op);
+    printf ("flags:        %d\n", s->flags);
+    printf ("left (ptr):   %d\n", s->left);
+    printf ("right (ptr):  %d\n", s->right);
+    printf ("ident (ptr):  %d\n", s->ident);
+  }
+}
+
+void debug_vect (vect_t *v)
+{
+  if (v != NULL) {
+    printf ("op:           %d\n", v->op);
+    printf ("flags:        %d\n", v->flags);
+    printf ("index (ptr):  %d\n", v->index);
+    printf ("loc (ptr):    %d\n", v->loc);
+    printf ("shp (ptr):    %d\n", v->shp);
+    printf ("left (ptr):   %d\n", v->left);
+    printf ("right (ptr):  %d\n", v->right);
+    printf ("ident (ptr):  %d\n", v->ident);
+  }
+}
+

@@ -1,0 +1,35 @@
+			MOA Compiler Release 0.2
+
+Copyright (c) 1993 Lenore Mullin, University of Missouri-Rolla
+All rights reserved.
+
+  This compiler has been produce as part of the Psi Compiler Project at
+the University of Missouri-Rolla.  The compiler preforms reductions on 
+array operations eleminating temporary storage.  The reduction scheme is
+based on the Psi Calculus developed by Dr. Lenore Mullin in her PhD 
+dissertation ``The Mathematics of Arrays''.  The taget language is C.
+
+Files:
+	mc_sun		: The compiler executable for a Sun 4
+	mc_next		: The compiler executable for a next
+	readme		: This file
+	bugs		: A list of know problems
+	COPYRIGHT	: The copyright notice
+	m.grammer	: The grammer definition
+	examples	: Examples directory
+
+  The compiler's usage is:
+	mc <source file> [output file]
+The source file is list of procedures containing array expressions.  If there
+is an output file the C source is written there, or to the screen otherwise.
+The grammer for the input file can be found in the file m.grammer.  The
+operators that are currently implemented include (p)take, (p)drop, psi, cat,
+omega, +, -, *, and /.  All operators use infix notation.  Omega can now 
+take itself as an operator but the partition vector argument to omega
+must be a constant vector.
+  The new grammer also includes two special operators ptake and pdrop these
+are identical to take and drop only the require positive values in the left
+argument.  This produces faster C output and is of course why they were added.
+A forall statement was included which should be fairly self explanatory looking
+at the example program.  You should however look at the grammer as well since
+there are a lot of new things you can do including a interface to C.

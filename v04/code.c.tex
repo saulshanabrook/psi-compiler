@@ -1,0 +1,112 @@
+add_steps
+  void add_steps(vect_t *bound, vect_t *shp1, vect_t *stride, s_expr_t *dim,
+    int num, int scalar)
+
+addto_allocs
+  void addto_allocs(expr_t *expr)
+
+addto_dymanics
+  void addto_dynamics(expr_t *expr)
+
+allocate_actuals
+  void allocate_actuals(reduced_t *list)
+
+allocate_array
+  void allocate_array(ident_t *ident)
+
+allocate_vect
+  void allocate_vect(ident_t *ident)
+
+close_forall
+  void close_forall(expr_t *fa_expr)
+
+code_expr
+  void code_expr(reduced_t *reduced)
+
+code_reduced
+  void code_reduced(reduced_t *reduced)
+
+code_c
+  void code_c(statement_t *body, dist_t *dist)
+
+code_c_rec
+  void code_c_rec(statement_t *body)
+
+code_idx_array
+  void code_idx_array (char *where, char *array, char *index)
+
+code_vect
+  void code_vect(vect_t *vect, vect_t *res, char *op, char *pre ,char *post,
+          char *mid)
+
+declare_utils
+  void declare_utils ()
+
+declare_var
+  void declare_var (int integer, char *name, int len)
+
+do_assign
+  void do_assign(expr_t *expr, expr_t *result)
+
+do_gamma
+  void do_gamma(expr_t *expr, expr_t *result, int num)
+
+do_location
+  int do_location(expr_t *expr, expr_t *result)
+
+do_loop_close
+  void do_loop_close(s_expr_t *dim, vect_t *bound, s_expr_t *rdim)
+
+do_loop_open
+  void do_loop_open(vect_t *bound, s_expr_t *dim)
+
+do_shapes
+  void do_shapes(expr_t *expr, expr_t *result)
+
+embed_const_vect
+  void embed_const_vect(ident_t *ident)
+
+end_loop
+  void end_loop(int depth)
+
+global_assign
+  void global_assign(reduced_t *global, expr_t *result)
+
+iota_loop_open
+  void iota_loop_open(vect_t *index, vect_t *bound, s_expr_t *dim)
+
+iota_loop_close
+  void iota_loop_close(s_expr_t *dim, vect_t *bound)
+
+my_gamma
+  int my_gamma(FILE *out, char *name, vect_t *index, vect_t *shp,
+    s_expr_t *dim)
+
+my_gamma_2
+  int my_gamma2(FILE *out, char *name, vect_t *index, vect_t *shp,
+    s_expr_t *dim)
+
+print_ident
+  void print_ident(FILE *outfile,ident_t *ident)
+
+print_op
+  void print_op(FILE *outfile, int op)
+
+print_s
+  void print_s(FILE *outfile,s_expr_t *s)
+
+print_rav
+  void print_rav(FILE *outfile, vect_t *vect,int i)
+
+open_forall
+  void open_forall(expr_t *fa_expr)
+
+recursive_assign
+  void recursive_assign(vect_t *vect, vect_t *res, char *op)
+
+separate_reduced
+  reduced_t *separate_reduced(reduced_t *list)
+
+start_loop
+  int start_loop(expr_t *var, expr_t *left, expr_t *right)
+

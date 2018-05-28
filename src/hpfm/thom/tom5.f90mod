@@ -1,0 +1,171 @@
+SUBROUTINE test (IN_A, IN_B)
+USE MOALIB
+USE NETWORK
+
+! MOA
+! Variable declarations
+!
+  REAL, DIMENSION (:) :: IN_A
+  REAL, DIMENSION (:) :: IN_B
+  REAL, DIMENSION (:), ALLOCATABLE :: A
+  REAL, DIMENSION (:), ALLOCATABLE :: B
+  INTEGER, DIMENSION (0:1-1) :: tmp_vect0
+  INTEGER, DIMENSION (0:1-1) :: tmp_vect1
+  INTEGER, DIMENSION (0:1-1) :: tmp_vect2
+  INTEGER, DIMENSION (0:1-1) :: tmp_vect3
+  INTEGER, DIMENSION (0:1-1) :: tmp_vect4
+  INTEGER, DIMENSION (0:1-1) :: tmp_vect5
+  LOGICAL :: j_cont,p_cont,s_cont,out
+  INTEGER :: p_,sp_,mode,offset
+  INTEGER, DIMENSION (0:2) :: p
+  INTEGER, DIMENSION (0:2) :: c
+  INTEGER, DIMENSION (0:2) :: s
+  INTEGER, DIMENSION (0:2) :: sp2
+  INTEGER, DIMENSION (0:2) :: ip
+  INTEGER, DIMENSION (0:2) :: lp
+  INTEGER, DIMENSION (0:2) :: bp
+  INTEGER, DIMENSION (0:2) :: ipp
+  INTEGER, DIMENSION (0:2) :: lpp
+  INTEGER, DIMENSION (0:2) :: bpp
+  TYPE BUF
+    REAL, DIMENSION (:), POINTER :: store
+  END TYPE BUF
+  INTEGER :: shift
+  INTEGER :: offset0
+  INTEGER :: i0
+  INTEGER :: i1
+  INTEGER :: i2
+
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE1"
+  END IF
+  call NODE_INIT();
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE1"
+  END IF
+
+  !  Communications for Initial Data
+
+  IF (MY_PROC()>0)    ALLOCATE (A(0:25-1))
+  i1=25
+  IF (MY_PROC()==0) THEN
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE1"
+  END IF
+    i0=100
+    DO i2=0, 0
+      p(i2)=0
+    END DO
+    p_cont=.TRUE.
+    DO
+      p_=p(0+0)
+      offset=((25)*(p(0+0)))
+      IF (i1<(i0-offset)) THEN
+        i2=i1
+      ELSE
+        i2=(i0-offset)
+      END IF
+      call SEND(IN_A(offset:offset+i1-1),i2,p_)
+      p(0+0)=p(0+0)+1
+      IF (p(0+0)>=4) p_cont=.FALSE.
+      IF (.NOT. p_cont) EXIT
+    END DO
+  ELSE
+    call RECV(A,i1,0)
+  END IF
+  IF (MY_PROC()>0)    ALLOCATE (B(0:25-1))
+  i1=25
+  IF (MY_PROC()==0) THEN
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE1"
+  END IF
+    i0=100
+    DO i2=0, 0
+      p(i2)=0
+    END DO
+    p_cont=.TRUE.
+    DO
+      p_=p(0+0)
+      offset=((25)*(p(0+0)))
+      IF (i1<(i0-offset)) THEN
+        i2=i1
+      ELSE
+        i2=(i0-offset)
+      END IF
+      call SEND(IN_B(offset:offset+i1-1),i2,p_)
+      p(0+0)=p(0+0)+1
+      IF (p(0+0)>=4) p_cont=.FALSE.
+      IF (.NOT. p_cont) EXIT
+    END DO
+  ELSE
+    call RECV(B,i1,0)
+  END IF
+
+  ! Procedure body
+
+  ! MOA
+  ! array assignment
+  !
+
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE1"
+  END IF
+  tmp_vect0(0+0)=25
+  DO i0 = 0, 1-1
+    p(i0)=0
+  END DO
+  p(0)=MY_PROC()
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE2"
+  END IF
+  tmp_vect1(0+0)=0
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE3"
+  END IF
+  tmp_vect2(0+0)=100
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE4"
+  END IF
+  tmp_vect3(0+0)=((p(0+0))*(tmp_vect0(0+0)))
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE5"
+  END IF
+  tmp_vect4(0+0)=((p(0+0))*(tmp_vect0(0+0))+tmp_vect0(0+0))
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE6"
+  END IF
+  ip(0+0)=((p(0+0))*(tmp_vect0(0+0)))
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE7"
+  END IF
+  lp(0+0)=tmp_vect3(0+0)
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE8"
+  END IF
+  bp(0+0)=(((-1))*(lp(0+0))+tmp_vect4(0+0))
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE9"
+  END IF
+  tmp_vect5(0+0)=25
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE0"
+  END IF
+  shift=(((-1))*(tmp_vect3(0+0))+lp(0+0))
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE1"
+  END IF
+  offset0=ip(0+0)
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE2"
+  END IF
+  DO i0 = 0, bp(0+0)-1
+  IF (MY_PROC() == 0) THEN
+    PRINT *, "HERE99"
+  END IF
+    A(shift)=B(offset0)
+    offset0=offset0+1
+    shift=shift+1
+  END DO
+
+
+END SUBROUTINE test 

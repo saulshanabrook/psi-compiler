@@ -1,0 +1,5 @@
+SUBROUTINE test (A, B)
+  REAL, DIMENSION(100) :: A, B
+
+  A=B*B+A
+END SUBROUTINE test

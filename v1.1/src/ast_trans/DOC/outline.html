@@ -1,0 +1,63 @@
+<html><head><title>outline</title></head>
+<body>
+<center><h3>Outline</h3></center>
+<h5>
+<ol>
+<li>Description of my work
+<li>Overview of compilers
+	<ul>
+	<li>PGI compiler
+	<li>PSI compiler
+	</ul>
+<li>PGI->PSI conversions
+	<ul>
+	<li> top-level statements 
+	<li> depth-first processing
+	<li> forming PSI expressions
+	<li> indexing, a first approach
+	</ul>
+<li>PSI->PGI conversions
+	<ul>
+	<li> several statements produced (concat)
+	<li> parsing subexpressions (binop.hpf)
+	<li> odd results of first subscripting attempt
+	<li> Parsing statement list (binary subscr)
+	<li> Where we got stuck (cshift subscr)
+	<li> Our way around it (psi_sect)
+	</ul>
+<li>Ideal Interface
+	<ul>
+	<li> why i skipped intermediate representation
+	<li> intermediate interface vs. use of stacks
+		<ul>
+		<li> stax require order of operands to be known
+		<li> stax more effecient?
+		<li> stax doesn't allow one side to "see" what they
+		     building, or intermediate rep.
+		<li> intermediate lang. would want to hold mult. statements
+		<li> reducing # of ASTs -- the optimization challenge.
+		<li> best way to represent normal form?
+		</ul>
+	</ul>
+<li>Personal Experience
+	<ul>
+	<li> Hands-on experience
+		<ul>
+		<li> Industrial AST module
+		<li> PSI-calculus AST representation
+		</ul>
+	<li> Compare-and-contrast
+		<ul>
+		<li> Documentation
+		<li> Use of macros
+			<ul>
+			<li> Useful for programming
+			<li> Poor for finding errors
+			</ul>
+		<li> Separation of Concerns
+		</ul>
+	</ul>
+</ul>
+</body>
+</html>
+

@@ -1,0 +1,28 @@
+NOTALLOCATED	vect.c	/^#define NOTALLOCATED(a) ((!ISUSED(a->flags))&&(!IS/
+const_op	vect.c	/^vect_t *const_op(vect_t *arg, vect_t *res, int siz/
+expand_vect	vect.c	/^vect_t *expand_vect(vect_t *vect)$/
+force_vect	vect.c	/^vect_t *force_vect(vect_t *vect)$/
+make_vect	vect.c	/^vect_t *make_vect(expr_t *expr)$/
+print_scalar	vect.c	/^print_scalar(vect_t *expr)$/
+propagate_cat	vect.c	/^propagate_cat(vect_t *vect, s_expr_t *location)$/
+propagate_drop	vect.c	/^propagate_drop(vect_t *vect, s_expr_t *index)$/
+propagate_take	vect.c	/^propagate_take(vect_t *vect, s_expr_t *bound)$/
+purify_vect	vect.c	/^vect_t *purify_vect(vect_t *vect)$/
+rav_value	vect.c	/^double rav_value(vect_t *vect, int i, int *simple)/
+real_expr	vect.c	/^int real_expr(expr_t *expr)$/
+real_vect	vect.c	/^int real_vect(vect_t *vect)$/
+red_rav	vect.c	/^s_expr_t *red_rav(vect_t *vect, int i)$/
+simplify_vect	vect.c	/^vect_t *simplify_vect(vect_t *vect)$/
+static_shps	vect.c	/^int static_shps(vect_t *vect)$/
+static_value	vect.c	/^int static_value(vect_t *vect)$/
+tau	vect.c	/^void tau(FILE *fd, expr_t *expr)$/
+update_locs	vect.c	/^update_locs(vect_t *vect, s_expr_t *drop)$/
+vect2array	vect.c	/^vect_t *vect2array(char *name,vect_t *vect)$/
+vect_assign	vect.c	/^vect_assign(vect_t *vect, vect_t *res, char *op)$/
+vect_cat	vect.c	/^vect_t *vect_cat(vect_t *left, vect_t *right)$/
+vect_compare	vect.c	/^int vect_compare(vect_t *vect1, vect_t *vect2) $/
+vect_drop	vect.c	/^vect_t *vect_drop(vect_t *left, vect_t *right)$/
+vect_len	vect.c	/^vect_t *vect_len(vect_t *vect)$/
+vect_op	vect.c	/^vect_t *vect_op(int op, vect_t *left, vect_t *righ/
+vect_take	vect.c	/^vect_t *vect_take(vect_t *left, vect_t *right)$/
+vect_unop	vect.c	/^vect_t *vect_unop(int op, vect_t *vect)$/

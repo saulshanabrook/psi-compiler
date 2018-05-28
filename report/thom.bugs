@@ -1,0 +1,55 @@
+This file documents all bugs of the psi compiler reported on or after
+August 26, 1994.
+
+Bug 0001	Reported: 08-26-94	Fixed: 08-29-94
+
+	matrix multiplication and some of the other expressions that use
+	omega were found to produce incorrect C code.  The initial shift
+	pointer was being computed incorrectly and in some cases was not
+	being incremented. 
+
+	Changes 0002 and 0003 as documented in thom.changes were made
+	in an attempt to fix this problem.
+
+Bug 0002	Reported: 08-27-94	Not Fixed
+
+	apparently the compilation of large distributed problems (more than
+	one expression) causes a segmentation fault.  compiling programs
+	that contain only one express seems to work ok, but if the arrays
+	are too small, the problem is not divided correctly in at least
+	some cases.
+
+Bug 0003	Reported: 09-02-94	Mostly Fixed 
+
+	iota does not work.  period.  generates a segmentation fault.  
+	suspected that the fix for Bug 001 may have generated this
+	problem.
+
+	Changes 0004 and 0006 as documented in thom.changes were made in an
+	attempt to fix this problem.
+
+Bug 0004	Reported: 09-07-94	Mostly Fixed
+
+	rav does not work.  period.  generates a segmentation fault and
+	other nasty things.  
+
+	Change 0005 as documented in thom.changes was made in an attempt
+	to fix this problem.  
+
+Bug 0005        Reported: 09-??-94      Not Fixed
+
+        Distributed stuff does not work.
+
+This looks fishy: (too many loops generated)
+main()
+{
+  array Amts^2 <1 8>;
+  const array RAMY^3 <2 3 4>=<1 2 3 4 5 6 7 8 9 10 11 12 1 2 3 4 5 6 7 8 9 10
+                                11 12>;
+  const array AMY^3 <2 3 4>=<9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9 9>;
+  const array Y^3 <2 3 4>=<8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8 8>;
+ 
+  Amts=<2> drop (<1> psi (Y cat omega <1 1> ((RAMY + AMY) + RAMY)));
+}
+
+check examples directory.  some don't even compile.

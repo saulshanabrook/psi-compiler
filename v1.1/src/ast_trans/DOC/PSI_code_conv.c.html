@@ -1,0 +1,288 @@
+<html><head><title>PSI_code_conv.c Module</title></head>
+<body>
+<center><h2>PSI_code_conv.c Module</h2></center><p>
+<h3><b>Description</b>: Along with PGI_PSI.h, implements the PSI_PGI stack.
+Contains driver functions which the PSI_PGI module will use to pass
+data and messages to the PSI_PGI stack.  <b>Note</b>: In this documentation,
+a "pointer to expression" refers to that expression's index in the AST
+lookup table.<p>
+</h3>
+<tt>
+<ul>
+<li><b>db_init_psi</b>: Used by PSI_PGI module.
+  <br>Inputs: none
+  <br>Output: none
+  <br>Postconditions:<ul>
+  <li>PSI_PGI stack is empty.
+  </ul>
+<li><b>db_push_ast</b>: Used throughout this module.
+  <br>Inputs:<ul>
+  <li>cur_expr: A pointer to the expression being pushed.
+  </ul>
+  Output: none
+  <br>Preconditions:<ul>
+  <li>The stack has been initialized prior to first push.
+  </ul>
+  <br>Postconditions:<ul>
+  cur_expr will be top item on stack.
+  </ul>
+  <br>Warnings:<ul>
+  <li>I don't check the return from my call to malloc.  This will need
+  to be added.
+  </ul>
+<li><b>db_pop_ast</b>: Used throughout this module.
+  <br>Inputs: none
+  <br>Output: Pointer to expression stored on the top of stack.
+    0 if stack is empty.
+  <br>Postconditions:<ul>
+  Node storing expression will be removed from stack and freed.
+  </ul>
+  <br>Warnings:<ul>
+  <li>Certain statements may cause the empty-stack warning message to appear.
+  This does not necessarily mean that an error has occured.
+  </ul>
+<li><b>PSI_PGI_FAOPEN</b>: Used by PSI_PGI module.
+  <br>Inputs:<ul>
+  <li>name: the string name of the index of the do loop to be created. 
+  <li>curst: the point of insertion into the statement list.
+  </ul>
+  Output: none
+  <br>Preconditions:<ul>
+  <li>The expression representing loop index's stride is in the first (top)
+  node of the PSI_PGI stack.
+  <li>The expression representing loop index's stop is in the second node
+  of the PSI_PGI stack.
+  <li>The expression representing loop index's start is in the third node
+  of the PSI_PGI stack.
+  <li>Stop represents the bound of the loop.
+  </ul>
+  <br>Postconditions:<ul>
+  <li>A new do loop node will be inserted into the pghpf statement list, just
+  before curst.
+  <li>The top three nodes will be removed from the PSI_PGI stack.
+  </ul>
+  <ul>Actions:
+  <li>A new AST node is allocated.
+  <li>The loop index is found be looking up <em>name</em> in the symbol
+  table.
+  <li>The label field of the do-loop node is set to NULL.
+  <li>Stride, stop, and start information are retrieved from the PSI_PGI stack.
+  <li>A new expression representing ((stop - 1) * stride) is built and
+  stored into the stop field of the do-loop.  start and stride are inserted.
+  <li>New statement holding do-loop AST is inserted into statement list.
+  </ul>
+<li><b>PSI_PGI_FACLOSE</b>
+  <br>Inputs:<ul> 
+  <li>curst: the point of insertion into the statement list.
+  </ul>
+  Output: none 
+  <br>Postconditions:<ul>
+  <li>A new do loop node will be inserted into the pghpf statement list, just
+  before curst.
+  </ul>
+<li><b>PSI_PGI_FASECT</b>
+  <br>Inputs:<ul>
+  <li>name: name of array to be subscripted
+  </ul>
+  Output: none
+  <br>Preconditions:<ul>
+  <li>The expressions representing array section's strides are in the first
+  (top) <em>dim</em> node of the PSI_PGI stack, where dim is the dimension
+  of the array being subscripted.
+  <li>The expressions representing array section's bounds are in the next dim
+  nodes of the PSI_PGI stack, after the strides.
+  <li>The expressions representing array section's starts are in the next dim
+  nodes of the PSI_PGI stack, after the bounds.
+  </ul>
+  <br>Postconditions:<ul>
+  <li>The top three node will be removed from the stack.
+  <li>A new subscript node will be created and pushed onto the stack.
+  </ul>
+  <ul>Actions:
+  <li>The name is used to locate the array in the symbol table.  An AST
+  representing the array identifier is created, and the dimensionality of
+  the array is noted.
+  <li>The strides, bounds, and starts are removed from the PSI_PGI stack.
+  <li>New starts are computed by adding in the starting index of the
+  subscripted array.
+  <li>New stops are computed by adding to the new start, (bound - 1) * stride.
+  <li>Triples are formed using the new stops, starts, and strides.
+  <li>Using the array identifier and the set of triples, a subscript AST
+  is formed and pushed onto the stack.
+  </ul>
+  <br>Warnings:<ul>
+  <li>As the name of this function indicates, the subscripting may be in
+  terms of a forall index.  New starts and stops are now constructed using
+  binary operator AST's.  This would be a good opportunity for optimization.
+  </ul>
+<li><b>PSI_PGI_ARRAY</b>
+  <br>Inputs:<ul> 
+  <li>name: name of the array identifier
+  </ul>
+  Output: none 
+  <br>Postconditions:<ul>
+  <li>A node representing an array identifier will be added to the top of
+  the stack.
+  </ul>
+  <br>Warnings:<ul>
+  <li>No shape information is being passed.  If the Psi compiler produces
+  a temporary array, this allows me to create a new entry based on the
+  name, but the use of such an array is largely untested.
+  </ul>
+<li><b>PSI_PGI_SCALAR</b>
+  <br>Inputs:<ul>
+  <li>name: name of the scalar identifier
+  </ul>
+  Output: none 
+  <br>Postconditions:<ul>
+  <li>A node representing a scalar identifier will be added to the top of
+  the stack.
+  </ul>
+  <br>Warnings:<ul>
+  <li>This routine should pose no problems if the scalar is introduced by
+  the Psi compiler.  Although I use this for temporary scalars in evaluating
+  subexpressions, these disappear by the time the final HPF statement is
+  formed.  Testing with the do-loop index should tell whether this function
+  is sufficient.
+  <li>No accommodations have been made for initial values; it appears
+  that the Psi compiler does all initializations in the form statements
+  rather than in variable declarations.
+  </ul>
+<li><b>PSI_PGI_CONS</b>
+  <br>Inputs:<ul> 
+  <li>v: value of constant.
+  </ul>
+  Output: none 
+  <br>Postconditions:<ul>
+  <li>A node representing a constant with value v will be added to the top
+  of the stack,
+  </ul>
+  <br>Warnings:<ul>
+  <li>v is an integer, so doubles are cast.  This should be fine for the
+  benchmarks, but in the future, we may want to provide a separate routine
+  for floating points.
+  </ul>
+<li><b>PSI_PGI_BINOP</b>
+  <br>Inputs:<ul> 
+  <li>optype: type of binary operation
+  </ul>
+  Output: none 
+  <br>Preconditions:<ul>
+  <li>The right operand is stored in the first (top) node of the PSI_PGI stack.
+  <li>The left operand is stored in the second node of the PSI_PGI stack.
+  <li>optype is in the range 1-28.
+  </ul>
+  <br>Postconditions:<ul>
+  <li>The top two nodes of the PSI_PGI stack are removed.
+  <li>A new node representing the binary operation will be pushed onto
+  the stack.
+  </ul>
+  <br>Warnings:<ul>
+  <li>Unlike the binop routine provided in the PGI_PSI module, this one is
+  used directly by the client.  I did this to save time.  I included the
+  optype macros in the PGI_PSI module for reference.
+  </ul>
+<li><b>PSI_PGI_SUBSCR</b>
+  <br>Inputs:<ul> 
+  <li>name: name of array to be subscripted
+  <li>start: array of integers starting indices (1 per dimension)
+  <li>stop: array of bounds (1 per dimension)
+  <li>stride: array of strides (1 per dimension)
+  </ul>
+  Output: none 
+  <br>Postconditions:<ul>
+  <li>A subscript node is pushed onto the stack.
+  </ul>
+  <br>Warnings:<ul>
+  <li>Not used currently.  Doesn't allow for scalars (specifically, loop
+  indices) in indexing information.
+  </ul>
+<li><b>PSI_PGI_EXPR</b>
+  <br>Inputs:<ul> 
+  <li>index1: index of lhs/lop of new expression
+  <li>optype: holds optype of subexpression (unused for assignments)
+  <li>do_assign: if non_zero, assignment statement.  otherwise, binop.
+  <li>dont_pop: if non_zero, rhs/rop is a previously computed subexpression.
+  otherwise, rhs/rop is top item on stack.
+  <li>index2: index of subexpression
+  </ul>
+  Output: none 
+  <br>Preconditions:<ul>
+  <li>If dont_pop is 0, then stack must be non-empty.
+  <li>If do_assign is 0, then optype is in the range 1-28.
+  <li>If do_assign is 0, then index1 is the index of a previously formed
+  subexpression.
+  </ul>
+  <br>Postconditions:<ul>
+  <li>index1 of the subexpression table will contain a pghpf expression,
+  either an assignment or a binary operation.
+  </ul>
+<li><b>PSI_PGI_ASS_EXPR</b>
+  <br>Inputs:<ul> 
+  <li>cur_stmnt: the point of insertion into the statement list. 
+  </ul>
+  Output: none 
+  <br>Preconditions:<ul>
+  <li>Index 0 of the subexpression table contains the RHS for this assignment.
+  <li>The top element of the stack contains the LHS for this assignment.
+  </ul>
+  <br>Postconditions:<ul>
+  <li>The top element of the stack will be removed.
+  <li>A new assignment node will be inserted into the pghpf statement list,
+  just before cur_stmnt.
+  </ul>
+  <br>Warnings:<ul>
+  <li>The original approach to subscripting resulted in extraneous assignment
+  statements being added to the statement list.  After inserting this
+  assignment statement, the function checks the <em>previous</em> statement
+  to see whether the LHS of that statement is identical to the one just
+  inserted.  If so, then the earlier statement is removed.
+  <li>For robustness, this check should probably verify that the previous
+  statement is also an assignment statement.  It does not do so currently.
+  <li>After testing, I would advise removing the final code segment that
+  involves checking the previous statement.
+  </ul>
+<li><b>PSI_LOP_MATCH</b>
+  <br>Inputs:<ul> 
+  <li>lop_name: string to be matched
+  <li>cur_stmnt: pointer to current location in statement list
+  </ul>
+  Output: A pointer to the last assignment statement previous to cur_stmnt
+  that has a LHS with a name that matches lop_name.
+  <br>Preconditions:<ul>
+  <li>LHS of assignments between these two statements are all subscript nodes.
+  <li>Such an assignment statement exists.
+  </ul> 
+  <br>Postconditions:<ul>
+  <li>The assignment statement that meets the above conditions will be
+  removed from the statement list.
+  </ul>
+  <br>Warnings:<ul>
+  <li>Because I am not checking the type of each statement, this routine
+  is not at all robust.
+  <li>The original approach to subscripting resulted in extraneous assignment
+  statements being added to the statement list.  This function is not no
+  longer being used.
+  </ul>
+<li><b>PSI_PGI_NEWST</b>
+  <br>Inputs:<ul>
+  <li>lop: name of array to be used in left-hand operand of operation
+  <li>rop: name of array to be used in right-hand operand of operation
+  <li>optype: type of binary operation
+  <li>cur_stmnt: pointer to current location in statement list
+  </ul>
+  Output: none 
+  <br>Preconditions:<ul>
+  <li>PSI_LOP_MATCH is valid for both lop and rop as the first argument,
+  and cur_stmnt as the second argument.
+  <li>optype is in the range 1-28.
+  </ul>
+  <br>Notes:<ul>
+  <li>Not used anymore.
+  <li>When the use of omega with psi and iota causes <em>temp_vect</em>s to
+  appear, the breakdown of expressions no longer occurs at the subexpression
+  level.  Rather, it is represented at the statement level.  This function
+  was written to scan for previous assignment statements with the goal
+  of reconstructing larger expressions.
+  </ul>
+</ul>

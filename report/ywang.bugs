@@ -1,0 +1,51 @@
+#the c file redeclares the var res0...
+$hostname hw2.1.host.c
+$arch network
+$procs 4 
+ 
+hw1(array xnew^3 <20 30 40>)
+{
+  array res0^3 <20 30 40>;
+ 
+  res0 = xnew;
+ 
+#  res0 = (j psi omega <1 2> xnew);
+#  res1 = (j psi omega <1 3> xnew);
+#  res2 = (j psi xnew);
+#  res3 = (j psi omega <1 1> xnew);
+}
+#######################################
+# program doesn't release the socket number.
+# we need to wait about 10 min before running another test
+#######################################
+
+#cannot compile
+$hostname hw2.1.host.c
+$arch network
+$procs 2 
+hw1(array A^3 <20 30 40>, array B^3 <20 30 40> )
+{
+  A =  <> psi B; 
+  printout(A);
+}
+
+#BUG... output 0s for A, input is correct.
+$hostname hw2.1.host.c
+$arch network
+$procs 2 
+ 
+hw1(array A^2 <30 40>, array B^3 <20 30 40> )
+{
+  printout(B);
+  A =  <0> psi B; 
+  printout(A);
+}
+ 
+#PSI : doesn't compile
+A=<> psi B;
+#Wrong output
+A=<0> psi B;
+#Cannot compile
+A=B+10;
+#wrong output (the data in B is less than A)
+A=B-A ;

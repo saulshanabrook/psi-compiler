@@ -1,0 +1,71 @@
+\documentstyle[epsf]{article}
+
+\addtolength{\topmargin}{-.75in}
+\addtolength{\textwidth}{1.6in}
+\setlength{\textheight}{8.75in}
+\addtolength{\oddsidemargin}{-0.75in}
+\addtolength{\evensidemargin}{-0.75in}
+\setlength{\parskip}{.1in}
+
+\newcommand{\cat}{+\!\!\!\!+}
+\newcommand{\take}{\,\bigtriangleup\,}
+\newcommand{\drop}{\,\bigtriangledown\,}
+\newcommand{\karate}{\!\widehat{\hbox to 10pt{}}\!}
+\newcommand{\rshp}{\widehat{\rho}}
+
+\title{PSI Compiler\\Guide to the dist.c and part.c}
+\author{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Overview}
+
+\subsection{part.c}
+This is the partitioner module.  The top level procedure is $partition$
+and accepts a statement list as an argument.  The partitioner calls
+$rec\_partition$ and $resolve\_rules$.  $rec\_partition$ searches the
+assignment statements for all arrays that are used.  If an array
+is used and has an explicit rule then that rule is added to a global
+list.  If the array does not have an explicit rule, a default rule
+is created that partitions the array evenly over the first dimension.
+
+When the $rec\_partition$ returns, a global list of all the rules for
+all the arrays is stored in the $rules$ variable.  $resolve\_rules$
+is then called.  This procedure will eventually resolve any conflicting
+rules and create a final distribution list.  The procedure currently assumes
+there are no conflicts (and in fact there can't be yet) and just converts
+them to the final distribution form (the dist\_t type).  The list
+of final distributions is returned from the $partion$ procedure and
+will be passed to the code generation module.
+
+\subsection{dist.c}
+The distribution module contains an initialization procedure $dist\_init$
+that must be called when the compiler is invoked.  The two main procedures
+in this module are $init\_dist\_arrays$, and $code\_dist$.  
+$init\_dist\_arrays$ is called
+by $code\_c$ before any code generation is performed.  This procedure will
+generate code to distribute initial data over the processors.  The second
+procedure, $code\_dist$ generates code for a list of expressions, involving
+distributed arrays, that can be combined.  Currently, no expressions involving
+distributed arrays may be combined so the list must be a list of one element.
+The procedure works in two phases.  First $dist\_lhs$ is called.  This 
+procedure
+creates a loop that loops through all processors, say $p$, and at each 
+iteration determines what part, say part1, of the array on the left hand side 
+is
+owned by the processor $p$.  Then the procedure computes what part of the right
+hand side is required for the assignment to part1.  Call this part2.  Now
+$dist\_rhs$ is called.  This procedure loops through all the processor numbers,
+say $sp$ and determines what part, say part3, of part2 belongs to processor
+$sp$.  The expression can now be coded.  If $p=sp=$my\_processor then
+I own part1 of the left hand side and part3 of the right hand side, so I can
+compute the expression (between part1 and part3).  Otherwise if 
+$p=$my\_processor then I own part1 but 
+not part3 so I should wait to receive something from processor $sp$ and then 
+use that to compute the expression.  Otherwise if $sp=$my\_processor then
+I own part3 but not part1 so I should send part3 to processor $p$.  Otherwise
+I do not own part1 or part3 and can continue without doing anything.
+
+\end{document}

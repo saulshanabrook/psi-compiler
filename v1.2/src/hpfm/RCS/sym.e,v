@@ -1,0 +1,35 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	94.09.27.02.08.08;	author psi;	state Exp;
+branches;
+next	;
+
+
+desc
+@externals for sym.c
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@/* Copyright (c) 1993 University of Missouri-Rolla
+   All rights reserved.
+
+   parse.e - exported functions from parse.c
+
+*/
+
+extern report(char *msg);
+extern ident_t **ret_table(int *size);
+extern ident_t *find_sym(int index, int talk);
+extern char *id_text(int index);
+@

@@ -1,0 +1,2919 @@
+
+
+Terminals which are not used:
+
+   FLOAT1
+   OMEGA1
+
+
+Conflict in state 107 between rule 79 and token PSI1 resolved as reduce.
+Conflict in state 107 between rule 79 and token TAKE1 resolved as reduce.
+Conflict in state 107 between rule 79 and token DROP1 resolved as reduce.
+Conflict in state 107 between rule 79 and token CAT1 resolved as reduce.
+Conflict in state 107 between rule 79 and token PDROP1 resolved as reduce.
+Conflict in state 107 between rule 79 and token PTAKE1 resolved as reduce.
+Conflict in state 107 between rule 79 and token '+' resolved as reduce.
+Conflict in state 107 between rule 79 and token '-' resolved as reduce.
+Conflict in state 107 between rule 79 and token '*' resolved as reduce.
+Conflict in state 107 between rule 79 and token '/' resolved as reduce.
+Conflict in state 108 between rule 80 and token PSI1 resolved as reduce.
+Conflict in state 108 between rule 80 and token TAKE1 resolved as reduce.
+Conflict in state 108 between rule 80 and token DROP1 resolved as reduce.
+Conflict in state 108 between rule 80 and token CAT1 resolved as reduce.
+Conflict in state 108 between rule 80 and token PDROP1 resolved as reduce.
+Conflict in state 108 between rule 80 and token PTAKE1 resolved as reduce.
+Conflict in state 108 between rule 80 and token '+' resolved as reduce.
+Conflict in state 108 between rule 80 and token '-' resolved as reduce.
+Conflict in state 108 between rule 80 and token '*' resolved as reduce.
+Conflict in state 108 between rule 80 and token '/' resolved as reduce.
+Conflict in state 109 between rule 81 and token PSI1 resolved as reduce.
+Conflict in state 109 between rule 81 and token TAKE1 resolved as reduce.
+Conflict in state 109 between rule 81 and token DROP1 resolved as reduce.
+Conflict in state 109 between rule 81 and token CAT1 resolved as reduce.
+Conflict in state 109 between rule 81 and token PDROP1 resolved as reduce.
+Conflict in state 109 between rule 81 and token PTAKE1 resolved as reduce.
+Conflict in state 109 between rule 81 and token '+' resolved as reduce.
+Conflict in state 109 between rule 81 and token '-' resolved as reduce.
+Conflict in state 109 between rule 81 and token '*' resolved as reduce.
+Conflict in state 109 between rule 81 and token '/' resolved as reduce.
+Conflict in state 110 between rule 82 and token PSI1 resolved as reduce.
+Conflict in state 110 between rule 82 and token TAKE1 resolved as reduce.
+Conflict in state 110 between rule 82 and token DROP1 resolved as reduce.
+Conflict in state 110 between rule 82 and token CAT1 resolved as reduce.
+Conflict in state 110 between rule 82 and token PDROP1 resolved as reduce.
+Conflict in state 110 between rule 82 and token PTAKE1 resolved as reduce.
+Conflict in state 110 between rule 82 and token '+' resolved as reduce.
+Conflict in state 110 between rule 82 and token '-' resolved as reduce.
+Conflict in state 110 between rule 82 and token '*' resolved as reduce.
+Conflict in state 110 between rule 82 and token '/' resolved as reduce.
+Conflict in state 111 between rule 83 and token PSI1 resolved as reduce.
+Conflict in state 111 between rule 83 and token TAKE1 resolved as reduce.
+Conflict in state 111 between rule 83 and token DROP1 resolved as reduce.
+Conflict in state 111 between rule 83 and token CAT1 resolved as reduce.
+Conflict in state 111 between rule 83 and token PDROP1 resolved as reduce.
+Conflict in state 111 between rule 83 and token PTAKE1 resolved as reduce.
+Conflict in state 111 between rule 83 and token '+' resolved as reduce.
+Conflict in state 111 between rule 83 and token '-' resolved as reduce.
+Conflict in state 111 between rule 83 and token '*' resolved as reduce.
+Conflict in state 111 between rule 83 and token '/' resolved as reduce.
+Conflict in state 113 between rule 77 and token PSI1 resolved as reduce.
+Conflict in state 113 between rule 77 and token TAKE1 resolved as reduce.
+Conflict in state 113 between rule 77 and token DROP1 resolved as reduce.
+Conflict in state 113 between rule 77 and token CAT1 resolved as reduce.
+Conflict in state 113 between rule 77 and token PDROP1 resolved as reduce.
+Conflict in state 113 between rule 77 and token PTAKE1 resolved as reduce.
+Conflict in state 113 between rule 77 and token '+' resolved as reduce.
+Conflict in state 113 between rule 77 and token '-' resolved as reduce.
+Conflict in state 113 between rule 77 and token '*' resolved as reduce.
+Conflict in state 113 between rule 77 and token '/' resolved as reduce.
+Conflict in state 115 between rule 78 and token PSI1 resolved as reduce.
+Conflict in state 115 between rule 78 and token TAKE1 resolved as reduce.
+Conflict in state 115 between rule 78 and token DROP1 resolved as reduce.
+Conflict in state 115 between rule 78 and token CAT1 resolved as reduce.
+Conflict in state 115 between rule 78 and token PDROP1 resolved as reduce.
+Conflict in state 115 between rule 78 and token PTAKE1 resolved as reduce.
+Conflict in state 115 between rule 78 and token '+' resolved as reduce.
+Conflict in state 115 between rule 78 and token '-' resolved as reduce.
+Conflict in state 115 between rule 78 and token '*' resolved as reduce.
+Conflict in state 115 between rule 78 and token '/' resolved as reduce.
+Conflict in state 141 between rule 84 and token PSI1 resolved as reduce.
+Conflict in state 141 between rule 84 and token TAKE1 resolved as reduce.
+Conflict in state 141 between rule 84 and token DROP1 resolved as reduce.
+Conflict in state 141 between rule 84 and token CAT1 resolved as reduce.
+Conflict in state 141 between rule 84 and token PDROP1 resolved as reduce.
+Conflict in state 141 between rule 84 and token PTAKE1 resolved as reduce.
+Conflict in state 141 between rule 84 and token '+' resolved as reduce.
+Conflict in state 141 between rule 84 and token '-' resolved as reduce.
+Conflict in state 141 between rule 84 and token '*' resolved as reduce.
+Conflict in state 141 between rule 84 and token '/' resolved as reduce.
+Conflict in state 142 between rule 85 and token PSI1 resolved as reduce.
+Conflict in state 142 between rule 85 and token TAKE1 resolved as reduce.
+Conflict in state 142 between rule 85 and token DROP1 resolved as reduce.
+Conflict in state 142 between rule 85 and token CAT1 resolved as reduce.
+Conflict in state 142 between rule 85 and token PDROP1 resolved as reduce.
+Conflict in state 142 between rule 85 and token PTAKE1 resolved as reduce.
+Conflict in state 142 between rule 85 and token '+' resolved as reduce.
+Conflict in state 142 between rule 85 and token '-' resolved as reduce.
+Conflict in state 142 between rule 85 and token '*' resolved as reduce.
+Conflict in state 142 between rule 85 and token '/' resolved as reduce.
+Conflict in state 143 between rule 86 and token PSI1 resolved as reduce.
+Conflict in state 143 between rule 86 and token TAKE1 resolved as reduce.
+Conflict in state 143 between rule 86 and token DROP1 resolved as reduce.
+Conflict in state 143 between rule 86 and token CAT1 resolved as reduce.
+Conflict in state 143 between rule 86 and token PDROP1 resolved as reduce.
+Conflict in state 143 between rule 86 and token PTAKE1 resolved as reduce.
+Conflict in state 143 between rule 86 and token '+' resolved as reduce.
+Conflict in state 143 between rule 86 and token '-' resolved as reduce.
+Conflict in state 143 between rule 86 and token '*' resolved as reduce.
+Conflict in state 143 between rule 86 and token '/' resolved as reduce.
+Conflict in state 144 between rule 87 and token PSI1 resolved as reduce.
+Conflict in state 144 between rule 87 and token TAKE1 resolved as reduce.
+Conflict in state 144 between rule 87 and token DROP1 resolved as reduce.
+Conflict in state 144 between rule 87 and token CAT1 resolved as reduce.
+Conflict in state 144 between rule 87 and token PDROP1 resolved as reduce.
+Conflict in state 144 between rule 87 and token PTAKE1 resolved as reduce.
+Conflict in state 144 between rule 87 and token '+' resolved as reduce.
+Conflict in state 144 between rule 87 and token '-' resolved as reduce.
+Conflict in state 144 between rule 87 and token '*' resolved as reduce.
+Conflict in state 144 between rule 87 and token '/' resolved as reduce.
+Conflict in state 147 between rule 71 and token PSI1 resolved as reduce.
+Conflict in state 147 between rule 71 and token TAKE1 resolved as reduce.
+Conflict in state 147 between rule 71 and token DROP1 resolved as reduce.
+Conflict in state 147 between rule 71 and token CAT1 resolved as reduce.
+Conflict in state 147 between rule 71 and token PDROP1 resolved as reduce.
+Conflict in state 147 between rule 71 and token PTAKE1 resolved as reduce.
+Conflict in state 147 between rule 71 and token '+' resolved as reduce.
+Conflict in state 147 between rule 71 and token '-' resolved as reduce.
+Conflict in state 147 between rule 71 and token '*' resolved as reduce.
+Conflict in state 147 between rule 71 and token '/' resolved as reduce.
+Conflict in state 148 between rule 72 and token PSI1 resolved as reduce.
+Conflict in state 148 between rule 72 and token TAKE1 resolved as reduce.
+Conflict in state 148 between rule 72 and token DROP1 resolved as reduce.
+Conflict in state 148 between rule 72 and token CAT1 resolved as reduce.
+Conflict in state 148 between rule 72 and token PDROP1 resolved as reduce.
+Conflict in state 148 between rule 72 and token PTAKE1 resolved as reduce.
+Conflict in state 148 between rule 72 and token '+' resolved as reduce.
+Conflict in state 148 between rule 72 and token '-' resolved as reduce.
+Conflict in state 148 between rule 72 and token '*' resolved as reduce.
+Conflict in state 148 between rule 72 and token '/' resolved as reduce.
+Conflict in state 149 between rule 73 and token PSI1 resolved as reduce.
+Conflict in state 149 between rule 73 and token TAKE1 resolved as reduce.
+Conflict in state 149 between rule 73 and token DROP1 resolved as reduce.
+Conflict in state 149 between rule 73 and token CAT1 resolved as reduce.
+Conflict in state 149 between rule 73 and token PDROP1 resolved as reduce.
+Conflict in state 149 between rule 73 and token PTAKE1 resolved as reduce.
+Conflict in state 149 between rule 73 and token '+' resolved as reduce.
+Conflict in state 149 between rule 73 and token '-' resolved as reduce.
+Conflict in state 149 between rule 73 and token '*' resolved as reduce.
+Conflict in state 149 between rule 73 and token '/' resolved as reduce.
+Conflict in state 150 between rule 74 and token PSI1 resolved as reduce.
+Conflict in state 150 between rule 74 and token TAKE1 resolved as reduce.
+Conflict in state 150 between rule 74 and token DROP1 resolved as reduce.
+Conflict in state 150 between rule 74 and token CAT1 resolved as reduce.
+Conflict in state 150 between rule 74 and token PDROP1 resolved as reduce.
+Conflict in state 150 between rule 74 and token PTAKE1 resolved as reduce.
+Conflict in state 150 between rule 74 and token '+' resolved as reduce.
+Conflict in state 150 between rule 74 and token '-' resolved as reduce.
+Conflict in state 150 between rule 74 and token '*' resolved as reduce.
+Conflict in state 150 between rule 74 and token '/' resolved as reduce.
+Conflict in state 151 between rule 75 and token PSI1 resolved as reduce.
+Conflict in state 151 between rule 75 and token TAKE1 resolved as reduce.
+Conflict in state 151 between rule 75 and token DROP1 resolved as reduce.
+Conflict in state 151 between rule 75 and token CAT1 resolved as reduce.
+Conflict in state 151 between rule 75 and token PDROP1 resolved as reduce.
+Conflict in state 151 between rule 75 and token PTAKE1 resolved as reduce.
+Conflict in state 151 between rule 75 and token '+' resolved as reduce.
+Conflict in state 151 between rule 75 and token '-' resolved as reduce.
+Conflict in state 151 between rule 75 and token '*' resolved as reduce.
+Conflict in state 151 between rule 75 and token '/' resolved as reduce.
+Conflict in state 152 between rule 76 and token PSI1 resolved as reduce.
+Conflict in state 152 between rule 76 and token TAKE1 resolved as reduce.
+Conflict in state 152 between rule 76 and token DROP1 resolved as reduce.
+Conflict in state 152 between rule 76 and token CAT1 resolved as reduce.
+Conflict in state 152 between rule 76 and token PDROP1 resolved as reduce.
+Conflict in state 152 between rule 76 and token PTAKE1 resolved as reduce.
+Conflict in state 152 between rule 76 and token '+' resolved as reduce.
+Conflict in state 152 between rule 76 and token '-' resolved as reduce.
+Conflict in state 152 between rule 76 and token '*' resolved as reduce.
+Conflict in state 152 between rule 76 and token '/' resolved as reduce.
+Conflict in state 154 between rule 67 and token PSI1 resolved as reduce.
+Conflict in state 154 between rule 67 and token TAKE1 resolved as reduce.
+Conflict in state 154 between rule 67 and token DROP1 resolved as reduce.
+Conflict in state 154 between rule 67 and token CAT1 resolved as reduce.
+Conflict in state 154 between rule 67 and token PDROP1 resolved as reduce.
+Conflict in state 154 between rule 67 and token PTAKE1 resolved as reduce.
+Conflict in state 154 between rule 67 and token '+' resolved as reduce.
+Conflict in state 154 between rule 67 and token '-' resolved as reduce.
+Conflict in state 154 between rule 67 and token '*' resolved as reduce.
+Conflict in state 154 between rule 67 and token '/' resolved as reduce.
+Conflict in state 155 between rule 68 and token PSI1 resolved as reduce.
+Conflict in state 155 between rule 68 and token TAKE1 resolved as reduce.
+Conflict in state 155 between rule 68 and token DROP1 resolved as reduce.
+Conflict in state 155 between rule 68 and token CAT1 resolved as reduce.
+Conflict in state 155 between rule 68 and token PDROP1 resolved as reduce.
+Conflict in state 155 between rule 68 and token PTAKE1 resolved as reduce.
+Conflict in state 155 between rule 68 and token '+' resolved as reduce.
+Conflict in state 155 between rule 68 and token '-' resolved as reduce.
+Conflict in state 155 between rule 68 and token '*' resolved as reduce.
+Conflict in state 155 between rule 68 and token '/' resolved as reduce.
+Conflict in state 156 between rule 69 and token PSI1 resolved as reduce.
+Conflict in state 156 between rule 69 and token TAKE1 resolved as reduce.
+Conflict in state 156 between rule 69 and token DROP1 resolved as reduce.
+Conflict in state 156 between rule 69 and token CAT1 resolved as reduce.
+Conflict in state 156 between rule 69 and token PDROP1 resolved as reduce.
+Conflict in state 156 between rule 69 and token PTAKE1 resolved as reduce.
+Conflict in state 156 between rule 69 and token '+' resolved as reduce.
+Conflict in state 156 between rule 69 and token '-' resolved as reduce.
+Conflict in state 156 between rule 69 and token '*' resolved as reduce.
+Conflict in state 156 between rule 69 and token '/' resolved as reduce.
+Conflict in state 157 between rule 70 and token PSI1 resolved as reduce.
+Conflict in state 157 between rule 70 and token TAKE1 resolved as reduce.
+Conflict in state 157 between rule 70 and token DROP1 resolved as reduce.
+Conflict in state 157 between rule 70 and token CAT1 resolved as reduce.
+Conflict in state 157 between rule 70 and token PDROP1 resolved as reduce.
+Conflict in state 157 between rule 70 and token PTAKE1 resolved as reduce.
+Conflict in state 157 between rule 70 and token '+' resolved as reduce.
+Conflict in state 157 between rule 70 and token '-' resolved as reduce.
+Conflict in state 157 between rule 70 and token '*' resolved as reduce.
+Conflict in state 157 between rule 70 and token '/' resolved as reduce.
+
+Grammar
+rule 1    @1 ->		/* empty */
+rule 2    @2 ->		/* empty */
+rule 3    executable_program -> @1 directives_opt @2 procedure_list
+rule 4    directives_opt ->		/* empty */
+rule 5    directives_opt -> '$' TRACE1
+rule 6    directives_opt -> '$' PROCS1 NUMBER1
+rule 7    directives_opt -> '$' ARCH1 NAME1
+rule 8    directives_opt -> '$' HOSTNAME1 NAME1
+rule 9    directives_opt -> '$' PICL1 NAME1
+rule 10   @3 ->		/* empty */
+rule 11   @4 ->		/* empty */
+rule 12   procedure_mand -> @3 declaration '{' var_dec_statement_opt @4 statement_base_opt '}'
+rule 13   procedure_opt ->		/* empty */
+rule 14   procedure_opt -> procedure_mand procedure_opt
+rule 15   procedure_list -> procedure_mand procedure_opt
+rule 16   arg_dec -> INT1 NAME1
+rule 17   arg_dec -> ARRAY1 NAME1 '^' NUMBER1
+rule 18   @5 ->		/* empty */
+rule 19   arg_dec -> ARRAY1 NAME1 '^' NUMBER1 @5 '<' vector_const2_base '>'
+rule 20   @6 ->		/* empty */
+rule 21   var_dec -> ARRAY1 NAME1 '^' NUMBER1 @6 '<' vector_const2_base '>'
+rule 22   var_dec -> ARRAY1 NAME1 '^' NUMBER1
+rule 23   var_dec -> CONST1 ARRAY1 NAME1 '^' NUMBER1 '<' vector_const2_base '>' '=' '<' vector_const_ident_base '>'
+rule 24   var_dec -> CONST1 ARRAY1 NAME1 '^' NUMBER1 '<' vector_const2_base '>' '=' anynumber
+rule 25   anynumber -> NUMBER1
+rule 26   anynumber -> '+' NUMBER1
+rule 27   anynumber -> '-' NUMBER1
+rule 28   global_dec -> GLOBAL1 NAME1
+rule 29   var_dec_statement_cont ->		/* empty */
+rule 30   var_dec_statement_cont -> var_dec ';' var_dec_statement_cont
+rule 31   var_dec_statement_cont -> global_dec ';' var_dec_statement_cont
+rule 32   var_dec_statement_mand -> var_dec ';' var_dec_statement_cont
+rule 33   var_dec_statement_opt ->		/* empty */
+rule 34   var_dec_statement_opt -> var_dec_statement_mand
+rule 35   arg_list_opt ->		/* empty */
+rule 36   arg_list_opt -> arg_dec arg_list_cont
+rule 37   arg_list_cont ->		/* empty */
+rule 38   @7 ->		/* empty */
+rule 39   arg_list_cont -> ',' @7 arg_dec arg_list_cont
+rule 40   @8 ->		/* empty */
+rule 41   declaration -> NAME1 '(' @8 arg_list_opt ')'
+rule 42   statement_base_opt ->		/* empty */
+rule 43   statement_base_opt -> statement_base_mand statement_base_opt
+rule 44   statement_base_mand -> assignment
+rule 45   statement_base_mand -> for_statement
+rule 46   statement_base_mand -> procedure_call
+rule 47   statement_base_mand -> '{' statement_base_opt '}'
+rule 48   assignment -> NAME1 '=' expression ';'
+rule 49   assignment -> '<' vector_const_ident_base '>' PDROP1 NAME1 '=' expression ';'
+rule 50   assignment -> '<' vector_const_ident_base '>' PSI1 NAME1 '=' expression ';'
+rule 51   for_statement -> FOR1 '(' expression LTE1 expression '<' expression ')' statement_base_mand
+rule 52   procedure_call -> NAME1 '(' expression ')' ';'
+rule 53   vector_const_ident_base -> vector_const2_base
+rule 54   @9 ->		/* empty */
+rule 55   vector_const2_base -> @9 vector_const2_opt
+rule 56   vector_const2_mand -> NUMBER1
+rule 57   vector_const2_mand -> NAME1
+rule 58   vector_const2_mand -> '+' NUMBER1
+rule 59   vector_const2_mand -> '-' NUMBER1
+rule 60   vector_const2_opt ->		/* empty */
+rule 61   vector_const2_opt -> vector_const2_mand vector_const2_opt
+rule 62   expression -> NAME1
+rule 63   @10 ->		/* empty */
+rule 64   @11 ->		/* empty */
+rule 65   expression -> '(' @10 expression @11 ')'
+rule 66   expression -> '<' vector_const_ident_base '>'
+rule 67   expression -> expression '+' expression
+rule 68   expression -> expression '-' expression
+rule 69   expression -> expression '*' expression
+rule 70   expression -> expression '/' expression
+rule 71   expression -> expression PSI1 expression
+rule 72   expression -> expression TAKE1 expression
+rule 73   expression -> expression DROP1 expression
+rule 74   expression -> expression CAT1 expression
+rule 75   expression -> expression PDROP1 expression
+rule 76   expression -> expression PTAKE1 expression
+rule 77   expression -> '+' expression
+rule 78   expression -> '-' expression
+rule 79   expression -> IOTA1 expression
+rule 80   expression -> DIM1 expression
+rule 81   expression -> SHP1 expression
+rule 82   expression -> TAU1 expression
+rule 83   expression -> RAV1 expression
+rule 84   expression -> '+' RED1 expression
+rule 85   expression -> '-' RED1 expression
+rule 86   expression -> '*' RED1 expression
+rule 87   expression -> '/' RED1 expression
+
+Terminals, with rules where they appear
+
+$ (-1)
+'$' (36) 5 6 7 8 9
+'(' (40) 41 51 52 65
+')' (41) 41 51 52 65
+'*' (42) 69 86
+'+' (43) 26 58 67 77 84
+',' (44) 39
+'-' (45) 27 59 68 78 85
+'/' (47) 70 87
+';' (59) 30 31 32 48 49 50 52
+'<' (60) 19 21 23 24 49 50 51 66
+'=' (61) 23 24 48 49 50
+'>' (62) 19 21 23 24 49 50 66
+'^' (94) 17 19 21 22 23 24
+'{' (123) 12 47
+'}' (125) 12 47
+error (256)
+FOR1 (258) 51
+NAME1 (259) 7 8 9 16 17 19 21 22 23 24 28 41 48 49 50 52 57 62
+NUMBER1 (260) 6 17 19 21 22 23 24 25 26 27 56 58 59
+ARRAY1 (261) 17 19 21 22 23 24
+GLOBAL1 (262) 28
+INT1 (263) 16
+FLOAT1 (264)
+PSI1 (265) 50 71
+TAKE1 (266) 72
+DROP1 (267) 73
+CAT1 (268) 74
+PDROP1 (269) 49 75
+PTAKE1 (270) 76
+CONST1 (271) 23 24
+IOTA1 (272) 79
+DIM1 (273) 80
+SHP1 (274) 81
+TAU1 (275) 82
+RAV1 (276) 83
+LTE1 (277) 51
+RED1 (278) 84 85 86 87
+OMEGA1 (279)
+TRACE1 (280) 5
+PROCS1 (281) 6
+ARCH1 (282) 7
+HOSTNAME1 (283) 8
+PICL1 (284) 9
+UNEG (285)
+
+Nonterminals, with rules where they appear
+
+executable_program (46)
+    on left: 3
+@1 (47)
+    on left: 1, on right: 3
+@2 (48)
+    on left: 2, on right: 3
+directives_opt (49)
+    on left: 4 5 6 7 8 9, on right: 3
+procedure_mand (50)
+    on left: 12, on right: 14 15
+@3 (51)
+    on left: 10, on right: 12
+@4 (52)
+    on left: 11, on right: 12
+procedure_opt (53)
+    on left: 13 14, on right: 14 15
+procedure_list (54)
+    on left: 15, on right: 3
+arg_dec (55)
+    on left: 16 17 19, on right: 36 39
+@5 (56)
+    on left: 18, on right: 19
+var_dec (57)
+    on left: 21 22 23 24, on right: 30 32
+@6 (58)
+    on left: 20, on right: 21
+anynumber (59)
+    on left: 25 26 27, on right: 24
+global_dec (60)
+    on left: 28, on right: 31
+var_dec_statement_cont (61)
+    on left: 29 30 31, on right: 30 31 32
+var_dec_statement_mand (62)
+    on left: 32, on right: 34
+var_dec_statement_opt (63)
+    on left: 33 34, on right: 12
+arg_list_opt (64)
+    on left: 35 36, on right: 41
+arg_list_cont (65)
+    on left: 37 39, on right: 36 39
+@7 (66)
+    on left: 38, on right: 39
+declaration (67)
+    on left: 41, on right: 12
+@8 (68)
+    on left: 40, on right: 41
+statement_base_opt (69)
+    on left: 42 43, on right: 12 43 47
+statement_base_mand (70)
+    on left: 44 45 46 47, on right: 43 51
+assignment (71)
+    on left: 48 49 50, on right: 44
+for_statement (72)
+    on left: 51, on right: 45
+procedure_call (73)
+    on left: 52, on right: 46
+vector_const_ident_base (74)
+    on left: 53, on right: 23 49 50 66
+vector_const2_base (75)
+    on left: 55, on right: 19 21 23 24 53
+@9 (76)
+    on left: 54, on right: 55
+vector_const2_mand (77)
+    on left: 56 57 58 59, on right: 61
+vector_const2_opt (78)
+    on left: 60 61, on right: 55 61
+expression (79)
+    on left: 62 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81
+    82 83 84 85 86 87, on right: 48 49 50 51 52 65 67 68 69 70 71 72
+    73 74 75 76 77 78 79 80 81 82 83 84 85 86 87
+@10 (80)
+    on left: 63, on right: 65
+@11 (81)
+    on left: 64, on right: 65
+
+
+state 0
+
+    $default	reduce using rule 1 (@1)
+
+    executable_program	go to state 187
+    @1  	go to state 1
+
+
+
+state 1
+
+    executable_program  ->  @1 . directives_opt @2 procedure_list   (rule 3)
+
+    '$' 	shift, and go to state 2
+
+    $default	reduce using rule 4 (directives_opt)
+
+    directives_opt	go to state 3
+
+
+
+state 2
+
+    directives_opt  ->  '$' . TRACE1   (rule 5)
+    directives_opt  ->  '$' . PROCS1 NUMBER1   (rule 6)
+    directives_opt  ->  '$' . ARCH1 NAME1   (rule 7)
+    directives_opt  ->  '$' . HOSTNAME1 NAME1   (rule 8)
+    directives_opt  ->  '$' . PICL1 NAME1   (rule 9)
+
+    TRACE1	shift, and go to state 4
+    PROCS1	shift, and go to state 5
+    ARCH1	shift, and go to state 6
+    HOSTNAME1	shift, and go to state 7
+    PICL1	shift, and go to state 8
+
+
+
+state 3
+
+    executable_program  ->  @1 directives_opt . @2 procedure_list   (rule 3)
+
+    $default	reduce using rule 2 (@2)
+
+    @2  	go to state 9
+
+
+
+state 4
+
+    directives_opt  ->  '$' TRACE1 .   (rule 5)
+
+    $default	reduce using rule 5 (directives_opt)
+
+
+
+state 5
+
+    directives_opt  ->  '$' PROCS1 . NUMBER1   (rule 6)
+
+    NUMBER1	shift, and go to state 10
+
+
+
+state 6
+
+    directives_opt  ->  '$' ARCH1 . NAME1   (rule 7)
+
+    NAME1	shift, and go to state 11
+
+
+
+state 7
+
+    directives_opt  ->  '$' HOSTNAME1 . NAME1   (rule 8)
+
+    NAME1	shift, and go to state 12
+
+
+
+state 8
+
+    directives_opt  ->  '$' PICL1 . NAME1   (rule 9)
+
+    NAME1	shift, and go to state 13
+
+
+
+state 9
+
+    executable_program  ->  @1 directives_opt @2 . procedure_list   (rule 3)
+
+    $default	reduce using rule 10 (@3)
+
+    procedure_mand	go to state 14
+    @3  	go to state 15
+    procedure_list	go to state 16
+
+
+
+state 10
+
+    directives_opt  ->  '$' PROCS1 NUMBER1 .   (rule 6)
+
+    $default	reduce using rule 6 (directives_opt)
+
+
+
+state 11
+
+    directives_opt  ->  '$' ARCH1 NAME1 .   (rule 7)
+
+    $default	reduce using rule 7 (directives_opt)
+
+
+
+state 12
+
+    directives_opt  ->  '$' HOSTNAME1 NAME1 .   (rule 8)
+
+    $default	reduce using rule 8 (directives_opt)
+
+
+
+state 13
+
+    directives_opt  ->  '$' PICL1 NAME1 .   (rule 9)
+
+    $default	reduce using rule 9 (directives_opt)
+
+
+
+state 14
+
+    procedure_list  ->  procedure_mand . procedure_opt   (rule 15)
+
+    $   	reduce using rule 13 (procedure_opt)
+    '*' 	reduce using rule 13 (procedure_opt)
+    $default	reduce using rule 10 (@3)
+
+    procedure_mand	go to state 17
+    @3  	go to state 15
+    procedure_opt	go to state 18
+
+
+
+state 15
+
+    procedure_mand  ->  @3 . declaration '{' var_dec_statement_opt @4 statement_base_opt '}'   (rule 12)
+
+    NAME1	shift, and go to state 19
+
+    declaration	go to state 20
+
+
+
+state 16
+
+    executable_program  ->  @1 directives_opt @2 procedure_list .   (rule 3)
+
+    $default	reduce using rule 3 (executable_program)
+
+
+
+state 17
+
+    procedure_opt  ->  procedure_mand . procedure_opt   (rule 14)
+
+    $   	reduce using rule 13 (procedure_opt)
+    '*' 	reduce using rule 13 (procedure_opt)
+    $default	reduce using rule 10 (@3)
+
+    procedure_mand	go to state 17
+    @3  	go to state 15
+    procedure_opt	go to state 21
+
+
+
+state 18
+
+    procedure_list  ->  procedure_mand procedure_opt .   (rule 15)
+
+    $default	reduce using rule 15 (procedure_list)
+
+
+
+state 19
+
+    declaration  ->  NAME1 . '(' @8 arg_list_opt ')'   (rule 41)
+
+    '(' 	shift, and go to state 22
+
+
+
+state 20
+
+    procedure_mand  ->  @3 declaration . '{' var_dec_statement_opt @4 statement_base_opt '}'   (rule 12)
+
+    '{' 	shift, and go to state 23
+
+
+
+state 21
+
+    procedure_opt  ->  procedure_mand procedure_opt .   (rule 14)
+
+    $default	reduce using rule 14 (procedure_opt)
+
+
+
+state 22
+
+    declaration  ->  NAME1 '(' . @8 arg_list_opt ')'   (rule 41)
+
+    $default	reduce using rule 40 (@8)
+
+    @8  	go to state 24
+
+
+
+state 23
+
+    procedure_mand  ->  @3 declaration '{' . var_dec_statement_opt @4 statement_base_opt '}'   (rule 12)
+
+    ARRAY1	shift, and go to state 25
+    CONST1	shift, and go to state 26
+
+    $default	reduce using rule 33 (var_dec_statement_opt)
+
+    var_dec	go to state 27
+    var_dec_statement_mand	go to state 28
+    var_dec_statement_opt	go to state 29
+
+
+
+state 24
+
+    declaration  ->  NAME1 '(' @8 . arg_list_opt ')'   (rule 41)
+
+    ARRAY1	shift, and go to state 30
+    INT1	shift, and go to state 31
+
+    $default	reduce using rule 35 (arg_list_opt)
+
+    arg_dec	go to state 32
+    arg_list_opt	go to state 33
+
+
+
+state 25
+
+    var_dec  ->  ARRAY1 . NAME1 '^' NUMBER1 @6 '<' vector_const2_base '>'   (rule 21)
+    var_dec  ->  ARRAY1 . NAME1 '^' NUMBER1   (rule 22)
+
+    NAME1	shift, and go to state 34
+
+
+
+state 26
+
+    var_dec  ->  CONST1 . ARRAY1 NAME1 '^' NUMBER1 '<' vector_const2_base '>' '=' '<' vector_const_ident_base '>'   (rule 23)
+    var_dec  ->  CONST1 . ARRAY1 NAME1 '^' NUMBER1 '<' vector_const2_base '>' '=' anynumber   (rule 24)
+
+    ARRAY1	shift, and go to state 35
+
+
+
+state 27
+
+    var_dec_statement_mand  ->  var_dec . ';' var_dec_statement_cont   (rule 32)
+
+    ';' 	shift, and go to state 36
+
+
+
+state 28
+
+    var_dec_statement_opt  ->  var_dec_statement_mand .   (rule 34)
+
+    $default	reduce using rule 34 (var_dec_statement_opt)
+
+
+
+state 29
+
+    procedure_mand  ->  @3 declaration '{' var_dec_statement_opt . @4 statement_base_opt '}'   (rule 12)
+
+    $default	reduce using rule 11 (@4)
+
+    @4  	go to state 37
+
+
+
+state 30
+
+    arg_dec  ->  ARRAY1 . NAME1 '^' NUMBER1   (rule 17)
+    arg_dec  ->  ARRAY1 . NAME1 '^' NUMBER1 @5 '<' vector_const2_base '>'   (rule 19)
+
+    NAME1	shift, and go to state 38
+
+
+
+state 31
+
+    arg_dec  ->  INT1 . NAME1   (rule 16)
+
+    NAME1	shift, and go to state 39
+
+
+
+state 32
+
+    arg_list_opt  ->  arg_dec . arg_list_cont   (rule 36)
+
+    ',' 	shift, and go to state 40
+
+    $default	reduce using rule 37 (arg_list_cont)
+
+    arg_list_cont	go to state 41
+
+
+
+state 33
+
+    declaration  ->  NAME1 '(' @8 arg_list_opt . ')'   (rule 41)
+
+    ')' 	shift, and go to state 42
+
+
+
+state 34
+
+    var_dec  ->  ARRAY1 NAME1 . '^' NUMBER1 @6 '<' vector_const2_base '>'   (rule 21)
+    var_dec  ->  ARRAY1 NAME1 . '^' NUMBER1   (rule 22)
+
+    '^' 	shift, and go to state 43
+
+
+
+state 35
+
+    var_dec  ->  CONST1 ARRAY1 . NAME1 '^' NUMBER1 '<' vector_const2_base '>' '=' '<' vector_const_ident_base '>'   (rule 23)
+    var_dec  ->  CONST1 ARRAY1 . NAME1 '^' NUMBER1 '<' vector_const2_base '>' '=' anynumber   (rule 24)
+
+    NAME1	shift, and go to state 44
+
+
+
+state 36
+
+    var_dec_statement_mand  ->  var_dec ';' . var_dec_statement_cont   (rule 32)
+
+    ARRAY1	shift, and go to state 25
+    GLOBAL1	shift, and go to state 45
+    CONST1	shift, and go to state 26
+
+    $default	reduce using rule 29 (var_dec_statement_cont)
+
+    var_dec	go to state 46
+    global_dec	go to state 47
+    var_dec_statement_cont	go to state 48
+
+
+
+state 37
+
+    procedure_mand  ->  @3 declaration '{' var_dec_statement_opt @4 . statement_base_opt '}'   (rule 12)
+
+    FOR1	shift, and go to state 49
+    NAME1	shift, and go to state 50
+    '{' 	shift, and go to state 51
+    '<' 	shift, and go to state 52
+
+    $default	reduce using rule 42 (statement_base_opt)
+
+    statement_base_opt	go to state 53
+    statement_base_mand	go to state 54
+    assignment	go to state 55
+    for_statement	go to state 56
+    procedure_call	go to state 57
+
+
+
+state 38
+
+    arg_dec  ->  ARRAY1 NAME1 . '^' NUMBER1   (rule 17)
+    arg_dec  ->  ARRAY1 NAME1 . '^' NUMBER1 @5 '<' vector_const2_base '>'   (rule 19)
+
+    '^' 	shift, and go to state 58
+
+
+
+state 39
+
+    arg_dec  ->  INT1 NAME1 .   (rule 16)
+
+    $default	reduce using rule 16 (arg_dec)
+
+
+
+state 40
+
+    arg_list_cont  ->  ',' . @7 arg_dec arg_list_cont   (rule 39)
+
+    $default	reduce using rule 38 (@7)
+
+    @7  	go to state 59
+
+
+
+state 41
+
+    arg_list_opt  ->  arg_dec arg_list_cont .   (rule 36)
+
+    $default	reduce using rule 36 (arg_list_opt)
+
+
+
+state 42
+
+    declaration  ->  NAME1 '(' @8 arg_list_opt ')' .   (rule 41)
+
+    $default	reduce using rule 41 (declaration)
+
+
+
+state 43
+
+    var_dec  ->  ARRAY1 NAME1 '^' . NUMBER1 @6 '<' vector_const2_base '>'   (rule 21)
+    var_dec  ->  ARRAY1 NAME1 '^' . NUMBER1   (rule 22)
+
+    NUMBER1	shift, and go to state 60
+
+
+
+state 44
+
+    var_dec  ->  CONST1 ARRAY1 NAME1 . '^' NUMBER1 '<' vector_const2_base '>' '=' '<' vector_const_ident_base '>'   (rule 23)
+    var_dec  ->  CONST1 ARRAY1 NAME1 . '^' NUMBER1 '<' vector_const2_base '>' '=' anynumber   (rule 24)
+
+    '^' 	shift, and go to state 61
+
+
+
+state 45
+
+    global_dec  ->  GLOBAL1 . NAME1   (rule 28)
+
+    NAME1	shift, and go to state 62
+
+
+
+state 46
+
+    var_dec_statement_cont  ->  var_dec . ';' var_dec_statement_cont   (rule 30)
+
+    ';' 	shift, and go to state 63
+
+
+
+state 47
+
+    var_dec_statement_cont  ->  global_dec . ';' var_dec_statement_cont   (rule 31)
+
+    ';' 	shift, and go to state 64
+
+
+
+state 48
+
+    var_dec_statement_mand  ->  var_dec ';' var_dec_statement_cont .   (rule 32)
+
+    $default	reduce using rule 32 (var_dec_statement_mand)
+
+
+
+state 49
+
+    for_statement  ->  FOR1 . '(' expression LTE1 expression '<' expression ')' statement_base_mand   (rule 51)
+
+    '(' 	shift, and go to state 65
+
+
+
+state 50
+
+    assignment  ->  NAME1 . '=' expression ';'   (rule 48)
+    procedure_call  ->  NAME1 . '(' expression ')' ';'   (rule 52)
+
+    '=' 	shift, and go to state 66
+    '(' 	shift, and go to state 67
+
+
+
+state 51
+
+    statement_base_mand  ->  '{' . statement_base_opt '}'   (rule 47)
+
+    FOR1	shift, and go to state 49
+    NAME1	shift, and go to state 50
+    '{' 	shift, and go to state 51
+    '<' 	shift, and go to state 52
+
+    $default	reduce using rule 42 (statement_base_opt)
+
+    statement_base_opt	go to state 68
+    statement_base_mand	go to state 54
+    assignment	go to state 55
+    for_statement	go to state 56
+    procedure_call	go to state 57
+
+
+
+state 52
+
+    assignment  ->  '<' . vector_const_ident_base '>' PDROP1 NAME1 '=' expression ';'   (rule 49)
+    assignment  ->  '<' . vector_const_ident_base '>' PSI1 NAME1 '=' expression ';'   (rule 50)
+
+    $default	reduce using rule 54 (@9)
+
+    vector_const_ident_base	go to state 69
+    vector_const2_base	go to state 70
+    @9  	go to state 71
+
+
+
+state 53
+
+    procedure_mand  ->  @3 declaration '{' var_dec_statement_opt @4 statement_base_opt . '}'   (rule 12)
+
+    '}' 	shift, and go to state 72
+
+
+
+state 54
+
+    statement_base_opt  ->  statement_base_mand . statement_base_opt   (rule 43)
+
+    FOR1	shift, and go to state 49
+    NAME1	shift, and go to state 50
+    '{' 	shift, and go to state 51
+    '<' 	shift, and go to state 52
+
+    $default	reduce using rule 42 (statement_base_opt)
+
+    statement_base_opt	go to state 73
+    statement_base_mand	go to state 54
+    assignment	go to state 55
+    for_statement	go to state 56
+    procedure_call	go to state 57
+
+
+
+state 55
+
+    statement_base_mand  ->  assignment .   (rule 44)
+
+    $default	reduce using rule 44 (statement_base_mand)
+
+
+
+state 56
+
+    statement_base_mand  ->  for_statement .   (rule 45)
+
+    $default	reduce using rule 45 (statement_base_mand)
+
+
+
+state 57
+
+    statement_base_mand  ->  procedure_call .   (rule 46)
+
+    $default	reduce using rule 46 (statement_base_mand)
+
+
+
+state 58
+
+    arg_dec  ->  ARRAY1 NAME1 '^' . NUMBER1   (rule 17)
+    arg_dec  ->  ARRAY1 NAME1 '^' . NUMBER1 @5 '<' vector_const2_base '>'   (rule 19)
+
+    NUMBER1	shift, and go to state 74
+
+
+
+state 59
+
+    arg_list_cont  ->  ',' @7 . arg_dec arg_list_cont   (rule 39)
+
+    ARRAY1	shift, and go to state 30
+    INT1	shift, and go to state 31
+
+    arg_dec	go to state 75
+
+
+
+state 60
+
+    var_dec  ->  ARRAY1 NAME1 '^' NUMBER1 . @6 '<' vector_const2_base '>'   (rule 21)
+    var_dec  ->  ARRAY1 NAME1 '^' NUMBER1 .   (rule 22)
+
+    $default	reduce using rule 20 (@6)
+
+    @6  	go to state 76
+
+
+
+state 61
+
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' . NUMBER1 '<' vector_const2_base '>' '=' '<' vector_const_ident_base '>'   (rule 23)
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' . NUMBER1 '<' vector_const2_base '>' '=' anynumber   (rule 24)
+
+    NUMBER1	shift, and go to state 77
+
+
+
+state 62
+
+    global_dec  ->  GLOBAL1 NAME1 .   (rule 28)
+
+    $default	reduce using rule 28 (global_dec)
+
+
+
+state 63
+
+    var_dec_statement_cont  ->  var_dec ';' . var_dec_statement_cont   (rule 30)
+
+    ARRAY1	shift, and go to state 25
+    GLOBAL1	shift, and go to state 45
+    CONST1	shift, and go to state 26
+
+    $default	reduce using rule 29 (var_dec_statement_cont)
+
+    var_dec	go to state 46
+    global_dec	go to state 47
+    var_dec_statement_cont	go to state 78
+
+
+
+state 64
+
+    var_dec_statement_cont  ->  global_dec ';' . var_dec_statement_cont   (rule 31)
+
+    ARRAY1	shift, and go to state 25
+    GLOBAL1	shift, and go to state 45
+    CONST1	shift, and go to state 26
+
+    $default	reduce using rule 29 (var_dec_statement_cont)
+
+    var_dec	go to state 46
+    global_dec	go to state 47
+    var_dec_statement_cont	go to state 79
+
+
+
+state 65
+
+    for_statement  ->  FOR1 '(' . expression LTE1 expression '<' expression ')' statement_base_mand   (rule 51)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 92
+
+
+
+state 66
+
+    assignment  ->  NAME1 '=' . expression ';'   (rule 48)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 93
+
+
+
+state 67
+
+    procedure_call  ->  NAME1 '(' . expression ')' ';'   (rule 52)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 94
+
+
+
+state 68
+
+    statement_base_mand  ->  '{' statement_base_opt . '}'   (rule 47)
+
+    '}' 	shift, and go to state 95
+
+
+
+state 69
+
+    assignment  ->  '<' vector_const_ident_base . '>' PDROP1 NAME1 '=' expression ';'   (rule 49)
+    assignment  ->  '<' vector_const_ident_base . '>' PSI1 NAME1 '=' expression ';'   (rule 50)
+
+    '>' 	shift, and go to state 96
+
+
+
+state 70
+
+    vector_const_ident_base  ->  vector_const2_base .   (rule 53)
+
+    $default	reduce using rule 53 (vector_const_ident_base)
+
+
+
+state 71
+
+    vector_const2_base  ->  @9 . vector_const2_opt   (rule 55)
+
+    NAME1	shift, and go to state 97
+    NUMBER1	shift, and go to state 98
+    '+' 	shift, and go to state 99
+    '-' 	shift, and go to state 100
+
+    $default	reduce using rule 60 (vector_const2_opt)
+
+    vector_const2_mand	go to state 101
+    vector_const2_opt	go to state 102
+
+
+
+state 72
+
+    procedure_mand  ->  @3 declaration '{' var_dec_statement_opt @4 statement_base_opt '}' .   (rule 12)
+
+    $default	reduce using rule 12 (procedure_mand)
+
+
+
+state 73
+
+    statement_base_opt  ->  statement_base_mand statement_base_opt .   (rule 43)
+
+    $default	reduce using rule 43 (statement_base_opt)
+
+
+
+state 74
+
+    arg_dec  ->  ARRAY1 NAME1 '^' NUMBER1 .   (rule 17)
+    arg_dec  ->  ARRAY1 NAME1 '^' NUMBER1 . @5 '<' vector_const2_base '>'   (rule 19)
+
+    $default	reduce using rule 17 (arg_dec)
+
+    @5  	go to state 103
+
+
+
+state 75
+
+    arg_list_cont  ->  ',' @7 arg_dec . arg_list_cont   (rule 39)
+
+    ',' 	shift, and go to state 40
+
+    $default	reduce using rule 37 (arg_list_cont)
+
+    arg_list_cont	go to state 104
+
+
+
+state 76
+
+    var_dec  ->  ARRAY1 NAME1 '^' NUMBER1 @6 . '<' vector_const2_base '>'   (rule 21)
+
+    '<' 	shift, and go to state 105
+
+
+
+state 77
+
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' NUMBER1 . '<' vector_const2_base '>' '=' '<' vector_const_ident_base '>'   (rule 23)
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' NUMBER1 . '<' vector_const2_base '>' '=' anynumber   (rule 24)
+
+    '<' 	shift, and go to state 106
+
+
+
+state 78
+
+    var_dec_statement_cont  ->  var_dec ';' var_dec_statement_cont .   (rule 30)
+
+    $default	reduce using rule 30 (var_dec_statement_cont)
+
+
+
+state 79
+
+    var_dec_statement_cont  ->  global_dec ';' var_dec_statement_cont .   (rule 31)
+
+    $default	reduce using rule 31 (var_dec_statement_cont)
+
+
+
+state 80
+
+    expression  ->  NAME1 .   (rule 62)
+
+    $default	reduce using rule 62 (expression)
+
+
+
+state 81
+
+    expression  ->  IOTA1 . expression   (rule 79)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 107
+
+
+
+state 82
+
+    expression  ->  DIM1 . expression   (rule 80)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 108
+
+
+
+state 83
+
+    expression  ->  SHP1 . expression   (rule 81)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 109
+
+
+
+state 84
+
+    expression  ->  TAU1 . expression   (rule 82)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 110
+
+
+
+state 85
+
+    expression  ->  RAV1 . expression   (rule 83)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 111
+
+
+
+state 86
+
+    expression  ->  '+' . expression   (rule 77)
+    expression  ->  '+' . RED1 expression   (rule 84)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    RED1	shift, and go to state 112
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 113
+
+
+
+state 87
+
+    expression  ->  '-' . expression   (rule 78)
+    expression  ->  '-' . RED1 expression   (rule 85)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    RED1	shift, and go to state 114
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 115
+
+
+
+state 88
+
+    expression  ->  '*' . RED1 expression   (rule 86)
+
+    RED1	shift, and go to state 116
+
+
+
+state 89
+
+    expression  ->  '/' . RED1 expression   (rule 87)
+
+    RED1	shift, and go to state 117
+
+
+
+state 90
+
+    expression  ->  '<' . vector_const_ident_base '>'   (rule 66)
+
+    $default	reduce using rule 54 (@9)
+
+    vector_const_ident_base	go to state 118
+    vector_const2_base	go to state 70
+    @9  	go to state 71
+
+
+
+state 91
+
+    expression  ->  '(' . @10 expression @11 ')'   (rule 65)
+
+    $default	reduce using rule 63 (@10)
+
+    @10 	go to state 119
+
+
+
+state 92
+
+    for_statement  ->  FOR1 '(' expression . LTE1 expression '<' expression ')' statement_base_mand   (rule 51)
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+    PSI1	shift, and go to state 120
+    TAKE1	shift, and go to state 121
+    DROP1	shift, and go to state 122
+    CAT1	shift, and go to state 123
+    PDROP1	shift, and go to state 124
+    PTAKE1	shift, and go to state 125
+    LTE1	shift, and go to state 126
+    '+' 	shift, and go to state 127
+    '-' 	shift, and go to state 128
+    '*' 	shift, and go to state 129
+    '/' 	shift, and go to state 130
+
+
+
+state 93
+
+    assignment  ->  NAME1 '=' expression . ';'   (rule 48)
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+    PSI1	shift, and go to state 120
+    TAKE1	shift, and go to state 121
+    DROP1	shift, and go to state 122
+    CAT1	shift, and go to state 123
+    PDROP1	shift, and go to state 124
+    PTAKE1	shift, and go to state 125
+    '+' 	shift, and go to state 127
+    '-' 	shift, and go to state 128
+    '*' 	shift, and go to state 129
+    '/' 	shift, and go to state 130
+    ';' 	shift, and go to state 131
+
+
+
+state 94
+
+    procedure_call  ->  NAME1 '(' expression . ')' ';'   (rule 52)
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+    PSI1	shift, and go to state 120
+    TAKE1	shift, and go to state 121
+    DROP1	shift, and go to state 122
+    CAT1	shift, and go to state 123
+    PDROP1	shift, and go to state 124
+    PTAKE1	shift, and go to state 125
+    '+' 	shift, and go to state 127
+    '-' 	shift, and go to state 128
+    '*' 	shift, and go to state 129
+    '/' 	shift, and go to state 130
+    ')' 	shift, and go to state 132
+
+
+
+state 95
+
+    statement_base_mand  ->  '{' statement_base_opt '}' .   (rule 47)
+
+    $default	reduce using rule 47 (statement_base_mand)
+
+
+
+state 96
+
+    assignment  ->  '<' vector_const_ident_base '>' . PDROP1 NAME1 '=' expression ';'   (rule 49)
+    assignment  ->  '<' vector_const_ident_base '>' . PSI1 NAME1 '=' expression ';'   (rule 50)
+
+    PSI1	shift, and go to state 133
+    PDROP1	shift, and go to state 134
+
+
+
+state 97
+
+    vector_const2_mand  ->  NAME1 .   (rule 57)
+
+    $default	reduce using rule 57 (vector_const2_mand)
+
+
+
+state 98
+
+    vector_const2_mand  ->  NUMBER1 .   (rule 56)
+
+    $default	reduce using rule 56 (vector_const2_mand)
+
+
+
+state 99
+
+    vector_const2_mand  ->  '+' . NUMBER1   (rule 58)
+
+    NUMBER1	shift, and go to state 135
+
+
+
+state 100
+
+    vector_const2_mand  ->  '-' . NUMBER1   (rule 59)
+
+    NUMBER1	shift, and go to state 136
+
+
+
+state 101
+
+    vector_const2_opt  ->  vector_const2_mand . vector_const2_opt   (rule 61)
+
+    NAME1	shift, and go to state 97
+    NUMBER1	shift, and go to state 98
+    '+' 	shift, and go to state 99
+    '-' 	shift, and go to state 100
+
+    $default	reduce using rule 60 (vector_const2_opt)
+
+    vector_const2_mand	go to state 101
+    vector_const2_opt	go to state 137
+
+
+
+state 102
+
+    vector_const2_base  ->  @9 vector_const2_opt .   (rule 55)
+
+    $default	reduce using rule 55 (vector_const2_base)
+
+
+
+state 103
+
+    arg_dec  ->  ARRAY1 NAME1 '^' NUMBER1 @5 . '<' vector_const2_base '>'   (rule 19)
+
+    '<' 	shift, and go to state 138
+
+
+
+state 104
+
+    arg_list_cont  ->  ',' @7 arg_dec arg_list_cont .   (rule 39)
+
+    $default	reduce using rule 39 (arg_list_cont)
+
+
+
+state 105
+
+    var_dec  ->  ARRAY1 NAME1 '^' NUMBER1 @6 '<' . vector_const2_base '>'   (rule 21)
+
+    $default	reduce using rule 54 (@9)
+
+    vector_const2_base	go to state 139
+    @9  	go to state 71
+
+
+
+state 106
+
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' NUMBER1 '<' . vector_const2_base '>' '=' '<' vector_const_ident_base '>'   (rule 23)
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' NUMBER1 '<' . vector_const2_base '>' '=' anynumber   (rule 24)
+
+    $default	reduce using rule 54 (@9)
+
+    vector_const2_base	go to state 140
+    @9  	go to state 71
+
+
+
+state 107
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+    expression  ->  IOTA1 expression .   (rule 79)
+
+
+    $default	reduce using rule 79 (expression)
+
+
+
+state 108
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+    expression  ->  DIM1 expression .   (rule 80)
+
+
+    $default	reduce using rule 80 (expression)
+
+
+
+state 109
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+    expression  ->  SHP1 expression .   (rule 81)
+
+
+    $default	reduce using rule 81 (expression)
+
+
+
+state 110
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+    expression  ->  TAU1 expression .   (rule 82)
+
+
+    $default	reduce using rule 82 (expression)
+
+
+
+state 111
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+    expression  ->  RAV1 expression .   (rule 83)
+
+
+    $default	reduce using rule 83 (expression)
+
+
+
+state 112
+
+    expression  ->  '+' RED1 . expression   (rule 84)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 141
+
+
+
+state 113
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+    expression  ->  '+' expression .   (rule 77)
+
+
+    $default	reduce using rule 77 (expression)
+
+
+
+state 114
+
+    expression  ->  '-' RED1 . expression   (rule 85)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 142
+
+
+
+state 115
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+    expression  ->  '-' expression .   (rule 78)
+
+
+    $default	reduce using rule 78 (expression)
+
+
+
+state 116
+
+    expression  ->  '*' RED1 . expression   (rule 86)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 143
+
+
+
+state 117
+
+    expression  ->  '/' RED1 . expression   (rule 87)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 144
+
+
+
+state 118
+
+    expression  ->  '<' vector_const_ident_base . '>'   (rule 66)
+
+    '>' 	shift, and go to state 145
+
+
+
+state 119
+
+    expression  ->  '(' @10 . expression @11 ')'   (rule 65)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 146
+
+
+
+state 120
+
+    expression  ->  expression PSI1 . expression   (rule 71)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 147
+
+
+
+state 121
+
+    expression  ->  expression TAKE1 . expression   (rule 72)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 148
+
+
+
+state 122
+
+    expression  ->  expression DROP1 . expression   (rule 73)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 149
+
+
+
+state 123
+
+    expression  ->  expression CAT1 . expression   (rule 74)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 150
+
+
+
+state 124
+
+    expression  ->  expression PDROP1 . expression   (rule 75)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 151
+
+
+
+state 125
+
+    expression  ->  expression PTAKE1 . expression   (rule 76)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 152
+
+
+
+state 126
+
+    for_statement  ->  FOR1 '(' expression LTE1 . expression '<' expression ')' statement_base_mand   (rule 51)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 153
+
+
+
+state 127
+
+    expression  ->  expression '+' . expression   (rule 67)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 154
+
+
+
+state 128
+
+    expression  ->  expression '-' . expression   (rule 68)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 155
+
+
+
+state 129
+
+    expression  ->  expression '*' . expression   (rule 69)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 156
+
+
+
+state 130
+
+    expression  ->  expression '/' . expression   (rule 70)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 157
+
+
+
+state 131
+
+    assignment  ->  NAME1 '=' expression ';' .   (rule 48)
+
+    $default	reduce using rule 48 (assignment)
+
+
+
+state 132
+
+    procedure_call  ->  NAME1 '(' expression ')' . ';'   (rule 52)
+
+    ';' 	shift, and go to state 158
+
+
+
+state 133
+
+    assignment  ->  '<' vector_const_ident_base '>' PSI1 . NAME1 '=' expression ';'   (rule 50)
+
+    NAME1	shift, and go to state 159
+
+
+
+state 134
+
+    assignment  ->  '<' vector_const_ident_base '>' PDROP1 . NAME1 '=' expression ';'   (rule 49)
+
+    NAME1	shift, and go to state 160
+
+
+
+state 135
+
+    vector_const2_mand  ->  '+' NUMBER1 .   (rule 58)
+
+    $default	reduce using rule 58 (vector_const2_mand)
+
+
+
+state 136
+
+    vector_const2_mand  ->  '-' NUMBER1 .   (rule 59)
+
+    $default	reduce using rule 59 (vector_const2_mand)
+
+
+
+state 137
+
+    vector_const2_opt  ->  vector_const2_mand vector_const2_opt .   (rule 61)
+
+    $default	reduce using rule 61 (vector_const2_opt)
+
+
+
+state 138
+
+    arg_dec  ->  ARRAY1 NAME1 '^' NUMBER1 @5 '<' . vector_const2_base '>'   (rule 19)
+
+    $default	reduce using rule 54 (@9)
+
+    vector_const2_base	go to state 161
+    @9  	go to state 71
+
+
+
+state 139
+
+    var_dec  ->  ARRAY1 NAME1 '^' NUMBER1 @6 '<' vector_const2_base . '>'   (rule 21)
+
+    '>' 	shift, and go to state 162
+
+
+
+state 140
+
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' NUMBER1 '<' vector_const2_base . '>' '=' '<' vector_const_ident_base '>'   (rule 23)
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' NUMBER1 '<' vector_const2_base . '>' '=' anynumber   (rule 24)
+
+    '>' 	shift, and go to state 163
+
+
+
+state 141
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+    expression  ->  '+' RED1 expression .   (rule 84)
+
+
+    $default	reduce using rule 84 (expression)
+
+
+
+state 142
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+    expression  ->  '-' RED1 expression .   (rule 85)
+
+
+    $default	reduce using rule 85 (expression)
+
+
+
+state 143
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+    expression  ->  '*' RED1 expression .   (rule 86)
+
+
+    $default	reduce using rule 86 (expression)
+
+
+
+state 144
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+    expression  ->  '/' RED1 expression .   (rule 87)
+
+
+    $default	reduce using rule 87 (expression)
+
+
+
+state 145
+
+    expression  ->  '<' vector_const_ident_base '>' .   (rule 66)
+
+    $default	reduce using rule 66 (expression)
+
+
+
+state 146
+
+    expression  ->  '(' @10 expression . @11 ')'   (rule 65)
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+    PSI1	shift, and go to state 120
+    TAKE1	shift, and go to state 121
+    DROP1	shift, and go to state 122
+    CAT1	shift, and go to state 123
+    PDROP1	shift, and go to state 124
+    PTAKE1	shift, and go to state 125
+    '+' 	shift, and go to state 127
+    '-' 	shift, and go to state 128
+    '*' 	shift, and go to state 129
+    '/' 	shift, and go to state 130
+
+    $default	reduce using rule 64 (@11)
+
+    @11 	go to state 164
+
+
+
+state 147
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression PSI1 expression .   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+
+    $default	reduce using rule 71 (expression)
+
+
+
+state 148
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression TAKE1 expression .   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+
+    $default	reduce using rule 72 (expression)
+
+
+
+state 149
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression DROP1 expression .   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+
+    $default	reduce using rule 73 (expression)
+
+
+
+state 150
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression CAT1 expression .   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+
+    $default	reduce using rule 74 (expression)
+
+
+
+state 151
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression PDROP1 expression .   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+
+    $default	reduce using rule 75 (expression)
+
+
+
+state 152
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+    expression  ->  expression PTAKE1 expression .   (rule 76)
+
+
+    $default	reduce using rule 76 (expression)
+
+
+
+state 153
+
+    for_statement  ->  FOR1 '(' expression LTE1 expression . '<' expression ')' statement_base_mand   (rule 51)
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+    PSI1	shift, and go to state 120
+    TAKE1	shift, and go to state 121
+    DROP1	shift, and go to state 122
+    CAT1	shift, and go to state 123
+    PDROP1	shift, and go to state 124
+    PTAKE1	shift, and go to state 125
+    '+' 	shift, and go to state 127
+    '-' 	shift, and go to state 128
+    '*' 	shift, and go to state 129
+    '/' 	shift, and go to state 130
+    '<' 	shift, and go to state 165
+
+
+
+state 154
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression '+' expression .   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+
+    $default	reduce using rule 67 (expression)
+
+
+
+state 155
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression '-' expression .   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+
+    $default	reduce using rule 68 (expression)
+
+
+
+state 156
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression '*' expression .   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+
+    $default	reduce using rule 69 (expression)
+
+
+
+state 157
+
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression '/' expression .   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+
+    $default	reduce using rule 70 (expression)
+
+
+
+state 158
+
+    procedure_call  ->  NAME1 '(' expression ')' ';' .   (rule 52)
+
+    $default	reduce using rule 52 (procedure_call)
+
+
+
+state 159
+
+    assignment  ->  '<' vector_const_ident_base '>' PSI1 NAME1 . '=' expression ';'   (rule 50)
+
+    '=' 	shift, and go to state 166
+
+
+
+state 160
+
+    assignment  ->  '<' vector_const_ident_base '>' PDROP1 NAME1 . '=' expression ';'   (rule 49)
+
+    '=' 	shift, and go to state 167
+
+
+
+state 161
+
+    arg_dec  ->  ARRAY1 NAME1 '^' NUMBER1 @5 '<' vector_const2_base . '>'   (rule 19)
+
+    '>' 	shift, and go to state 168
+
+
+
+state 162
+
+    var_dec  ->  ARRAY1 NAME1 '^' NUMBER1 @6 '<' vector_const2_base '>' .   (rule 21)
+
+    $default	reduce using rule 21 (var_dec)
+
+
+
+state 163
+
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' NUMBER1 '<' vector_const2_base '>' . '=' '<' vector_const_ident_base '>'   (rule 23)
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' NUMBER1 '<' vector_const2_base '>' . '=' anynumber   (rule 24)
+
+    '=' 	shift, and go to state 169
+
+
+
+state 164
+
+    expression  ->  '(' @10 expression @11 . ')'   (rule 65)
+
+    ')' 	shift, and go to state 170
+
+
+
+state 165
+
+    for_statement  ->  FOR1 '(' expression LTE1 expression '<' . expression ')' statement_base_mand   (rule 51)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 171
+
+
+
+state 166
+
+    assignment  ->  '<' vector_const_ident_base '>' PSI1 NAME1 '=' . expression ';'   (rule 50)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 172
+
+
+
+state 167
+
+    assignment  ->  '<' vector_const_ident_base '>' PDROP1 NAME1 '=' . expression ';'   (rule 49)
+
+    NAME1	shift, and go to state 80
+    IOTA1	shift, and go to state 81
+    DIM1	shift, and go to state 82
+    SHP1	shift, and go to state 83
+    TAU1	shift, and go to state 84
+    RAV1	shift, and go to state 85
+    '+' 	shift, and go to state 86
+    '-' 	shift, and go to state 87
+    '*' 	shift, and go to state 88
+    '/' 	shift, and go to state 89
+    '<' 	shift, and go to state 90
+    '(' 	shift, and go to state 91
+
+    expression	go to state 173
+
+
+
+state 168
+
+    arg_dec  ->  ARRAY1 NAME1 '^' NUMBER1 @5 '<' vector_const2_base '>' .   (rule 19)
+
+    $default	reduce using rule 19 (arg_dec)
+
+
+
+state 169
+
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' NUMBER1 '<' vector_const2_base '>' '=' . '<' vector_const_ident_base '>'   (rule 23)
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' NUMBER1 '<' vector_const2_base '>' '=' . anynumber   (rule 24)
+
+    NUMBER1	shift, and go to state 174
+    '+' 	shift, and go to state 175
+    '-' 	shift, and go to state 176
+    '<' 	shift, and go to state 177
+
+    anynumber	go to state 178
+
+
+
+state 170
+
+    expression  ->  '(' @10 expression @11 ')' .   (rule 65)
+
+    $default	reduce using rule 65 (expression)
+
+
+
+state 171
+
+    for_statement  ->  FOR1 '(' expression LTE1 expression '<' expression . ')' statement_base_mand   (rule 51)
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+    PSI1	shift, and go to state 120
+    TAKE1	shift, and go to state 121
+    DROP1	shift, and go to state 122
+    CAT1	shift, and go to state 123
+    PDROP1	shift, and go to state 124
+    PTAKE1	shift, and go to state 125
+    '+' 	shift, and go to state 127
+    '-' 	shift, and go to state 128
+    '*' 	shift, and go to state 129
+    '/' 	shift, and go to state 130
+    ')' 	shift, and go to state 179
+
+
+
+state 172
+
+    assignment  ->  '<' vector_const_ident_base '>' PSI1 NAME1 '=' expression . ';'   (rule 50)
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+    PSI1	shift, and go to state 120
+    TAKE1	shift, and go to state 121
+    DROP1	shift, and go to state 122
+    CAT1	shift, and go to state 123
+    PDROP1	shift, and go to state 124
+    PTAKE1	shift, and go to state 125
+    '+' 	shift, and go to state 127
+    '-' 	shift, and go to state 128
+    '*' 	shift, and go to state 129
+    '/' 	shift, and go to state 130
+    ';' 	shift, and go to state 180
+
+
+
+state 173
+
+    assignment  ->  '<' vector_const_ident_base '>' PDROP1 NAME1 '=' expression . ';'   (rule 49)
+    expression  ->  expression . '+' expression   (rule 67)
+    expression  ->  expression . '-' expression   (rule 68)
+    expression  ->  expression . '*' expression   (rule 69)
+    expression  ->  expression . '/' expression   (rule 70)
+    expression  ->  expression . PSI1 expression   (rule 71)
+    expression  ->  expression . TAKE1 expression   (rule 72)
+    expression  ->  expression . DROP1 expression   (rule 73)
+    expression  ->  expression . CAT1 expression   (rule 74)
+    expression  ->  expression . PDROP1 expression   (rule 75)
+    expression  ->  expression . PTAKE1 expression   (rule 76)
+
+    PSI1	shift, and go to state 120
+    TAKE1	shift, and go to state 121
+    DROP1	shift, and go to state 122
+    CAT1	shift, and go to state 123
+    PDROP1	shift, and go to state 124
+    PTAKE1	shift, and go to state 125
+    '+' 	shift, and go to state 127
+    '-' 	shift, and go to state 128
+    '*' 	shift, and go to state 129
+    '/' 	shift, and go to state 130
+    ';' 	shift, and go to state 181
+
+
+
+state 174
+
+    anynumber  ->  NUMBER1 .   (rule 25)
+
+    $default	reduce using rule 25 (anynumber)
+
+
+
+state 175
+
+    anynumber  ->  '+' . NUMBER1   (rule 26)
+
+    NUMBER1	shift, and go to state 182
+
+
+
+state 176
+
+    anynumber  ->  '-' . NUMBER1   (rule 27)
+
+    NUMBER1	shift, and go to state 183
+
+
+
+state 177
+
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' NUMBER1 '<' vector_const2_base '>' '=' '<' . vector_const_ident_base '>'   (rule 23)
+
+    $default	reduce using rule 54 (@9)
+
+    vector_const_ident_base	go to state 184
+    vector_const2_base	go to state 70
+    @9  	go to state 71
+
+
+
+state 178
+
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' NUMBER1 '<' vector_const2_base '>' '=' anynumber .   (rule 24)
+
+    $default	reduce using rule 24 (var_dec)
+
+
+
+state 179
+
+    for_statement  ->  FOR1 '(' expression LTE1 expression '<' expression ')' . statement_base_mand   (rule 51)
+
+    FOR1	shift, and go to state 49
+    NAME1	shift, and go to state 50
+    '{' 	shift, and go to state 51
+    '<' 	shift, and go to state 52
+
+    statement_base_mand	go to state 185
+    assignment	go to state 55
+    for_statement	go to state 56
+    procedure_call	go to state 57
+
+
+
+state 180
+
+    assignment  ->  '<' vector_const_ident_base '>' PSI1 NAME1 '=' expression ';' .   (rule 50)
+
+    $default	reduce using rule 50 (assignment)
+
+
+
+state 181
+
+    assignment  ->  '<' vector_const_ident_base '>' PDROP1 NAME1 '=' expression ';' .   (rule 49)
+
+    $default	reduce using rule 49 (assignment)
+
+
+
+state 182
+
+    anynumber  ->  '+' NUMBER1 .   (rule 26)
+
+    $default	reduce using rule 26 (anynumber)
+
+
+
+state 183
+
+    anynumber  ->  '-' NUMBER1 .   (rule 27)
+
+    $default	reduce using rule 27 (anynumber)
+
+
+
+state 184
+
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' NUMBER1 '<' vector_const2_base '>' '=' '<' vector_const_ident_base . '>'   (rule 23)
+
+    '>' 	shift, and go to state 186
+
+
+
+state 185
+
+    for_statement  ->  FOR1 '(' expression LTE1 expression '<' expression ')' statement_base_mand .   (rule 51)
+
+    $default	reduce using rule 51 (for_statement)
+
+
+
+state 186
+
+    var_dec  ->  CONST1 ARRAY1 NAME1 '^' NUMBER1 '<' vector_const2_base '>' '=' '<' vector_const_ident_base '>' .   (rule 23)
+
+    $default	reduce using rule 23 (var_dec)
+
+
+
+state 187
+
+    $   	go to state 188
+
+
+
+state 188
+
+    $   	go to state 189
+
+
+
+state 189
+
+    $default	accept

@@ -1,0 +1,60 @@
+ljw_ctr = 1
+main.c, 53, #1, Starting main.. 
+moa_func.c, 635, #2, Starting psi_omega2.. 
+moa_func.c, 639, #3: --------------
+                 vect_t: x5e654 var: sigl 
+moa_func.c, 639, #4: op:  0 
+moa_func.c, 639, #5: flags: 0 
+moa_func.c, 639, #6: index: x135ae8 
+moa_func.c, 639, #7: loc:   x135ae8 
+moa_func.c, 639, #8: shp:   x10a4a4 
+moa_func.c, 639, #9: left:   x0 
+moa_func.c, 639, #10: ident:   x7e098 
+moa_func.c, 639, #11: right:   x0 
+moa_func.c, 640, #12: --------------
+                 vect_t: x5e694 var: sigr 
+moa_func.c, 640, #13: op:  0 
+moa_func.c, 640, #14: flags: 0 
+moa_func.c, 640, #15: index: x10a51c 
+moa_func.c, 640, #16: loc:   x10a544 
+moa_func.c, 640, #17: shp:   x10a4f4 
+moa_func.c, 640, #18: left:   x0 
+moa_func.c, 640, #19: ident:   x7e098 
+moa_func.c, 640, #20: right:   x0 
+moa_func.c, 645, #21: --------------
+                 vect_t: x5e6f4 var: c_sigl 
+moa_func.c, 645, #22: op:  0 
+moa_func.c, 645, #23: flags: 0 
+moa_func.c, 645, #24: index: x135ae8 
+moa_func.c, 645, #25: loc:   x135ae8 
+moa_func.c, 645, #26: shp:   x135afc 
+moa_func.c, 645, #27: left:   x0 
+moa_func.c, 645, #28: ident:   x7e3f8 
+moa_func.c, 645, #29: right:   x0 
+moa_func.c, 646, #30: --------------
+                 vect_t: x5e754 var: c_sigr 
+moa_func.c, 646, #31: op:  0 
+moa_func.c, 646, #32: flags: 0 
+moa_func.c, 646, #33: index: x135ae8 
+moa_func.c, 646, #34: loc:   x135ae8 
+moa_func.c, 646, #35: shp:   x135afc 
+moa_func.c, 646, #36: left:   x0 
+moa_func.c, 646, #37: ident:   x7e440 
+moa_func.c, 646, #38: right:   x0 
+moa_func.c, 651, #39: --------------
+                 vect_t: x5e7b4 var: u_x 
+moa_func.c, 651, #40: op:  0 
+moa_func.c, 651, #41: flags: 0 
+moa_func.c, 651, #42: index: x135ae8 
+moa_func.c, 651, #43: loc:   x135ae8 
+moa_func.c, 651, #44: shp:   x10a580 
+moa_func.c, 651, #45: left:   x0 
+moa_func.c, 651, #46: ident:   x7e050 
+moa_func.c, 651, #47: right:   x0 
+moa_func.c, 665, #48: --------------
+                 ident: x7e710 var: fa 
+moa_func.c, 665, #49: string: forall_i0 
+moa_func.c, 665, #50: type: 1 
+moa_func.c, 665, #51: value: 0.000000 
+moa_func.c, 665, #52: index: 0 
+moa_func.c, 665, #53: flags: 0 

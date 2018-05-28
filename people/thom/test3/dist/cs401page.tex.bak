@@ -1,0 +1,168 @@
+\documentstyle[12pt,margins]{article}
+
+\title{HPF Front-End and F90 Back-End to the Psi Compiler}
+\author{Thom McMahon}
+\date{}
+
+\begin{document}
+\maketitle
+\section{Introduction}
+My project for this semester was to continue work on the interface between
+the Psi Compiler and HPF, extending the subset of recognizable HPF 
+grammar and providing for an interface between the output Fortran 90
+code and MPI.  My goals were mostly fulfilled.  The part of HPF 
+recognizable by the parser has grown, yet not as much as I originally
+intented.  Furthermore, although the MPI interface written as yet
+doesn't work, it hopefully never will have to.  This interface is
+an interface to the C version of MPI, since the Fortran version is
+not currently available, but soon should be on at least the hypercube
+if not the Sun workstations.  Availiablity of Fortran MPI will
+make any interface to C MPI unnecessary and probably wasted effort.
+Since this is an ongoing project, I will briefly describe what work
+was done over the summer, what work was done during the semester, and
+what work needs to be done in the future.
+
+\section{The Summer}
+When work began on this project this summer, the front-end of the
+Psi Compiler was an
+interface to MOAL (Mathematics of Array Language) and the back-end was an
+interface was to C.  Therefore, the first goal was to separate these
+interfaces from the rest of the code so that only a few modules would have
+to be changed to create interfaces to other langugages such as HPF and
+Fortran 90.  The code for the front-end interface was mainly the parser and
+lexical analyzer and therefore easy to isolate; however,
+the back-end was more difficult, since much of the code to generate the
+C output was spread throughout various parts of the compiler.  Two
+modules (code.c and dist.c) housed the majority of the code generation,
+while two other modules (ident.c and vect.c) housed a minor portion of
+code generation.  These two other modules were stripped of their
+code generation parts, which were placed in code.c.  
+
+Once isolation was complete, the exisiting front-end interface was
+replaced with a new parser and lexical analyzer for a subset of HPF, and
+the back-end code generation modules were modified to output
+Fortran 90.
+
+\subsection{The Front-End}
+The parser and lexical analyzer were created using tools
+from Purdue, namely PCCTS (Purdue Compiler Construction Tool Set).  
+PCCTS turned out to be fairly good as far as describing grammars, using
+extended BNF for grammar descriptions; however,
+it produces top-down LL grammars, as opposed to yacc or Bison which produce
+more general bottom-up LALR grammars. In addition PCCTS has trouble 
+accomplishing right recursion (something needed for right associativity
+of expressions).  Once the parser was in place, two modules, hpfm_func.c
+and compat.c were created to act as an interface to the Psi Compiler
+reduction engine.  Hpfm_func.c contains 4 functions: make_compatable,
+reduce_extended, code_extended, and mark_extended.  Make_compatable
+is called by the parser when it encounters an operator or intrinsic
+function call, such as plus, times, MATMUL, etc....  Make_compatable's
+job is to make sure that the arguments (passed as root nodes of the
+parse tree that represent parts of an expression)
+are compatable with the operator
+or function call.  For example, suppose we have a sample program with
+the line:
+/begin{verbatim}
+  A = MATMUL (A**B, CSHIFT(TRANSPOSE (C), 3))
+/end{verbatim}
+{\tt MATMUL} AND {\tt CSHIFT} are supported by the Psi Compiler, while
+at present {\tt TRANSPOSE} is not.  The parser, upon recognizing the
+{\tt CSHIFT(TRANSPOSE (C), 3))} calls make_compatable, which 
+realizes that {\tt TRANSPOSE(C)} must be assigned to a temporary variable,
+which will be used as an argument to {\tt CSHIFT}.  
+Make_compatable then creates a node in the parse tree, marked to be 
+of type EXTENDED, and returns this node to the parser.  Events are
+similar for the {\tt MATMUL}.  Make_compatable realizes that the
+{\tt CSHIFT} can be handled by the Psi Compiler, and thus is a valid
+argument to {\tt MATMUL}, whereas {\ttA**B} is not.  Another {\tt EXTENDED}
+node is created, and nothing is done to the {\tt CSHIFT} part.  
+
+When the parse tree is being tragressed by the Psi Compiler during
+reduction phase, and a node
+of type {\tt EXTENDED} is encountered, the compiler calls the 
+reduce_extended function.   This function takes care of adding nodes
+that handle the temporary variable assignments discussed above to the
+list of reduced expressions.  When these nodes are encountered during
+the code generation of the Psi Compiler, code_extended is called to
+write to the output Fortran 90 file. 
+
+This whole process is actually much more complicated and confusing than
+presented here, requiring a pretty thourough understanding of the inner
+workings of the Psi Compiler in order to permit complete comprehension.  
+
+\subsection{The Back-End}
+The back-end was again more difficult to modify then the front-end,
+since many things
+that could be done in C were not allowed in Fortran 90.  Most problems were
+related to the strong typing and limited pointer capability of the Fortran
+language.  The worst problem was rearranging all of the code generation
+to compensate for Fortran's column-major order for arrays, as opposed
+to C's row-major order.  Put simply, everything had to be turned
+upside-down and backwards to the was it was originally.  
+
+\section{The semester}
+For this semester, I concentrated on attempting to add to the 
+subset of HPF recognized by the parser, as well as get the distributed
+output working.
+
+\subsection{Additional Grammar}
+Adding things to the parser was easy compared to the
+rest.  There were however a few ambiguities of the imput grammar, releated
+to the syntax of the Fortran language itself.
+
+For example, both
+\begin{verbatim}
+                DO I = 1, 10
+                  A = B
+                END DO
+\end{verbatim}
+and
+\begin{verbatim}
+                DO
+                  I = 1
+                  A = B
+                END DO
+\end{verbatim}
+are perfectly fine in Fortran.  For a LL parser, they are a nightmare,
+since it can not be determined whether the {\tt I = 1} is part of the
+loop control or an assignment statement until the comma is parsed.  
+This is one of the main reasons I will be experimenting with Bison,
+which creates a LALR parser.
+
+\subsection{The Rest}
+The rest:  Everything else depended upon proper working of the back-end
+Psi Compiler.  Since the Psi Compiler was nowhere near perfect at the
+beginning of the semester, barely approacing stability by the end of 
+the semester, the isolation of errors was made extremely difficult; 
+they could just as well be in new code as well as old.  However, 
+progress did become more rapid as the semester progressed.
+
+\subsubsection{The Distributed Code}
+The orignal distributed code was a little on the messy side, since it attempted
+to be as general as possible.  This generality was not only confusing,
+but many of the output code, generated by the original Psi Compiler to
+accomplish this generality, was perfectly legal in C, but when
+translated into Fortran 90, was perfectly {\it illegal}.  For example,
+logical comparisons used in expressions such as
+\begin{verbatim}
+                A = C > B
+\end{verbatim}
+are valid in C, but invalid in Fortran.  Other invalid parts included
+pointer arithmetic; trying to make pointers, declared as pointers to
+real numbers, point to arrays of real numbers; and allocation of memory
+for variables not declared in local scope (i.e. ones passed as function
+parameters).   
+This has changed, for the sake of both
+readibility and simplicity; however, strict limitations are now present
+on how arrays can be distributed and what operations can be performed.
+But until enough theory and experience exists to remove these restrictions,
+they must remain.  Also, the use of MPI is being integrated
+into the compiler as an alternative to the socket code previously 
+available.  MPI is a standard message-passing interface with around 125
+functions devoted to communication between processors for parallel
+programs.
+
+This project is an ongoing one, with the short-term goal of 
+compiling a real-world HPF program to be benchmarked against
+present HPF compilers such as Forge's and PGI's.
+\end{document}

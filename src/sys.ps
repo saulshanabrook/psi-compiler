@@ -1,0 +1,1055 @@
+%! a2ps 3.0
+
+/$a2psdict 100 dict def
+$a2psdict begin
+% Initialize page description variables.
+/inch {72 mul} bind def
+/landscape false def
+/twinpage false def
+/sheetheight 11 inch def
+/sheetwidth 8.5 inch def
+/margin 1.2 inch def
+/noborder false def
+/noheader false def
+/headersize 0.29 inch def
+/bodyfontsize 9 def
+/lines 75 def
+/columns 96 def
+/date (Feb 13 1995 15:19:03) def
+%!  PostScript Source Code
+%
+%  File: imag:/users/local/a2ps/header.ps
+%  Created: Tue Nov 29 12:14:02 1988 by miguel@imag (Miguel Santana)
+%  Version: 2.0
+%  Description: PostScript prolog for a2ps ascii to PostScript program.
+% 
+%  Edit History:
+%  - Original version by evan@csli (Evan Kirshenbaum).
+%  - Modified by miguel@imag to:
+%    1) Correct an overflow bug when printing page number 10 (operator
+%	cvs).
+%    2) Define two other variables (sheetwidth, sheetheight) describing
+%	the physical page (by default A4 format).
+%    3) Minor changes (reorganization, comments, etc).
+%  - Modified by tullemans@apolloway.prl.philips.nl
+%    1) Correct stack overflows with regard to operators cvs and copy.
+%       The resulting substrings where in some cases not popped off 
+%       the stack, what can result in a stack overflow.
+%    2) Replaced copypage and erasepage by showpage. Page througput
+%       degrades severely (see red book page 140) on our ps-printer
+%       after printing sheet 16 (i.e. page 8) of a file which was 
+%       actually bigger. For this purpose the definitions of startdoc
+%       and startpage are changed.
+%  - Modified by Tim Clark <T.Clark@uk.ac.warwick> to:
+%    1) Print one page per sheet (portrait) as an option.
+%    2) Reduce size of file name heading, if it's too big.
+%    3) Save and restore PostScript state at begining/end. It now uses
+%	conventional %%Page %%Trailer markers.
+%    4) Print one wide page per sheet in landscape mode as an option.
+%  - Modified by miguel@imag.fr to
+%    1) Add new option to print n copies of a file.
+%    2) Add new option to suppress heading printing.
+%    3) Add new option to suppress page surrounding border printing.
+%    4) Add new option to change font size. Number of lines and columns
+%	are now automatically adjusted, depending on font size and
+%	printing mode used.
+%    5) Minor changes (best layout, usage message, etc).
+%
+
+% Copyright (c) 1988, Miguel Santana, miguel@imag.imag.fr
+%
+% Permission is granted to copy and distribute this file in modified
+% or unmodified form, for noncommercial use, provided (a) this copyright
+% notice is preserved, (b) no attempt is made to restrict redistribution
+% of this file, and (c) this file is not distributed as part of any
+% collection whose redistribution is restricted by a compilation copyright.
+%
+
+
+% General macros.
+/xdef {exch def} bind def
+/getfont {exch findfont exch scalefont} bind def
+
+% Page description variables and inch function are defined by a2ps program.
+
+% Character size for differents fonts.
+   landscape
+   { /filenamefontsize 12 def }
+   { /filenamefontsize 16 def }
+ifelse
+/datefontsize filenamefontsize 0.8 mul def
+/headermargin filenamefontsize 0.25 mul def
+/bodymargin bodyfontsize 0.7 mul def
+
+% Font assignment to differents kinds of "objects"
+/filenamefontname /Helvetica-Bold def
+/stdfilenamefont filenamefontname filenamefontsize getfont def
+/datefont /Helvetica datefontsize getfont def
+/bodyfont /Courier bodyfontsize getfont def
+
+% Logical page attributs (a half of a real page or sheet).
+/pagewidth
+   bodyfont setfont (0) stringwidth pop columns mul bodymargin dup add add
+   def
+/pageheight
+   bodyfontsize lines mul bodymargin dup add add headersize add
+   def
+
+% Coordinates for upper corner of a logical page and for sheet number.
+% Coordinates depend on format mode used.
+% In twinpage mode, coordinate x of upper corner is not the same for left
+% and right pages: upperx is an array of two elements, indexed by sheetside.
+/rightmargin margin 3 div def
+/leftmargin margin 2 mul 3 div def
+/topmargin margin twinpage {3} {2} ifelse div def
+landscape
+{  % Landscape format
+   /uppery rightmargin pageheight add bodymargin add def
+   /sheetnumbery sheetwidth leftmargin pageheight add datefontsize add sub def
+   twinpage
+   {  % Two logical pages
+      /upperx [ topmargin			% upperx for left page
+		dup 2 mul pagewidth add		% upperx for right page
+	      ] def
+      /sheetnumberx sheetheight topmargin sub def
+   }
+   {  /upperx [ topmargin dup ] def
+      /sheetnumberx sheetheight topmargin sub datefontsize sub def
+   }
+   ifelse
+}
+{  % Portrait format
+   /uppery topmargin pageheight add def
+   /upperx [ leftmargin dup ] def
+   /sheetnumberx sheetwidth rightmargin sub datefontsize sub def
+   /sheetnumbery
+	 sheetheight 
+	 topmargin pageheight add datefontsize add headermargin add
+      sub
+      def
+
+}
+ifelse
+
+% Strings used to make easy printing numbers
+/pnum 12 string def
+/empty 12 string def
+
+% Other initializations.
+/datewidth date stringwidth pop def
+/filenameroom
+         pagewidth
+	 filenamefontsize 4 mul datewidth add (Page 999) stringwidth pop add
+      sub
+   def
+
+
+% Function startdoc: initializes printer and global variables.
+/startdoc
+    { /sheetside 0 def			% sheet side that contains current page
+      /sheet 1 def			% sheet number
+   } bind def
+
+% Function newfile: init file name and reset page number for each new file.
+/newfile
+    { cleanup
+      /filename xdef
+      /filenamewidth filename stringwidth pop def
+      /filenamefont
+	 filenamewidth filenameroom gt
+	 {
+	       filenamefontname
+	       filenamefontsize filenameroom mul filenamewidth div
+	    getfont
+	 }
+	 {  stdfilenamefont }
+	 ifelse
+	 def
+      /pagenum 1 def
+    } bind def
+
+% Function printpage: Print a physical page.
+/printpage
+    { /sheetside 0 def
+      twinpage
+      {  noborder not
+	    { sheetnumber }
+	 if
+      }
+      {  noheader noborder not and
+	    { sheetnumber }
+	 if
+      }
+      ifelse
+      showpage 
+%      pagesave restore
+      /sheet sheet 1 add def
+    } bind def
+
+% Function cleanup: terminates printing, flushing last page if necessary.
+/cleanup
+    { twinpage sheetside 1 eq and
+         { printpage }
+      if
+    } bind def
+
+%
+% Function startpage: prints page header and page border and initializes
+% printing of the file lines.
+/startpage
+    { sheetside 0 eq
+	{ % /pagesave save def
+	  landscape
+	    { sheetwidth 0 inch translate	% new coordinates system origin
+	      90 rotate				% landscape format
+	    } if
+	} if
+      noborder not { printborder } if
+      noheader not { printheader } if
+	 upperx sheetside get  bodymargin  add
+	    uppery
+	    bodymargin bodyfontsize add  noheader {0} {headersize} ifelse  add
+	 sub
+      moveto
+      bodyfont setfont
+    } bind def
+
+% Function printheader: prints page header.
+/printheader
+    { upperx sheetside get  uppery headersize sub 1 add  moveto
+      datefont setfont
+      gsave
+        datefontsize headermargin rmoveto
+	date show					% date/hour
+      grestore
+      gsave
+	pagenum pnum cvs pop
+	   pagewidth (Page 999) stringwidth pop sub
+	   headermargin
+	rmoveto
+        (Page ) show pnum show				% page number
+      grestore
+      empty pnum copy pop
+      gsave
+        filenamefont setfont
+	      filenameroom filename stringwidth pop sub 2 div datewidth add
+	      bodymargin 2 mul 
+	   add 
+	   headermargin
+	rmoveto
+        filename show						% file name
+      grestore
+    } bind def
+
+% Function printborder: prints border page.
+/printborder 
+    { upperx sheetside get uppery moveto
+      gsave					% print the four sides
+        pagewidth 0 rlineto			% of the square
+        0 pageheight neg rlineto
+        pagewidth neg 0 rlineto
+        closepath stroke
+      grestore
+      noheader not
+         { 0 headersize neg rmoveto pagewidth 0 rlineto stroke }
+      if
+    } bind def
+
+%
+% Function endpage: adds a sheet number to the page (footnote) and prints
+% the formatted page (physical impression). Activated at the end of each
+% source page (lines reached or FF character).
+/endpage
+   { /pagenum pagenum 1 add def
+     twinpage  sheetside 0 eq  and
+        { /sheetside 1 def }
+        { printpage }
+     ifelse
+   } bind def
+
+% Function sheetnumber: prints the sheet number.
+/sheetnumber
+    { sheetnumberx sheetnumbery moveto
+      datefont setfont
+      sheet pnum cvs
+	 dup stringwidth pop (0) stringwidth pop sub neg 0 rmoveto show
+      empty pnum copy pop
+    } bind def
+
+% Function s: print a source line
+/s  { gsave
+        show
+      grestore
+      0 bodyfontsize neg rmoveto
+    } bind def
+%%EndProlog
+
+/docsave save def
+startdoc
+(sys.c) newfile
+/sheet 1 def
+%%Page: 1 1
+startpage
+(1     /* Copyright \(c\) 1993 University of Missouri-Rolla) s
+(2        All rights reserved.) s
+(3     ) s
+(4        sys.c - this module contains utility rutines for memory management and) s
+(5           some I/O rutines.) s
+(6     ) s
+(7        v0.0 Scott Thibault - 5/93) s
+(8        v0.1 Scott Thibault - 6/93) s
+(9        v0.2 Scott Thibault - 7/93) s
+(10       v0.3 Scott Thibault - 8/93) s
+(11               Made structural changes to garbage collection to reflect) s
+(12               the new compiler structure.) s
+(13            Scott Thibault - 10/93) s
+(14               The procedures get_tmp_mem and free_tmp_mem were added to) s
+(15               ease the use of dynamic memory.) s
+(16    */) s
+(17    ) s
+(18    #include <stdio.h>) s
+(19    #include <math.h>) s
+(20    #include <memory.h>) s
+(21    #include "psi.h") s
+(22    #include "sys.h") s
+(23    #include "dist.h") s
+(24    ) s
+(25    #include "psi.e") s
+(26    #include "parse.e") s
+(27    ) s
+(28    extern FILE *tfile;) s
+(29    extern FILE *cfile;) s
+(30    extern FILE *rfile;) s
+(31    extern ident_t dumb_var;) s
+(32    extern vect_t pad_zero,pad_one;) s
+(33    ) s
+(34    #ifndef NULL) s
+(35    #define NULL 0) s
+(36    #endif) s
+(37    ) s
+(38    #ifndef TRUE) s
+(39    #define TRUE 1) s
+(40    #define FALSE 0) s
+(41    #endif) s
+(42     ) s
+(43         /* size of memory blocks allocated by get_tmp_mem */) s
+(44    #define TMP_BLOCK_SIZE 5000) s
+(45    ) s
+(46    /* maximum number of different types used in garbage collection */) s
+(47    #define MAX_EXPR 1000) s
+(48    #define MAX_VECT 4000) s
+(49    #define MAX_IDENT 8000) s
+(50    #define MAX_S_EXPR 8000) s
+(51    ) s
+(52    /* This type is used to keep of list of mem. blocks allocated by) s
+(53         the get_tmp_mem function. */) s
+(54    ) s
+(55    typedef struct mem_block {) s
+(56      int              size_free;) s
+(57      char             *mem;) s
+(58      struct mem_block *next;) s
+(59    } mem_block_t;) s
+(60    ) s
+(61    ) s
+(62    int ntab=1;  /* current indentation level of output source code */) s
+(63    int ntabf=1;) s
+(64    int ptabs=0;) s
+(65    ) s
+(66      /* static arrays for memory heaps */) s
+(67    static expr_t expr_mem[MAX_EXPR];) s
+(68    static expr_t *e_free;) s
+(69    static int num_e_free=MAX_EXPR;) s
+(70    static vect_t vect_mem[MAX_VECT];) s
+(71    static vect_t *v_free;) s
+(72    static int num_v_free=MAX_VECT;) s
+(73    static ident_t ident_mem[MAX_IDENT];) s
+(74    static ident_t *i_free;) s
+(75    static int num_i_free=MAX_IDENT;) s
+endpage
+%%Page: 2 2
+startpage
+(76    static s_expr_t s_expr_mem[MAX_S_EXPR];) s
+(77    static s_expr_t *s_free;) s
+(78    static int num_s_free=MAX_S_EXPR;) s
+(79    ) s
+(80      /* list of memory used by get_tmp_mem */) s
+(81    static mem_block_t *blocks=NULL;) s
+(82    ) s
+(83    save_t *save_list;) s
+(84    ) s
+(85    ) s
+(86    /* get_expr_mem - this fuctions allocates ONE expr_t blocks and returns a) s
+(87         pointer to the first one. n is obsolete */) s
+(88    ) s
+(89    expr_t *get_expr_mem\(int n\)) s
+(90    ) s
+(91    {) s
+(92      expr_t *ret;) s
+(93    ) s
+(94      if \(n==0\) {) s
+(95        puts\("Attempt to allocate 0 expression nodes, something wrong!"\);) s
+(96        exit\(1\);) s
+(97      }) s
+(98      num_e_free--;) s
+(99      if \(e_free==NULL\) {) s
+(100       puts\("Out of expression blocks!"\);) s
+(101       exit\(1\);) s
+(102     } else {) s
+(103       ret=e_free;) s
+(104       e_free=e_free->left;) s
+(105       ret->op=NOP;) s
+(106       ret->forall=NULL;) s
+(107       ret->dim=NULL;) s
+(108       ret->loc=NULL;) s
+(109       ret->shp=NULL;) s
+(110       ret->rot=NULL;) s
+(111       ret->stride=NULL;) s
+(112       ret->bound=NULL;) s
+(113       ret->index=NULL;) s
+(114       ret->left=NULL;) s
+(115       ret->ident=NULL;) s
+(116       ret->right=NULL;) s
+(117       ret->flags=0;) s
+(118       return\(ret\);) s
+(119     }) s
+(120   }) s
+(121   ) s
+(122   ) s
+(123   /* expr_free - place an expr block back on the free list */) s
+(124   ) s
+(125   expr_free\(expr_t *expr\)) s
+(126   ) s
+(127   {) s
+(128     expr->left=e_free;) s
+(129     e_free=expr;) s
+(130     num_e_free++;) s
+(131   }) s
+(132   ) s
+(133   ) s
+(134   /* get_vect - allocates space for one vect_t block and returns a pointer to) s
+(135        it. */) s
+(136   ) s
+(137   vect_t *get_vect\(\)) s
+(138   ) s
+(139   {) s
+(140     vect_t *ret;) s
+(141   ) s
+(142     num_v_free--;) s
+(143     if \(v_free==NULL\) {) s
+(144       puts\("Out of vector blocks!"\);) s
+(145       exit\(1\);) s
+(146     } else {) s
+(147       ret=v_free;) s
+(148       v_free=v_free->left;) s
+(149       ret->op=NOP;) s
+(150       ret->flags=0;) s
+endpage
+%%Page: 3 3
+startpage
+(151       ret->loc=NULL;) s
+(152       ret->index=NULL;) s
+(153       ret->shp=NULL;) s
+(154       ret->left=NULL;) s
+(155       ret->ident=NULL;) s
+(156       ret->right=NULL;) s
+(157       return\(ret\);) s
+(158     }) s
+(159   }) s
+(160   ) s
+(161   ) s
+(162   /* vect_free - place an vect block back on the free list */) s
+(163   ) s
+(164   vect_free\(vect_t *vect\)) s
+(165   ) s
+(166   {) s
+(167     vect->left=v_free;) s
+(168     v_free=vect;) s
+(169     num_v_free++;) s
+(170   }) s
+(171   ) s
+(172   ) s
+(173   /* get_ident - allocates space for an ident_t block and returns a pointer to) s
+(174        it. */) s
+(175   ) s
+(176   ident_t *get_ident\(\)) s
+(177   ) s
+(178   {) s
+(179     ident_t *ret;) s
+(180   ) s
+(181     num_i_free--;) s
+(182     if \(i_free==NULL\) {) s
+(183       puts\("Out of ident blocks!"\);) s
+(184       exit\(1\);) s
+(185     } else {) s
+(186       ret=i_free;) s
+(187       i_free=i_free->next;) s
+(188       ret->type=CONSTANT; ) s
+(189       ret->flags=0;) s
+(190       ret->array.dim=NULL;) s
+(191       ret->array.shp=NULL;) s
+(192       ret->array.rav=NULL;) s
+(193       ret->array.rule=NULL;) s
+(194       ret->next=NULL;) s
+(195       return\(ret\);) s
+(196     }) s
+(197   }) s
+(198   ) s
+(199   ) s
+(200   /* ident_free - place an ident block back on the free list */) s
+(201   ) s
+(202   ident_free\(ident_t *ident\)) s
+(203   ) s
+(204   {) s
+(205     ident->next=i_free;) s
+(206     i_free=ident;) s
+(207     num_i_free++;) s
+(208   }) s
+(209   ) s
+(210   ) s
+(211   /* get_s_expr - allocates space for an s_expr_t block and returns a pointer to) s
+(212        it. */) s
+(213   ) s
+(214   s_expr_t *get_s_expr\(\)) s
+(215   ) s
+(216   {) s
+(217     s_expr_t *ret;) s
+(218   ) s
+(219     num_s_free--;) s
+(220     if \(s_free==NULL\) {) s
+(221       puts\("Out of s_expr blocks!"\);) s
+(222       exit\(1\);) s
+(223     } else {) s
+(224       ret=s_free;) s
+(225       s_free=s_free->left;) s
+endpage
+%%Page: 4 4
+startpage
+(226       ret->op=NOP;) s
+(227       ret->flags=0;) s
+(228       ret->ident=NULL;) s
+(229       ret->left=ret->right=NULL;) s
+(230       return\(ret\);) s
+(231     }) s
+(232   }) s
+(233   ) s
+(234   ) s
+(235   /* s_expr_free - place an s_expr block back on the free list */) s
+(236   ) s
+(237   s_expr_free\(s_expr_t *s_expr\)) s
+(238   ) s
+(239   {) s
+(240     s_expr->left=s_free;) s
+(241     s_free=s_expr;) s
+(242     num_s_free++;) s
+(243   }) s
+(244   ) s
+(245   ) s
+(246   /* error - reports and error message to the screen */) s
+(247   ) s
+(248   void error\(char *msg\)) s
+(249   {) s
+(250     printf\("Error: %s, proceeding...\\n",msg\);) s
+(251   }) s
+(252   ) s
+(253   ) s
+(254   /* fatal - reports and error message to the screen and aborts the program */) s
+(255   ) s
+(256   void fatal\(char *msg\)) s
+(257   ) s
+(258   {) s
+(259     printf\("error: %s\\n",msg\);) s
+(260     exit\(1\);) s
+(261   }) s
+(262   ) s
+(263   ) s
+(264   /* get_mem - general allocation of size bytes from the system heap */) s
+(265   ) s
+(266   void *get_mem\(int size\)) s
+(267   ) s
+(268   {) s
+(269     void *ret;) s
+(270   ) s
+(271     if \(size==0\) {) s
+(272       error\("internal; get_mem called with 0"\);) s
+(273       return \(NULL\);) s
+(274     }) s
+(275     if \(\(ret=\(void *\) malloc\(size\)\)==NULL\) {) s
+(276       fatal\("Out of memory!"\);) s
+(277     }) s
+(278   ) s
+(279     return\(ret\);) s
+(280   }) s
+(281   ) s
+(282   /* get_tmp_mem - allocate size bytes from the system heap that can) s
+(283        be deallocated when free_tmp_mem is called.  */) s
+(284   ) s
+(285   void *get_tmp_mem\(int size\) ) s
+(286   ) s
+(287   {) s
+(288     mem_block_t *node;) s
+(289     void *ret;) s
+(290   ) s
+(291     /* the implementation of this has an unknown bug so the memory is just) s
+(292        allocated and is never deallocated. */) s
+(293   ) s
+(294     return\(get_mem\(size\)\);) s
+(295   ) s
+(296   /*) s
+(297      faulty implementation) s
+(298   ) s
+(299     if \(\(blocks==NULL\)||\(blocks->size_free<size\)\) {) s
+(300       node=\(mem_block_t *\) get_mem\(sizeof\(mem_block_t\)\);) s
+endpage
+%%Page: 5 5
+startpage
+(301       node->mem=\(char *\) get_mem\(TMP_BLOCK_SIZE\);) s
+(302       node->size_free=TMP_BLOCK_SIZE;) s
+(303       node->next=blocks;) s
+(304       blocks=node;) s
+(305     }) s
+(306   ) s
+(307     blocks->size_free-=size;) s
+(308     ret=blocks->mem+blocks->size_free;) s
+(309   ) s
+(310     return\(ret\);) s
+(311   */) s
+(312   }) s
+(313   ) s
+(314   ) s
+(315   /* free_tmp_mem - frees any temporary memory allocated by get_tmp_mem */) s
+(316   ) s
+(317   void free_tmp_mem\(\)) s
+(318   ) s
+(319   {) s
+(320     mem_block_t *node,*junk;) s
+(321     ) s
+(322     node=blocks;) s
+(323     while \(node!=NULL\) {) s
+(324       free\(node->mem\);) s
+(325       junk=node;) s
+(326       node=node->next;) s
+(327       free\(junk\);) s
+(328     }) s
+(329   ) s
+(330     blocks=NULL;) s
+(331   }) s
+(332   ) s
+(333   /* get_statement - allocate space for a statement_t object and add it to) s
+(334        the save_list so it will be saved during garbage collection */) s
+(335   ) s
+(336   statement_t *get_statement\(int kind\)) s
+(337   ) s
+(338   {) s
+(339     save_t *save;) s
+(340     statement_t *ret;) s
+(341   ) s
+(342     ret=\(statement_t *\) get_mem\(sizeof\(statement_t\)\);) s
+(343     save=\(save_t *\) get_mem\(sizeof\(save_t\)\);) s
+(344     save->statement=ret;) s
+(345     save->next=save_list;) s
+(346     save_list=save;) s
+(347   ) s
+(348     ret->kind=kind;) s
+(349     switch \(kind\) {) s
+(350     case LOOP:) s
+(351       ret->d.loop=\(loop_t *\) get_mem\(sizeof\(loop_t\)\);) s
+(352       break;) s
+(353     case ASSIGN:) s
+(354       ret->d.assign=\(assign_t *\) get_mem\(sizeof\(assign_t\)\);) s
+(355       break;) s
+(356     }) s
+(357     ) s
+(358     return\(ret\);) s
+(359   }) s
+(360   ) s
+(361   ) s
+(362   /* clear_saves - empty the save list */) s
+(363   ) s
+(364   clear_saves\(\)) s
+(365   ) s
+(366   {) s
+(367     save_list=NULL;) s
+(368   }) s
+(369   ) s
+(370   ) s
+(371   /* copy_expr - allocats an expr_t block and) s
+(372        copies the expr_t passed in to the new.  Returns the new block. */) s
+(373   ) s
+(374   expr_t *copy_expr\(expr_t *expr\)) s
+(375   ) s
+endpage
+%%Page: 6 6
+startpage
+(376   {) s
+(377     expr_t *new;) s
+(378   ) s
+(379     new=get_expr_mem\(1\);) s
+(380     *new=*expr;) s
+(381     return\(new\);) s
+(382   }) s
+(383   ) s
+(384   ) s
+(385   /* dotab - print spaces up to the current idention piont in ntab */) s
+(386   ) s
+(387   dotab\(int adj\)) s
+(388   ) s
+(389   {) s
+(390     int i;) s
+(391   ) s
+(392     for \(i=0; i<ntab+adj; i++\) fprintf\(tfile,"  "\);) s
+(393   }) s
+(394   ) s
+(395   /* dotab - print spaces up to the current idention piont in ntabs to file fd */) s
+(396   ) s
+(397   dotabf\(FILE *fd, int adj\)) s
+(398   ) s
+(399   {) s
+(400     int i;) s
+(401   ) s
+(402     if \(fd==tfile\)) s
+(403       for \(i=0; i<ntab+adj+ntabf-1; i++\) fprintf\(tfile,"  "\);) s
+(404     else) s
+(405       for \(i=0; i<adj+ntabf; i++\) fprintf\(fd,"  "\);) s
+(406   }) s
+(407   ) s
+(408   ) s
+(409   /* do_ptab - print spaces up to the current idention piont in ptabs */) s
+(410   ) s
+(411   do_ptab\(int adj\)) s
+(412   ) s
+(413   {) s
+(414     int i;) s
+(415   ) s
+(416     for \(i=0; i<ptabs+adj; i++\) fprintf\(rfile,"  "\);) s
+(417   }) s
+(418   ) s
+(419   ) s
+(420   /* stats - reports the memory usage */) s
+(421   ) s
+(422   stats\(\)) s
+(423   ) s
+(424   {) s
+(425     printf\("Memory usage:"\);) s
+(426     printf\(" Expr. Blks \(%d\)=%d",sizeof\(expr_t\),MAX_EXPR-num_e_free\);) s
+(427     printf\("  Vect. Blks \(%d\)=%d",sizeof\(vect_t\),MAX_VECT-num_v_free\);) s
+(428     printf\("  Idnt. Blks \(%d\)=%d",sizeof\(ident_t\),MAX_IDENT-num_i_free\);) s
+(429     printf\("  S_expr. Blks \(%d\)=%d",sizeof\(ident_t\),MAX_S_EXPR-num_s_free\);) s
+(430     printf\("\\n"\);) s
+(431   }) s
+(432   ) s
+(433   /* mark_ident - mark an identifier and anything it points to */) s
+(434   ) s
+(435   mark_ident\(ident_t *ident\)) s
+(436   ) s
+(437   {) s
+(438     int i,tau,bound;) s
+(439   ) s
+(440     if \(ident!=NULL\) {) s
+(441       ident->type|=MARK; ) s
+(442       mark_ident\(ident->array.dim\);) s
+(443       if \(ident->array.shp!=NULL\) {) s
+(444         tau=1;) s
+(445           /* if dim is NULL it must be a vector */) s
+(446           /* otherwise since shp!=NULL the dim must have a value */) s
+(447         bound=\(ident->array.dim==NULL\) ? 1 : ident->array.dim->value;) s
+(448         for \(i=0; i<bound; i++\) {) s
+(449           if \(\(ident->array.shp[i]->type&0x7fff\)==CONSTANT\)) s
+(450             tau*=ident->array.shp[i]->value;) s
+endpage
+%%Page: 7 7
+startpage
+(451           mark_ident\(ident->array.shp[i]\);) s
+(452         }) s
+(453   ) s
+(454         if \(ident->array.rav!=NULL\) {  /* if rav!=NULL then tau must be valid */) s
+(455           for \(i=0; i<tau; i++\) {) s
+(456             mark_s_expr\(ident->array.rav[i]\);) s
+(457           }) s
+(458         }) s
+(459       }) s
+(460     }) s
+(461   }) s
+(462   ) s
+(463   /* mark_ident_list - mark an identifier list and anything it points to */) s
+(464   ) s
+(465   mark_ident_list\(ident_t *ident\)) s
+(466   ) s
+(467   {) s
+(468     while \(ident!=NULL\) {) s
+(469       mark_ident\(ident\);) s
+(470       ident=ident->next;) s
+(471     }) s
+(472   }) s
+(473   ) s
+(474   ) s
+(475   /* mark_vect - mark a vector and anything it points to */) s
+(476   ) s
+(477   mark_vect\(vect_t *vect\)) s
+(478   ) s
+(479   {) s
+(480     if \(vect!=NULL\) {) s
+(481       vect->op|=MARK;) s
+(482       mark_s_expr\(vect->index\);) s
+(483       mark_s_expr\(vect->loc\);) s
+(484       mark_s_expr\(vect->shp\);) s
+(485       mark_ident\(vect->ident\);) s
+(486       mark_vect\(vect->left\);  ) s
+(487       mark_vect\(vect->right\);) s
+(488     }) s
+(489   }) s
+(490   ) s
+(491   ) s
+(492   /* mark_expr - mark an array expression and anything it points to */) s
+(493   ) s
+(494   mark_expr\(expr_t *expr\)) s
+(495   ) s
+(496   {) s
+(497     if \(expr!=NULL\) {) s
+(498       expr->op|=MARK;) s
+(499       mark_s_expr\(expr->dim\);) s
+(500       if \(expr->forall!=NULL\) {) s
+(501         mark_vect\(expr->forall->bound\);) s
+(502         mark_ident\(expr->forall->fa\);) s
+(503       }) s
+(504       mark_vect\(expr->index\);) s
+(505       mark_vect\(expr->bound\);) s
+(506       mark_vect\(expr->loc\);) s
+(507       mark_vect\(expr->shp\);) s
+(508       mark_vect\(expr->rot\);) s
+(509       mark_vect\(expr->stride\);) s
+(510       mark_ident\(expr->ident\);) s
+(511       mark_expr\(expr->left\);) s
+(512       mark_expr\(expr->right\);) s
+(513     }) s
+(514   }) s
+(515   ) s
+(516   /* mark_s_expr - mark a scalar expression and anything it points to */) s
+(517   ) s
+(518   mark_s_expr\(s_expr_t *s_expr\)) s
+(519   ) s
+(520   {) s
+(521     if \(s_expr!=NULL\) {) s
+(522       s_expr->op|=MARK;) s
+(523       mark_s_expr\(s_expr->left\);) s
+(524       mark_s_expr\(s_expr->right\);) s
+(525       mark_ident\(s_expr->ident\);) s
+endpage
+%%Page: 8 8
+startpage
+(526     }) s
+(527   }) s
+(528   ) s
+(529   /* collect_reduced - mark anything referenced in a list of reduced_t objects */) s
+(530   ) s
+(531   collect_reduced\(reduced_t *reduced\)) s
+(532   ) s
+(533   {) s
+(534     reduced_t *node,*tmp;) s
+(535   ) s
+(536     node=reduced;) s
+(537     while \(node!=NULL\) {) s
+(538       switch \(node->type\) {) s
+(539       case SKIP:) s
+(540         break;) s
+(541       case ALLOCATE:) s
+(542         mark_expr\(node->d.frag\);) s
+(543         break;) s
+(544       case EXT_OP:) s
+(545         mark_expr\(node->d.frag\);) s
+(546         break;) s
+(547       case NOP:) s
+(548         tmp=node->d.list;) s
+(549         while \(tmp!=NULL\) {) s
+(550           mark_expr\(tmp->d.frag\);) s
+(551           tmp=tmp->next;) s
+(552         }) s
+(553         break;) s
+(554       case FORALL:) s
+(555         mark_expr\(node->d.list->d.frag\);) s
+(556         collect_reduced\(node->d.list->next\);) s
+(557         break;) s
+(558       default:) s
+(559         fatal\("Internal error: collect_reduced"\);) s
+(560       }) s
+(561       node=node->next;) s
+(562     }) s
+(563   }) s
+(564   ) s
+(565   /* collect_garbage - performs garbage collection.  Everthing in) s
+(566        the reduced, list, and dist structures are marked.  Then anything) s
+(567        not marked is returned to the heap. */) s
+(568   ) s
+(569   collect_garbage\(reduced_t *reduced, save_t *list, dist_t *dist\)) s
+(570   ) s
+(571   {) s
+(572     dist_t *dnode;) s
+(573     save_t *node;) s
+(574   ) s
+(575     if \(list!=NULL\)) s
+(576       collect_reduced\(reduced\);) s
+(577   ) s
+(578     dnode=dist;) s
+(579     while \(dnode!=NULL\) {) s
+(580       mark_ident\(dnode->ident\);) s
+(581       mark_vect\(dnode->shp\);) s
+(582       mark_vect\(dnode->c\);) s
+(583       mark_vect\(dnode->g\);) s
+(584       mark_vect\(dnode->e\);) s
+(585       mark_vect\(dnode->pl\);) s
+(586       mark_vect\(dnode->pb\);) s
+(587       dnode=dnode->next;) s
+(588     }) s
+(589   ) s
+(590     node=list;) s
+(591     while \(node!=NULL\) {) s
+(592       switch \(node->statement->kind\) {) s
+(593       case DYNAMIC:) s
+(594         mark_expr\(node->statement->d.dynamic\);) s
+(595         break;) s
+(596       case REDUCED:) s
+(597         collect_reduced\(node->statement->d.reduced\);) s
+(598         break;) s
+(599       case LOOP:) s
+(600         mark_expr\(node->statement->d.loop->lower\);) s
+endpage
+%%Page: 9 9
+startpage
+(601         mark_expr\(node->statement->d.loop->var\);) s
+(602         mark_expr\(node->statement->d.loop->upper\);) s
+(603         break;) s
+(604       case CALL:) s
+(605         collect_reduced\(node->statement->d.reduced\);) s
+(606         break;) s
+(607       case EXTENDED:) s
+(608         mark_extended\(node\);) s
+(609         break;) s
+(610       default:) s
+(611         fatal\("Internal error: collect_garbage"\);) s
+(612       }) s
+(613       node=node->next;) s
+(614     }) s
+(615   ) s
+(616     collect_mem\(\);) s
+(617   }) s
+(618   ) s
+(619   ) s
+(620   /* collect_mem - return anything unmarked to the heap */) s
+(621   ) s
+(622   collect_mem\(\)) s
+(623   ) s
+(624   {) s
+(625     ident_t **sym_table;) s
+(626     int i,s;) s
+(627   ) s
+(628     sym_table=ret_table\(&s\);) s
+(629     for \(i=0; i<s; i++\) {) s
+(630       mark_ident_list\(sym_table[i]\);) s
+(631     }) s
+(632     ) s
+(633     e_free=NULL;) s
+(634     num_e_free=0;) s
+(635     for \(i=0; i<MAX_EXPR; i++\) {) s
+(636       if \(\(expr_mem[i].op&\(MARK\)\)>0\)) s
+(637         expr_mem[i].op&=NMARK;) s
+(638       else) s
+(639         expr_free\(expr_mem+i\);) s
+(640     }) s
+(641     buffer.op&=NMARK;) s
+(642   ) s
+(643     s_free=NULL;) s
+(644     num_s_free=0;) s
+(645     for \(i=0; i<MAX_S_EXPR; i++\) {) s
+(646       if \(\(s_expr_mem[i].op&\(MARK\)\)>0\)) s
+(647         s_expr_mem[i].op&=NMARK;) s
+(648       else) s
+(649         s_expr_free\(s_expr_mem+i\);) s
+(650     }) s
+(651     s_const0.op&=NMARK;) s
+(652     s_const1.op&=NMARK;) s
+(653   ) s
+(654     v_free=NULL;) s
+(655     num_v_free=0;) s
+(656     for \(i=0; i<MAX_VECT; i++\) {) s
+(657       if \(\(vect_mem[i].op&\(MARK\)\)>0\)) s
+(658         vect_mem[i].op&=NMARK;) s
+(659       else) s
+(660         vect_free\(vect_mem+i\);) s
+(661     }) s
+(662     empty_vec.op&=NMARK;) s
+(663     zero_vec.op&=NMARK;) s
+(664     one_vec.op&=NMARK;) s
+(665     pad_one.op&=NMARK;) s
+(666     pad_zero.op&=NMARK;) s
+(667   ) s
+(668     i_free=NULL;) s
+(669     num_i_free=0;) s
+(670     for \(i=0; i<MAX_IDENT; i++\) {) s
+(671       if \(\(ident_mem[i].type&\(MARK\)\)>0\)) s
+(672         ident_mem[i].type&=NMARK;) s
+(673       else) s
+(674         ident_free\(ident_mem+i\); ) s
+(675     }) s
+endpage
+%%Page: 10 10
+startpage
+(676   ) s
+(677     const0.type&=NMARK;) s
+(678     const1.type&=NMARK;) s
+(679     unmark_statics\(\);) s
+(680   }) s
+(681   ) s
+(682   /* mem_init - initializes the memory for our private memory management */) s
+(683   ) s
+(684   mem_init\(\)) s
+(685   ) s
+(686   {) s
+(687     int i;) s
+(688   ) s
+(689     /* create a free list containt the entire expr_t heap */) s
+(690     for \(i=0; i<MAX_EXPR-1; i++\) {) s
+(691       expr_mem[i].left=expr_mem+i+1;) s
+(692       expr_mem[i].op=NOP;) s
+(693     }) s
+(694     expr_mem[i].left=NULL;) s
+(695     expr_mem[i].op=NOP;) s
+(696     e_free=expr_mem;) s
+(697   ) s
+(698     /* create a free list containt the entire s_expr_t heap */) s
+(699     for \(i=0; i<MAX_S_EXPR-1; i++\) {) s
+(700       s_expr_mem[i].left=s_expr_mem+i+1;) s
+(701       s_expr_mem[i].op=NOP;) s
+(702     }) s
+(703     s_expr_mem[i].left=NULL;) s
+(704     s_expr_mem[i].op=NOP;) s
+(705     s_free=s_expr_mem;) s
+(706   ) s
+(707     /* create a free list containt the entire vect_t heap */) s
+(708     for \(i=0; i<MAX_VECT-1; i++\) {) s
+(709       vect_mem[i].left=vect_mem+i+1;) s
+(710       vect_mem[i].op=NOP;) s
+(711     }) s
+(712     vect_mem[i].left=NULL;) s
+(713     vect_mem[i].op=NOP;) s
+(714     v_free=vect_mem;) s
+(715   ) s
+(716     /* create a free list containt the entire ident_t heap */) s
+(717     for \(i=0; i<MAX_IDENT-1; i++\) {) s
+(718       ident_mem[i].next=ident_mem+i+1;) s
+(719       ident_mem[i].type=CONSTANT;) s
+(720       ident_mem[i].array.dim=NULL;) s
+(721       ident_mem[i].array.shp=NULL;) s
+(722       ident_mem[i].array.rav=NULL;) s
+(723     }) s
+(724     ident_mem[i].next=NULL;) s
+(725     ident_mem[i].type=CONSTANT;) s
+(726     ident_mem[i].array.dim=NULL;) s
+(727     ident_mem[i].array.shp=NULL;) s
+(728     ident_mem[i].array.rav=NULL;) s
+(729     i_free=ident_mem;) s
+(730   ) s
+(731   }) s
+endpage
+
+%%Trailer
+cleanup
+docsave restore end

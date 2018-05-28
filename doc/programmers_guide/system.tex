@@ -1,0 +1,802 @@
+\documentstyle[epsf]{article}
+
+\addtolength{\topmargin}{-.75in}
+\addtolength{\textwidth}{1.6in}
+\setlength{\textheight}{8.75in}
+\addtolength{\oddsidemargin}{-0.75in}
+\addtolength{\evensidemargin}{-0.75in}
+\setlength{\parskip}{.1in}
+
+\newcommand{\cat}{+\!\!\!\!+}
+\newcommand{\take}{\,\bigtriangleup\,}
+\newcommand{\drop}{\,\bigtriangledown\,}
+\newcommand{\karate}{\!\widehat{\hbox to 10pt{}}\!}
+\newcommand{\rshp}{\widehat{\rho}}
+
+\title{PSI Compiler\\Programmer's Guide}
+\author{}
+
+\begin{document}
+\maketitle
+\tableofcontents
+
+\section{Overview}
+\begin{figure}
+\begin{center}
+\leavevmode
+\epsfbox{structure.ps}
+\end{center}
+\caption{Module call structure of the compiler}
+\label{structure}
+\end{figure}
+  This section describes the structure and operation of the compiler in
+a very general sense.  The compiler consists of many modules that may be
+grouped into several groups.  Like any compiler, there is a module
+that drives the operation of the compiler, a lexical analyzer that converts
+the input into a stream of tokens, a parser that checks the syntax of the
+input and creates an internal representation of the input program, and
+code generation modules that convert the internal representation into
+an output program in the output language.  In addition to that, the PSI 
+Compiler contains modules that perform reductions on array expressions.
+Essentially this can be viewed as a source to source transformation of the
+internal representation and thus is invoked between parsing and code 
+generation.  
+
+Figure \ref{structure} shows the different sections that make up
+the compiler and how they relate to each other.  The arrows indicate that
+the section at the tail invokes the section at the head.  The sections to
+the right of the parser section are invoked in order from top to bottom.  Each
+section in the figure represents one or more C modules.  The following
+table lists the C modules that belong to each section.
+
+\begin{tabular}{ll}
+driver & main.c -- invokes initialization routines and the parser \\
+lexical analyzer & lex.c -- reads and tokenizes the input file \\
+input parser & parse.c -- parses the input and invokes many things \\
+shape analyzer & moa\_func.c -- computes the shape of expressions \\
+reduction engine & psi.c -- uses rewrite rules to reduce expressions \\
+code generation & code.c -- generates output code \\
+distributed code gen. & part.c -- partitions arrays \\
+ & dist.c -- generates code for assignments of dist. arrays \\
+auxiliary & vect.c -- symbolic manipulation of vector expressions \\
+ & ident.c -- symbolic manipulation of scalar expressions \\
+ & poly.c -- symbolic manipulation of normalized polynomials \\
+ & scalar.c -- converts to and from normalized polynomial forms \\
+ & values.c -- identifies constants (used by scalar.c) \\
+ & output.c -- prints expressions, in internal form, in MOAL \\
+system (not shown) & sys.c -- used by all for system related activity and \\
+ & maintains memory management with garbage collection \\
+\end{tabular}
+
+The overall flow of execution of the compiler is as follows.  The main module
+scans the command line arguments and opens appropriate input and output files.
+It then calls the initialization routines of all modules that require one.  
+Then the parser is called.  The MOAL parser is a recursive descent parser.  The
+parser parses the input of the program by repetitively calling the lexical
+analyzer to retrieve the next token from the input stream.  When a subprogram
+declaration has been parsed the arguments of the subprogram are defined in
+a symbol table and the declaration is translated to the output.  When variable
+declarations are parsed they are defined in the parsers symbol table.
+When directives are parsed some global variables are set that control the
+behavior of the compiler.  A subroutine body may contain assignments, {\bf for}
+loops, or allocate statements.  When assignment statements are parsed the 
+shape analysis module is called to build an expression tree, for the right
+hand side of the assignment, that has a defined shape at each node.  The 
+expression is reduced by the reduction engine and the 
+assignment statement is stored in a list of statements.  When {\bf for} loops 
+or allocate statements are parsed they create entries in the list of 
+statements.
+After the statement body has been completely parsed, the list of statements
+is passed to code generation.  If the target architecture is a multi-processor
+architecture then the list of statements is used by the partitioner (part.c) 
+to create a list of distributions for each array that is used by the 
+distributed code generation module.
+
+\section{Programming Style}
+  Of course it is difficult to dictate style but some issues are of 
+importance.  The man consideration is that the compiler remain a modular
+system.  That is, procedures that conceptually belong together should be
+kept together.  As demonstrated by the previous section, if modularity
+is maintained then the structure of the code can be easily explained and
+understood.  If a module's contents can not be described in one or two 
+sentences, it probably contains too much.  
+
+In C modules are represented by
+separate C files, since it has no language construct for modules.  To maintain
+separate files in C, each file should have a corresponding file with the
+same name only with a .e extension.  This is an export file and should contain
+prototypes for procedures that may be used outside the module and extern 
+declarations for variables that may be used outside the module.
+
+Each file contains a list of changes that have been made at the top of the
+file; this should be maintained.  The file VERSION should have an update
+list of general changes made to the compiler indicating date and version.
+
+Keep in mind that other people will have to read, understand and possible
+change your code.  Thus it should be readable and easy to understand.
+Efficiency is not a major concern in this project and should not conflict
+with the readability of the algorithms.
+
+\section{Data Structures}
+Nearly all data structures are defined in the psi.h header file.  The following
+sections describe the semantics of these data types.  Some of the data types
+are used with more then one set of semantics during different stages of the
+compiler.
+
+Since garbage collection is used for most of these data types, the sys.c 
+module should be consulted before allocating objects of these types.  If
+an object that is being maintained by garbage collection is allocated using
+get\_mem (malloc), obscure side effects will occur that are difficult to 
+trace back to the problem.
+
+\subsection{Tokens (symbol\_t,emit\_t)}
+Tokens are used to represent the input string of characters as a stream
+of numeric tokens which are easier to manipulate and take less space.
+Tokens are passed to the parser through the global variable emit which
+is of the type emit\_t.  emit\_t contains two fields $index$ and $arg$.
+$index$ represents the token as specified by the \#define's in parse.h.
+If $index$ is NAME1 or NUMBER1 then more information is required to 
+identify the token.  If $index$ is NAME1 then $arg1$ is an arbitrary number
+that will represent that name throughout the execution of the compiler.
+If $index$ is NUMBER1 then $arg1$ is the number that was read.
+
+Since each name is given a unique number that remains constant every time it
+is read, a table of these values must be maintained.  The table of values
+is maintained in a hash table of linked lists.  The linked lists are lists
+of the type symbol\_t.  It contains a $name$ field that identifies the string
+represented by the particular element of the list.  The $index$ field 
+identifies
+the unique number that has been associated with that string.  If a string
+is parsed that is not found in the table, a unused number is assigned to it
+and and a new entry in the table is created.
+
+During initialization, the keywords of the input language are entered into
+the table.  Since these are not identifiers, there needs to be a distinction
+between an entry in the table for a keyword and one for an identifier name.
+The distinction is made with the $isname$ field of the symbol\_t structure.
+
+\subsection{The Symbol Table}
+As in the lexical analyzer, the parser associates certain information with
+identifiers that must be retained and retrieved every time they are 
+encountered.  So the parser also maintains a symbol table.  The information
+that is required is the information that is specified by a variable 
+declaration.  For example, the variable's type.  This table is also maintained
+as a hash table of linked lists.  The nodes of the list are of the ident\_t
+type.  This type is described in the next section.
+
+\subsection{Identifiers (ident\_t)}
+The ident\_t type is used in many places in the compiler and represents
+all known information about a particular data object.  It is defined in the
+psi.h header file. The $string$ field
+contains the actual string name of the data object.  The $index$ is the
+number that was assigned to this string by the lexical analyzer.  The $real$
+field indicates the base type of the object.  It will be TRUE for real numbers
+and FALSE for integers.  The $type$ field unfortunately does not really 
+indicated type but kind of data objects.  Its value may take on those
+defined immediately preceding it the psi.h file.  They are:
+
+\begin{description}
+\item[FLOAT] This is a constant.  It may actually be an integer or a float
+depending on $real$ but is called FLOAT as an artifact of when the compiler did
+not have an integer type.  An object of this kind will use the $value$ field
+to represent the constant value, regardless of its type.
+
+\item[VAR\_FLOAT] This is a variable scalar value.  No special fields are used
+for objects of this kind.
+
+\item[CONST\_ARRAY] This is a constant array.  This kind uses the $array.dim$
+field to indiciate the dimension of the array, the $array.shp$ field to 
+indicate the shape of the array, and the $array.cnst$ field to store the
+values of the constant array.
+
+\item[EMBEDED\_ARRAY] This is a constant array that has been previously 
+assigned to some temporary variable.  The $string$ field will hold the name
+of the temporary variable not the constants name.  The other field described
+for the CONST\_ARRAY kind the same here.  Sometimes it is necessary, during
+code generation, access a constant array dynamically.  This means it needs
+to be assigned to a temporary variable.  If this is done its kind is changed
+the EMBEDED\_ARRAY kind so that if it needs to be accessed dynamically again,
+the same temporary can be used rather then create a new one and do the same
+assignment.
+
+\item[ARRAY] This is an array variable.  This kind uses the $array.dim$ and
+$array.shp$ fields the same way as the CONST\_ARRAY kind.
+
+\item[RAV] This is an array that has been built from scalar expressions.  This 
+kind uses the $array.dim$ and $array.shp$ fileds the same way as the CONST\_
+ARRAY kind.
+The $array.rav$ field is also used to store the elements of the array.  Since
+these elements may be constants, scalar variables, or even expressions they
+are represented by the s\_expr\_t type.  The s\_expr\_t represents scalar
+expressions.
+
+\item[IOTA] Is a special kind to represent the iota constructor.  Iota builds
+a particular array but there is no need to actually build it unless it is
+used somewhere.  This kind represents that array and if it is encountered 
+during code generation then the module has built in knowledge of the contents
+of the array constructed by iota.  The $array.dim$ and $array.shp$ fields are
+still used as with the other array kinds.
+\end{description}
+The $array.rule$ field can be set for any array kind and indicates a users
+explicit distribution for the array on a distributed system.
+
+Currently the compiler requires the dimension of every array be known
+so the dimension of an array is a constant.  However, in the hope that in
+the future a dimension may be a variable, the $array.dim$ field is a pointer
+to an identifier.  The shape of an array may be a constant or a variable so
+each element of the shape is a pointer to an identifier.  Since the shape
+is a vector of such, the $array.shp$ field is a pointer to an array of pointers
+to identifiers.  The length of the array of pointers is the dimension of the
+array variable.
+
+The $flags$ field is used to attach different attributes to objects.  
+Attributes are represented by a group of bits of the $flags$ field. The 
+different attributes represented by $flags$ are:
+
+\begin{description}
+\item[GLOBAL] This object is duplicated on all processors on a distributed
+memory architecture.  This can be set by the user with the global directive
+statement.
+
+\item[DYNAMIC] This object has an unknown shape and must be allocated 
+dynamically.
+
+\item[USED] This object has been used in a previous assignment statement.  If 
+this is not the case and it is also not DYNAMIC or a PARAMETER then it needs
+to be allocated.
+
+\item[HASSHAPE] This indicates that a dynamic array has been allocated somehow
+and can now be used in an assignment (i.e. its shape is known).
+
+\item[PARAMETER] This object is a parameter to the subprogram currently being
+parsed.
+
+\item[CODED] This object has been assigned to a variable.  This is used to
+recognize a RAV kind object that can be accessed through a variable rather
+then its element wise scalar expressions.
+\end{description}
+All of these attributes can be set, reset, or checked by macros defined in
+the psi.h file.
+
+The $next$ field of ident\_t points to the next node in a symbol table list.
+Since the same objects of ident\_t type are used in expressions and in the 
+symbol table, this field may not be used anywhere except by the symbol table
+procedures.
+
+\subsection{Scalar Expressions (s\_expr\_t)}
+Scalar expressions are expressions involving only scalar objects.  The
+s\_expr\_t represents these expressions as expression trees.  The $op$
+field represents the operation performed at that node.  The possible values
+of $op$ are \#define'd immediately after the definition of s\_expr\_t in
+the psi.h file.  If $op$ is NOP then the $ident$ field is a pointer to a 
+variable or constant represented by this node.  If $op$ is a binary operator
+then the $left$ and $right$ fields point to the left and right arguments
+to the operator.  If $op$ is a unary operator then most often the $left$
+field will point to the argument to the operator.  Some special unary operators
+might allow either $left$ or $right$ be the argument and require the other to
+be NULL in order to determine which is the correct one.  $flags$ represents 
+attributes as with ident\_t.  The only attribute associated with objects of 
+type s\_expr\_t
+is CODED.  It has a similar meaning to that described for ident\_t.
+
+The \#define'd values for $op$ are used for scalar, vector, and array 
+expressions, so not all of them can be used with any given kind of expression.
+The valid operators for expressions represented by s\_expr\_t are
+NOP, ABS, IF\_NEG, IF\_POS, PLUS, MINUS, SKIP, TIMES, DIVIDE, MIN, MAX,
+and MOD.
+
+\subsection{Vector Expressions (vect\_t)}
+Vector expressions are expressions that involve only one dimensional array
+objects.  These expressions are used to represent internal vectors described in
+{\it Array Expressions} and shape vectors.  Since many of the reduction rules
+are described in terms of MOA operations on vectors, the MOA operations on 
+vectors are built into the compiler and are contained in the vect.c module.
+Like s\_expr\_t these expressions are represented as expression trees.  The 
+$op$ field represents the operation performed at that node.  The possible 
+values of $op$ are \#define'd immediately above the definition of vect\_t in
+the psi.h file.  If $op$ is NOP then the $ident$ field is a pointer to a 
+variable or constant represented by this node.  If $op$ is a binary operator
+then the $left$, and $right$ fields point to the left and right arguments
+to the operator.  If $op$ is a unary operator then most often the $left$
+field will point to the argument to the operator.  Some special unary operators
+might allow either $left$, or $right$ be the argument and require the other
+be NULL to determine which is the correct one.  $flags$ represents attributes
+as with ident\_t.  The only flag associated with objects of type vect\_t
+is CODED.  It as a similar meaning to that described for ident\_t.
+
+  The $shp$ field is used to represent the shape of the vector; this is a
+scalar expression.  Also scalar expressions, the fields $index$ and $loc$
+are used to indicate the index of the first element and the location of
+the vector in the result.  The expression (2 drop some vector)
+will be represented with a vect\_t that has an index
+of 2 and points to the vector argument.  The expression ($a$ cat $b$) would be
+represented by a tree containing $a$ left of the root and $b$ on the right.
+The location of $b$ in the result is the shape of $a$, in accordance with
+the definition of cat.  Thus the $loc$ field of the $b$ node would be equal to
+the shape of $a$.
+
+The \#define'd values for $op$ are used for scalar, vector, and array 
+expressions so not all of them can be used with any given kind of expression.
+The valid operators for expressions represented by vect\_t are
+NOP, ABS, IF\_NEG, IF\_POS, PLUS, MINUS, SKIP, TIMES, DIVIDE, MIN, MAX,
+CAT, STORE, RSCAN, SCAN, and MOD.
+
+\subsection{Array Expressions (expr\_t,parser\_t,forall\_t)}
+Array expressions are stored in expression trees using the expr\_t type.
+The $op$ field specifies the operator represented by the node or NOP, if
+it is a leaf of the expression tree.
+The expr\_t is also used for propagating information through the expression
+during shape analysis and while reducing expressions.  For the purpose of
+shape analysis, the $shp$ and $dim$ fields of expr\_t represents the shape and
+dimension of the
+sub-expression represented by the sub-tree whose root is that expr\_t.
+
+The EXT\_OP operator and $ext\_op$ and $ext\_str$ fields
+have been included to support external operations.
+The nodes must be created and maintained by external routines.  When they
+are encountered during the reduction process an external routine 
+$reduce\_external$ is called.  Likewise, during code generation if 
+a reduced\_t (discussed later) is encountered with the EXT\_OP operator then
+the external routine $code\_external$ is called.
+
+Several vect\_t fields are used during the reduction process.  The fields are
+$index, bound,$ and $loc$.  They are undefined until the reduction
+process begins.  The function $psi\_reduce$ performs the forward reduction.
+The reduction process is described in 
+the UMR technical report ``A Reduction Semantics for Array 
+Expressions: The PSI Compiler''.  The first thing done
+is to convert an expression
+$$A=\xi$$ into the equivalent form
+$$\vec{b}\take(\vec{l}\drop A)=\vec{b}\take(\vec{i}\drop \xi)$$
+where $\vec{b}=\rho\xi$, $\vec{l}=(\delta A)\rshp 0$, and
+$\vec{i}=(\delta\xi)\rshp 0$.  This second expression is represented
+in the expression tree by setting $bound=\vec{b}, loc=\vec{l}$ and
+$index=\vec{i}$ in the top node of the tree.  The forward reduction is
+then performed by using the reduction rules in the technical report to derive 
+new expressions of the left and right arguments of the outermost operator, 
+eliminating the outermost operator.  The outermost operator in the tree
+is, of course, the top node.  So the reduction rules tell us how to compute
+$index, bound,$ and $loc$ for the two arguments (left and right branches)
+of the top node.  Then, to eliminated that operator we just move down the
+tree, first to the left then to the right, recursively calling $psi\_reduce$
+to reduce the expressions that resulted from the last reduction.  The
+$rot$ field was also include for future use when rotate is implemented, but
+is currently unused.
+
+The $left$ and $right$ fields are the arguments to the operator, if any.
+The $ident$ field is used for the NOP operator, which is used for the leaves
+of the expression tree.  The $flags$ field marks the node with certain 
+attributes of leaf nodes.  The valid attributes are
+\begin{description}
+\item[ALLOC] Indicates that this array has been allocated.
+\item[SCANNED] Indicates that the $shp$ field of this node is now equal to
+$_{*}\mbox{scan}\;(\rho\xi )$ if the node represents $\xi$.  This is used
+to make the computation of $\gamma$ easier.
+\end{description}
+There are macros defined in psi.h to set,reset, and check these flags.
+
+The $func$ field is a string representation of the operator represented
+by the node.  This is used for convenience during code generation.
+
+During shape analysis, omega operations are eliminated using the
+definition of omega.  The definition involves a forall expression that
+must also be represented in the tree.  The $left$ argument of an omega
+node is the expression that results from applying the definition of omega.
+The $forall$ field of expr\_t is used to describe the forall expression
+that results from applying the definition.  $forall$ is a pointer to a
+forall\_t type.  The $fa$ field of forall\_t is a new vector variable that
+is created for the forall expression.  The $bound$ field represents the
+bounds of the forall expression.
+
+For historical reasons the parser does not deal directly with expressions
+as expr\_t objects.  Instead, there is a top level object that points
+to the expr\_t object.  The top level object is a parse\_t type.  The
+$psi$ field is a pointer to the expression and the $ident$ field is no
+longer used.
+
+The \#define'd values for $op$ are used for scalar, vector, and array 
+expressions, so not all of them can be used with any given kind of expression.
+The valid operators for expressions represented by vect\_t are
+NOP, PLUS, MINUS, SKIP, TIMES, DIVIDE, MIN, MAX,
+TAKE, DROP, CAT, PSI, FORALL, SCALAR\_EXTEND, PTAKE, PDROP, PLUS\_RED, 
+MINUS\_RED, TIMES\_RED, DIVIDE\_RED, RAVEL, ALLOCATE, REDUCTION, RED\_OP, 
+RESHAPE, ROTATE, REVERSE and MOD.
+
+\subsection{Compound Operators (op\_t)}
+The omega operator allows the user to create compound operators by allowing
+omega to take omega as an operator argument.  The compiler internally 
+represents 
+operators with the op\_t type.  If the operator is not an omega operator
+then the $omega$ field is FALSE, $func$ is a pointer to the function in
+moa\_func.c that processes the operator and $part$ and $next$ are NULL.
+If the operator is an omega and its operator argument is not an omega then
+the $omega$ field is FALSE, $func$ is a pointer to the function in
+moa\_func.c that processes the operator argument of the omega, $part$ 
+is a pointer the vector partition argument of the omega and $next$ is NULL.
+If the operator is an omega and its operator argument is an omega then
+the $omega$ field is TRUE, $func$ is NULL, $part$ is a pointer to the
+vector partition argument of the omega and $next$ is a pointer to the
+op\_t that results from recursively applying these rules to the operator
+argument of the omega.
+
+\subsection{Statements (assign\_t,reduced\_t,loop\_t,statement\_t)}
+The statement\_t type is used to represent any statement of the MOAL
+input.  The $kind$ field indicates the kind of statement it is.
+$kind$ may be any of the following (which are defined in psi.h)
+\begin{description}
+\item[LOOP] A loop statement represented by the $d.loop$ field.
+\item[ASSIGN] An assignment statement that has not be reduced and
+is represented by the $d.assign$ field.
+\item[REDUCED] A reduced assignment statement represented by the 
+$d.reduced$ field.
+\item[DYNAMIC] An array allocation statement represented by $d.dynamic$.
+\item[CALL] A call to a procedure whose arguments are represented in
+$d.dynamic$ and $str$ is the actual procedure call statement.
+\end{description}
+The $next$ field is used to create a list of statements representing the
+code body of a procedure.
+
+The $d.assign$ field uses the assign\_t type.  This type has a $result$
+field that points to the result array and a $expr$ field that points to
+the expression of the right hand side.  The $d.loop$ field is represented
+by the loop\_t type.  The loop\_t type contains the fields $lower$ and
+$upper$ which are pointers to the lower and upper bound expressions.  The
+$var$ field is a pointer to the loop variable.  The loop body of the
+loop is stored in a statement list pointed to by the $body$ field.
+
+The $d.reduced$ field uses the type reduced\_t.  This type also represents
+different things depending on the value of the $type$ field.  The $type$
+field may have the following values defined in psi.h
+\begin{description}
+\item[SKIP]  This is a dummy node and does nothing.
+\item[NOP] This is a reduced assignment statement consisting of the operations
+in the list pointed to by the $d.list$ field.
+\item[FORALL]  This represents a forall loop that results from an omega
+expression.  The first element of the list in the $d.list$ field is the
+forall expression.  The remaining elements of the list are the reduced
+expressions resulting from the application of the omega definition.
+\item[ALLOCATE]  This is used to allocate temporary arrays.  The $d.frag$
+field points to the array to be allocated.
+\item[EXT\_OP]  This represents an external operator that should be coded with
+the external routine $code\_external$.  This is used for input languages that
+support array operations not supported by the compiler.
+\end{description}
+
+\subsection{Distributed Arrays (rule\_t,dist\_t)}
+The rule\_t type is used to indicate an array's desired distribution.  If
+an explicit distribution directive is in the input program then that 
+distribution is specified by a rule\_t pointed to by the variable's
+ident\_t object.  During the partitioning process these rules are put into
+a list of all available rules.  If no rule exists for a particular array
+then a default rule is created by the partitioner that distributes the 
+array evenly over the first dimension.  The $ident$ field is a pointer
+to the identifier begin distributed.  The $dist$ field is either BLOCK
+or CYCLIC (defined in psi.h).  The $shp$ field is the shape of the
+array being distributed.  The $part$ field is the shape of the partitions.
+The $proc$ field is the shape of the processor array that the array should
+be mapped to.  Once all the rules are in
+a list, a list of final distributions is created with the dist\_t type.
+Eventually the partitioner should be able to resolve any conflicting rules
+that appear in the initial list.
+
+The dist\_t type is used to create a list of distributions used by code 
+generation to generate distributed assignments.  The fields of dist\_t
+have the following meaning
+\begin{description}
+\item[ident] The array being distributed.
+\item[shp] The shape of the array.
+\item[c] The shape of the cyclic portion of the dist. mem.
+\item[g] The shape of the processor array.
+\item[e] The shape of the processors local sub-array.
+\item[pl] The location of the processor sub-array used.
+\item[pb] The shape of the processor sub-array used.
+\item[next] The next distribution in the list.
+\end{description}
+
+\subsection{Normalized Polynomials (poly\_t)}
+Normalized polynomials of $k$ variables are represented as
+$k$ dimensional arrays of coefficients.  These are stored in objects of
+poly\_t type.  The $d$ field is the dimension of the array and the $shp$
+field is the shape of the array.  The $rav$ field is a pointer to the
+components of the array.  Each variable $x_{i}$ is represented by dimension
+$i$.  The coefficient of the term $x_{1}^{e1}x_{2}^{e2}\cdots x_{d}^{ed}$
+is the element $<e1\; e2\; \cdots ed\; >$ of the array.  These are used
+to simplify scalar expressions and put them in a normal form to determine
+if two scalar expressions are equivalent.
+
+\subsection{Garbage Collection (save\_t)}
+The save\_t type is used to store a list of statements.  When garbage 
+collection is invoked every object not referenced somewhere in the list
+of statements, given by the save\_list global variable, is returned to the
+heap.
+
+\subsection{Code Generation (name\_t,steps\_t)}
+During code generation many variable scopes may be created as a result of 
+user {\bf for} loops.  Any array dynamically allocated in a particular
+scope needs to be deallocated at the end of that scope.  For this purpose two
+global variables, allocs and dynamics, of the name\_t type maintain a list of
+variables that have been allocated during the current scope.  This list is
+used generate code for deallocations.  The name\_t type contains only a
+string name of the variable and a pointer to the next name\_t in the list.
+
+The steps\_t type is used to maintain a list of steps for each variable in
+a given assignment.  Each element of the list gives the step values as an
+s\_expr\_t for each dimension of the variable it represents.  The
+steps for each dimension are stored as an array of pointers to s\_exprs in
+the $steps$ field.  The $num$ field is a number representing which variable
+that node represents.
+
+\section{Module Descriptions}
+\subsection{lex.c}
+The lex.c module is the lexical analyzer.  This module must be initialized
+when the compiler begins by calling $lex\_init$ and then $get\_symbol$.  At
+all times, the current look ahead symbol is stored in the emit global variable.
+The next symbol is read by calling $get\_symbol$.
+\subsection{parser.c}
+The parser.c module contains a standard recursive descent parser.  Any
+parser use with the MOA compiler must do several things.  Handling distributed
+programs is dependent on the input language.  The parser must set the
+global variable $n\_procs$ to be the target number of processors.  If a
+host/node program is to be generated the global variable $host$ must be
+set to TRUE.  Whenever a
+procedure body is parsed the appropriate procedure header must be produced
+by the parser in the output language in the output file.  The following
+variables, $max\_dim,max\_combine,forall\_num,red\_num$ and $const\_array\_num$
+should be set to zero.  These variables will keep track of the number of
+temporary variables used of different kinds.  The files $tfile,vfile$
+and $hfile$ (if one is needed) should be opened.  Any variable declarations
+will be output to the $vfile$.  Generated code will be output to the $tfile$.
+If a host program is being generated then it will be written to $hfile$.
+Each statement that is parsed should be stored in an appropriate 
+statement\_t object.  At the end of the procedure the parser should have a
+complete list of the statement body.  Then the $partition$ routine is
+called with the statement list as input and it will return a distribution
+list.  The statement list and distribution list is then passed to the 
+$code\_c$ routine that generates code for the list of statements.  Upon return
+from this procedure the parser should call $declare\_utils$, close the 
+mentioned files and copy them to the output as appropriate.
+
+In order for the parser to successfully build the assignment statement
+it must follow the following procedure.  When a variable access is encountered,
+$psi\_access$ should be called with the ident\_t representing the variable.
+The routine will return a parser\_t representing the expression consisting
+of only the variable access.  When an operator is encountered, the function
+in moa\_func.c for that operator is called with the arguments of the operator
+represented as a parser\_t object.  The procedure will return a new parser\_t
+that represents the expression of the operator and its arguments.  The
+parser\_t for each argument is obtained by recursively using this procedure.
+Each time a procedure is called from moa\_func.c the shape values of the
+result of the operation is computed as a function of the arguments' shapes,
+as indicated by their definition in MOA.  This process is shape analysis.
+This is done for all operators except the assignment.  When an assignment has
+been completely parsed, the parser will have a parser\_t for the result and
+for the right hand side expression.  These are stored appropriately in a
+statement\_t object to represent the assignment.  The statement\_t object
+can be passed to the $psi\_reduce$ procedure which will reduced the 
+assignment statement.
+
+\subsection{moa\_func.c}
+The moa\_func module performs shape analysis as an expression is parsed, as
+described in the last sub-section.  There is one procedure for each MOA
+operator currently supported with the name $psi\_$ plus the name of the
+operator.  They each take one parser\_t argument for each argument to the
+operator and return a new parser\_t.
+
+\subsection{psi.c}
+This module contains the main routines that perform the reduction of an
+array assignment.  The module contains two initialization routines,
+$reduction\_init$ and $psi\_init$, that must be called when the compiler is
+invoked.  The only other procedure in this module called from outside
+is $psi\_reduce$ which does the reduction.  The {\it array expressions} section
+describes how the forward reduction takes place.  The expression is
+converted to its normal form in $psi\_reduce$ and then passed to the $assign$
+procedure.  The $assign$ procedure looks at the operator of the top node.
+If the operator is a NOP then there is nothing more to do and that expr\_t
+is added to the reduced list by the $addto\_reduced$ procedure.  If it
+is an operator then a procedure is called to apply the reduction rule for
+that operator by propagating new values of $bound, index,$ and $loc$ to
+the operators arguments.  There is one such function for each operator with
+the name $red\_$ plus the name of the operator.  Finally, $assign$ is 
+recursively called with the arguments of the operators to reduce them.
+
+When $assign$ returns in $psi\_reduce$, the final list of reduced expressions
+has been created.  This list may contain many assignments, if the expression
+contains cat or algebraic operators.  The list is created in reversed
+order so $reverse$ is called to put them back in the proper order.  Finally,
+a procedure not related to the reductions is called, $combine\_reduced$.
+The $combine\_reduced$ procedure provides an important optimization.  It 
+searches
+through the list of reduced expressions and identifies the ones that have the
+same bound and thus can use the same {\bf for} loops.  The result of this 
+procedure is a list of lists.  Each set of reduced expressions that can be
+combined into one set of loops is stored in a list.  Each of these sets
+are then put in a list.  The return type is reduced\_t.  The $d.list$
+field of each node in the reduced\_t list points to a list of reduced
+expressions that can be combined.
+
+
+\subsection{part.c}
+This is the partitioner module.  The top level procedure is $partition$
+and accepts a statement list as an argument.  The partitioner calls
+$rec\_partition$ and $resolve\_rules$.  $rec\_partition$ searches the
+assignment statements for all arrays that are used.  If an array
+is used and has an explicit rule then that rule is added to a global
+list.  If the array does not have an explicit rule, a default rule
+is created that partitions the array evenly over the first dimension.
+
+When the $rec\_partition$ returns, a global list of all the rules for
+all the arrays is stored in the $rules$ variable.  $resolve\_rules$
+is then called.  This procedure will eventually resolve any conflicting
+rules and create a final distribution list.  The procedure currently assumes
+there are no conflicts (and in fact there can't be yet) and just converts
+them to the final distribution form (the dist\_t type).  The list
+of final distributions is returned from the $partion$ procedure and
+will be passed to the code generation module.
+
+\subsection{code.c}
+The code module contains the procedures required to generate code for 
+sequential execution.  $code\_c$ is the top level procedure in
+the code module which accepts a statement list and a distribution as
+arguments.  This procedure calls $init\_dist\_arrays$, if the target
+architecture has more then one processor.  $init\_dist\_arrays$ is described in
+the dist.c section.  Then $code\_c\_rec$ is called to generate code for
+the statement list.  After code generation is complete, if the target
+number of processors is more than one then $allocate\_utils$, from
+dist.c, is called to allocate the utility variables used for distributed
+assignments.
+
+$code\_c\_rec$ searches through the list and calls
+$code\_reduced$ if it finds a reduced assignment.  Each reduced assignment
+contains a list of reduced expressions that are searched by $code\_reduced$.
+Each node in the list of reduced expressions may have the NOP,FORALL,
+ or ALLOCATE values in the $type$ field with the following meaning
+\begin{description}
+\item[NOP] This type is an assignment list and the $d.list$ field points
+to the list of expressions that can be combined.  This list is combined
+and the expressions are coded by $code\_expr$.
+\item[FORALL] This type is a forall statement.  The $d.list->d.frag$
+field points to the FORALL expr\_t node that contains the bounds of the
+forall.  This node is passed to the $open\_forall$ and $close\_forall$ 
+procedures to generated the {\bf for} loops.  The $d.list->next$ is another
+list of reduced expressions that belong within the scope of the forall
+expression.  This list is coded by recursively calling $code\_reduced$.
+\item[ALLOCATE]  This is an allocation for a temporary array.  The
+$d.frag$ field is a pointer to the temporary array.
+\end{description}
+
+The $code\_expr$ procedure accepts a list of expressions that can be
+combined into one expression.  The first thing done is to separated out
+any expressions that are distributed because these can not be combined
+even though that have the same bounds.  The $sperate\_reduced$ procedure
+is called to perform the separation.  The result is a list of lists
+similar to the one produced by $combine\_reduced$.  Each node of the list
+points to a list of expressions that still can be combined (i.e. are not
+distributed).  All distributed expressions will become a list with one element,
+since they can not be combined with anything.  Next, the list is search and
+any arrays that are not distributed, have not be allocated, and have not been
+used are allocated by $allocate\_array$.  All arrays are also marked USED.
+Finally, the list of lists is search and for each list it is passed to
+$global\_assign$ if it is not distributed or $code\_dist$ if it is.
+
+$global\_assign$ takes a list of expressions to be coded with combined loops.
+The procedure uses any of the expressions to generate the {\bf for} loops for 
+the 
+expression, since they must all have the same bounds in order to be combined.
+Then code is generated for each expression inside the same set of nested 
+loops.  The start offset for each array is computed before the {\bf for}
+loops using $\gamma$ (generated by the $do\_shapes$ and $do\_location$ 
+procedures).
+The steps (strides) for each variable are computed by the $add\_steps$ 
+procedure to create the structure described in the Code Generation
+section.
+
+$code\_dist$ is described in the next section.
+
+\subsection{dist.c}
+The distribution module contains an initialization procedure $dist\_init$
+that must be called when the compiler is invoked.  The two main procedures
+in this module are $init\_dist\_arrays$, and $code\_dist$.  
+$init\_dist\_arrays$ is called
+by $code\_c$ before any code generation is performed.  This procedure will
+generate code to distribute initial data over the processors.  The second
+procedure, $code\_dist$ generates code for a list of expressions, involving
+distributed arrays, that can be combined.  Currently, no expressions involving
+distributed arrays may be combined so the list must be a list of one element.
+The procedure works in two phases.  First $dist\_lhs$ is called.  This 
+procedure
+creates a loop that loops through all processors, say $p$, and at each 
+iteration determines what part, say part1, of the array on the left hand side 
+is
+owned by the processor $p$.  Then the procedure computes what part of the right
+hand side is required for the assignment to part1.  Call this part2.  Now
+$dist\_rhs$ is called.  This procedure loops through all the processor numbers,
+say $sp$ and determines what part, say part3, of part2 belongs to processor
+$sp$.  The expression can now be coded.  If $p=sp=$my\_processor then
+I own part1 of the left hand side and part3 of the right hand side, so I can
+compute the expression (between part1 and part3).  Otherwise if 
+$p=$my\_processor then I own part1 but 
+not part3 so I should wait to receive something from processor $sp$ and then 
+use that to compute the expression.  Otherwise if $sp=$my\_processor then
+I own part3 but not part1 so I should send part3 to processor $p$.  Otherwise
+I do not own part1 or part3 and can continue without doing anything.
+
+\subsection{vect.c}
+Both the shape analysis and reduction process involves many manipulations
+of vectors.  To aid with this task, vect.c contains procedures
+that manipulate symbolic vectors.  The following is a summary of the
+procedures in vect.c and a brief description of there purpose.
+\begin{description}
+\item[make\_vect] This procedure takes an array expression in an expr\_t and
+converts it to the vect\_t representation.  This is used mostly for operators
+that take vector arguments.  If the array expression is a simple array access
+it can just be converted to the vect\_t form.  If it is not a simply array
+access then the expression is assigned to a temporary variable, so that it
+can be accessed as an array.
+\item[simplify\_vect]  This simplifies a vector expression if there are
+any constants sub-expressions that can be collapsed.
+\item[vect\_op]  This procedure takes two vector arguments and an operator
+and creates a vect\_t node with that operator and those arguments.  The
+result is passed to simplify\_vect before returning it.
+\item[vect\_take]  This procedure performs a vector take with a positive 
+left argument.
+\item[vect\_drop]  This procedure performs a vector drop with a positive 
+left argument.
+\item[vect\_cat]   This procedure performs the concatenation of two vectors.
+\item[vect\_unop]  This procedure takes a vector argument and an operator
+and creates a vect\_t node with that operator and argument.  The
+result is passed to simplify\_vect before returning it.
+\item[red\_rav]  This procedure accepts a vector and an index into it and 
+returns an s\_expr\_t that is the specified element of the vector.
+\item[print\_scalar]  Prints the scalar value of an vector expression.  This
+procedure can be used when the vector expression has one element.
+\item[vect\_assign] This procedure can be used to assign a vector expression
+to a temporary variable so that it may be accessed as an array.
+\item[purify\_vect]  This ``purifies'' a vector by insuring that it can be
+accessed as an array.  If the input vector is an expression, it must be
+assigned to a temporary array.
+\item[vect2array]  This makes an expr\_t that points the the input vector.
+\item[rav\_value]  This procedure takes a vector, index, and integer pointer
+as arguments.  If the index$^{th}$ element of the vector is a constant then
+its value is returned and the value at the integer pointer is set to TRUE
+otherwise it is set to FALSE and the return value is undefined.
+\item[vect\_len]  This returns the length of a vector as a vector expression.
+\item[tau]  This procedure computes the product of a vector and prints the
+result to a specified file.  It is used to compute tau of an array by passing 
+it the shape of the array.
+\item[force\_vect]  Like purify\_vect except that, if a temporary assignment
+is made, the generated code is output directly to the code file.  In 
+purfiy\_vect the code would be added to the reduced expression list.
+\item[static\_shps]  Returns a true value if the input vector has
+constant shape,loc, and index values.
+\item[vect\_comp] Compares two vectors to determine if they have equivalent
+components.
+\end{description}
+
+\subsection{ident.c}
+Like the vector module this module contains utility procedures for manipulating
+and generating code for scalar expressions (s\_expr\_t).  The following is a
+list of the procedures available in ident.c and a breif description of each.
+\begin{description}
+\item[make\_ident] If the scalar expression is a simply variable access then
+that variable is returned.  Otherwise the expression is assigned to a temporary
+and an ident\_t for the temporary is returned.
+\item[print\_s\_expr] Prints a scalar expression to a file.  The $print\_op$
+procedure in code.c is used to print operator symbols, since this is dependent
+on the output language.
+\item[make\_s\_expr] Forces a vector to be a scalar expression using a 
+temporary variable if necessary.
+\item[red\_s\_expr] Forces a scalar expression to be a variable access using
+a temporary variable if necessary.
+\item[simplify\_s\_expr]  Simplifies scalar expressions by collapsing 
+constants.  Also, normalizes them by converting them to normallized polynomial
+form and back.
+\item[s\_op] Accepts a scalar operator and two s\_expr\_t arguments.  Returns
+a scalar expression that is the given operator and its two arguments.
+\item[s\_vect] Creates a vector expression that has the value of the scalar
+expression passed in.
+\item[s\_compare] Compares to scalar expressions to determine if they are
+equivalent.  The two scalar expressions must be in the same form (the
+purpose of using normalized polynomials).
+\end{description}
+
+\end{document}

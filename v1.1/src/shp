@@ -1,0 +1,74 @@
+  if (l_dist->c!=NULL) {                         /* forall j in l_dist->c */
+    if (l_dist->c->shp->ident->value>max_c_dim)
+      max_c_dim=l_dist->c->shp->ident->value;
+    print_s_expr(tfile,l_dist->c->shp);
+  p=vect_op(PLUS,p2,l_dist->pl);
+  if (l_dist->c!=NULL) {
+    tmp=vect_op(TIMES,vect_op(TIMES,j,l_dist->g),l_dist->e);
+    y1=vect_op(PLUS,vect_op(TIMES,p2,l_dist->e),tmp);
+    y1=vect_op(TIMES,p2,l_dist->e);
+  y2=vect_op(PLUS,y1,l_dist->e);
+  my_gamma(tfile,"p_=",p,l_dist->g,l_dist->g->shp);
+  tmp=vect_op(PLUS,vect_op(DIVIDE,ip,r_dist->e),s);
+  tmp2=vect_op(DIVIDE,tmp,r_dist->pb);
+  tmp2=vect_op(MOD,tmp,r_dist->pb);
+  sp=vect_op(PLUS,sp2,r_dist->pl);
+  tmp=vect_op(TIMES,vect_op(TIMES,c,r_dist->g),r_dist->e);
+  y1=vect_op(PLUS,vect_op(TIMES,sp2,r_dist->e),tmp);
+  y2=vect_op(PLUS,y1,r_dist->e);
+  my_gamma(tfile,"sp_=",sp,r_dist->g,r_dist->g->shp);
+    r_dist->e=force_vect(r_dist->e);
+    tmp=vect_op(TIMES,vect_op(DIVIDE,ip,r_dist->e),r_dist->e);
+    s_bound=vect_op(PLUS,vect_op(DIVIDE,tmp,r_dist->e),
+		    vect_unop(IF_POS,vect_op(MOD,tmp,r_dist->e)));
+	assign->shp=dist->e;
+	assign->shp=dist->e;
+    l_dist->e=force_vect(l_dist->e);
+    res->shp=l_dist->e; /* set the shape of the local partition of the array */
+      if (l_dist->pl->shp->ident->value>max_p_dim)
+	max_p_dim=l_dist->pl->shp->ident->value;
+      p2=build_vect("p",l_dist->pl->shp);
+      if (l_dist->c!=NULL) j=build_vect("j",l_dist->c->shp);
+      close_while(tfile,p2,l_dist->pb,"p_cont");
+      if (l_dist->c!=NULL) {
+	close_while(tfile,j,l_dist->c,"j_cont");
+  p=build_vect("p",dist->g->shp);
+  dim=dist->ident->array.dim->value;
+      print_rav(hfile,dist->e,i);
+      print_ident(hfile,dist->ident->array.shp[i]);
+    s=purify_vect(vect_op(PLUS,p,dist->pl));
+    my_gamma(hfile,"p_=",s,dist->g,dist->g->shp);
+    s=purify_vect(vect_op(TIMES,p,dist->e));
+    my_gamma(hfile,"offset=",s,dist->shp,dist->shp->shp);
+	    dist->ident->string);
+    close_while(hfile,p,dist->pb,"p_cont");
+      print_rav(tfile,dist->e,i);
+    if (dist->g==dist->pb) {
+      fprintf(tfile,"RECV_HOST(%s,i1*sizeof(double));\n",dist->ident->string);
+      inv_gamma("proc",dist->g,"p");
+      if (check_zero(dist->pl)) if_bounded(p,dist->pl,dist->pb,"in",NO_OUT);
+      else if_bounded(p,NULL,dist->pb,"in",NO_OUT);
+	      dist->ident->string);
+      print_rav(tfile,dist->e,i);
+      print_ident(tfile,dist->ident->array.shp[i]);
+    s=purify_vect(vect_op(PLUS,p,dist->pl));
+    my_gamma(tfile,"p_=",s,dist->g,dist->g->shp);
+    s=purify_vect(vect_op(TIMES,p,dist->e));
+    my_gamma(tfile,"offset=",s,dist->shp,dist->shp->shp);
+	    dist->ident->string);
+    close_while(tfile,p,dist->pb,"p_cont");
+    if (dist->g==dist->pb) {
+      fprintf(tfile,"RECV(%s,i1*sizeof(double),0);\n",dist->ident->string);
+      inv_gamma("proc",dist->g,"p");
+      if (check_zero(dist->pl)) if_bounded(p,dist->pl,dist->pb,"in",NO_OUT);
+      else if_bounded(p,NULL,dist->pb,"in",NO_OUT);
+	      dist->ident->string);
+      if (!ISUSED(dist->ident->flags)) {
+	if (!ISPARAMETER(dist->ident->flags))
+	  fprintf(vfile,"  double *%s;\n",dist->ident->string);
+	fprintf(tfile,"%s=(double *) get_mem(",dist->ident->string);
+	if (dist->e->shp->ident->value>0) {
+	  for (i=0; i<dist->e->shp->ident->value; i++) {
+	    print_rav(tfile,dist->e,i);
+      if (ISPARAMETER(dist->ident->flags)) {
+      dist=dist->next;

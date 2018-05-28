@@ -1,0 +1,113 @@
+<html><head><title>PSI_PGI.c Module</title></head>
+<body>
+<center><h2>PSI_PGI.c Module</h2></center><p>
+<h3><b>Description</b>: Contains functions which traverse Psi statement
+list and passes information to PSI_PGI stack.  Requests PSI_PGI stack
+to make pghpf do loops and assignment statements which are added to the
+pghpf statement list.<p>
+</h3>
+<tt>
+<ul>
+<li><b>PSI_PGI_AST</b>
+  <br>Inputs:<ul> 
+  <li>cur: a pointer to the current Psi statement
+  <li>curst: the point of insertion into the pghpf statement list.
+  </ul>
+  Output: none 
+  <br>Postconditions:<ul>
+  <li>The Psi program starting at cur will be translated and equivalent
+  pghpf statements will be added before curst.
+  </ul>
+  <br>Warnings:<ul>
+  <li>The only type of node in the statement list I am sure is handled
+  correctly is the REDUCED type.
+  <li>Code may have to be added to open and close loops for the LOOP
+  type if this case ever shows up in the future.
+  </ul>
+<li><b>psi_code_reduced</b>
+  <br>Inputs:<ul> 
+  <li>reduced: a reduced Psi statement
+  <li>curst: the point of insertion into the pghpf statement list.
+  </ul>
+  Output: none 
+  <br>Preconditions:<ul>
+  <li>Type of <em>reduced</em> is in {SKIP, NOP, ALLOCATE, FORALL, EX_OP}.
+  </ul>
+  <br>Postconditions:<ul>
+  <li>The Psi statement <em>reduced</em> will be translated and an equivalent
+  statement (or, in the case of a forall loop, statements) will be added
+  to the pghpf statement list before curst.
+  </ul>
+  <br>Actions:<ul>
+  <li>In the case of NOP, the list of statements in the field <em>list</em>
+  will correspond to a two-address intermediate representation of a
+  statement I must reconstruct.  The function psi_code_expr will process
+  this list, and then this function requests the PSI_PGI stack to form the
+  assignment statement.
+  <li>In the case of FORALL, this node contains one or more nested loops.
+  Loops are opened (by requesting pghpf to create a do-loop node), the
+  body of the loop is then translated (and added to the statement list),
+  and then the loops are closed (by requesting pghpf to create a end-do-loop
+  node).
+  </ul>
+<li><b>psi_code_expr</b>
+  <br>Inputs:<ul> 
+  <li>reduced: a reduced Psi statement
+  </ul>
+  Output: none 
+  <br>Postconditions:<ul>
+  <li>Index 0 of the PSI_PGI subexpression table will contain the RHS
+  expression of an assignment statement corresponding to <em>reduced</em>.
+  <li>The top node of the PSI_PGI stack will contain the LHS expression
+  of an assignment statement corresponding to <em>reduced</em>.
+  </ul>
+<li><b>psi_global_assign</b>
+  <br>Inputs:<ul> 
+  <li>global: 
+  <li>result:
+  </ul>
+  Output: none 
+  <br>Notes:<ul>
+  <li>Currently being rewritten
+  </ul>
+<li><b>pgi_ident2array</b>
+  <br>Inputs:<ul> 
+  <li>id: a pointer to the identifier to be converted.
+  <li>dim: the dimensionality of the target vector.
+  </ul>
+  Output: none 
+  <br>Notes:<ul>
+  <li>Not used anymore.
+  <li>When omega was combined with psi and omega, the indexing information
+  i needed for the array access nodes in the body of the loop was not being
+  passed down, so this routine copied the information into global arrays
+  which global_assign would use when the array access nodes were reached.
+  <li>This routine employs nothing but side effects.  Each call results
+  in one of the global arrays for stop, start, or stride to be filled with
+  <em>dim</em> values, and global flags are read to and written from to
+  control which array is used for storage.
+  </ul>
+<li><b>pgi_swalk</b>
+  <br>Inputs:<ul> 
+  <li>se: a scalar expression to be converted to pghpf form.
+  </ul>
+  Output: none 
+  <br>Postconditions:<ul>
+  <li>A node representing <em>se</em> converted to pghpf form will be on
+  the top of the PSI_PGI stack.
+  </ul>
+<li><b>pgi_vect2array</b>: Currently being rewritten
+  <br>Inputs:<ul> 
+  <li>source: the vector to be converted
+  <li>dim: the dimensionality of the vector
+  </ul>
+  Output: none 
+  <br>Postconditions:<ul>
+  <li>The vector will be converted to pghpf form and pushed onto the top
+  of the PSI_PGI stack.
+  <li>The vector will be pushed on in reverse order, i.e. source[0] will
+  be stored in the top node of the stack.
+  </ul>
+  </ul>
+</ul>
+</html>

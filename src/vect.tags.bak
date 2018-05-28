@@ -1,0 +1,9 @@
+const_op	vect.c	/^vect_t *const_op(vect_t *arg, vect_t *res, int siz/
+expand_vect	vect.c	/^vect_t *expand_vect(vect_t *vect)$/
+propagate_cat	vect.c	/^propagate_cat(vect_t *vect, s_expr_t *location)$/
+propagate_drop	vect.c	/^propagate_drop(vect_t *vect, s_expr_t *index)$/
+propagate_take	vect.c	/^propagate_take(vect_t *vect, s_expr_t *bound)$/
+real_expr	vect.c	/^int real_expr(expr_t *expr)$/
+real_vect	vect.c	/^int real_vect(vect_t *vect)$/
+static_value	vect.c	/^int static_value(vect_t *vect)$/
+update_locs	vect.c	/^update_locs(vect_t *vect, s_expr_t *drop)$/

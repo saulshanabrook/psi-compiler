@@ -1,0 +1,74 @@
+<html><head><title>PGI_PSI.c Module</title></head>
+<body>
+<center><h2>PGI_PSI.c Module</h2></center><p>
+<h3><b>Description</b>: Contains functions which traverse <i>hpfsrc</i>
+statement list and passes information to PGI_PSI stacks.  Calls psi_reduce
+on valid assignment statements.<p>
+</h3>
+<tt>
+<ul>
+<li><b>PGI_PSI_AST</b>: Used by <i>pghpf</i>
+  <br>Inputs:<ul>
+  <li>cur_stmnt: Typically, a pointer to the first pghpf-encoded statement
+  of an HPF program.
+  </ul>
+  Output: none
+  <br>Preconditions:<ul>
+  <li>cur_stmnt is a valid statement pointer.
+  <li>Statement list is terminated with an A_END ast.
+  </ul>
+  <br>Postconditions:<ul>
+  <li>Assignment statements will be replaced by equivalent, Psi-reduced
+  statements.  Typically, program will be consist of many more statements
+  after the call to PGI_PSI_AST.
+  </ul>
+  <br>Actions:<ul>
+  <li>Traverses statement list; isolates assignment statements.
+  <li>Initializes Psi reduction engine for each assignment statement.
+  <li>Attempts to convert LHS and RHS of assignment statement.
+  <li>If successful, then it requests the Psi compiler to reduce an
+  assignment statement.
+  <li>If not, then clears the PGI_PSI stack.
+  <li>Remove original statement from list.
+  </ul>
+<li><b>PGI_CONV_AST</b>
+  <br>Inputs:<ul>
+  <li>cur: A pghpf AST to be converted
+  </ul>
+  Output: 1 if the conversion was successful, 0 otherwise.
+  <br>Preconditions:<ul>
+  <li>All nodes to the left of cur (as defined by DFS) in the program tree
+  have been previously visited.
+  </ul>
+  <br>Postconditions:<ul>
+  <li>If the conversion was successful, an equivalent Psi expression
+  will be on the top of the PGI_PSI stack.
+  </ul>
+  <br>Actions:<ul>
+  <li>Depth First Search is done on each AST.
+  <li>Atomic objects (leaves) are processed by passing appropriate symbol
+  table information to the PGI_PSI stack.
+  [<i>opportunity for optimization?</i>]
+  <li>Internal nodes are processed by visiting the children (leftmost first),
+  followed by calling the appropriate PGI_PSI_ routine to reconstruct the
+  equivalent expression from the PGI_PSI stack.
+  <li>More specific information about how the different intrinsic functions
+  are handled can be found in my writeup or in PGI_PSI.c itself.
+  </ul>
+<li><b>isspread</b>: Used by check_spr
+  <br>Inputs:<ul>
+  <li>cur: pghpf AST
+  </ul>
+  Output: 1 if cur represents a direct call to intrinsic function SPREAD,
+   0 otherwise.
+<li><b>check_spr</b>: Used by PGI_CONV_AST
+  <br>Inputs:<ul>
+  <li>cur: pghpf AST
+  </ul>
+  <br>Output:<ul>
+  <li>1 if cur represents a direct call to intrinsic function SPREAD
+  <li>2 if cur represents an indirect call to intrinsic function SPREAD.
+      Call would be parenthesized if the result is being subscripted.
+  <li>0 otherwise.
+  </ul>
+</ul>

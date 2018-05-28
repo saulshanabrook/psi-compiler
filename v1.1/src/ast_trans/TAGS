@@ -1,0 +1,78 @@
+
+PSI_PGI.c,326
+#define NOTALLOCATED(NOTALLOCATED17,305
+#define OP_ADD 21,506
+#define OP_SUB 22,523
+#define OP_MUL 23,540
+#define OP_DIV 24,557
+void pgi_ident2array(36,918
+void pgi_swalk(68,1573
+void pgi_vect2array(110,2710
+psi_global_assign(214,5157
+psi_code_expr(458,11959
+psi_code_reduced(512,13283
+void PSI_PGI_AST(613,15945
+
+code_conv.c,695
+void init_psi(19,454
+void push_ast(23,499
+parser_t *pop_ast(32,696
+void PGI_PSI_FLUSHS(45,968
+void psi_binop(53,1109
+void psi_unop(62,1256
+void PGI_PSI_PLUS(68,1363
+void PGI_PSI_MINUS(72,1407
+void PGI_PSI_TIMES(76,1453
+void PGI_PSI_DIVIDE(80,1499
+void PGI_PSI_NEGATE(84,1547
+void PGI_PSI_NOP(90,1645
+void PGI_PSI_ABS(94,1686
+void PGI_PSI_NULL(98,1727
+void PGI_PSI_CONS(108,1980
+void PGI_PSI_SCALAR(125,2313
+ident_t *make_id_cnst(138,2573
+ident_t *cnst2parse(150,2801
+void PGI_PSI_ARRAY(163,3095
+void PGI_PSI_INDEX(183,3576
+void psi_spread_binop(236,4975
+void PGI_PSI_SPLUS(247,5191
+void PGI_PSI_SMINUS(251,5243
+void PGI_PSI_STIMES(255,5297
+void PGI_PSI_SDIVIDE(259,5351
+
+hpfm_func.c,563
+vect_t *new_vect(20,424
+parser_t *vect2parser(32,568
+parser_t *non_psi 66,1419
+parser_t *unon_psi 90,1988
+parser_t *unon2_psi 145,3410
+vect_t *int2vect 191,4590
+parser_t *force_order 216,5290
+op_t *omega_ize_binary 250,6160
+op_t *omega_ize_unary 265,6583
+parser_t *hpfm_concat 277,6807
+parser_t *hpfm_cshift 306,7688
+parser_t *hpfm_dot_product 338,8741
+parser_t *hpfm_eoshift 352,9121
+parser_t *hpfm_matmul 391,10513
+parser_t *hpfm_product 419,11175
+parser_t *hpfm_shape 442,11864
+parser_t *hpfm_sum 452,12069
+parser_t *hpfm_transpose 475,12753
+
+pgi_intr.c,241
+void PGI_PSI_CONCAT(23,571
+void PGI_PSI_CSHIFT(40,956
+void PGI_PSI_CSHIFT2(73,1841
+void PGI_PSI_TRANSPOSE(105,2680
+void PGI_PSI_DOTPROD(113,2809
+void PGI_PSI_MATMUL(121,2952
+void PGI_PSI_PRODUCT(144,3459
+void PGI_PSI_SPREAD(157,3718
+
+trans.c,135
+void PGI_PSI_INIT(12,219
+void PGI_PSI_ASGN(27,425
+void PGI_PSI_REDUCE(34,587
+void PSI_PGI_BOOT(46,891
+void PSI_PGI_FREEMEM(48,915

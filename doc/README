@@ -1,0 +1,16 @@
+This directory conatins all the documentation for the Psi Compiler.
+The directories contain the following information
+
+   compiler_theory     : paper about the underlying theory of the Psi
+                         Compiler
+   compiler_theory2    : more recent version of the above
+   distributed         : Scott Thibault's explanation of his distributed
+                         code
+   grammar_info        : information about the Psi Compiler grammar
+   hpfm                : paper about the HPF -> MOA -> F90 compiler
+   misc                : miscellaneous files
+   mpi_guide           : directions for using MPI with the Psi Compiler
+   programmers_guide   : a guide for programmers working on the Psi Compiler
+   prog_guide_2        : second version of the above
+   users_guide         : a users guide for the Psi Compiler
+   v0.4_users_guide    : a more recent version of the above

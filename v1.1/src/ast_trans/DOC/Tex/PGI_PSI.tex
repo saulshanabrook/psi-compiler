@@ -1,0 +1,196 @@
+Converting from pghpf to Psi \\ \\
+
+Segment I: PGI to PGI_PSI Stack \\ \\
+
+The first segment of my project involves traversing a PGI representation
+of an HPF program and passing relevant information to the PGI_PSI stack.
+At the top most level, I visit each node of a linked list of statements.
+If the node represents an assignment statement, the LHS is visited, followed
+by the RHS.  I then request the PGI_PSI stack to form an assignment
+statement and pass it to the reduction engine.  To enforce modularity,
+I pass a pointer to the current statement node to the PGI_PSI modules.  These
+modules will, in turn, pass them back to the PSI_PGI modules when requesting
+to add a new statement to the PGI list.\\ \\
+
+Most of my PGI_PSI functions are straightforward.  I traverse the PGI
+expressions depth-first, so combinators such as binary operators or
+function calls are handled by first visiting the sub-expressions (and
+pushing the translations onto the PGI_PSI stack), and then requesting
+the PGI_PSI stack to rebuild the expression.  Unlike statements, I
+traverse expressions right-to-left as a rule.  For procedure/function
+calls, I process the last argument first.  Generally, the PGI_PSI routines
+are "ignorant" of Psi notation.  For example, when a CSHIFT node is
+encountered, a request is made to PGI_PSI_CSHIFT; the PGI_PSI module
+will pop the argument off the stack and form an equivalent Psi expression
+using take and drop.\\ \\
+
+  \begin{itemize}
+  \item  Array Identifiers\\ \\
+  
+  In MOA, all arrays have first index of 0.  In HPF, arrays may have any
+  starting index.  So, for each dimension of the array, I compute the
+  number of components (stop - start + 1) and store the results in an
+  array.  I pass this array to the PGI_PSI stack, which treats it as
+  the shape vector for the array.\\ \\
+
+  \item  Spread combined with Binop\\ \\
+
+  This is a feature that I started to implement, but abandoned since it
+  wasn't the top priority.  Since I originally was going to build the
+  SPREAD on the Psi side, I wanted to be efficient in the case that the
+  SPREAD was being used with a binary operator.  There are certain conditions
+  where it is more efficient to use the original array as an operand and
+  then to spread the result.  However, I am now considering handling
+  SPREAD much like subscripting; rather than concatenating copies of
+  the array together, I would instead create a forall node (with shape to
+  reflect the size of the SPREAD), and then express indexing the SPREAD in
+  terms of indexing the original array (which is how my Fortran 90 manual
+  actually defines SPREAD).
+
+  \item  Array Subscripting\\ \\
+
+  I shifted the responsibility of how to implement array sections in MOA
+  to the PGI_PSI stack.  Subscript nodes point to an array of triples which
+  describe the start/stop/strides for each dimension.  Note that in HPF,
+  these values are absolute indices, so a triple of (5:9:2) refers to
+  {\em indices }  5, 7, and 9, rather than elements 5, 7, and 9.  Since
+  the array information passed over set the starting index to 0, I need
+  to adjust the triples before pushing them onto the stack.  Since arrays
+  can only have indexing of stride 1, I need only to subtract the starting
+  index of the subscripted array from the start and stop of the triple.
+  So, if the above triple were being used to subscript an array with
+  starting index of 3, the triple would become (2:6:2). \\ \\
+
+  \item  Expression Subscripting\\ \\
+
+  Normand Belanger extended the pghpf grammar to allow a programmer
+  to specify expression subscripting.  The syntax is rather strict:
+  the expression to be subscripted {\em must }  be enclosed within
+  parentheses (e.g. (CSHIFT(A, 5))(5:9)).  I didn't have to add anything
+  to my module to accommodate for this; the parser will screen out what
+  can or cannot be subscripted.  However, I should point out the hazards
+  of using this feature.  Suppose in the above expression, A is a
+  one-dimensional array with indices 5 through 15.  The expression "A"
+  in pghpf has shape <11>, and has indices 5 through 15.  The expression
+  (CSHIFT(A,5)) also has
+  shape <11>, but has indices 1 through 11.  That is, when an array
+  is directly subscripted, then the triples specify the indices of
+  the array to be taken.  However, when an arbitrary array is subscripted,
+  the triples specify the elements of the resulting array to be taken. \\ \\
+  \end{itemize}  
+
+  Presently, the reduction engine of the Psi compiler can only process
+  a subset of legitimate expressions.  For example, only integer constants
+  can be used as a shift amount.  Therefore, as I traverse the PGI ASTs,
+  I verify that the expression is Psi-ready before I pass the assignment
+  to psi_reduce.  Instead of making a first pass to inspect the expression,
+  I make a single pass, assuming that it will be valid.  If I find at some
+  point that the current statement should be skipped, I abort the traversal
+  immediately and empty the PGI_PSI stack. 
+
+  Segment II: PGI_PSI Stack to Psi\\ \\
+
+  The second segment of my program is a set of routines that remove
+  information from the PGI_PSI stack and form Psi expression trees.
+  Though this seems straightforward, it actually took me a fair amount
+  of time to write these functions in such a way that the reduction
+  engine excepted the new ASTs.  I did not find routines provided that
+  would, say, take a constant and return a parser_t that represented
+  that constant.  There was, however, a function ({\em psi_access } )
+  that accepted an ident_t and built a parser_t around it.  So, for
+  the atomic types, I merely had to experiment with filling in the
+  fields of the ident_t type.  Before the first statement is converted,
+  a symbol table is created and initialized; this table is used by
+  all statements throughout an entire program.  Scope may present a
+  problem later on as this module becomes more ambitious; this may need to be
+  addressed, both in the symbol table routines and in my modules.\\ \\
+
+  Most of my implementations of the intrinsic functions are variations
+  of routines found in hpfm_func.c, a module written for the HPF front-end
+  to the Psi compiler.  The moa_func.c module of the Psi compiler
+  will form parser_t's for cat, take, drop, unary, and binary operators.
+  Additionally, it provides routines that build omega expressions based
+  on the input (two arguments, operation, and partition).  {\bf Note } :
+  due to discrepancies between HPF and MOA, my routines subtract one
+  from the dimension before forming MOA expressions.\\ \\
+
+  {\bf Example } :  CSHIFT(A, shift = 5, dim = 3)\\ \\
+
+  Segment I will place A on the stack, and then call PGI_PSI_CSHIFT(5, 2).
+  PGI_PSI_CSHIFT will retrieve A from the stack, store the constant 5
+  into a parser_t, decrement the dimension, and then call:\\
+  \begin{enumerate}
+  \item psi_omega2(5, A, [drop, 1, 2]);  (the '2' refers to dim)
+  \\
+  \item psi_omega2(5, A, [take, 1, 2]); (the '2' refers to dim)
+  \\
+  \item pgi_omega2((1.), (2.), [cat, 2, 2]); (both '2's refer to dim)
+  \end{enumerate} \\ \\
+
+  Subscripting - A First Approach
+
+  When one is forming Psi expressions, there are really two approaches to
+  take.  The first is to use basic Psi operators to try to "build" the
+  result; the approach in PGI_PSI_CSHIFT uses this approach, as does most
+  of the intrinsic-conversion routines.  The second approach is to indicate
+  how indexing this expression relates to indexing the operands.  This is
+  a difficult concept to relate, and, unfortunately, I was stuck in the former
+  mode until very recently.  I'll use 2-D TRANSPOSE as an example.\\ \\
+
+  To "build" a 2-D TRANSPOSE of MxN array A, one would have to build an
+  expression using M*(N-1) + (M-1) omega (concat) operators.  That is, we
+  isolate the elements within the row and then use omega to concatenate
+  them into a column, which would require N-1 concats for each of the M rows.
+  Then, we would join the M columns together to form an NXM transpose of A.\\ \\
+
+  More efficient is to express indexing the TRANSPOSE in terms of indexing A.
+  One can build two forall nodes (both with start <0>, one with bound <M>, the
+  other with bound <N>), say with forall indices {\em forall1 }  and
+  {\em forall2 } .  Then the bottommost node of this expression would
+  be an array access (of A) with index vector <forall2 forall1>.  The AST
+  is much smaller than in the previous approach, and there is virtually
+  nothing left to reduce.\\ \\
+
+  I first tried to "build" the array section by forming an index set
+  (iota of the shape of the target section), multiplying the index set
+  by the stride of the section, adding in the start of the section, and
+  then using omega to index A with the index set.  Unfortunately, the Psi
+  compiler produced complex code for this type of expression.\\ \\
+
+  I then realized how much easier it would be to express subscripting
+  not just by using a new forall node, but by actually changing the
+  start/stop/stride information in the expression to be subscripted.
+  The first step was is compute the new shape of the node; the number of
+  components in each dimension {\em i }  would be (stop[i] - start[i])
+  / stride[i]) + 1.  The second step is to compute the new indexing
+  rule for this node; if the node has no prior indexing rule, then it
+  is initialized to (start - 1), the decrement being due to the fact that
+  HPF starts indexing at 1 by default, whereas all Psi indexing starts at 0.
+  If the node does have a prior indexing rule, 
+  then a new start must be computed.  Recall that if the start of the
+  section is 5, that refers to the fifth element of the expression.  So,
+  the adjusted start is the original start + (section start - 1) * original
+  stride.
+  The stride is set; if there was a stride originally specified, then the
+  new stride is the original stride multiplied by the section stride.\\ \\
+
+  {\bf Example } : Let {\em fish }  be a vector with shape <50>, and {\em 
+  goat }  be a vector with shape <4>.
+  The statement (fish(10:40:3))(3:9:2) would be evaluated as follows:
+  \begin{enumerate}
+  \item The process is bottom-up, so first the array access node is
+  created with un-set index, bound, and stride fields.
+  \item Next, the section (10:40:3) is processed.
+  \item The array access node's index field is set to <9> (10-1).
+  \item The array access node's bound field is set to <11> ((40-10)/3 + 1).
+  \item The array access node's stride field is set to <3>.
+  \item Next, the section (3:9:2) is processed.
+  \item The array access node's index field is set to <15> (9 + (3-1)*3).
+  \item The array access node's bound field is set to <4> ((9-3)/2 + 1).
+  \item The array access node's stride field is set to <6> (3 * 2).
+  \end{enumerate}
+  So, by adjusting the fields, one can more easily create the desired index
+  set; in this case, {15, 21, 27, 33}.\\ \\
+
+
+

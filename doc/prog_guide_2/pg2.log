@@ -1,0 +1,91 @@
+This is TeX, Version 3.1415 (C version 6.1) (format=lplain 94.4.25)  22 SEP 1995 09:34
+**pg2
+(pg2.tex
+LaTeX Version 2.09 <25 March 1992>
+(/usr/share/local/tex/lib/texmf/tex/latex/article.sty
+Standard Document Style `article' <14 Jan 92>.
+(/usr/share/local/tex/lib/texmf/tex/latex/art10.sty)
+\c@part=\count79
+\c@section=\count80
+\c@subsection=\count81
+\c@subsubsection=\count82
+\c@paragraph=\count83
+\c@subparagraph=\count84
+\c@figure=\count85
+\c@table=\count86
+)
+(/usr/share/local/tex/lib/texmf/tex/dvips/epsf.sty
+\epsffilein=\read1
+\epsfxsize=\dimen99
+\epsfysize=\dimen100
+\epsftsize=\dimen101
+\epsfrsize=\dimen102
+\epsftmp=\dimen103
+\pspoints=\dimen104
+) (pg2.aux) (pg2.toc [1
+
+])
+\tf@toc=\write3
+
+[2] [3] [4] [5] [6] [7] [8]
+Overfull \hbox (1.0384pt too wide) in paragraph at lines 473--476
+[] []\tenrm This rep-re-sents an ex-ter-nal op-er-a-tor that should be coded wi
+th the ex-ter-nal rou-tine \tentt code[]external\tenrm .
+
+\hbox(6.94444+1.94444)x435.63243, glue set - 1.0
+.\hbox(0.0+0.0)x0.0
+.\glue 0.0
+.\hbox(6.11111+0.0)x10.02972
+..\glue -25.0
+..\glue 0.0
+..\glue -5.0
+..\hbox(6.11111+0.0)x35.02972
+...\glue 5.0
+...\tentt E
+...\tentt X
+...\tentt T
+...\kern 0.62996
+...etc.
+..\glue 5.0
+.\penalty 0
+.\tenrm T
+.etc.
+
+[9] [10] [11]
+Overfull \hbox (10.49352pt too wide) in paragraph at lines 709--735
+\tenrm piler is in-voked. The two main pro-ce-dures in this mod-ule are $\tenmi
+ init[]dist[]arrays$\tenrm , and $\tenmi code[]dist$\tenrm . $\tenmi init[]dist
+[]arrays$
+
+\hbox(6.94444+1.94444)x460.63243, glue set - 1.0
+.\tenrm p
+.\tenrm i
+.\tenrm l
+.\tenrm e
+.\tenrm r
+.etc.
+
+[12]
+Overfull \hbox (8.77882pt too wide) in paragraph at lines 805--811
+[]\tenrm This pro-ce-dure per-forms a vec-tor drop with a pos-i-tive left ar-gu
+-ment. \tentt propogate[]drop \tenrm and \tentt update[]locs
+
+\hbox(6.94444+2.22223)x435.63243, glue set - 1.0
+.\hbox(0.0+0.0)x0.0
+.\tenrm T
+.\tenrm h
+.\tenrm i
+.\tenrm s
+.etc.
+
+[13] [14] [15] [16] (pg2.aux) ) 
+Here is how much of TeX's memory you used:
+ 223 strings out of 11977
+ 2148 string characters out of 87079
+ 37106 words of memory out of 262141
+ 2168 multiletter control sequences out of 9500
+ 18996 words of font info for 72 fonts, out of 100000 for 255
+ 14 hyphenation exceptions out of 607
+ 14i,7n,15p,458b,311s stack positions out of 300i,40n,60p,3000b,4000s
+
+Output written on pg2.dvi (16 pages, 77140 bytes).

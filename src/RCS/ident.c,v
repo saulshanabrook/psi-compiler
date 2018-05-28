@@ -1,0 +1,942 @@
+head	1.4;
+access;
+symbols;
+locks
+	psi:1.4; strict;
+comment	@ * @;
+
+
+1.4
+date	95.05.26.18.46.19;	author psi;	state Exp;
+branches;
+next	1.3;
+
+1.3
+date	95.05.08.06.33.33;	author psi;	state Exp;
+branches;
+next	1.2;
+
+1.2
+date	94.10.04.01.04.02;	author psi;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	94.09.06.06.36.06;	author psi;	state Exp;
+branches;
+next	;
+
+
+desc
+@contains procedures related to manipulating or generating code
+for scalar expressions
+@
+
+
+1.4
+log
+@bug fixes and documentation.
+@
+text
+@/* Copyright (c) 1993 University of Missouri-Rolla
+   All rights reserved.
+
+   ident.c - contains procedures related to manipulating or generating code
+     for scalar expression.
+
+   v0.0 Scott Thibault - 5/93
+   v0.1 Scott Thibault - 6/93
+   v0.2 Scott Thibault - 7/93
+   V0.3 Scott Thibault - 10/93
+           Added the ident_compare, and s_compare functions.
+   v0.4 Thom McMachon  - 5/95
+	   - moved print_ident and print_op from ident.c to code.c
+           - added some more documentation
+*/
+
+#include <stdio.h>
+#include <string.h>
+#include <math.h>
+#include "psi.h"
+#include "sys.h"
+
+#include "psi.e"
+#include "vect.e"
+#include "sys.e"
+#include "scalar.e"
+
+#ifndef NULL
+#define NULL 0
+#endif
+
+#ifndef TRUE
+#define TRUE 1
+#define FALSE 0
+#endif
+
+#define MYMIN(x,y) ((x)<(y)) ? (x) : (y)
+#define MYMAX(x,y) ((x)>(y)) ? (x) : (y)
+
+/* the current number of temporary scalars */
+int scalar_num=0;
+int max_scalar_num=0;
+int int_expr=TRUE;
+
+/* prototypes */
+s_expr_t *simplify_s_expr(s_expr_t *s);
+
+
+/* make_ident - reduce a s_expr to an identifier.  Unless the s_expr is
+                a simple variable access or has been coded before, it is
+		assigned to a temporary vector. */
+
+ident_t *make_ident(s_expr_t *s)
+{
+  ident_t *tmp;
+  char var_temp [40];
+
+  /* simple variable or previously coded? */
+  if ((s->op==NOP)||ISCODED(s->flags)) return(s->ident);
+ 
+  /* set up temporary variable */ 
+  tmp=get_ident();
+  tmp->type=VARIABLE;
+  if (scalar_num>=max_scalar_num) {
+    sprintf(var_temp,"scalar%d",scalar_num);
+    declare_var(1,var_temp,0);
+  }
+
+  /* print assignment to tfile */
+  sprintf(tmp->string,"scalar%d",scalar_num);
+  dotab(0);
+  fprintf(tfile,"%s=",tmp->string);
+  print_s_expr(tfile,s);
+  fprintf(tfile,";\n");
+  
+  scalar_num++;
+  if (scalar_num>max_scalar_num)
+    max_scalar_num=scalar_num;
+
+  s->ident=tmp;
+  /* the scalar expression has been coded now, so... */
+  SETCODED(s->flags);
+
+  return(tmp);
+}
+
+/* make_s_expr - reduce a vector to a s_expr.  Unless the vector is
+                a simple variable access, it is assigned to a temporary
+		vector. */
+
+s_expr_t *make_s_expr(vect_t *vect)
+{
+  ident_t *tmp;
+  s_expr_t *ret;
+
+  if (SCALAR(vect->shp)&&(vect->shp->ident->value==0))
+    return(&s_const0);
+
+  tmp=get_ident();
+  ret=get_s_expr();
+  ret->op=NOP;
+  ret->ident=tmp;
+
+  if (vect->op==NOP) 
+    switch (vect->ident->type) {
+    case CONSTANT:
+    case VARIABLE:
+      *tmp=*vect->ident;
+      return(ret);
+      break;
+
+    case IOTA:
+      if (SCALAR(vect->index)) {
+	tmp->type=CONSTANT;
+	tmp->value=vect->index->ident->value;
+	return(ret);
+      }
+      break;
+
+    case CONST_ARRAY:
+      if (SCALAR(vect->index)) {
+	tmp->type=CONSTANT;
+	tmp->value=vect->ident->array.cnst[(int) vect->index->ident->value];
+	return(ret);
+      }
+      break;
+      
+    case EMBEDED_ARRAY:
+      if (SCALAR(vect->index)) {
+	if (vect->ident->array.rav!=NULL) {
+	  ret=vect->ident->array.rav[(int) vect->index->ident->value];
+	} else {
+	  tmp->type=CONSTANT;
+	  tmp->value=vect->ident->array.cnst[(int) vect->index->ident->value];
+	}
+	return(ret);
+      }
+      break;
+      
+    case RAV:
+      if (SCALAR(vect->index)) {
+	ret=vect->ident->array.rav[(int) vect->index->ident->value];
+	return(ret);
+      }
+      break;
+    }
+
+  return(red_rav(vect,0));
+}
+
+
+/* print_s_expr - print a scalar expression to the file outfile. */
+
+print_s_expr(FILE *outfile, s_expr_t *s)
+{
+  s=simplify_s_expr(s);
+  /* if it's an expression, add parenthesis */
+  if (s->op!=NOP)
+    fprintf(outfile,"(");
+  print_s(outfile,s);
+  /* if it's an expression, add parenthesis */
+  if (s->op!=NOP)
+    fprintf(outfile,")");
+}
+
+/* red_ident - reduces an identifier to a simple variable access.  If the
+               identifier is an expresion then the expression is assigned
+	       to a temprorary scalar variable. */
+
+ident_t *red_ident(ident_t *ident)
+{
+  ident_t *ret;
+  char var_temp [40];
+
+  if (ident==NULL) return(NULL);
+
+  switch (ident->type) {
+  case CONSTANT:
+  case VARIABLE:
+    ret=ident;
+    break;
+    
+  case EMBEDED_ARRAY:
+    if (ident->array.rav!=NULL) 
+      ret=make_ident(ident->array.rav[0]);
+    else {
+      ret=get_ident();
+      ret->type=CONSTANT;
+      ret->value=ident->array.cnst[0];
+    }
+    break;
+
+  case IOTA:
+    ret=get_ident();
+    ret->type=CONSTANT;
+    ret->value=0;
+    break;
+    
+  case CONST_ARRAY:    
+    ret=get_ident();
+    ret->type=CONSTANT;
+    ret->value=ident->array.cnst[0];
+    break;
+    
+  case RAV:
+    ret=make_ident(ident->array.rav[0]);
+    break;
+    
+  default:
+    /* assign identifier to a variable in the output C code */
+    ret=get_ident();
+    if (scalar_num>=max_scalar_num) {
+      sprintf(var_temp,"scalar%d",scalar_num);
+      declare_var(1,var_temp,0);
+    }
+
+    dotab(0);
+    fprintf(tfile,"scalar%d=",scalar_num);
+    print_ident(tfile,ident);
+    fprintf(tfile,";\n");
+    
+    sprintf(ret->string,"scalar%d",scalar_num);
+    ret->type=VARIABLE;
+    scalar_num++;
+    if (scalar_num>max_scalar_num)
+      max_scalar_num=scalar_num;
+    break;
+  }
+  
+  return(ret);
+}
+
+
+/* red_s_expr - reduces an scalar expressions to a simple variable access.
+               If the identifier is an expresion then the expression is
+               assigned to a temprorary scalar variable. */
+
+s_expr_t *red_s_expr(s_expr_t *s)
+{  
+  s_expr_t *ret;
+  char var_temp [40];
+
+  if (s==NULL) return(s);
+
+  ret=get_s_expr();
+  /* simple variable access or already coded? */
+  if ((s->op==NOP)||(ISCODED(s->flags))) {
+    ret->ident=red_ident(s->ident);
+  } else {
+    ret->ident=get_ident();
+    ret->ident->type=VARIABLE;
+    if (scalar_num>=max_scalar_num) {
+      sprintf(var_temp,"scalar%d",scalar_num);
+      declare_var(1,var_temp,0);
+    }
+
+    sprintf(ret->ident->string,"scalar%d",scalar_num);
+    dotab(0);
+    fprintf(tfile,"%s=",ret->ident->string);
+    print_s_expr(tfile,s);
+    fprintf(tfile,";\n");
+    
+    scalar_num++;
+    if (scalar_num>max_scalar_num)
+      max_scalar_num=scalar_num;
+
+    s->ident=ret->ident;
+    /* it's been coded, so... */
+    SETCODED(s->flags);
+  }
+
+  return(ret);
+}
+
+
+/* compactor - recusively searches and expression to make simplifications. */
+
+s_expr_t *compactor(s_expr_t *s, int *changed)
+{
+  s_expr_t *ret;
+
+  if (s==NULL) {
+    return(NULL);
+  }
+
+  switch (s->op) {
+  case NOP:
+    ret=s;
+    break;
+    
+  case PLUS:  /* check for adding 0 */
+    s->left=compactor(s->left,changed);
+    s->right=compactor(s->right,changed);
+    if (SCALAR(s->left)&&(s->left->ident->value==0)) {
+      ret=s->right;
+      *changed=TRUE;
+    } else if (SCALAR(s->right)&&(s->right->ident->value==0)) {
+      ret=s->left;
+      *changed=TRUE;
+    } else {
+      ret=s;
+    }
+    break;
+    
+  case MINUS:  /* check from subtracting 0 from something */
+    s->left=compactor(s->left,changed);
+    s->right=compactor(s->right,changed);
+    if (SCALAR(s->right)&&(s->right->ident->value==0)) {
+      ret=s->left;
+      *changed=TRUE;
+    } else {
+      ret=s;
+    }
+    break;
+    
+  case TIMES:  /* check for multiplying by 0 or 1 */
+    s->left=compactor(s->left,changed);
+    s->right=compactor(s->right,changed);
+    if (SCALAR(s->left)&&(s->left->ident->value==0)) {
+      ret=&s_const0;
+      *changed=TRUE;
+    } else if (SCALAR(s->left)&&(s->left->ident->value==1)) {
+      ret=s->right;
+      *changed=TRUE;
+    } else if (SCALAR(s->right)&&(s->right->ident->value==0)) {
+      ret=&s_const0;
+      *changed=TRUE;
+    } else if (SCALAR(s->right)&&(s->right->ident->value==1)) {
+      ret=s->left;
+      *changed=TRUE;
+    } else {
+      ret=s;
+    }
+    break;
+    
+  case DIVIDE: /* check for dividing by 1, or 0/something */
+    s->left=compactor(s->left,changed);
+    s->right=compactor(s->right,changed);
+    if (SCALAR(s->left)&&(s->left->ident->value==0)) {
+      ret=&s_const0;
+      *changed=TRUE;
+    } else if (SCALAR(s->right)&&(s->right->ident->value==0)) {
+      fatal("Divide by zero in compactor");
+    } else if (SCALAR(s->right)&&(s->right->ident->value==1)) {
+      ret=s->left;
+      *changed=TRUE;
+    } else {
+      ret=s;
+    }
+    break;
+
+  case MOD: /* go ahead and perform the MOD if we can */
+    s->left=compactor(s->left,changed);
+    s->right=compactor(s->right,changed);
+    if (SCALAR(s->left)&&SCALAR(s->right)) {
+      ret=get_s_expr();
+      NEW_SCALAR(ret->ident,
+		 ((int) s->left->ident->value)%((int) s->right->ident->value));
+      *changed=TRUE;
+    }
+    ret=s;
+    break;
+
+  case IF_POS:  /* evaluate this if we can */
+    s->left=compactor(s->left,changed);
+    if (SCALAR(s->left)) {
+      if (s->left->ident->value>=0) {
+	ret=&s_const1;
+      } else {
+	ret=&s_const0;
+      }
+      *changed=TRUE;
+    } else {
+      ret=s;
+    }
+    break;
+
+  case IF_NEG:  /* evaluate this if we can */
+    s->left=compactor(s->left,changed);
+    if (SCALAR(s->left)) {
+      if (s->left->ident->value<0)
+	ret=&s_const1;
+      else 
+	ret=&s_const0;
+      *changed=TRUE;
+    } else {
+      ret=s;
+    }
+    break;    
+
+  case SKIP:  /* skip this node and go to either right or left node */
+    if (s->left==NULL) ret=s->right;
+    else ret=s->left;
+    *changed=TRUE;
+    break;
+
+  case ABS:  /* evaluate this one if we can */
+    s->left=compactor(s->left,changed);
+    if (SCALAR(s->left)) {
+      ret=get_s_expr();
+      ret->ident=get_ident();
+      ret->ident->type=CONSTANT;
+      ret->ident->value=fabs(s->left->ident->value);
+      *changed=TRUE;
+    } else {
+      ret=s;
+    }
+    break;
+
+  case MIN:  /* evaluate this one if we can, check for MIN (0, something) */
+    s->left=compactor(s->left,changed);
+    s->right=compactor(s->right,changed);
+    if (SCALAR(s->left)&&SCALAR(s->right)) {
+      ret=get_s_expr();
+      NEW_SCALAR(ret->ident,
+		 MYMIN(s->left->ident->value,s->right->ident->value));
+      *changed=TRUE;
+    } else if (SCALAR(s->left)&&(s->left->ident->value==0)) {
+      ret=&s_const0;
+      *changed=TRUE;
+    } else if (SCALAR(s->right)&&(s->right->ident->value==0)) {
+      ret=&s_const0;
+      *changed=TRUE;
+    } else {
+      ret=s;
+    }
+    break;
+    
+  case MAX:  /* evaluate this one if we can, check for MAX (0, something) */
+    s->left=compactor(s->left,changed);
+    s->right=compactor(s->right,changed);
+    if (SCALAR(s->left)&&SCALAR(s->right)) {
+      ret=get_s_expr();
+      NEW_SCALAR(ret->ident,
+		 MYMAX(s->left->ident->value,s->right->ident->value));
+      *changed=TRUE;
+    } else if (SCALAR(s->left)&&(s->left->ident->value==0)) {
+      ret=s->right;
+      *changed=TRUE;
+    } else if (SCALAR(s->right)&&(s->right->ident->value==0)) {
+      ret=s->left;
+      *changed=TRUE;
+    } else {
+      ret=s;
+    }
+    break;
+    
+  default:
+    puts("compactor: internal error -- operator unknown.");
+    exit(1);
+  }
+  
+  return(ret);
+}
+
+/* this function forces an integer division of the left and right
+   subtrees of s, if they are both scalars.  call this function only
+   on s_expr_t variables returned from a s_op call.  for those times when
+   you just have to have integer division.  used in psi.c:block_rav
+   to force integer division before a multiplication. */
+s_expr_t *force_divide (s_expr_t *s)
+{
+  s_expr_t *ret;
+
+  if ((s->op == DIVIDE) && (SCALAR(s->left)) && (SCALAR(s->right))) {
+    ret=get_s_expr();
+    /* divide by 0 should have already been handled by compactor above */
+    NEW_SCALAR(ret->ident,
+      (int)s->left->ident->value/(int)s->right->ident->value);
+  } else {
+    ret=s;
+  }
+  return (ret);
+}
+
+/* simplify_s_expr takes a scalar expression and simplifies it as much
+   as possible.  division is not simplified out, probably for precision
+   purposes */
+s_expr_t *simplify_s_expr(s_expr_t *s)
+{
+  int found,changed;
+  double num;
+  s_expr_t *ret,*tmp;
+
+  ret=StandardizeSExpr(s);
+
+  do {
+    changed=FALSE;
+    ret=compactor(ret,&changed);
+  } while (changed);
+
+  return(ret);
+}
+
+
+/* s_op - returns an expression tree for left op right */
+
+s_expr_t *s_op(int op, s_expr_t *left, s_expr_t *right)
+{
+  s_expr_t *ret;
+
+  ret=get_s_expr();
+  ret->op=op;
+  ret->left=left;
+  ret->right=right;
+  
+  return(simplify_s_expr(ret));
+}
+
+/* s_vect - this function converts a s_expr into a vector */
+
+vect_t *s_vect(s_expr_t *s)
+{
+  vect_t *ret;
+  
+  ret=get_vect();
+  ret->loc=&s_const0;
+  ret->index=&s_const0;
+  ret->shp=&s_const1;
+  ret->ident=(red_s_expr(s))->ident;
+
+  return(ret);
+}
+
+/* ident_compare - returns TRUE if ident1 and ident2 are the same pointers
+    or are string equivalent, FALSE otherwise. */
+
+int ident_compare(ident_t *ident1, ident_t *ident2)
+{
+  int ret,i;
+  int type1,type2;
+
+  type1=ident1->type;
+  if (type1==EMBEDED_ARRAY)
+    type1=(ident1->array.cnst!=NULL) ? CONST_ARRAY : RAV;
+  type2=ident2->type;
+  if (type2==EMBEDED_ARRAY)
+    type2=(ident2->array.cnst!=NULL) ? CONST_ARRAY : RAV;
+
+  ret=FALSE;
+  switch (type1) {
+  case VARIABLE:
+    switch (type2) {
+    case VARIABLE:
+      ret=(strcmp(ident1->string,ident2->string)==0);
+      break;
+    case RAV:
+      if ((ident2->array.shp[0]->value==1)&&(ident2->array.rav[0]->op==NOP))
+	ret=ident_compare(ident1,ident2->array.rav[0]->ident);
+      break;
+    }
+    break;
+      
+  case RAV:
+    switch (type2) {
+    case RAV:
+      if (ident1->array.shp[0]->value==ident2->array.shp[0]->value) {
+	ret=TRUE;
+	for (i=0; i<ident1->array.shp[0]->value; i++) {
+	  ret&=s_compare(ident1->array.rav[i],ident2->array.rav[i]);
+	}
+      }
+      break;
+    case VARIABLE:
+    case CONSTANT:
+      if ((ident1->array.shp[0]->value==1)&&(ident1->array.rav[0]->op==NOP))
+	ret=ident_compare(ident1->array.rav[0]->ident,ident2);
+      break;
+    case CONST_ARRAY:
+      if (ident1->array.shp[0]->value==ident2->array.shp[0]->value) {
+	ret=TRUE;
+	for (i=0; i<ident1->array.shp[0]->value; i++) {
+	  if ((ident1->array.rav[i]->op!=NOP)||
+	      (ident1->array.rav[i]->ident->type!=CONSTANT)||
+	      (ident1->array.rav[i]->ident->value!=ident2->array.cnst[i]))
+	    ret=FALSE;
+	}
+      }
+      break;
+    case IOTA:
+      if (ident1->array.shp[0]->value==ident2->array.shp[0]->value) {
+	ret=TRUE;
+	for (i=0; i<ident1->array.shp[0]->value; i++) {
+	  if ((ident1->array.rav[i]->op!=NOP)||
+	      (ident1->array.rav[i]->ident->type!=CONSTANT)||
+	      (ident1->array.rav[i]->ident->value!=i))
+	    ret=FALSE;
+	}
+      }
+      break;
+    }
+    break;
+
+  case CONSTANT:
+    switch (type2) {
+    case CONSTANT:
+      ret=(ident1->value==ident2->value);
+      break;
+    case RAV:
+      if ((ident2->array.shp[0]->value==1)&&(ident2->array.rav[0]->op==NOP))
+	ret=ident_compare(ident1,ident2->array.rav[0]->ident);
+      break;
+    case CONST_ARRAY:
+      ret=((ident2->array.shp[0]->value==1)&&
+	   (ident2->array.cnst[0]==ident1->value));
+      break;
+    case IOTA:
+      ret=(ident1->value==0);
+      break;
+    }
+    break;
+
+  case CONST_ARRAY:
+    switch (type2) {
+    case CONST_ARRAY:
+      if (ident1->array.shp[0]->value==ident2->array.shp[0]->value) {
+	ret=TRUE;
+	for (i=0; i<ident1->array.shp[0]->value; i++) {
+	  ret&=(ident1->array.cnst[i]==ident2->array.cnst[i]);
+	}
+      }
+      break;
+    case CONSTANT:
+      ret=((ident1->array.shp[0]->value==1)&&
+	   (ident1->array.cnst[0]==ident2->value));
+      break;
+    case RAV:
+      if (ident1->array.shp[0]->value==ident2->array.shp[0]->value) {
+	ret=TRUE;
+	for (i=0; i<ident1->array.shp[0]->value; i++) {
+	  if ((ident2->array.rav[i]->op!=NOP)||
+	      (ident2->array.rav[i]->ident->type!=CONSTANT)||
+	      (ident2->array.rav[i]->ident->value!=ident1->array.cnst[i]))
+	    ret=FALSE;
+	}
+      }
+      break;
+    case IOTA:
+      if (ident1->array.shp[0]->value==ident2->array.shp[0]->value) {
+	ret=TRUE;
+	for (i=0; i<ident1->array.shp[0]->value; i++) {
+	  ret&=(ident1->array.cnst[i]==i);
+	}
+      }
+      break;
+    }
+    break;
+
+  case IOTA:
+    switch (type2) {
+    case CONST_ARRAY:
+      if (ident1->array.shp[0]->value==ident2->array.shp[0]->value) {
+	ret=TRUE;
+	for (i=0; i<ident1->array.shp[0]->value; i++) {
+	  ret&=(ident2->array.cnst[i]==i);
+	}
+      }
+      break;
+    case CONSTANT:
+      ret=((ident1->array.shp[0]->value==1)&&(ident2->value==0));
+      break;
+    case RAV:
+      if (ident1->array.shp[0]->value==ident2->array.shp[0]->value) {
+	ret=TRUE;
+	for (i=0; i<ident1->array.shp[0]->value; i++) {
+	  if ((ident2->array.rav[i]->op!=NOP)||
+	      (ident2->array.rav[i]->ident->type!=CONSTANT)||
+	      (ident2->array.rav[i]->ident->value!=i))
+	    ret=FALSE;
+	}
+      }
+      break;
+    case IOTA:
+      ret=(ident1->array.shp[0]->value==ident2->array.shp[0]->value);
+      break;
+    }
+    break;
+
+  case ARRAY:
+    ret=(ident1==ident2);
+    break;
+  }
+
+  return(ret);
+}
+
+
+/* s_compare - returns TRUE if s1 and s2 are the same as defined by
+    the operators at each node are equal and the leaves point to the
+    same identifier or are string equiv., FALSE otherwise. */
+
+int s_compare(s_expr_t *s1, s_expr_t *s2)
+{
+  int ret;
+
+  if (s1->op==s2->op) {
+    if (s1->op==NOP) {
+      ret=ident_compare(s1->ident,s2->ident);
+    } else {
+      ret=(s_compare(s1->left,s2->left)&&s_compare(s1->right,s2->right));
+    }
+  } else ret=FALSE;
+
+  return(ret);
+}
+@
+
+
+1.3
+log
+@just before some changes
+@
+text
+@d12 1
+a12 1
+   v0.4 Thom McMachon
+d14 1
+d58 1
+d60 2
+a61 1
+  
+d69 1
+d81 1
+a154 1
+
+d157 1
+d161 1
+a170 1
+
+d175 1
+a175 1
+  if (ident==NULL) return(ret);
+d210 1
+d234 3
+a236 3
+/* red_s_expr - reduces an identifier to a simple variable access.  If the
+               identifier is an expresion then the expression is assigned
+	       to a temprorary scalar variable. */
+a238 1
+
+d246 1
+d268 1
+a278 1
+
+d291 1
+a291 1
+  case PLUS:
+d305 1
+a305 1
+  case MINUS:
+d316 1
+a316 1
+  case TIMES:
+d336 1
+a336 1
+  case DIVIDE:
+d352 1
+a352 1
+  case MOD:
+d364 1
+a364 1
+  case IF_POS:
+d378 1
+a378 1
+  case IF_NEG:
+d391 1
+a391 1
+  case SKIP:
+d397 1
+a397 1
+  case ABS:
+d410 1
+a410 1
+  case MIN:
+d429 1
+a429 1
+  case MAX:
+d449 1
+a449 1
+    puts("compactor: internal error.");
+a454 1
+      
+d456 23
+a479 1
+
+a498 1
+
+a509 1
+
+a512 1
+
+a524 1
+
+a528 1
+     
+a692 1
+
+@
+
+
+1.2
+log
+@tmcmahon: changed print_s_expr to hopefully take out some unneeded
+parenthesis.   ((((these things)))).
+@
+text
+@d49 1
+a49 1
+                a simple variable access or has been coded befor, it is
+a52 1
+
+d60 1
+a60 1
+  tmp->type=VAR_FLOAT;
+a81 1
+
+a86 1
+
+d101 2
+a102 2
+    case FLOAT:
+    case VAR_FLOAT:
+d109 1
+a109 1
+	tmp->type=FLOAT;
+d117 1
+a117 1
+	tmp->type=FLOAT;
+d128 1
+a128 1
+	  tmp->type=FLOAT;
+d173 2
+a174 2
+  case FLOAT:
+  case VAR_FLOAT:
+d183 1
+a183 1
+      ret->type=FLOAT;
+d190 1
+a190 1
+    ret->type=FLOAT;
+d196 1
+a196 1
+    ret->type=FLOAT;
+d217 1
+a217 1
+    ret->type=VAR_FLOAT;
+d245 1
+a245 1
+    ret->ident->type=VAR_FLOAT;
+d396 1
+a396 1
+      ret->ident->type=FLOAT;
+d520 1
+a520 1
+  case VAR_FLOAT:
+d522 1
+a522 1
+    case VAR_FLOAT:
+d542 2
+a543 2
+    case VAR_FLOAT:
+    case FLOAT:
+d552 1
+a552 1
+	      (ident1->array.rav[i]->ident->type!=FLOAT)||
+d563 1
+a563 1
+	      (ident1->array.rav[i]->ident->type!=FLOAT)||
+d572 1
+a572 1
+  case FLOAT:
+d574 1
+a574 1
+    case FLOAT:
+d601 1
+a601 1
+    case FLOAT:
+d610 1
+a610 1
+	      (ident2->array.rav[i]->ident->type!=FLOAT)||
+d637 1
+a637 1
+    case FLOAT:
+d645 1
+a645 1
+	      (ident2->array.rav[i]->ident->type!=FLOAT)||
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d156 2
+a157 1
+  fprintf(outfile,"(");
+d159 2
+a160 1
+  fprintf(outfile,")");
+@

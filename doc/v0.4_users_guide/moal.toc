@@ -1,0 +1,19 @@
+\contentsline {section}{\numberline {1}Introduction}{2}
+\contentsline {section}{\numberline {2}The Language}{2}
+\contentsline {subsection}{\numberline {2.1}Procedure Definitions}{3}
+\contentsline {subsection}{\numberline {2.2}The Definition Part}{4}
+\contentsline {subsection}{\numberline {2.3}The Statement Part}{4}
+\contentsline {subsection}{\numberline {2.4}Array Expressions}{5}
+\contentsline {subsubsection}{\numberline {2.4.1}Pointwise Operations}{5}
+\contentsline {subsubsection}{\numberline {2.4.2}Reduction}{6}
+\contentsline {subsubsection}{\numberline {2.4.3}Structural Information, Partitioning and Restructuring}{6}
+\contentsline {subsubsection}{\numberline {2.4.4}Take and Drop}{6}
+\contentsline {subsubsection}{\numberline {2.4.5}Ptake and Pdrop}{7}
+\contentsline {subsubsection}{\numberline {2.4.6}Psi}{9}
+\contentsline {subsubsection}{\numberline {2.4.7}Concatenation}{10}
+\contentsline {subsubsection}{\numberline {2.4.8}Omega}{10}
+\contentsline {subsubsection}{\numberline {2.4.9}Flattening an array - rav}{10}
+\contentsline {subsubsection}{\numberline {2.4.10}Iota}{11}
+\contentsline {section}{\numberline {3}Using the Compiler}{11}
+\contentsline {subsection}{\numberline {3.1}General Use}{11}
+\contentsline {subsection}{\numberline {3.2}Use on Distributed Memory Architectures}{12}

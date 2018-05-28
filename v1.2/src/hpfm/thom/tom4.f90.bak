@@ -1,0 +1,142 @@
+SUBROUTINE test (A , B , C , D , E )
+USE MOALIB
+  INTEGER :: D 
+
+! MOA
+! Variable declarations
+!
+  INTEGER, DIMENSION (0:0) :: forall_i0
+  INTEGER, DIMENSION (0:0) :: forall_i1
+  INTEGER, DIMENSION (0:0) :: forall_i2
+  INTEGER, DIMENSION (0:0) :: forall_i3
+  INTEGER  , DIMENSION (0:0) :: tmp_vect0
+  INTEGER, DIMENSION (0:0) :: forall_i4
+  INTEGER, DIMENSION (0:0) :: forall_i5
+  INTEGER, DIMENSION (0:0) :: forall_i6
+  INTEGER, DIMENSION (0:0) :: forall_i7
+  INTEGER  , DIMENSION (0:0) :: tmp_vect1
+  INTEGER, DIMENSION (0:10*10-1) :: B
+  REAL, DIMENSION (0:10-1) :: temp1
+  INTEGER, DIMENSION (0:10*10-1) :: E
+  INTEGER, DIMENSION (0:10*10-1) :: TEMPF900
+  REAL, DIMENSION (0:10-1) :: temp2
+  INTEGER, DIMENSION (0:10*10-1) :: TEMPF901
+  INTEGER :: shift
+  INTEGER :: offset0
+  INTEGER :: i0
+  INTEGER :: i1
+
+! MOA
+! array assignment
+!
+
+  TEMPF900=ABS (B**A)
+  forall_i2(0)=0
+  DO
+    IF (forall_i2(0) == 0+10) EXIT
+    shift=(forall_i2(0+0))+((0))*10
+    DO i0 = 0, ((10))-1
+      B(shift)=0.000000
+    END DO
+    forall_i3(0)=0
+    DO
+      IF (forall_i3(0) == 0+10) EXIT
+      forall_i0(0)=(forall_i2(0+0))
+      DO
+        IF (forall_i0(0) == (forall_i2(0+0))+1) EXIT
+        forall_i1(0)=(forall_i3(0+0))
+        DO
+          IF (forall_i1(0) == (forall_i3(0+0))+((1))) EXIT
+          shift=0
+          offset0=((3)+MIN(forall_i0(0+0),(7)))+(forall_i1(0+0))*10
+          DO i1 = 0, (MIN((1),((7))-(MIN(forall_i0(0+0),(7)))))-1
+            tmp_vect0(shift)=E(offset0)
+            offset0=offset0+((1))
+          END DO
+          shift=0
+          offset0=((forall_i0(0+0))-(MIN(forall_i0(0+0),(7))))+(forall_i1(0+0))*10
+          DO i1 = 0, (((1))-(MIN((1),((7))-(MIN(forall_i0(0+0),(7))))))-1
+            tmp_vect0(shift)=E(offset0)
+            offset0=offset0+((1))
+          END DO
+          shift=((0))
+          DO i0 = 0, ((10))-1
+            temp1(shift)=tmp_vect0(0+0)
+            shift=shift+(1)
+          END DO
+          shift=((0))
+          offset0=(forall_i1(0+0))+((0))*10
+          DO i0 = 0, 10-1
+            temp1(shift)=temp1(shift)*TEMPF900(offset0)
+            offset0=offset0+(10)
+            shift=shift+(1)
+          END DO
+          forall_i1(0)=forall_i1(0)+1
+        END DO
+        forall_i0(0)=forall_i0(0)+1
+      END DO
+      shift=(forall_i2(0+0))+((0))*10
+      offset0=0
+      DO i0 = 0, ((10))-1
+        B(shift)=B(shift)+temp1(offset0)
+        offset0=offset0+((1))
+      END DO
+      forall_i3(0)=forall_i3(0)+1
+    END DO
+    forall_i2(0)=forall_i2(0)+1
+  END DO
+
+
+! MOA
+! array assignment
+!
+
+  TEMPF901=ABS (B**A)
+  forall_i6(0)=0
+  DO
+    IF (forall_i6(0) == 0+10) EXIT
+    shift=(forall_i6(0+0))+((0))*10
+    DO i0 = 0, ((10))-1
+      B(shift)=0.000000
+    END DO
+    forall_i7(0)=0
+    DO
+      IF (forall_i7(0) == 0+10) EXIT
+      forall_i4(0)=(forall_i6(0+0))
+      DO
+        IF (forall_i4(0) == (forall_i6(0+0))+1) EXIT
+        forall_i5(0)=(forall_i7(0+0))
+        DO
+          IF (forall_i5(0) == (forall_i7(0+0))+((1))) EXIT
+          shift=0
+          offset0=(forall_i4(0+0))+(forall_i5(0+0))*10
+          tmp_vect1(shift)=TEMPF901(offset0)
+          shift=((0))
+          DO i0 = 0, ((10))-1
+            temp2(shift)=tmp_vect1(0+0)
+            shift=shift+(1)
+          END DO
+          shift=((0))
+          offset0=(forall_i5(0+0))+((0))*10
+          DO i0 = 0, 10-1
+            temp2(shift)=temp2(shift)*E(offset0)
+            offset0=offset0+(10)
+            shift=shift+(1)
+          END DO
+          forall_i5(0)=forall_i5(0)+1
+        END DO
+        forall_i4(0)=forall_i4(0)+1
+      END DO
+      shift=(forall_i6(0+0))+((0))*10
+      offset0=0
+      DO i0 = 0, ((10))-1
+        B(shift)=B(shift)+temp2(offset0)
+        offset0=offset0+((1))
+      END DO
+      forall_i7(0)=forall_i7(0)+1
+    END DO
+    forall_i6(0)=forall_i6(0)+1
+  END DO
+
+
+END SUBROUTINE test 

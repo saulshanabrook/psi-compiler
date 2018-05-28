@@ -1,0 +1,259 @@
+#include <stdlib.h>
+#include "moalib.e"
+
+main()
+
+{
+  double *offset0;
+  int i0;
+  int i1;
+  double *shift;
+  double _s[]={30.000000, 30.000000, 30.000000, 30.000000};
+  double _w[]={30.000000, 30.000000};
+  double _b0[]={0.000000, 0.000000};
+  double _b1[]={0.000000};
+  double _z[]={3.000000};
+  double _k[]={30.000000, 1.000000};
+  double _b5[]={30.000000, 1.000000, 30.000000, 1.000000};
+  double _x[]={30.000000};
+  double _l[]={0.000000, 1.000000, 2.000000, 3.000000, 4.000000,
+    5.000000, 6.000000, 7.000000, 8.000000, 9.000000,
+    10.000000, 11.000000, 12.000000, 13.000000, 14.000000,
+    15.000000, 16.000000, 17.000000, 18.000000, 19.000000,
+    20.000000, 21.000000, 22.000000, 23.000000, 24.000000,
+    25.000000, 26.000000, 27.000000, 28.000000, 29.000000};
+  double _zoo[]={0.000000, 1.000000, 2.000000, 3.000000, 4.000000,
+    5.000000, 6.000000, 7.000000, 8.000000, 9.000000,
+    10.000000, 11.000000, 12.000000, 13.000000, 14.000000,
+    15.000000, 16.000000, 17.000000, 18.000000, 19.000000,
+    20.000000, 21.000000, 22.000000, 23.000000, 24.000000,
+    25.000000, 26.000000, 27.000000, 28.000000, 29.000000};
+  double _foo[]={0.000000, 1.000000, 2.000000, 3.000000, 4.000000,
+    5.000000, 6.000000, 7.000000, 8.000000, 9.000000,
+    10.000000, 11.000000};
+  double _r[]={0.000000, 1.000000, 2.000000, 3.000000, 4.000000,
+    5.000000, 6.000000, 7.000000, 8.000000, 9.000000,
+    10.000000, 11.000000, 12.000000, 13.000000, 14.000000,
+    15.000000, 16.000000, 17.000000, 18.000000, 19.000000,
+    20.000000, 21.000000, 22.000000, 23.000000, 24.000000,
+    25.000000, 26.000000, 27.000000, 28.000000, 29.000000,
+    0.000000, 1.000000, 2.000000, 3.000000, 4.000000,
+    5.000000, 6.000000, 7.000000, 8.000000, 9.000000,
+    10.000000, 11.000000, 12.000000, 13.000000, 14.000000,
+    15.000000, 16.000000, 17.000000, 18.000000, 19.000000,
+    20.000000, 21.000000, 22.000000, 23.000000, 24.000000,
+    25.000000, 26.000000, 27.000000, 28.000000, 29.000000};
+  int forall_i0[1];
+  double tmp_vect0[2];
+  double tmp_vect1[2];
+  int forall_i1[1];
+  double tmp_vect2[1];
+  int forall_i2[1];
+  double tmp_vect3[1];
+  int forall_i3[1];
+  int forall_i4[1];
+  double tmp_vect4[1];
+  int forall_i5[1];
+  int forall_i6[1];
+  double tmp_vect5[1];
+  double tmp_vect6[1];
+  int forall_i7[1];
+  double tmp_vect7[1];
+  double tmp_vect8[1];
+  int forall_i8[1];
+  int forall_i9[1];
+  double tmp_vect9[1];
+  double tmp_vect10[1];
+  double _a13[2*30*1];
+  double _a7[1];
+  double consta0[2];
+  double _a2[4*30];
+  double _a1[30];
+  double _a3[2*30];
+  int scalar0;
+  int scalar1;
+
+code.c: 1741: /*******
+a13=b5 take  omega <1.000000 1.000000>  iota x
+********/
+
+  shift=tmp_vect0+code.c: 359: 0;
+  offset0=_b5+code.c: 139: forall_i0[0]*code.c: 386: 2+code.c: 112: 0;
+  code.c: 1103: for (i1=0code.c: 1104: ; i1<code.c: 386: 2code.c: 1106: ; i1++) {
+    code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+    code.c: 1145: offset0+=code.c: 112: 1code.c: 1147: ;
+    code.c: 1154: shift+=code.c: 112: 1code.c: 1156: ;
+  code.c: 1162: }
+  code.c: 1488: for (forall_i0[0]=code.c: 359: 0code.c: 1490: ; forall_i0[0]<code.c: 359: 0code.c: 1492: +code.c: 112: 30code.c: 1494: ; forall_i0[0]++) {
+    shift=tmp_vect1+code.c: 359: 0;
+    offset0=_b5+code.c: 139: forall_i0[0]*code.c: 386: 2+code.c: 112: 0;
+    code.c: 1103: for (i1=0code.c: 1104: ; i1<code.c: 386: 2code.c: 1106: ; i1++) {
+      code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+      code.c: 1145: offset0+=code.c: 112: 1code.c: 1147: ;
+      code.c: 1154: shift+=code.c: 112: 1code.c: 1156: ;
+    code.c: 1162: }
+    shift=_a13+code.c: 139: forall_i0[0]*code.c: 386: 30+code.c: 112: 0*code.c: 386: 1+code.c: 112: 0;
+    code.c: 1360: *(shift)= code.c: 139: forall_i0[0]code.c: 1362: ;
+    code.c: 1365: shift++;
+  code.c: 1516: }
+code.c: 1743: 
+
+code.c: 1741: /*******
+a7= shp  iota <3.000000>
+********/
+
+  shift=_a7+code.c: 359: 0;
+  code.c: 1286: consta0[0]=code.c: 1288: 3.000000code.c: 1292: ;
+  code.c: 1286: consta0[1]=code.c: 1288: 1.000000code.c: 1292: ;
+  offset0=consta0+code.c: 359: 0;
+  code.c: 1103: for (i0=0code.c: 1104: ; i0<code.c: 359: 2code.c: 1106: ; i0++) {
+    code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+    code.c: 1145: offset0+=code.c: 112: 1code.c: 1147: ;
+    code.c: 1154: shift+=code.c: 112: 1code.c: 1156: ;
+  code.c: 1162: }
+code.c: 1743: 
+
+code.c: 1741: /*******
+a2=b0 psi  omega <1.000000 1.000000> (( iota <2.000000>) psi  iota <x>)
+********/
+
+  code.c: 1488: for (forall_i1[0]=code.c: 359: 0code.c: 1490: ; forall_i1[0]<code.c: 359: 0code.c: 1492: +code.c: 386: 2code.c: 1494: ; forall_i1[0]++) {
+    shift=tmp_vect2+code.c: 359: 0;
+    offset0=_b0+code.c: 139: forall_i1[0]*code.c: 386: 1+code.c: 112: 0;
+    code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+    shift=_a2+code.c: 139: forall_i1[0]*code.c: 386: 30+code.c: 112: 0;
+    code.c: 1360: *(shift)= code.c: 410: 0code.c: 1362: ;
+    code.c: 1365: shift++;
+  code.c: 1516: }
+code.c: 1743: 
+
+code.c: 1741: /*******
+a2=b0 psi  omega <1.000000 1.000000> (<2.000000> take  iota <x>)
+********/
+
+  code.c: 1488: for (forall_i2[0]=code.c: 359: 0code.c: 1490: ; forall_i2[0]<code.c: 359: 0code.c: 1492: +code.c: 386: 2code.c: 1494: ; forall_i2[0]++) {
+    shift=tmp_vect3+code.c: 359: 0;
+    offset0=_b0+code.c: 139: forall_i2[0]*code.c: 386: 1+code.c: 112: 0;
+    code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+    shift=_a2+code.c: 139: forall_i2[0]*code.c: 386: 30+code.c: 112: 0;
+    code.c: 1360: *(shift)= code.c: 139: forall_i2[0]code.c: 1362: ;
+    code.c: 1365: shift++;
+  code.c: 1516: }
+code.c: 1743: 
+
+code.c: 1741: /*******
+a1=b1 psi  omega <1.000000 1.000000> r
+********/
+
+  code.c: 1488: for (forall_i3[0]=code.c: 359: 0code.c: 1490: ; forall_i3[0]<code.c: 359: 0code.c: 1492: +code.c: 112: 2code.c: 1494: ; forall_i3[0]++) {
+    shift=_a1+code.c: 367: forall_i3[0code.c: 372: ];
+    offset0=_r+code.c: 139: forall_i3[0]*code.c: 386: 30+code.c: 112: 0;
+    code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+  code.c: 1516: }
+code.c: 1743: 
+
+code.c: 1741: /*******
+a2=b0 psi  omega <1.000000 1.000000> r
+********/
+
+  code.c: 1488: for (forall_i4[0]=code.c: 359: 0code.c: 1490: ; forall_i4[0]<code.c: 359: 0code.c: 1492: +code.c: 112: 2code.c: 1494: ; forall_i4[0]++) {
+    shift=tmp_vect4+code.c: 359: 0;
+    offset0=_b0+code.c: 139: forall_i4[0]*code.c: 386: 1+code.c: 112: 0;
+    code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+    shift=_a2+code.c: 139: forall_i4[0]*code.c: 386: 30+code.c: 112: 0;
+    offset0=_r+code.c: 139: forall_i4[0]*code.c: 386: 30+code.c: 137: ((int) tmp_vect4[0]);
+    code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+  code.c: 1516: }
+code.c: 1743: 
+
+code.c: 1741: /*******
+a1=x take  omega <1.000000 1.000000>  iota x
+********/
+
+  code.c: 1488: for (forall_i5[0]=code.c: 359: 0code.c: 1490: ; forall_i5[0]<code.c: 359: 0code.c: 1492: +code.c: 386: 30code.c: 1494: ; forall_i5[0]++) {
+    shift=_a1+code.c: 367: forall_i5[0code.c: 372: ];
+    code.c: 1360: *(shift)= code.c: 139: forall_i5[0]code.c: 1362: ;
+    code.c: 1365: shift++;
+  code.c: 1516: }
+code.c: 1743: 
+
+code.c: 1741: /*******
+a3=w take  omega <1.000000 1.000000>  iota x
+********/
+
+  shift=tmp_vect5+code.c: 359: 0;
+  offset0=_w+code.c: 139: forall_i6[0]*code.c: 386: 1+code.c: 112: 0;
+  code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+  code.c: 1488: for (forall_i6[0]=code.c: 359: 0code.c: 1490: ; forall_i6[0]<code.c: 359: 0code.c: 1492: +code.c: 112: 30code.c: 1494: ; forall_i6[0]++) {
+    shift=tmp_vect6+code.c: 359: 0;
+    offset0=_w+code.c: 139: forall_i6[0]*code.c: 386: 1+code.c: 112: 0;
+    code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+    shift=_a3+code.c: 139: forall_i6[0]*code.c: 386: 30+code.c: 112: 0;
+    code.c: 1360: *(shift)= code.c: 139: forall_i6[0]code.c: 1362: ;
+    code.c: 1365: shift++;
+  code.c: 1516: }
+code.c: 1743: 
+
+code.c: 1741: /*******
+a3=w take  omega <1.000000 1.000000> r
+********/
+
+  shift=tmp_vect7+code.c: 359: 0;
+  offset0=_w+code.c: 139: forall_i7[0]*code.c: 386: 1+code.c: 112: 0;
+  code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+  code.c: 1488: for (forall_i7[0]=code.c: 359: 0code.c: 1490: ; forall_i7[0]<code.c: 359: 0code.c: 1492: +code.c: 112: 2code.c: 1494: ; forall_i7[0]++) {
+    shift=tmp_vect8+code.c: 359: 0;
+    offset0=_w+code.c: 139: forall_i7[0]*code.c: 386: 1+code.c: 112: 0;
+    code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+    shift=_a3+code.c: 139: forall_i7[0]*code.c: 386: 30+code.c: 112: 0;
+    offset0=_r+code.c: 139: forall_i7[0]*code.c: 386: 30+(code.c: 203: (code.c: 137: ((int) tmp_vect8[0])code.c: 163: +code.c: 112: 30code.c: 205: )code.c: 154: *code.c: 209: (code.c: 237: ((code.c: 137: ((int) tmp_vect8[0])code.c: 239: )<0)code.c: 211: ));
+    scalar0=(code.c: 203: (code.c: 112: 30code.c: 205: )code.c: 166: -code.c: 209: (code.c: 243: abs(code.c: 137: ((int) tmp_vect7[0])code.c: 245: )code.c: 211: ));
+    scalar1=(code.c: 203: (code.c: 112: 30code.c: 205: )code.c: 166: -code.c: 209: (code.c: 243: abs(code.c: 137: ((int) tmp_vect7[0])code.c: 245: )code.c: 211: ));
+    code.c: 1103: for (i1=0code.c: 1104: ; i1<(code.c: 243: abs(code.c: 137: ((int) tmp_vect7[0])code.c: 245: ))code.c: 1106: ; i1++) {
+      code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+      code.c: 1145: offset0+=code.c: 112: 1code.c: 1147: ;
+      code.c: 1154: shift+=code.c: 112: 1code.c: 1156: ;
+    code.c: 1162: }
+  code.c: 1516: }
+code.c: 1743: 
+
+code.c: 1741: /*******
+a3=x take  omega <1.000000 1.000000> r
+********/
+
+  code.c: 1488: for (forall_i8[0]=code.c: 359: 0code.c: 1490: ; forall_i8[0]<code.c: 359: 0code.c: 1492: +code.c: 386: 2code.c: 1494: ; forall_i8[0]++) {
+    shift=_a3+code.c: 139: forall_i8[0]*code.c: 386: 30+code.c: 112: 0;
+    offset0=_r+code.c: 139: forall_i8[0]*code.c: 386: 30+code.c: 112: 0;
+    code.c: 1103: for (i1=0code.c: 1104: ; i1<code.c: 386: 30code.c: 1106: ; i1++) {
+      code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+      code.c: 1145: offset0+=code.c: 112: 1code.c: 1147: ;
+      code.c: 1154: shift+=code.c: 112: 1code.c: 1156: ;
+    code.c: 1162: }
+  code.c: 1516: }
+code.c: 1743: 
+
+code.c: 1741: /*******
+a3=w take  omega <1.000000 1.000000> zoo
+********/
+
+  shift=tmp_vect9+code.c: 359: 0;
+  offset0=_w+code.c: 139: forall_i9[0]*code.c: 386: 1+code.c: 112: 0;
+  code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+  code.c: 1488: for (forall_i9[0]=code.c: 359: 0code.c: 1490: ; forall_i9[0]<code.c: 359: 0code.c: 1492: +code.c: 112: 2code.c: 1494: ; forall_i9[0]++) {
+    shift=tmp_vect10+code.c: 359: 0;
+    offset0=_w+code.c: 139: forall_i9[0]*code.c: 386: 1+code.c: 112: 0;
+    code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+    shift=_a3+code.c: 139: forall_i9[0]*code.c: 386: 30+code.c: 112: 0;
+    offset0=_zoo+(code.c: 203: (code.c: 137: ((int) tmp_vect10[0])code.c: 163: +code.c: 112: 30code.c: 205: )code.c: 154: *code.c: 209: (code.c: 237: ((code.c: 137: ((int) tmp_vect10[0])code.c: 239: )<0)code.c: 211: ));
+    scalar0=(code.c: 203: (code.c: 112: 30code.c: 205: )code.c: 166: -code.c: 209: (code.c: 243: abs(code.c: 137: ((int) tmp_vect9[0])code.c: 245: )code.c: 211: ));
+    code.c: 1103: for (i0=0code.c: 1104: ; i0<(code.c: 243: abs(code.c: 137: ((int) tmp_vect9[0])code.c: 245: ))code.c: 1106: ; i0++) {
+      code.c: 1346: *(shift)code.c: 1348: = *(offset0);
+      code.c: 1145: offset0+=code.c: 112: 1code.c: 1147: ;
+      code.c: 1154: shift+=code.c: 112: 1code.c: 1156: ;
+    code.c: 1162: }
+  code.c: 1516: }
+code.c: 1743: 
+
+}
+
+

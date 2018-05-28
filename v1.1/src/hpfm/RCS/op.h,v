@@ -1,0 +1,36 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.1
+date	94.09.27.02.08.31;	author psi;	state Exp;
+branches;
+next	;
+
+
+desc
+@contains structure for passing functins around during parser time.
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@/* Copyright (c) 1993 University of Missouri-Rolla
+   All rights reserved.
+   
+   op.h - a type for passing functions around the parser
+
+   5/94 - Scott Thibault - created
+
+*/
+
+typedef struct {
+  parser_t *(*func)();
+} psiop_t;
+@

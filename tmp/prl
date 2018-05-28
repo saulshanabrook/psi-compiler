@@ -1,0 +1,2 @@
+#!/usr/local/bin/perl 
+perl -ne $1 $2

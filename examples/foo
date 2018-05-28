@@ -1,0 +1,7 @@
+Reducing:
+<i> psi B=(<i> psi (<1.000000> psi (<0.000000> psi C)))
+#<> take (<_i[0]> drop _B[])=<> take (<> drop (<_i[0] > Psi (<1 > Psi (<0 > Psi )))) stride=<>
+#  <> take (<_i[0]> drop _B[])=<1> take (<_i[0]> drop (<1 > Psi (<0 > Psi ))) stride=<1>
+#    <> take (<_i[0]> drop _B[])=<1 1> take ((<1>++<_i[0]>) drop (<0 > Psi )) stride=<1 1>
+#      <> take (<_i[0]> drop _B[])=<1 1 1> take ((<0>++(<1>++<_i[0]>)) drop ) stride=<1 1 1>
+

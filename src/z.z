@@ -1,0 +1,69 @@
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file code.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file dist.c
+A comment starts on line 941, but
+       the comment on line 838 is not ended.
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file ex14.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file ex7.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file extended.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file ident.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file lex.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file main.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file moa_func.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file moalib.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file output.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file parse.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file part.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file poly.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file psi.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file psiold.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file scalar.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file sys.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file try.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file values.c
+Simple C/C++ Syntax Check program.
+Copyright (c) LJW, December 31, 1995.
+Processing file vect.c
+A comment starts on line 99, but
+       the comment on line 99 is not ended.
+A comment starts on line 100, but
+       the comment on line 99 is not ended.

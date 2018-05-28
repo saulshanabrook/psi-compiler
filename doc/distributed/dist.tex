@@ -1,0 +1,168 @@
+\documentstyle[margins]{article}
+\newcommand{\cat}{+\!\!\!\!+}
+\newcommand{\take}{\,\bigtriangleup\,}
+\newcommand{\drop}{\,\bigtriangledown\,}
+\newcommand{\karate}{\!\widehat{\hbox to 10pt{}}\!}
+\newcommand{\rshp}{\widehat{\rho}}
+\newcommand{\one}{$<$\! 1\!$>$}
+\newtheorem{definition}{Definition}
+\newcommand{\Size}{\tau\,}
+\newcommand{\Dim}{\delta\,}
+\newcommand{\Ravel}{\,\mbox{\tt rav}\,}
+\newcommand{\Reshape}{\,\widehat{\rho}\,}
+\newcommand{\Reduce}{\,\mbox{\tt red}\,}
+
+\title{Psi Compiler\\Programmer's Guide\\Distributed Augmentation}
+\author{Scott Thibault\\Compiled by\\Thom McMahon}
+\date{October 28, 1994}
+
+\begin{document}
+\maketitle
+\section*{Intoduction}
+A distributed array can be described by three vectors.  
+Let e be the shape of local sub-array on each processor.
+(ex $<$8 6$>$ array on 4 processors e = $<$2 6$>$)
+Let g be the shape of the abstract processor array which is the
+same dimension as the distributed array.
+(ex $<$8 6$>$ array on 4 processors g = $<$4 1$>$) --
+columns are not distributed row distributed over four processors  --
+Let c be the shape of the cyclic structure of the array.
+(ex $<$8 6$>$ array on 4 processors c = $<$1 1$>$, If you wanted to 
+distribute the rows of a $<$32 6$>$ on 2 processors cyclicly, which the 
+compiler does not do, you could with the following 
+e = $<$4 6$>$,g=$<$2 1$>$,c=$<$4 1$>$
+this would be distributes blocks of $<$4 6$>$ on 2 processors cyclicly,
+to get 32 rows on 2 processors in blocks of 4 you need to cycle 4 times
+hence c = $<$4 1$>$)
+The shape of the distributed array could be thought of as being 
+c cat g cat e.
+(for the cyclic example the distributed shape would be $<$4 1 2 1 4 6$>$
+which has the same number of components as $<$32 6$>$)
+The compiler reduces all expressions to something like A=B but this
+is a functional representation and does not account for the fact that
+A and B are not on the same processor.  The operational assignement
+can be done in three stages.  
+\section*{The Algorithm}
+\subsection*{Stage 1}
+Stage one is to, for each processor, 
+determine what sub-array of the assignement is done on that processor.
+The assignment specifies a sub-array that is being assigned to.  Each
+process owns (stores) a sub-array of the array begin assigned to.  The
+geometric intersection of the sub-array being assigned to and the 
+sub-array processor p owns is the part of the assignment that p needs to
+perform.  For each processor, p, stage one computes the sub-array
+of the array being assigned that must be done on processor p as well
+as performing an intersection to determine what sub-array of the 
+right hand side of the assignment is required for processor p. 
+From now on let $<$2 4$>$:$<$4 8$>$ denote a sub-array that is equivalent
+to ($<$4 8$>$-$<$2 4$>$+$<$1 1$>$) take ($<$2 4$>$ drop ARRAY)
+Example: shape A and B=$<$12 30 10$>$ then to compute A=B on 4 processors,
+processor 0 needs to assign:
+$<$0 0 0$>$:$<$3 30 10$>$ of A=$<$0 0 0$>$:$<$3 30 10$>$ of B
+processor 1 needs to assign:
+$<$3 0 0$>$:$<$6 30 10$>$ of A=$<$3 0 0$>$:$<$6 30 10$>$ of B
+processor 2 needs to assign:
+$<$6 0 0$>$:$<$9 30 10$>$ of A=$<$6 0 0$>$:$<$9 30 10$>$ of B
+processor 3 needs to assign:
+$<$9 0 0$>$:$<$12 30 10$>$ of A=$<$9 0 0$>$:$<$12 30 10$>$ of B
+End stage one.
+\subsection*{Stage 2}
+Stage two: Stage one contains a loop (for each p).  Stage two is performed
+within that loop for each p.  So, the input to stage two is the sub-arrays
+of the left hand side (lhs) and the (rhs) that need to be assigned on
+the current p (processor).  Since the rhs may be distributed different
+than the lhs, the rhs may not all be stored on processor p, even though
+the lhs is.  The purpose of stage 2 is to gather up all the peices of
+the rhs from different processor that are needed to perform p's portion
+of the assignment.  Any particular sub-array of a distributed array
+is contained on some sub-array of the processor array.  In stage
+two there is a loop that loops through the sub-array of the processor
+array.  Example: say the rhs sub-array for processor 1 is 
+$<$3 0 0$>$:$<$9 30 10$>$ and the array is distributed by c=$<$1 1 1$>$,p=$<$4 1 1$>$,
+e=$<$3 30 10$>$ then the sub-array of the processor array that contains
+the above mentioned part of the rhs is $<$1 1 1$>$:$<$2 1 1$>$ of the processor
+array (i.e. processors 1 and 2).
+The loop s in the code does this loop from zero to the shape of this
+processor sub-array, and sp is s plus the location of the processor
+sub-array.  For the previous example $<$0 0 0$>$ $<$= s $<$ $<$2 1 1$>$ and
+sp will be between $<$1 1 1$>$ and $<$2 1 1$>$ inclusive.
+For each of the blocks an intersection is performed between the sub-array
+needed for the rhs and the current block.  The result of this 
+intersection is the sub-array of the rhs on processor s that is needed to
+perform processor p's portion of the assignment.  This result is also
+used to determine which part of the lhs is assigned this block that is
+on processor s.
+end stage two.
+\subsection*{Stage 3}
+stage three.  We can now perform the assignment.  At this point
+we know what sub-array of the rhs on processor s should be assigned to
+what sub-array of the lhs on processor p.  For stage three each processor
+examines it processor number to see if it is p or s or nethier.   Lets
+say I'm node i.  If i=p and i=s then p=s and I own both peices of the
+lhs and rhs so I can do the assignment without any communication.  Else
+if i=p then I own the lhs but need to get the rhs side from processor s
+so I issue a read command.  Else if i=s then I own the rhs but not the
+lhs so I need to send the rhs peice to processor p.
+end stage three.
+Whew!
+Well, that was the original algorithm.  Of course I converted for
+you from it's beautifully cryptic mathematical description 
+but that would be hard to type here.  There is
+only one difference between this and the current implementation and
+that is the mode loop.  You want to make sure all the send are issued
+before the reads so all three stages are performed twice.  The first
+time through only sends are performed where needed and the second time
+throught only receives and assignements are performed where needed.
+\section*{Geometrical Overview}
+The above algorithm requires some geometric intersections of 
+n-dimensional rectangles.  Lets say we need the intersection of
+rectangle A and B where each rectangle has two parts corresponding
+to two opposite corners of the rectangle say c1 and c2.  There
+are five cases for the intersection:
+\begin{verbatim}
+case 1 - A is completely inside B
+
+B -------
+  | --- |
+  | |A| |
+  | --- |
+  -------
+
+case 2 - B is completely inside A
+
+A -------
+  | --- |
+  | |B| |
+  | --- |
+  -------
+
+case 3 - A is above and left of B and intersect some
+
+------  A
+|    |
+|  -------  B
+|  |     |
+---|     |
+   -------
+
+case 4 - B is above and left of A and intersect some
+
+------  B
+|    |
+|  -------  A
+|  |     |
+---|     |
+   -------
+
+case 5 - A and B are disjoint
+
+-------   -------
+|     |   |     |
+-------   -------
+   A         B
+\end{verbatim}
+The intersection code contains two if statements that are used to determine
+which case to use.  Just before the if statements a bunch of temporary vectors
+usually get created to compute the two corners of each rectangle (sub-array).
+After the case is determined the intersection can be determined.
+\end{document}

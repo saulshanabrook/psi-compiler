@@ -1,0 +1,15 @@
+File last modified: 02/22/95
+
+This is Thom McMahon's directory.  It probably looks something like this...
+
+	thom ------- F90 (simple FORTRAN 90 programs)
+		|
+		|--- dist (test directory for distributed stuff)
+		|
+		|--- rcsbak (backups of /u2/psi/Compiler/mc/src/RCS)
+		|
+		|--- test (formal test programs for the Psi Compiler)
+		|
+		|--- test2 (other test programs for the Psi Compiler)
+		|
+		|--- test3 (still other test programs for the Psi Compiler)

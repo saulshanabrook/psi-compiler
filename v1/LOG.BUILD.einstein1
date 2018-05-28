@@ -1,0 +1,18 @@
+gcc -g -L. -c parse.c
+gcc -g -L. -c lex.c
+gcc -g -L. -c main.c
+gcc -g -L. -c dist.c
+gcc -g -L. -c extended.c
+gcc -g -L. -c psi.c
+gcc -g -L. -c moa_func.c
+gcc -g -L. -c vect.c
+gcc -g -L. -c ident.c
+gcc -g -L. -c sys.c
+gcc -g -L. -c part.c
+gcc -g -L. -c scalar.c
+gcc -g -L. -c poly.c
+gcc -g -L. -c values.c
+gcc -g -L. -c output.c
+ar r libmoabase.a psi.o moa_func.o vect.o ident.o sys.o part.o scalar.o poly.o values.o output.o 
+gcc -g -L. -o mc lex.o main.o code.o parse.o dist.o extended.o -lmoabase -lm
+*** Error code 1

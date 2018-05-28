@@ -1,0 +1,56 @@
+This file documents changes made to the compiler starting August 27, 1994.
+
+NOTE:  if a change is not documented in here, all changes to a file can
+       be viewed by doing a rlog <filename> in the /Compiler/src 
+       directory.  
+
+Change 0001	Date: 08-27-94
+
+	changed embed_const_vect in code.c so that constant arrays are
+	always declared as double.  some arrays that should have been
+	double were declared as int.  The ident->real flag of these 
+	arrays was not set (this is the real problem and the one that
+	needs to be fixed sometime in the future).
+
+Change 0002	Date: 08-29-94
+
+	changed do_location so that the SCAN of result->shp is computed
+	in a temporary variable.  This temporary SCANned shape is used to
+	compute the initial value of shift, a pointer to the result used
+	for the assignment of expr to result.  The original result->shp,
+	at present, needs to be retained for future use.  
+
+Change 0003	Date: 08-29-94
+
+	changed the add_steps call that pertains to the result so that
+	it uses result->bound instead of node->d.frag->bound.  Not sure
+	why it was using node->d.frag->bound in the first place.
+
+Change 0004	Date: 09-05-94
+
+	changed definition of NOTALLOCATED in code.c to include a 
+	condition for a->type!=IOTA.
+
+Change 0005	Date: 09-12-94
+
+	changed do_location in code.c so that it RSCANs the result->shp
+        that is used in calculations of the initial value of shift.
+
+        changed add_steps so that if either of value1-4 is not constant,
+        step_mask[i] is computed exactly like it would be if they were
+        constant, but using scalar operations on scalar_t varibles.
+
+        changed do_loop_close to check and make sure k>=0 since before
+	it was being decremeented to -1 and then being used as and index
+	to an array.  (This was obviously generating a seg fault).
+
+Change 0006	Date: 09-22-94
+	
+	changed combine_reduced in psi.c so the evaluation of the 
+	variable same separates iota's out of assign groupings properly.
+
+Change 0007	Date: 11-13-94
+	
+	changed vect.c mostly (red_rav) so when new ident_t types are
+        created, the value of (ident_t *)->real is preserved.  
+        

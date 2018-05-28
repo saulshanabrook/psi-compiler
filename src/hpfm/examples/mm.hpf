@@ -1,0 +1,8 @@
+SUBROUTINE multiply(m,n,p,A,B,C)
+ INTEGER :: m,n,p
+ REAL, DIMENSION (m,n) :: A
+ REAL, DIMENSION (n,p) :: B
+ REAL, DIMENSION (m,p) :: C
+
+ C=MATMUL(A,B)
+END SUBROUTINE

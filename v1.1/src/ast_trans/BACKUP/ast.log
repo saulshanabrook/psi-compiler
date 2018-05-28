@@ -1,0 +1,7 @@
+2/04 -- finish up PSI_PGI_CONS and verify with simple bin-ops.
+
+2/05 -- finish up PSI_PGI_SCALAR and verify with simple bin-ops
+	  * do i need is_real set in this ident_t?
+          * if so, should I make separate REAL and INT functions (same with
+	    CONS) for PGI to call?
+

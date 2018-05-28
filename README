@@ -1,0 +1,41 @@
+This file last modified:  02/22/95
+
+files:
+	README  : This file
+	../dist	: Files of the current distribution
+	doc	: Docs for the version currently in progress
+	examples: Examples for the version currently in progress
+	people  : directories for current research assistants
+	report	: bug* , bug reports for different versions
+	src	: The version currently in progress
+	v0.2    : Version 0.2 of the compiler
+	v0.3    : Version 0.3 of the compiler
+	v0.4    : Version 0.4 of the compiler
+
+Each version now has it's own copy of the doc and examples directory as they
+were when that version was finished.  The new tree looks something like this:
+
+Compiler -- mc ----- doc 
+	         |
+                 --- examples
+		 |
+		 --- people ----- bruce
+		 |	      |
+		 |	      --- thom
+		 |	      |
+		 |	      --- maryjo (joint bruce/thom directory)
+                 --- report
+                 |
+		 --- src
+                 |
+		 --- v0.2 ----- doc
+		 |	    |
+		 |	    --- examples
+                 |
+		 --- v0.3 ----- doc
+		 |	    |
+		 |	    --- examples
+                 |
+		 --- v0.4 ----- doc
+		 	    |
+		 	    --- examples

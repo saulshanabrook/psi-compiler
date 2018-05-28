@@ -1,0 +1,41 @@
+CC=gcc
+LEX=flex
+YACC=bison
+
+LFLAGS=
+YFLAGS= --defines
+
+CCREALOPTIONS = -O2
+CLIBPATHS= -L. -L/usr/lib
+CLIBRARIES= -lfl -lm   
+INCLUDES=-I. -I/usr/include
+
+CCDEBUGOPTIONS = -g 
+CDEBUGLIBRARIES = -lm
+
+CFLAGS=$(CCREALOPTIONS) $(INCLUDES) $(OTHERINCLUDES)
+CLIBS=$(CLIBPATHS) $(CLIBRARIES)
+COUT = _psi
+
+$(COUT): lex.yy.o _psi.tab.o _psi.scanner.o _psi.sem.o
+	$(CC) $(CFLAGS) -o $(COUT) lex.yy.o _psi.tab.o _psi.scanner.o _psi.sem.o $(CLIBS) 
+
+lex.yy.o: lex.yy.c
+	$(CC) -c lex.yy.c
+
+lex.yy.c: _psi.lex
+	$(LEX) $(LFLAGS) _psi.lex
+
+_psi.tab.o : _psi.tab.c
+	$(CC) -c _psi.tab.c
+
+_psi.tab.c: _psi.y
+	$(YACC) $(YFLAGS) _psi.y
+
+_psi.scanner.o : _psi.scanner.c
+	$(CC) -c _psi.scanner.c
+
+_psi.sem.o : _psi.sem.c
+	$(CC) -c _psi.sem.c
+clean: 
+	rm *.o _psi _psi.tab.c

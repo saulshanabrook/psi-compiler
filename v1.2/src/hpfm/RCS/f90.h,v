@@ -1,0 +1,45 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.2
+date	94.09.27.02.51.18;	author psi;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	94.09.27.02.04.23;	author psi;	state Exp;
+branches;
+next	;
+
+
+desc
+@macros specific to hpfm/f90
+@
+
+
+1.2
+log
+@nothing.  deleted a line.
+@
+text
+@#define  NOP           0
+#define  HPFASSIGN     1
+#define  FUNC          2
+#define  SPLIT         3
+#define  UNRECOGNIZED  4
+#define  PREORDER      5
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@a6 1
+
+@

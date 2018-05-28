@@ -1,0 +1,33 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	94.09.27.02.04.49;	author psi;	state Exp;
+branches;
+next	;
+
+
+desc
+@externals for hpfm_func.e
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@parser_t *hpfm_concat(parser_t *arglist);
+parser_t *hpfm_cshift (parser_t *arglist);
+parser_t *hpfm_dot_product (parser_t *arglist);
+parser_t *hpfm_eoshift (parser_t *arglist);
+parser_t *hpfm_matmul (parser_t *arglist);
+parser_t *hpfm_product (parser_t *arglist);
+parser_t *hpfm_shape (parser_t *arglist);
+parser_t *hpfm_sum (parser_t *arglist);
+parser_t *hpfm_transpose (parser_t *arglist);
+@

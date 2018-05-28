@@ -1,0 +1,56 @@
+head	1.2;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.2
+date	94.10.28.00.33.27;	author psi;	state Exp;
+branches;
+next	1.1;
+
+1.1
+date	94.09.06.07.12.19;	author psi;	state Exp;
+branches;
+next	;
+
+
+desc
+@contains external functions of dist.c
+@
+
+
+1.2
+log
+@*** empty log message ***
+@
+text
+@/* Copyright (c) 1993 University of Missouri-Rolla
+   All rights reserved.
+
+   dist.e - exported functions from dist.c	
+
+*/
+
+extern char *host_name;
+extern int host;
+extern int picl;
+extern int genmpi;
+extern int para_trace;
+extern dist_t *distribution;
+extern dist_assign(reduced_t *global, reduced_t *distributed,
+	expr_t *res, dist_t *l_dist);
+extern init_dist_arrays(dist_t *dist);
+extern code_global_int(ident_t *ident);
+extern dist_t *find_dist(ident_t *array);
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@d11 1
+@

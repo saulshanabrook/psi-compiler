@@ -1,0 +1,33 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@# @;
+
+
+1.1
+date	94.09.06.07.13.07;	author psi;	state Exp;
+branches;
+next	;
+
+
+desc
+@contains external functions of parse.c
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@/* Copyright (c) 1993 University of Missouri-Rolla
+   All rights reserved.
+
+   parse.e - exported functions from parse.c
+
+*/
+
+extern report(char *msg);
+extern ident_t **ret_table(int *size);
+@

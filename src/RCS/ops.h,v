@@ -1,0 +1,43 @@
+head	1.1;
+access;
+symbols;
+locks; strict;
+comment	@ * @;
+
+
+1.1
+date	94.09.06.07.40.49;	author psi;	state Exp;
+branches;
+next	;
+
+
+desc
+@contains a structure to represent omega
+@
+
+
+1.1
+log
+@Initial revision
+@
+text
+@/* Copyright (c) 1993 University of Missouri-Rolla
+   All rights reserved.
+
+   8/93 - Original sources by Scott Thibault
+
+*/
+
+/* ops.h - a structure to represent a complex operator */
+
+#ifndef OPS_H
+#define OPS_H
+
+typedef struct op_node {
+  int      omega;
+  parser_t *(*func)();
+  parser_t *part;
+  struct op_node *next;
+} op_t;
+#endif
+@

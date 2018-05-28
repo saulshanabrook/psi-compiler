@@ -1,0 +1,94 @@
+entering executable_header ()
+exiting executable_header ()
+entering executable_post_declaration()
+exiting executable_post_declaration()
+entering procedure_header()
+exiting procedure_header()
+	-- 1 : array>	-- Token 261 (15)
+	-- 1 : in1>	-- Name 1
+	-- 1 : array>	-- Token 261 (15)
+	-- 1 : out>	-- Name 1
+	-- 3 : out>	-- Name 1
+entering procedure_post_declaration()
+exiting procedure_post_declaration()
+	-- 3 : take>	-- Token 266 (8)
+	-- 3 : in1>	-- Name 1
+	-- 6 : DROP_M>	-- Name 1
+entering procedure_header()
+exiting procedure_header()
+	-- 6 : array>	-- Token 261 (15)
+	-- 6 : in1>	-- Name 1
+	-- 6 : array>	-- Token 261 (15)
+	-- 6 : out>	-- Name 1
+	-- 8 : out>	-- Name 1
+entering procedure_post_declaration()
+exiting procedure_post_declaration()
+	-- 8 : drop>	-- Token 267 (9)
+	-- 8 : in1>	-- Name 1
+entering procedure_header()
+exiting procedure_header()
+	-- 12 : array>	-- Token 261 (15)
+	-- 12 : in1>	-- Name 1
+	-- 12 : array>	-- Token 261 (15)
+	-- 12 : out>	-- Name 1
+	-- 14 : out>	-- Name 1
+entering procedure_post_declaration()
+exiting procedure_post_declaration()
+	-- 14 : take>	-- Token 266 (8)
+	-- 14 : take>	-- Token 266 (8)
+	-- 14 : take>	-- Token 266 (8)
+	-- 14 : in1>	-- Name 1
+entering procedure_header()
+exiting procedure_header()
+	-- 17 : array>	-- Token 261 (15)
+	-- 17 : in1>	-- Name 1
+	-- 17 : array>	-- Token 261 (15)
+	-- 17 : out>	-- Name 1
+	-- 19 : out>	-- Name 1
+entering procedure_post_declaration()
+exiting procedure_post_declaration()
+	-- 19 : drop>	-- Token 267 (9)
+	-- 19 : drop>	-- Token 267 (9)
+	-- 19 : drop>	-- Token 267 (9)
+	-- 19 : drop>	-- Token 267 (9)
+	-- 19 : in1>	-- Name 1
+	-- 22 : PTD1_M>	-- Name 1
+entering procedure_header()
+exiting procedure_header()
+	-- 22 : array>	-- Token 261 (15)
+	-- 22 : in1>	-- Name 1
+	-- 22 : array>	-- Token 261 (15)
+	-- 22 : out>	-- Name 1
+	-- 24 : out>	-- Name 1
+entering procedure_post_declaration()
+exiting procedure_post_declaration()
+	-- 24 : psi>	-- Token 265 (2)
+	-- 24 : take>	-- Token 266 (8)
+	-- 24 : drop>	-- Token 267 (9)
+	-- 24 : in1>	-- Name 1
+	-- 27 : PSI1_M>	-- Name 1
+entering procedure_header()
+exiting procedure_header()
+	-- 27 : array>	-- Token 261 (15)
+	-- 27 : in1>	-- Name 1
+	-- 27 : array>	-- Token 261 (15)
+	-- 27 : out>	-- Name 1
+	-- 29 : out>	-- Name 1
+entering procedure_post_declaration()
+exiting procedure_post_declaration()
+	-- 29 : psi>	-- Token 265 (2)
+	-- 29 : in1>	-- Name 1
+	-- 32 : PSI2_M>	-- Name 1
+entering procedure_header()
+exiting procedure_header()
+	-- 32 : array>	-- Token 261 (15)
+	-- 32 : in1>	-- Name 1
+	-- 32 : array>	-- Token 261 (15)
+	-- 32 : out>	-- Name 1
+	-- 34 : out>	-- Name 1
+entering procedure_post_declaration()
+exiting procedure_post_declaration()
+	-- 34 : psi>	-- Token 265 (2)
+	-- 34 : in1>	-- Name 1
+entering executable_footer()
+entering executable_footer()

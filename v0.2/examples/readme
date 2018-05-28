@@ -1,0 +1,12 @@
+There are a few examples in this directory.  The ex?.m are just made up
+expressions to illustrate the C output the compiler can generate.  One of 
+the examples is an implementation of lu decomposition.  lu.m is the MOA source
+for lu decomposition.  lu_main.c is a C program that calls the LU function in
+lu.m to show an example of the C interface.  The makefile is setup to compile
+the program lu including moalib.c which contains a couple of runtime functions
+used by our compiler's output programs.
+
+In order to try these examples you need to edit the makefile changing only
+the CC and MC lines to suit your configuration.  CC needs to be the name
+of an ansi C compiler and MC needs to be ../mc_next or ../mc_sun for whichever
+machine you might be on.

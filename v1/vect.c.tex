@@ -1,0 +1,110 @@
+force_vect
+  vect_t *force_vect (vect_t *vect)
+    vect:  the vector to be assigned to a temporary variable
+    returns:  a new vector representing the temporary variable
+  This function creates a temporary variable for simple variable
+  access and assigns vect to this new variable in the C output.  The new
+  variable has a name of the form tmp_vectn, where n is a number from
+  0 to a very large value.  This function is like purify_vect, except
+  it ALWAYS assigns vect to a temporary variable.
+
+make_vect
+  vect_t *make_vect (expr_t *expr)
+
+print_scalar
+  print_scalar (vect_t *expr)
+
+purify_vect
+  vect_t *purify_vect (vect_t *vect)
+    vect:  the vector to be purified of elements containing expressions
+    returns:  a simple vector
+  This function checks to see if vect is a simple vector, and if so, it
+  is returned.  Otherwise, a temporary vector is created, and vect is
+  assigned to this vector in the C output.  
+
+rav_value
+  double rav_value (vect_t *vect, int i, int *simple)
+    vect:  the vector whose ith value will be returned
+    i:  the index of the value to be returned
+    simple:  TRUE if the (i+index)th value of vect can be evaluated at
+             compile time;  FALSE otherwise
+    returns:  the floating point value of the (i+index)th element of
+              vect
+  This function attempts to evaluate the value of the ith element
+  of the vector vect.  This value can be evaluated if 1) the vector
+  is of type CONSTANT, 2) the vector is of type IOTA, 3) the vector
+  is of type CONST_ARRAY, 4) the vector is of type RAV and the
+  (i+index)th value is a SCALAR (index is the number representing
+  the starting index of the vector), or 5) the vector is of type
+  EMBEDDED_ARRAY.  Otherwise, it is not evaluated, and simple
+  remains FALSE, the value it was given at the beginning of the
+  function.
+
+simplify_vect
+  vect_t *simplify_vect (vect_t *vect)
+    vect:  the vector to be simplified
+    returns:  a simplified vector
+  This function searches through the vector, combining all the 
+  constants and constant expressions.
+
+static_shps
+  int static_shps (vect_t *vect)
+    vect:  the vector in question
+    returns:  TRUE or FALSE
+  This function determines if vect->index, vect->loc, and vect->shp are
+  scalars, and if the vector is just a variable access.
+
+tau
+  void tau (FILE *fd, expr_t *expr)
+    fd:  the file to write the output to 
+    expr:  the expression to find the tau of
+    returns:  nothing
+  This procedure outputs an expression representing the value of \tau (expr).
+  This expression may be a single value, or a series of constants
+  (representing the extents of each dimension) multiplied together.  
+  Output is to the file fd.
+
+vect_assign
+  vect_assign (vect_t *vect, vect_t *res, char *op)
+
+vect_drop
+  vect_t *vect_drop (vect_t *left, vect_t *right)
+
+vect_cat
+  vect_t *vect_cat (vect_t *left, vect_t *right)
+
+vect_len
+  vect_t *vect_len (vect_t *vect)
+    vect:  the vector whose length is to be found
+    returns:  a vect_t type representing the length of vect
+  This function will return zero_vec if vect is NULL, and if vect
+  is not NULL, will return the length of the vector (technically
+  the shape).
+
+vect_op
+  vect_t *vect_op (int op, vect_t *left, vect_t *right)
+
+red_rav
+  s_expr_t *red_rav (vect_t *vect, int i)
+
+vect_setup
+  int vect_setup (vect_t *expr)
+
+vect_take
+  vect_t *vect_take (vect_t *left, vect_t *right)
+ 
+vect2array
+  vect_t *vect2array (char *name,vect_t *vect)
+    name:  the name of the new array (can be NULL)
+    vect:  the vector to be turned into an array
+    returns:  a new vector that represents the new array
+  This function creates a new vector, gives it a name, and calls
+  vect_assign to assign vect to this new vector in the C output.  
+  Any element of vect that is an expression is evaluated in the C
+  output and stored in the corresponding element of the new vector.
+  This allows future C statements to access the values of vect 
+  through a simple variable access to array name.
+
+vect_unop
+  vect_t *vect_unop (int op, vect_t *vect)
+

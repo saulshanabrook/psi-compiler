@@ -1,0 +1,7 @@
+SUBROUTINE test (A)
+  INTEGER, DIMENSION(10,10) :: A
+  INTEGER, DIMENSION(10,10) :: A1
+
+  A1(2:9,2:9) = A(1:8,1:8) + A(3:10,3:10) - 2*A(2:9,2:9)
+  A = A1
+END SUBROUTINE test
