@@ -42,7 +42,7 @@
           of the array computation, which just thinks about arrays as a shape and a function form indices to value,
           from the Operational Normal Form, which deals with memory layout (strides, etc). Her PSI calculus compiler
           defines a number of reductions in the DNF, so that complex array operations can be reduced to basic indexing operations
-          and computation, which reduce the need for intermediate values. Then that can be translated into different implementations
+          and computation, which reduce the need for intermediate values. Then the DNF is transformed to the ONF through one of the layout functions (gamma) for different implementations
           dependending on the hardware requirements.
         </p>
         <p class="lead">
