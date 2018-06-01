@@ -56,7 +56,7 @@
  (global $tempFloat (mut f32) (f32.const 0))
  (global $f0 (mut f32) (f32.const 0))
  (elem (get_global $tableBase) $b0 $___stdio_close $b0 $b0 $b0 $_psi_red_plus $b0 $_psi_red_minus $b0 $_psi_red_times $b0 $_psi_red_div $b0 $b0 $_psi_iota $_psi_shp $_psi_dim $_psi_tau $_psi_rav $b0 $b0 $b0 $b0 $b0 $_psi_reverse $b0 $b0 $b0 $b0 $b0 $b0 $b0 $b1 $b1 $b1 $b1 $b1 $b1 $_psi_plus $b1 $_psi_minus $b1 $_psi_times $b1 $_psi_div $_psi_psi $b1 $b1 $b1 $b1 $b1 $_psi_take $_psi_drop $_psi_ptake $_psi_pdrop $_psi_cat $b1 $b1 $b1 $b1 $b1 $b1 $b1 $b1 $b2 $b2 $___stdout_write $___stdio_seek $_sn_write $b2 $b2 $b2 $b2 $b2 $b2 $b2 $b2 $b2 $b2 $b2 $b2 $b2 $b2 $b2 $b2 $b2 $b2 $b2 $b2 $___stdio_write $___stdio_read $b2 $b2 $b2 $b2 $b2)
- (data (i32.const 1024) "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\f0?2\00\00\00\01\00\00\00\01\00\00\00\01\00\00\00\01\00\00\00\01\00\00\00\e8\03\00\00@\1f\00\00@\1f\00\00\a0\0f\00\00<\04\00\00\05\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\02\00\00\00\03\00\00\00F\a3\0e\00\00\04\00\00\00\00\00\00\00\00\00\00\01\00\00\00\00\00\00\00\00\00\00\00\00\00\00\n\ff\ff\ff\ff\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00<\04\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\04\9a\0e\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\04\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00  int\00  double\00 %s\00[%d]\000\00((int) %s[0])\00%s[0]\00((int) %s)\00internal; unknown ident type in print_ident, code.c\00/\00%%\00-\00internal; unknown operator in print_op, code.c\00((\00)>0)\00)<0)\00internal; unknown scalar expression operator in print_s, code.c\00internal; NULL identifier in allocat_vect, code.c\00  %s %s\00[\00];\n\00[1];\n\00internal; NULL identifier in embed_const_vect, code.c\00  %s const%d[]={\00  %s const%d[%d];\n\00const%d[%d]=\00const%d\00internal; NULL identifier in print_rav, code.c\00(int) %s[%d\00%s[%d\00]\00(int) %s[\00%s[\00(int) %s\00internal; unknown ident type in print_rav, code.c\00]%s%s\00%s%s[\00%s;\n\00for (i=0; i<\00; i++)  %s[i+\00%s%s[i+\00%s[%d+\00%s%s[%d\00(%d+\00]%s%si+\00]%s%s%s[\00]%s;\n\00]%s%s%s[i+\00%s[0]%s0;\n\n\00; i++) %s[i]%s0;\n\n\00min\00%=\00fabs(\00>0)\00<0)\00for (i=\00-2; i>=0; i--)\00%s[i]%s%s[i+1]*%s[i];\n\00for (i=1; i<\00; i++)\00%s[i]%s%s[i-1]*%s[i];\n\00  %s *%s\00=(%s *) get_mem(\00*%d\00*%s\00*sizeof(%s));\n\00  %s %s[1];\n\00*(\00%s0;\n\00gamma_shp\00gamma_index\00; i++)\n\00%s+=%s[i\00]*%s[i];\n\00shift=%s;\n\00shift=%s+\00offset%d=%s;\n\00offset%d=%s+\00Unknown dimension in add_steps\00for (i%d=0\00; i%d<\00; i%d++) {\n\00Unknown dimension in do_loop_open\00Unknown dimension: do_loop_close\00offset%d+=\00shift+=\00Unknown dimension in do_loop_close\00for (i%d=\00Help, I don\'t know the dimension\00Help! I don\'t know the dimension\00 consta%d[%d];\n\00consta%d[%d]=\00consta%d\00*(shift)\00%s *(offset%d);\n\00*(shift)%s i%d;\n\00*(shift)%s \00shift++;\n\00%s %s;\n\00%s %f;\n\00for (%s[%d]=\00; %s[%d]<\00; %s[%d]++) {\n\00forall vector must have a static shape.\00%s[%d]=\00  %s *%s;\n\00%s=(%s *) get_mem((\00)*sizeof(%s));\n\00Unknown type encountered in code_reduced\00free(%s);\n\00/*******\n%s\n********/\n\n\00)*sizeof(%s));\n\n\00unknown kind in code_c_rec\00Undefined identifier\00Error on line %d: %s.\n\00duplicate variable definition\00syntax error\00Dimension of allocation expression unknown.\00Dimension of allocation expression must be 1.\00Shape of allocation vector expression unknown.\00Dimension mismatch in dynamic array allocation.\00Illegal use of dynamic array (shape not defined yet).\00Constant to large\00Expecting a variable or constant\00 (\00Expecting omega as an operator.\00 omega \00 +red \00 + \00 -red \00 - \00 *red \00 * \00 /red \00 / \00 psi \00 iota \00 shp \00 dim \00 tau \00 rav \00 take \00 cat \00 reverse \00Expecting an operator\00Expecting a factor.\00 pdrop \00Syntax error\00Reducing:\n%s\n\00Expecting an identifier\00Array argument to allocate is not dynamic.\00%s(\00);\n\00_%s\00undeclared variable\00only formal parameters are allowed in the shape definition\00  double %s[]={\00,\n    %f\00, %f\00};\n\00expecting \'array\'\00int \00  int \00double \00  double *\00[]\00Parameters must have a specified shape\00, \00temp$$$$.moa\00Couldn\'t create temporary file.\00vtemp$$$$.moa\00htemp$$$$.moa\00  double *shift;\n\00int argc, char *argv[],\00)\n\n\00{\n\00  double *offset%d;\n\00  int i%d;\n\00r\00Couldn\'t open temporary file.\00  NODE_INIT(argc,argv);\n\00  NODE_INIT(%d);\n\n\00\n  HOST_INIT(%d);\n\n\00  TRACE_START(\"%s\");\n\00  TRACE_END();\n\00  NODE_CLEANUP();\n\00procs\00arch\00mpimac\00mpi not allowed with host\00#include \"%s.h\"\n\n\00hostname\00host not allowed with mpi\00Couldn\'t open host output file\00trace\00picl\00#include <stdlib.h>\n\00#include \"picl.h\"\n\n\00\n\n\00global\00const\00rav\00array\00psi\00take\00drop\00ptake\00pdrop\00cat\00omega\00int\00double\00for\00iota\00shp\00dim\00red\00tau\00allocate\00reverse\00mc\00ex.m\00-r\00ex.r\00-o\00ex.c\00Starting main..\n\00usage: %s <source> [-o output] [-r filename]\n\00rt\00Cannot open %s.\n\00-h\00wt\00Could\'nt open host output file\00#include \"moalib.e\"\n\n\00Cannot create %s.\n\00-g\00junk$$$$.moa\00Cannot open temporary file.\n\00MOA Compiler version 0.4 (PSI Compiler Library v0.4)\00Copyright (c) 1993 Lenore R. Mullin\n\00i0=%s;\n\00i1=\00%s[%d]=i0/i1;\n\00i0=i0%%i1;\n\00i1/=\00%s[%d]=i0;\n\00%s[%s]\00for (i0=0; i0<\00; i0++) {\n\00if (\00i0\00) out=TRUE;\n\00>=\00++;\n\00=0;\n\00) %s=FALSE;\n\00} while (%s);\n\00; i0++) j[i0]=0;\n\00j_cont=TRUE;\n\00do {\n\00; i0++) p[i0]=0;\n\00p[0]=MY_PROC();\n\00printf(\"x1:<\");\n\00; i0++)\n  printf(\"%%d \",(int) %s[i0]);\n\00printf(\">\\n\");\n\00printf(\"x1:0\\n\");\n\00printf(\"x2:<\");\n\00printf(\"x2:0\\n\");\n\00printf(\"y1:<\");\n\00printf(\"y1:0\\n\");\n\00printf(\"y2:<\");\n\00printf(\"y2:0\\n\");\n\00printf(\"ip:<\");\n\00; i0++)\n  printf(\"%%d \",ip[i0]);\n\00printf(\"lp:<\");\n\00; i0++)\n  printf(\"%%d \",lp[i0]);\n\00printf(\"bp:<\");\n\00; i0++)\n  printf(\"%%d \",bp[i0]);\n\00ipp\00lpp\00bpp\00s\00printf(\"p=%%d\\n\",p_);\n\00printf(\"sp=%%d\\n\",sp_);\n\00ip\00lp\00bp\00p\00j\00for (i0=0; i0<%d; i0++) {  /* Send global integer */\n\00START_SEND(i0,sizeof(int));\n\00HOST_SEND(&%s,sizeof(int),i0);\n\00END_SEND();\n\00START_SEND(i0,sizeof(double));\n\00HOST_SEND(%s,sizeof(double),i0);\n\00START_RECV();\n\00RECV_HOST(&%s,sizeof(int)); \n\00END_RECV(-1,sizeof(int));\n\00%s=(double *) get_mem(sizeof(double));\n\00RECV_HOST(%s,sizeof(double)); \n\00END_RECV(-1,sizeof(double));\n\00if (MY_PROC()==0) {\n\00/* Send global integer */\n\00for (i0=1; i0<%d; i0++) {\n\00SEND(&%s,sizeof(int),i0);\n\00SEND(%s,sizeof(double),i0);\n\00} else {\n\00RECV(&%s,sizeof(int),0);\n\00END_RECV(0,sizeof(int));\n\00RECV(%s,sizeof(int),0);\n\00i0=\00for (i2=0; i2<%d; i2++) p[i2]=0;\n\00p_cont=TRUE;\n\00p_=\00offset=\00i2=(i1<(i0-offset)) ? i1 : (i0-offset);\n\00HOST_SEND(%s+offset,i2*sizeof(double),p_);\n\00p_cont\00RECV_HOST(%s,i1*sizeof(double));\n\00proc\00in\00if (in) RECV_HOST(%s,i1*sizeof(double));\n\00SEND(%s+offset,i2*sizeof(double),p_);\n\00RECV(%s,i1*sizeof(double),0);\n\00if (in) RECV(%s,i1*sizeof(double),0);\n\00\n/* Communications for Initial Data */\n\n\00/* Communications for Initial Data */\n\n\00  double *%s;\n\00if (MY_PROC()>0)\n\00%s=(double *) get_mem(\00*sizeof(double));\n\00/* Procedure body */\n\n\00  int j_cont,p_cont,s_cont,out;\n\00  int p_,sp_,mode,offset;\n\00  int p[%d];\n\00  int c[%d];\n\00  int s[%d];\n\00  int sp2[%d];\n\00  int ip[%d];\n\00  int lp[%d];\n\00  int bp[%d];\n\00  int ipp[%d];\n\00  int lpp[%d];\n\00  int bpp[%d];\n\00  double *buffer%dr[%d],*buffer%ds[%d];\n\00  int p_,p_cont,p[%d];\n\00  int shift,offset;\n\00buffer\00Attempt to allocate 0 expression nodes, something wrong!\00Out of expression blocks!\00internal; get_mem called with 0\00Out of memory!\00error: %s\n\00Error: %s, proceeding...\n\00non-scalar shape caught in block_rav\00internal; unknown operator in simplify_vect\00internal; unknown operation in red_rav\00scalar%d\00%s=\00;\n\00Divide by zero in compactor\00compactor: internal error -- operator unknown.\00Out of s_expr blocks!\00FATAL ERROR: Scaler.c (#2), unexpected NULL found in s_expr_t\00WARNING: Scaler.c (#3), an unexpected s_expr_t op was encountered.\000\n\00(%f)\00(x%d^%d)\00(x%d)\00+\00%g\00\n*\00FATAL ERROR: Scaler.c (#0), A unexpected NULL was encountered in an s_expr_t.\00  \00Out of ident blocks!\00scalar%d=\00*=\00/=\00+=\00-=\00temp%d\00tmp_vect%d\00=\00Red rav doesn\'t know the dimension\00forall %s in \00 {\n\00}\n\00(\00<\00 \00>\00<>\00 Tk \00)\00abs(\000>\000<\00min(\00,\00max(\00++\00Internal error: print_vector -- unknown operator\00<%d>\00%s[]\00%d \00\08>\00#\00expr is NULL\n\00expr->bound is NULL\n\00empty expression\n\00Internal error in print_expr\00 take (\00 drop \00) stride=\00\n\00NULL\00forall (%s in \00) {\n\00}\00 Dr \00*red(\00/red(\00-red(\00+red(\00rav(\00 Psi \00Internal error: rec_print_expr\00Out of vector blocks!\00%d\00%d+%d\00red_rav: opps\00red_rav: can\'t do this yet\00temp\00Internal error: vect_expand\00empty\00Incompatibale shapes with algebraic operator\00forall_i%d\00%f\00*\00%s\001\00Internal error: collect_reduced\00Internal error: collect_garbage\00Unknown type encountered in partition_reduced\00unknown kind in rec_partition\00rwa\00\11\00\n\00\11\11\11\00\00\00\00\05\00\00\00\00\00\00\t\00\00\00\00\0b\00\00\00\00\00\00\00\00\11\00\0f\n\11\11\11\03\n\07\00\01\13\t\0b\0b\00\00\t\06\0b\00\00\0b\00\06\11\00\00\00\11\11\11\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\0b\00\00\00\00\00\00\00\00\11\00\n\n\11\11\11\00\n\00\00\02\00\t\0b\00\00\00\t\00\0b\00\00\0b\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\0c\00\00\00\00\00\00\00\00\00\00\00\0c\00\00\00\00\0c\00\00\00\00\t\0c\00\00\00\00\00\0c\00\00\0c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\0e\00\00\00\00\00\00\00\00\00\00\00\0d\00\00\00\04\0d\00\00\00\00\t\0e\00\00\00\00\00\0e\00\00\0e\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\00\00\00\00\0f\00\00\00\00\0f\00\00\00\00\t\10\00\00\00\00\00\10\00\00\10\00\00\12\00\00\00\12\12\12\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\12\00\00\00\12\12\12\00\00\00\00\00\00\t\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\0b\00\00\00\00\00\00\00\00\00\00\00\n\00\00\00\00\n\00\00\00\00\t\0b\00\00\00\00\00\0b\00\00\0b\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\0c\00\00\00\00\00\00\00\00\00\00\00\0c\00\00\00\00\0c\00\00\00\00\t\0c\00\00\00\00\00\0c\00\00\0c\00\00-+   0X0x\00(null)\00-0X+0X 0X-0x+0x 0x\00inf\00INF\00nan\00NAN\000123456789ABCDEF.\00T!\"\19\0d\01\02\03\11K\1c\0c\10\04\0b\1d\12\1e\'hnopqb \05\06\0f\13\14\15\1a\08\16\07($\17\18\t\n\0e\1b\1f%#\83\82}&*+<=>?CGJMXYZ[\\]^_`acdefgijklrstyz{|\00Illegal byte sequence\00Domain error\00Result not representable\00Not a tty\00Permission denied\00Operation not permitted\00No such file or directory\00No such process\00File exists\00Value too large for data type\00No space left on device\00Out of memory\00Resource busy\00Interrupted system call\00Resource temporarily unavailable\00Invalid seek\00Cross-device link\00Read-only file system\00Directory not empty\00Connection reset by peer\00Operation timed out\00Connection refused\00Host is down\00Host is unreachable\00Address in use\00Broken pipe\00I/O error\00No such device or address\00Block device required\00No such device\00Not a directory\00Is a directory\00Text file busy\00Exec format error\00Invalid argument\00Argument list too long\00Symbolic link loop\00Filename too long\00Too many open files in system\00No file descriptors available\00Bad file descriptor\00No child process\00Bad address\00File too large\00Too many links\00No locks available\00Resource deadlock would occur\00State not recoverable\00Previous owner died\00Operation canceled\00Function not implemented\00No message of desired type\00Identifier removed\00Device not a stream\00No data available\00Device timeout\00Out of streams resources\00Link has been severed\00Protocol error\00Bad message\00File descriptor in bad state\00Not a socket\00Destination address required\00Message too large\00Protocol wrong type for socket\00Protocol not available\00Protocol not supported\00Socket type not supported\00Not supported\00Protocol family not supported\00Address family not supported by protocol\00Address not available\00Network is down\00Network unreachable\00Connection reset by network\00Connection aborted\00No buffer space available\00Socket is connected\00Socket not connected\00Cannot send after socket shutdown\00Operation already in progress\00Operation in progress\00Stale file handle\00Remote I/O error\00Quota exceeded\00No medium found\00Wrong medium type\00No error information")
+ (data (i32.const 1024) "\00\00\00\00\00\00\00\00\00\00\00\00\00\00\f0?2\00\00\00\01\00\00\00\01\00\00\00\01\00\00\00\01\00\00\00\01\00\00\00\e8\03\00\00@\1f\00\00@\1f\00\00\a0\0f\00\00<\04\00\00\05\00\00\00\00\00\00\00\00\00\00\00\01\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\02\00\00\00\03\00\00\00F\a3\0e\00\00\04\00\00\00\00\00\00\00\00\00\00\01\00\00\00\00\00\00\00\00\00\00\00\00\00\00\n\ff\ff\ff\ff\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00<\04\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\04\9a\0e\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\04\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\ff\ff\ff\ff\ff\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00  int\00  double\00 %s\00[%d]\000\00((int) %s[0])\00%s[0]\00((int) %s)\00internal; unknown ident type in print_ident, code.c\00/\00%%\00-\00internal; unknown operator in print_op, code.c\00((\00)>0)\00)<0)\00internal; unknown scalar expression operator in print_s, code.c\00internal; NULL identifier in allocat_vect, code.c\00  %s %s\00[\00];\n\00[1];\n\00internal; NULL identifier in embed_const_vect, code.c\00  %s const%d[]={\00  %s const%d[%d];\n\00const%d[%d]=\00const%d\00internal; NULL identifier in print_rav, code.c\00(int) %s[%d\00%s[%d\00]\00(int) %s[\00%s[\00(int) %s\00internal; unknown ident type in print_rav, code.c\00]%s%s\00%s%s[\00%s;\n\00for (i=0; i<\00; i++)  %s[i+\00%s%s[i+\00%s[%d+\00%s%s[%d\00(%d+\00]%s%si+\00]%s%s%s[\00]%s;\n\00]%s%s%s[i+\00%s[0]%s0;\n\n\00; i++) %s[i]%s0;\n\n\00min\00%=\00fabs(\00>0)\00<0)\00for (i=\00-2; i>=0; i--)\00%s[i]%s%s[i+1]*%s[i];\n\00for (i=1; i<\00; i++)\00%s[i]%s%s[i-1]*%s[i];\n\00  %s *%s\00=(%s *) get_mem(\00*%d\00*%s\00*sizeof(%s));\n\00  %s %s[1];\n\00*(\00%s0;\n\00gamma_shp\00gamma_index\00; i++)\n\00%s+=%s[i\00]*%s[i];\n\00shift=%s;\n\00shift=%s+\00offset%d=%s;\n\00offset%d=%s+\00Unknown dimension in add_steps\00for (i%d=0\00; i%d<\00; i%d++) {\n\00Unknown dimension in do_loop_open\00Unknown dimension: do_loop_close\00offset%d+=\00shift+=\00Unknown dimension in do_loop_close\00for (i%d=\00Help, I don\'t know the dimension\00Help! I don\'t know the dimension\00 consta%d[%d];\n\00consta%d[%d]=\00consta%d\00*(shift)\00%s *(offset%d);\n\00*(shift)%s i%d;\n\00*(shift)%s \00shift++;\n\00%s %s;\n\00%s %f;\n\00for (%s[%d]=\00; %s[%d]<\00; %s[%d]++) {\n\00forall vector must have a static shape.\00%s[%d]=\00  %s *%s;\n\00%s=(%s *) get_mem((\00)*sizeof(%s));\n\00Unknown type encountered in code_reduced\00free(%s);\n\00/*******\n%s\n********/\n\n\00)*sizeof(%s));\n\n\00unknown kind in code_c_rec\00Undefined identifier\00Error on line %d: %s.\n\00duplicate variable definition\00syntax error\00Dimension of allocation expression unknown.\00Dimension of allocation expression must be 1.\00Shape of allocation vector expression unknown.\00Dimension mismatch in dynamic array allocation.\00Illegal use of dynamic array (shape not defined yet).\00Constant to large\00Expecting a variable or constant\00 (\00Expecting omega as an operator.\00 omega \00 +red \00 + \00 -red \00 - \00 *red \00 * \00 /red \00 / \00 psi \00 iota \00 shp \00 dim \00 tau \00 rav \00 take \00 cat \00 reverse \00Expecting an operator\00Expecting a factor.\00 pdrop \00Syntax error\00Reducing:\n%s\n\00Expecting an identifier\00Array argument to allocate is not dynamic.\00%s(\00);\n\00_%s\00undeclared variable\00only formal parameters are allowed in the shape definition\00  double %s[]={\00,\n    %f\00, %f\00};\n\00expecting \'array\'\00int \00  int \00double \00  double *\00[]\00Parameters must have a specified shape\00, \00temp$$$$.moa\00Couldn\'t create temporary file.\00vtemp$$$$.moa\00htemp$$$$.moa\00  double *shift;\n\00int argc, char *argv[],\00)\n\n\00{\n\00  double *offset%d;\n\00  int i%d;\n\00r\00Couldn\'t open temporary file.\00  NODE_INIT(argc,argv);\n\00  NODE_INIT(%d);\n\n\00\n  HOST_INIT(%d);\n\n\00  TRACE_START(\"%s\");\n\00  TRACE_END();\n\00  NODE_CLEANUP();\n\00procs\00arch\00mpimac\00mpi not allowed with host\00#include \"%s.h\"\n\n\00hostname\00host not allowed with mpi\00Couldn\'t open host output file\00trace\00picl\00#include <stdlib.h>\n\00#include \"picl.h\"\n\n\00\n\n\00global\00const\00rav\00array\00psi\00take\00drop\00ptake\00pdrop\00cat\00omega\00int\00double\00for\00iota\00shp\00dim\00red\00tau\00allocate\00reverse\00junk$$$$.moa\00Starting main..\n\00usage: %s <source> [-o output] [-r filename]\n\00rt\00Cannot open %s.\n\00-h\00wt\00Could\'nt open host output file\00#include \"moalib.e\"\n\n\00Cannot create %s.\n\00-g\00Cannot open temporary file.\n\00MOA Compiler version 0.4 (PSI Compiler Library v0.4)\00Copyright (c) 1993 Lenore R. Mullin\n\00i0=%s;\n\00i1=\00%s[%d]=i0/i1;\n\00i0=i0%%i1;\n\00i1/=\00%s[%d]=i0;\n\00%s[%s]\00for (i0=0; i0<\00; i0++) {\n\00if (\00i0\00) out=TRUE;\n\00>=\00++;\n\00=0;\n\00) %s=FALSE;\n\00} while (%s);\n\00; i0++) j[i0]=0;\n\00j_cont=TRUE;\n\00do {\n\00; i0++) p[i0]=0;\n\00p[0]=MY_PROC();\n\00printf(\"x1:<\");\n\00; i0++)\n  printf(\"%%d \",(int) %s[i0]);\n\00printf(\">\\n\");\n\00printf(\"x1:0\\n\");\n\00printf(\"x2:<\");\n\00printf(\"x2:0\\n\");\n\00printf(\"y1:<\");\n\00printf(\"y1:0\\n\");\n\00printf(\"y2:<\");\n\00printf(\"y2:0\\n\");\n\00printf(\"ip:<\");\n\00; i0++)\n  printf(\"%%d \",ip[i0]);\n\00printf(\"lp:<\");\n\00; i0++)\n  printf(\"%%d \",lp[i0]);\n\00printf(\"bp:<\");\n\00; i0++)\n  printf(\"%%d \",bp[i0]);\n\00ipp\00lpp\00bpp\00s\00printf(\"p=%%d\\n\",p_);\n\00printf(\"sp=%%d\\n\",sp_);\n\00ip\00lp\00bp\00p\00j\00for (i0=0; i0<%d; i0++) {  /* Send global integer */\n\00START_SEND(i0,sizeof(int));\n\00HOST_SEND(&%s,sizeof(int),i0);\n\00END_SEND();\n\00START_SEND(i0,sizeof(double));\n\00HOST_SEND(%s,sizeof(double),i0);\n\00START_RECV();\n\00RECV_HOST(&%s,sizeof(int)); \n\00END_RECV(-1,sizeof(int));\n\00%s=(double *) get_mem(sizeof(double));\n\00RECV_HOST(%s,sizeof(double)); \n\00END_RECV(-1,sizeof(double));\n\00if (MY_PROC()==0) {\n\00/* Send global integer */\n\00for (i0=1; i0<%d; i0++) {\n\00SEND(&%s,sizeof(int),i0);\n\00SEND(%s,sizeof(double),i0);\n\00} else {\n\00RECV(&%s,sizeof(int),0);\n\00END_RECV(0,sizeof(int));\n\00RECV(%s,sizeof(int),0);\n\00i0=\00for (i2=0; i2<%d; i2++) p[i2]=0;\n\00p_cont=TRUE;\n\00p_=\00offset=\00i2=(i1<(i0-offset)) ? i1 : (i0-offset);\n\00HOST_SEND(%s+offset,i2*sizeof(double),p_);\n\00p_cont\00RECV_HOST(%s,i1*sizeof(double));\n\00proc\00in\00if (in) RECV_HOST(%s,i1*sizeof(double));\n\00SEND(%s+offset,i2*sizeof(double),p_);\n\00RECV(%s,i1*sizeof(double),0);\n\00if (in) RECV(%s,i1*sizeof(double),0);\n\00\n/* Communications for Initial Data */\n\n\00/* Communications for Initial Data */\n\n\00  double *%s;\n\00if (MY_PROC()>0)\n\00%s=(double *) get_mem(\00*sizeof(double));\n\00/* Procedure body */\n\n\00  int j_cont,p_cont,s_cont,out;\n\00  int p_,sp_,mode,offset;\n\00  int p[%d];\n\00  int c[%d];\n\00  int s[%d];\n\00  int sp2[%d];\n\00  int ip[%d];\n\00  int lp[%d];\n\00  int bp[%d];\n\00  int ipp[%d];\n\00  int lpp[%d];\n\00  int bpp[%d];\n\00  double *buffer%dr[%d],*buffer%ds[%d];\n\00  int p_,p_cont,p[%d];\n\00  int shift,offset;\n\00buffer\00Attempt to allocate 0 expression nodes, something wrong!\00Out of expression blocks!\00internal; get_mem called with 0\00Out of memory!\00error: %s\n\00Error: %s, proceeding...\n\00non-scalar shape caught in block_rav\00internal; unknown operator in simplify_vect\00internal; unknown operation in red_rav\00scalar%d\00%s=\00;\n\00Divide by zero in compactor\00compactor: internal error -- operator unknown.\00Out of s_expr blocks!\00FATAL ERROR: Scaler.c (#2), unexpected NULL found in s_expr_t\00WARNING: Scaler.c (#3), an unexpected s_expr_t op was encountered.\000\n\00(%f)\00(x%d^%d)\00(x%d)\00+\00%g\00\n*\00FATAL ERROR: Scaler.c (#0), A unexpected NULL was encountered in an s_expr_t.\00  \00Out of ident blocks!\00scalar%d=\00*=\00/=\00+=\00-=\00temp%d\00tmp_vect%d\00=\00Red rav doesn\'t know the dimension\00forall %s in \00 {\n\00}\n\00(\00<\00 \00>\00<>\00 Tk \00)\00abs(\000>\000<\00min(\00,\00max(\00++\00Internal error: print_vector -- unknown operator\00<%d>\00%s[]\00%d \00\08>\00#\00expr is NULL\n\00expr->bound is NULL\n\00empty expression\n\00Internal error in print_expr\00 take (\00 drop \00) stride=\00\n\00NULL\00forall (%s in \00) {\n\00}\00 Dr \00*red(\00/red(\00-red(\00+red(\00rav(\00 Psi \00Internal error: rec_print_expr\00Out of vector blocks!\00%d\00%d+%d\00red_rav: opps\00red_rav: can\'t do this yet\00temp\00Internal error: vect_expand\00empty\00Incompatibale shapes with algebraic operator\00forall_i%d\00%f\00*\00%s\001\00Internal error: collect_reduced\00Internal error: collect_garbage\00Unknown type encountered in partition_reduced\00unknown kind in rec_partition\00mc\00ex.m\00-r\00ex.r\00-o\00ex.c\00rwa\00\11\00\n\00\11\11\11\00\00\00\00\05\00\00\00\00\00\00\t\00\00\00\00\0b\00\00\00\00\00\00\00\00\11\00\0f\n\11\11\11\03\n\07\00\01\13\t\0b\0b\00\00\t\06\0b\00\00\0b\00\06\11\00\00\00\11\11\11\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\0b\00\00\00\00\00\00\00\00\11\00\n\n\11\11\11\00\n\00\00\02\00\t\0b\00\00\00\t\00\0b\00\00\0b\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\0c\00\00\00\00\00\00\00\00\00\00\00\0c\00\00\00\00\0c\00\00\00\00\t\0c\00\00\00\00\00\0c\00\00\0c\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\0e\00\00\00\00\00\00\00\00\00\00\00\0d\00\00\00\04\0d\00\00\00\00\t\0e\00\00\00\00\00\0e\00\00\0e\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\10\00\00\00\00\00\00\00\00\00\00\00\0f\00\00\00\00\0f\00\00\00\00\t\10\00\00\00\00\00\10\00\00\10\00\00\12\00\00\00\12\12\12\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\12\00\00\00\12\12\12\00\00\00\00\00\00\t\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\0b\00\00\00\00\00\00\00\00\00\00\00\n\00\00\00\00\n\00\00\00\00\t\0b\00\00\00\00\00\0b\00\00\0b\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\00\0c\00\00\00\00\00\00\00\00\00\00\00\0c\00\00\00\00\0c\00\00\00\00\t\0c\00\00\00\00\00\0c\00\00\0c\00\00-+   0X0x\00(null)\00-0X+0X 0X-0x+0x 0x\00inf\00INF\00nan\00NAN\000123456789ABCDEF.\00T!\"\19\0d\01\02\03\11K\1c\0c\10\04\0b\1d\12\1e\'hnopqb \05\06\0f\13\14\15\1a\08\16\07($\17\18\t\n\0e\1b\1f%#\83\82}&*+<=>?CGJMXYZ[\\]^_`acdefgijklrstyz{|\00Illegal byte sequence\00Domain error\00Result not representable\00Not a tty\00Permission denied\00Operation not permitted\00No such file or directory\00No such process\00File exists\00Value too large for data type\00No space left on device\00Out of memory\00Resource busy\00Interrupted system call\00Resource temporarily unavailable\00Invalid seek\00Cross-device link\00Read-only file system\00Directory not empty\00Connection reset by peer\00Operation timed out\00Connection refused\00Host is down\00Host is unreachable\00Address in use\00Broken pipe\00I/O error\00No such device or address\00Block device required\00No such device\00Not a directory\00Is a directory\00Text file busy\00Exec format error\00Invalid argument\00Argument list too long\00Symbolic link loop\00Filename too long\00Too many open files in system\00No file descriptors available\00Bad file descriptor\00No child process\00Bad address\00File too large\00Too many links\00No locks available\00Resource deadlock would occur\00State not recoverable\00Previous owner died\00Operation canceled\00Function not implemented\00No message of desired type\00Identifier removed\00Device not a stream\00No data available\00Device timeout\00Out of streams resources\00Link has been severed\00Protocol error\00Bad message\00File descriptor in bad state\00Not a socket\00Destination address required\00Message too large\00Protocol wrong type for socket\00Protocol not available\00Protocol not supported\00Socket type not supported\00Not supported\00Protocol family not supported\00Address family not supported by protocol\00Address not available\00Network is down\00Network unreachable\00Connection reset by network\00Connection aborted\00No buffer space available\00Socket is connected\00Socket not connected\00Cannot send after socket shutdown\00Operation already in progress\00Operation in progress\00Stale file handle\00Remote I/O error\00Quota exceeded\00No medium found\00Wrong medium type\00No error information")
  (export "___errno_location" (func $___errno_location))
  (export "_fflush" (func $_fflush))
  (export "_free" (func $_free))
@@ -300,7 +300,7 @@
     (drop
      (call $_fprintf
       (get_local $$15)
-      (i32.const 7367)
+      (i32.const 7343)
       (get_local $$vararg_buffer8)
      )
     )
@@ -337,7 +337,7 @@
   (drop
    (call $_fprintf
     (get_local $$15)
-    (i32.const 7367)
+    (i32.const 7343)
     (get_local $$vararg_buffer8)
    )
   )
@@ -584,7 +584,7 @@
               (drop
                (call $_fprintf
                 (get_local $$11)
-                (i32.const 8168)
+                (i32.const 8144)
                 (get_local $$vararg_buffer1)
                )
               )
@@ -718,7 +718,7 @@
             (drop
              (call $_fprintf
               (get_local $$27)
-              (i32.const 8168)
+              (i32.const 8144)
               (get_local $$vararg_buffer9)
              )
             )
@@ -795,7 +795,7 @@
              (drop
               (call $_fprintf
                (get_local $$39)
-               (i32.const 8168)
+               (i32.const 8144)
                (get_local $$vararg_buffer12)
               )
              )
@@ -960,7 +960,7 @@
         (drop
          (call $_fprintf
           (get_local $$65)
-          (i32.const 8318)
+          (i32.const 8294)
           (get_local $$vararg_buffer20)
          )
         )
@@ -1080,7 +1080,7 @@
          (drop
           (call $_fprintf
            (get_local $$6)
-           (i32.const 8316)
+           (i32.const 8292)
            (get_local $$vararg_buffer)
           )
          )
@@ -1122,7 +1122,7 @@
       (drop
        (call $_fprintf
         (get_local $$9)
-        (i32.const 7619)
+        (i32.const 7595)
         (get_local $$vararg_buffer5)
        )
       )
@@ -1593,7 +1593,7 @@
                (drop
                 (call $_fprintf
                  (get_local $$33)
-                 (i32.const 7827)
+                 (i32.const 7803)
                  (get_local $$vararg_buffer1)
                 )
                )
@@ -1626,7 +1626,7 @@
                (drop
                 (call $_fprintf
                  (get_local $$38)
-                 (i32.const 7843)
+                 (i32.const 7819)
                  (get_local $$vararg_buffer3)
                 )
                )
@@ -1653,7 +1653,7 @@
                (drop
                 (call $_fprintf
                  (get_local $$42)
-                 (i32.const 7827)
+                 (i32.const 7803)
                  (get_local $$vararg_buffer5)
                 )
                )
@@ -1686,7 +1686,7 @@
                (drop
                 (call $_fprintf
                  (get_local $$47)
-                 (i32.const 7843)
+                 (i32.const 7819)
                  (get_local $$vararg_buffer7)
                 )
                )
@@ -1708,7 +1708,7 @@
               (drop
                (call $_fprintf
                 (get_local $$48)
-                (i32.const 7856)
+                (i32.const 7832)
                 (get_local $$vararg_buffer9)
                )
               )
@@ -1741,7 +1741,7 @@
               (drop
                (call $_fprintf
                 (get_local $$53)
-                (i32.const 7861)
+                (i32.const 7837)
                 (get_local $$vararg_buffer11)
                )
               )
@@ -1774,7 +1774,7 @@
               (drop
                (call $_fprintf
                 (get_local $$58)
-                (i32.const 7843)
+                (i32.const 7819)
                 (get_local $$vararg_buffer13)
                )
               )
@@ -1796,7 +1796,7 @@
              (drop
               (call $_fprintf
                (get_local $$59)
-               (i32.const 7863)
+               (i32.const 7839)
                (get_local $$vararg_buffer15)
               )
              )
@@ -1829,7 +1829,7 @@
              (drop
               (call $_fprintf
                (get_local $$64)
-               (i32.const 7861)
+               (i32.const 7837)
                (get_local $$vararg_buffer17)
               )
              )
@@ -1862,7 +1862,7 @@
              (drop
               (call $_fprintf
                (get_local $$69)
-               (i32.const 7843)
+               (i32.const 7819)
                (get_local $$vararg_buffer19)
               )
              )
@@ -1994,7 +1994,7 @@
           (drop
            (call $_fprintf
             (get_local $$82)
-            (i32.const 7845)
+            (i32.const 7821)
             (get_local $$vararg_buffer29)
            )
           )
@@ -2027,7 +2027,7 @@
           (drop
            (call $_fprintf
             (get_local $$87)
-            (i32.const 7843)
+            (i32.const 7819)
             (get_local $$vararg_buffer31)
            )
           )
@@ -2751,7 +2751,7 @@
                      (drop
                       (call $_fprintf
                        (get_local $$59)
-                       (i32.const 8316)
+                       (i32.const 8292)
                        (get_local $$vararg_buffer8)
                       )
                      )
@@ -2879,7 +2879,7 @@
                      (drop
                       (call $_fprintf
                        (get_local $$70)
-                       (i32.const 8168)
+                       (i32.const 8144)
                        (get_local $$vararg_buffer10)
                       )
                      )
@@ -2892,7 +2892,7 @@
                      (drop
                       (call $_fprintf
                        (get_local $$70)
-                       (i32.const 8318)
+                       (i32.const 8294)
                        (get_local $$vararg_buffer13)
                       )
                      )
@@ -3442,7 +3442,7 @@
       (drop
        (call $_fprintf
         (get_local $$73)
-        (i32.const 7367)
+        (i32.const 7343)
         (get_local $$vararg_buffer20)
        )
       )
@@ -3648,7 +3648,7 @@
       (drop
        (call $_fprintf
         (get_local $$28)
-        (i32.const 7861)
+        (i32.const 7837)
         (get_local $$vararg_buffer4)
        )
       )
@@ -3708,7 +3708,7 @@
     (drop
      (call $_fprintf
       (get_local $$29)
-      (i32.const 8168)
+      (i32.const 8144)
       (get_local $$vararg_buffer6)
      )
     )
@@ -4478,7 +4478,7 @@
            (drop
             (call $_fprintf
              (get_local $$42)
-             (i32.const 8168)
+             (i32.const 8144)
              (get_local $$vararg_buffer2)
             )
            )
@@ -4683,7 +4683,7 @@
             (drop
              (call $_fprintf
               (get_local $$72)
-              (i32.const 7619)
+              (i32.const 7595)
               (get_local $$vararg_buffer12)
              )
             )
@@ -4818,7 +4818,7 @@
            (drop
             (call $_fprintf
              (get_local $$105)
-             (i32.const 8168)
+             (i32.const 8144)
              (get_local $$vararg_buffer24)
             )
            )
@@ -5149,7 +5149,7 @@
             (drop
              (call $_fprintf
               (get_local $$149)
-              (i32.const 8168)
+              (i32.const 8144)
               (get_local $$vararg_buffer35)
              )
             )
@@ -5427,7 +5427,7 @@
          (drop
           (call $_fprintf
            (get_local $$171)
-           (i32.const 8168)
+           (i32.const 8144)
            (get_local $$vararg_buffer38)
           )
          )
@@ -5876,7 +5876,7 @@
      (drop
       (call $_fprintf
        (get_local $$230)
-       (i32.const 8318)
+       (i32.const 8294)
        (get_local $$vararg_buffer52)
       )
      )
@@ -7317,7 +7317,7 @@
                   (drop
                    (call $_fprintf
                     (get_local $$185)
-                    (i32.const 8168)
+                    (i32.const 8144)
                     (get_local $$vararg_buffer40)
                    )
                   )
@@ -7840,7 +7840,7 @@
               (drop
                (call $_fprintf
                 (get_local $$273)
-                (i32.const 7843)
+                (i32.const 7819)
                 (get_local $$vararg_buffer63)
                )
               )
@@ -11541,7 +11541,7 @@
               (block
                (i32.store
                 (get_local $$7)
-                (i32.const 7745)
+                (i32.const 7721)
                )
                (set_local $label
                 (i32.const 19)
@@ -11631,7 +11631,7 @@
             (get_local $$140)
             (get_local $$141)
             (i32.const 2285)
-            (i32.const 7843)
+            (i32.const 7819)
             (i32.const 0)
            )
           )
@@ -11704,7 +11704,7 @@
            (get_local $$150)
            (get_local $$151)
            (get_local $$152)
-           (i32.const 7827)
+           (i32.const 7803)
            (i32.const 2291)
            (i32.const 0)
           )
@@ -11778,7 +11778,7 @@
           (get_local $$161)
           (get_local $$162)
           (get_local $$163)
-          (i32.const 7827)
+          (i32.const 7803)
           (i32.const 2295)
           (i32.const 0)
          )
@@ -12277,7 +12277,7 @@
    (block
     (i32.store
      (get_local $$7)
-     (i32.const 7748)
+     (i32.const 7724)
     )
     (set_local $label
      (i32.const 20)
@@ -12292,7 +12292,7 @@
    (block
     (i32.store
      (get_local $$7)
-     (i32.const 7739)
+     (i32.const 7715)
     )
     (set_local $label
      (i32.const 21)
@@ -12306,7 +12306,7 @@
    )
    (i32.store
     (get_local $$7)
-    (i32.const 7742)
+    (i32.const 7718)
    )
   )
   (i32.store
@@ -12478,7 +12478,7 @@
   (drop
    (call $_sprintf
     (get_local $$6)
-    (i32.const 5053)
+    (i32.const 5029)
     (get_local $$vararg_buffer)
    )
   )
@@ -13504,7 +13504,7 @@
         (drop
          (call $_fprintf
           (get_local $$70)
-          (i32.const 8168)
+          (i32.const 8144)
           (get_local $$vararg_buffer15)
          )
         )
@@ -13518,7 +13518,7 @@
         (drop
          (call $_fprintf
           (get_local $$70)
-          (i32.const 8318)
+          (i32.const 8294)
           (get_local $$vararg_buffer18)
          )
         )
@@ -13631,7 +13631,7 @@
     (drop
      (call $_fprintf
       (get_local $$92)
-      (i32.const 8321)
+      (i32.const 8297)
       (get_local $$vararg_buffer27)
      )
     )
@@ -14450,7 +14450,7 @@
       (drop
        (call $_fprintf
         (get_local $$36)
-        (i32.const 8318)
+        (i32.const 8294)
         (get_local $$vararg_buffer)
        )
       )
@@ -14532,7 +14532,7 @@
         (drop
          (call $_fprintf
           (get_local $$50)
-          (i32.const 7619)
+          (i32.const 7595)
           (get_local $$vararg_buffer1)
          )
         )
@@ -14646,7 +14646,7 @@
         (drop
          (call $_fprintf
           (get_local $$66)
-          (i32.const 7843)
+          (i32.const 7819)
           (get_local $$vararg_buffer5)
          )
         )
@@ -14668,7 +14668,7 @@
       (drop
        (call $_fprintf
         (get_local $$66)
-        (i32.const 7367)
+        (i32.const 7343)
         (get_local $$vararg_buffer7)
        )
       )
@@ -14835,7 +14835,7 @@
     (drop
      (call $_fprintf
       (get_local $$88)
-      (i32.const 7619)
+      (i32.const 7595)
       (get_local $$vararg_buffer20)
      )
     )
@@ -15283,7 +15283,7 @@
       (drop
        (call $_fprintf
         (get_local $$36)
-        (i32.const 8318)
+        (i32.const 8294)
         (get_local $$vararg_buffer)
        )
       )
@@ -15361,7 +15361,7 @@
           (drop
            (call $_fprintf
             (get_local $$49)
-            (i32.const 7619)
+            (i32.const 7595)
             (get_local $$vararg_buffer1)
            )
           )
@@ -15389,7 +15389,7 @@
         (drop
          (call $_fprintf
           (get_local $$53)
-          (i32.const 8316)
+          (i32.const 8292)
           (get_local $$vararg_buffer3)
          )
         )
@@ -15439,7 +15439,7 @@
         (drop
          (call $_fprintf
           (get_local $$60)
-          (i32.const 7619)
+          (i32.const 7595)
           (get_local $$vararg_buffer5)
          )
         )
@@ -15500,7 +15500,7 @@
       (drop
        (call $_fprintf
         (get_local $$70)
-        (i32.const 7367)
+        (i32.const 7343)
         (get_local $$vararg_buffer7)
        )
       )
@@ -15667,7 +15667,7 @@
     (drop
      (call $_fprintf
       (get_local $$90)
-      (i32.const 7619)
+      (i32.const 7595)
       (get_local $$vararg_buffer20)
      )
     )
@@ -20064,7 +20064,7 @@
                (drop
                 (call $_fprintf
                  (get_local $$95)
-                 (i32.const 7367)
+                 (i32.const 7343)
                  (get_local $$vararg_buffer2)
                 )
                )
@@ -20272,7 +20272,7 @@
                (drop
                 (call $_fprintf
                  (get_local $$123)
-                 (i32.const 7367)
+                 (i32.const 7343)
                  (get_local $$vararg_buffer6)
                 )
                )
@@ -20320,7 +20320,7 @@
            (drop
             (call $_fprintf
              (get_local $$128)
-             (i32.const 7824)
+             (i32.const 7800)
              (get_local $$vararg_buffer8)
             )
            )
@@ -20889,7 +20889,7 @@
           (drop
            (call $_fprintf
             (get_local $$62)
-            (i32.const 7619)
+            (i32.const 7595)
             (get_local $$vararg_buffer5)
            )
           )
@@ -21269,7 +21269,7 @@
           (drop
            (call $_fprintf
             (get_local $$38)
-            (i32.const 7824)
+            (i32.const 7800)
             (get_local $$vararg_buffer)
            )
           )
@@ -21970,7 +21970,7 @@
       (set_local $$24
        (call $_strncmp
         (get_local $$23)
-        (i32.const 8218)
+        (i32.const 8194)
         (i32.const 4)
        )
       )
@@ -22617,7 +22617,7 @@
                 (drop
                  (call $_fprintf
                   (get_local $$107)
-                  (i32.const 8313)
+                  (i32.const 8289)
                   (get_local $$vararg_buffer9)
                  )
                 )
@@ -22667,7 +22667,7 @@
               (drop
                (call $_fprintf
                 (get_local $$124)
-                (i32.const 7367)
+                (i32.const 7343)
                 (get_local $$vararg_buffer12)
                )
               )
@@ -23584,7 +23584,7 @@
            )
            (set_local $$273
             (call $_strncmp
-             (i32.const 8218)
+             (i32.const 8194)
              (get_local $$272)
              (i32.const 4)
             )
@@ -24090,7 +24090,7 @@
               (drop
                (call $_fprintf
                 (get_local $$344)
-                (i32.const 7367)
+                (i32.const 7343)
                 (get_local $$vararg_buffer32)
                )
               )
@@ -24175,7 +24175,7 @@
         )
         (set_local $$355
          (call $_strncmp
-          (i32.const 8218)
+          (i32.const 8194)
           (get_local $$354)
           (i32.const 4)
          )
@@ -25513,7 +25513,7 @@
     (drop
      (call $_fprintf
       (get_local $$9)
-      (i32.const 7824)
+      (i32.const 7800)
       (get_local $$vararg_buffer)
      )
     )
@@ -26042,7 +26042,7 @@
       (drop
        (call $_fprintf
         (get_local $$55)
-        (i32.const 7367)
+        (i32.const 7343)
         (get_local $$vararg_buffer2)
        )
       )
@@ -26189,7 +26189,7 @@
       (drop
        (call $_fprintf
         (get_local $$73)
-        (i32.const 7619)
+        (i32.const 7595)
         (get_local $$vararg_buffer12)
        )
       )
@@ -26649,7 +26649,7 @@
            (drop
             (call $_fprintf
              (get_local $$45)
-             (i32.const 7824)
+             (i32.const 7800)
              (get_local $$vararg_buffer)
             )
            )
@@ -27987,7 +27987,7 @@
       (set_local $$18
        (call $_strncmp
         (get_local $$17)
-        (i32.const 8218)
+        (i32.const 8194)
         (i32.const 4)
        )
       )
@@ -30581,7 +30581,7 @@
               (drop
                (call $_fprintf
                 (get_local $$88)
-                (i32.const 8321)
+                (i32.const 8297)
                 (get_local $$vararg_buffer17)
                )
               )
@@ -30680,7 +30680,7 @@
                 (drop
                  (call $_fprintf
                   (get_local $$80)
-                  (i32.const 8316)
+                  (i32.const 8292)
                   (get_local $$vararg_buffer15)
                  )
                 )
@@ -33090,7 +33090,7 @@
     (drop
      (call $_sprintf
       (get_local $$5)
-      (i32.const 8318)
+      (i32.const 8294)
       (get_local $$vararg_buffer)
      )
     )
@@ -33462,7 +33462,7 @@
   (drop
    (call $_sprintf
     (get_local $$8)
-    (i32.const 7829)
+    (i32.const 7805)
     (get_local $$vararg_buffer)
    )
   )
@@ -33580,7 +33580,7 @@
       (drop
        (call $_sprintf
         (get_local $$20)
-        (i32.const 8313)
+        (i32.const 8289)
         (get_local $$vararg_buffer1)
        )
       )
@@ -33626,7 +33626,7 @@
       (drop
        (call $_sprintf
         (get_local $$27)
-        (i32.const 8318)
+        (i32.const 8294)
         (get_local $$vararg_buffer3)
        )
       )
@@ -33679,7 +33679,7 @@
       (drop
        (call $_sprintf
         (get_local $$35)
-        (i32.const 7831)
+        (i32.const 7807)
         (get_local $$vararg_buffer6)
        )
       )
@@ -34100,7 +34100,7 @@
     (drop
      (call $_sprintf
       (get_local $$168)
-      (i32.const 7833)
+      (i32.const 7809)
       (get_local $$vararg_buffer8)
      )
     )
@@ -34561,7 +34561,7 @@
   (drop
    (call $_sprintf
     (get_local $$168)
-    (i32.const 7833)
+    (i32.const 7809)
     (get_local $$vararg_buffer8)
    )
   )
@@ -35575,7 +35575,7 @@
     (drop
      (call $_sprintf
       (get_local $$18)
-      (i32.const 7843)
+      (i32.const 7819)
       (get_local $$vararg_buffer1)
      )
     )
@@ -35637,7 +35637,7 @@
     (drop
      (call $_sprintf
       (get_local $$26)
-      (i32.const 7831)
+      (i32.const 7807)
       (get_local $$vararg_buffer5)
      )
     )
@@ -36382,7 +36382,7 @@
           (drop
            (call $_sprintf
             (get_local $$102)
-            (i32.const 8029)
+            (i32.const 8005)
             (get_local $$vararg_buffer37)
            )
           )
@@ -36472,7 +36472,7 @@
         (drop
          (call $_sprintf
           (get_local $$112)
-          (i32.const 8029)
+          (i32.const 8005)
           (get_local $$vararg_buffer41)
          )
         )
@@ -36723,7 +36723,7 @@
   (drop
    (call $_sprintf
     (get_local $$141)
-    (i32.const 7831)
+    (i32.const 7807)
     (get_local $$vararg_buffer49)
    )
   )
@@ -37228,7 +37228,7 @@
     (drop
      (call $_sprintf
       (get_local $$6)
-      (i32.const 7827)
+      (i32.const 7803)
       (get_local $$vararg_buffer)
      )
     )
@@ -37257,7 +37257,7 @@
     (drop
      (call $_sprintf
       (get_local $$9)
-      (i32.const 7843)
+      (i32.const 7819)
       (get_local $$vararg_buffer2)
      )
     )
@@ -38382,7 +38382,7 @@
     (drop
      (call $_sprintf
       (get_local $$27)
-      (i32.const 8029)
+      (i32.const 8005)
       (get_local $$vararg_buffer1)
      )
     )
@@ -38457,7 +38457,7 @@
   (drop
    (call $_sprintf
     (get_local $$36)
-    (i32.const 7769)
+    (i32.const 7745)
     (get_local $$vararg_buffer5)
    )
   )
@@ -40306,7 +40306,7 @@
     (drop
      (call $_sprintf
       (get_local $$34)
-      (i32.const 7861)
+      (i32.const 7837)
       (get_local $$vararg_buffer)
      )
     )
@@ -42042,7 +42042,7 @@
        (drop
         (call $_fprintf
          (get_local $$51)
-         (i32.const 8313)
+         (i32.const 8289)
          (get_local $$vararg_buffer2)
         )
        )
@@ -43510,7 +43510,7 @@
     (drop
      (call $_fprintf
       (get_local $$52)
-      (i32.const 7367)
+      (i32.const 7343)
       (get_local $$vararg_buffer23)
      )
     )
@@ -44048,7 +44048,7 @@
   (set_local $$6
    (call $_fopen
     (i32.const 4074)
-    (i32.const 4787)
+    (i32.const 4776)
    )
   )
   (i32.store
@@ -44070,7 +44070,7 @@
   (set_local $$8
    (call $_fopen
     (i32.const 4119)
-    (i32.const 4787)
+    (i32.const 4776)
    )
   )
   (i32.store
@@ -44106,7 +44106,7 @@
     (set_local $$12
      (call $_fopen
       (i32.const 4133)
-      (i32.const 4787)
+      (i32.const 4776)
      )
     )
     (i32.store
@@ -44210,7 +44210,7 @@
   (drop
    (call $_fprintf
     (get_local $$23)
-    (i32.const 7827)
+    (i32.const 7803)
     (get_local $$vararg_buffer5)
    )
   )
@@ -44264,7 +44264,7 @@
     (drop
      (call $_fprintf
       (get_local $$29)
-      (i32.const 7827)
+      (i32.const 7803)
       (get_local $$vararg_buffer9)
      )
     )
@@ -44735,7 +44735,7 @@
   )
   (drop
    (call $_fputs
-    (i32.const 8046)
+    (i32.const 8022)
     (get_local $$81)
    )
   )
@@ -45227,7 +45227,7 @@
   (drop
    (call $_fprintf
     (get_local $$131)
-    (i32.const 7824)
+    (i32.const 7800)
     (get_local $$vararg_buffer47)
    )
   )
@@ -45267,7 +45267,7 @@
   (drop
    (call $_fprintf
     (get_local $$134)
-    (i32.const 7824)
+    (i32.const 7800)
     (get_local $$vararg_buffer49)
    )
   )
@@ -45673,7 +45673,7 @@
     (set_local $$40
      (call $_fopen
       (get_local $$39)
-      (i32.const 4787)
+      (i32.const 4776)
      )
     )
     (i32.store
@@ -45700,7 +45700,7 @@
     (drop
      (call $_fprintf
       (get_local $$42)
-      (i32.const 4821)
+      (i32.const 4810)
       (get_local $$vararg_buffer4)
      )
     )
@@ -45968,7 +45968,7 @@
   (drop
    (call $_fprintf
     (get_local $$4)
-    (i32.const 4821)
+    (i32.const 4810)
     (get_local $$vararg_buffer1)
    )
   )
@@ -48735,102 +48735,7 @@
    (get_local $$8)
   )
  )
- (func $_mainJS (; 112 ;)
-  (local $$0 i32)
-  (local $$1 i32)
-  (local $$2 i32)
-  (local $$3 i32)
-  (local $$4 i32)
-  (local $$5 i32)
-  (local $label i32)
-  (local $sp i32)
-  (set_local $sp
-   (get_global $STACKTOP)
-  )
-  (set_global $STACKTOP
-   (i32.add
-    (get_global $STACKTOP)
-    (i32.const 32)
-   )
-  )
-  (if
-   (i32.ge_s
-    (get_global $STACKTOP)
-    (get_global $STACK_MAX)
-   )
-   (call $abortStackOverflow
-    (i32.const 32)
-   )
-  )
-  (set_local $$0
-   (get_local $sp)
-  )
-  (i32.store
-   (get_local $$0)
-   (i32.const 4677)
-  )
-  (set_local $$1
-   (i32.add
-    (get_local $$0)
-    (i32.const 4)
-   )
-  )
-  (i32.store
-   (get_local $$1)
-   (i32.const 4680)
-  )
-  (set_local $$2
-   (i32.add
-    (get_local $$0)
-    (i32.const 8)
-   )
-  )
-  (i32.store
-   (get_local $$2)
-   (i32.const 4685)
-  )
-  (set_local $$3
-   (i32.add
-    (get_local $$0)
-    (i32.const 12)
-   )
-  )
-  (i32.store
-   (get_local $$3)
-   (i32.const 4688)
-  )
-  (set_local $$4
-   (i32.add
-    (get_local $$0)
-    (i32.const 16)
-   )
-  )
-  (i32.store
-   (get_local $$4)
-   (i32.const 4693)
-  )
-  (set_local $$5
-   (i32.add
-    (get_local $$0)
-    (i32.const 20)
-   )
-  )
-  (i32.store
-   (get_local $$5)
-   (i32.const 4696)
-  )
-  (drop
-   (call $_main
-    (i32.const 6)
-    (get_local $$0)
-   )
-  )
-  (set_global $STACKTOP
-   (get_local $sp)
-  )
-  (return)
- )
- (func $_main (; 113 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_main (; 112 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -49030,7 +48935,7 @@
   )
   (drop
    (call $_printf
-    (i32.const 4701)
+    (i32.const 4690)
     (get_local $$vararg_buffer)
    )
   )
@@ -49060,7 +48965,7 @@
     )
     (drop
      (call $_printf
-      (i32.const 4718)
+      (i32.const 4707)
       (get_local $$vararg_buffer1)
      )
     )
@@ -49083,7 +48988,7 @@
   (set_local $$12
    (call $_fopen
     (get_local $$11)
-    (i32.const 4764)
+    (i32.const 4753)
    )
   )
   (i32.store
@@ -49119,7 +49024,7 @@
     )
     (drop
      (call $_printf
-      (i32.const 4767)
+      (i32.const 4756)
       (get_local $$vararg_buffer3)
      )
     )
@@ -49187,7 +49092,7 @@
     (set_local $$24
      (call $_strcmp
       (get_local $$23)
-      (i32.const 4784)
+      (i32.const 4773)
      )
     )
     (set_local $$25
@@ -49248,7 +49153,7 @@
        (set_local $$33
         (call $_fopen
          (get_local $$32)
-         (i32.const 4787)
+         (i32.const 4776)
         )
        )
        (i32.store
@@ -49264,7 +49169,7 @@
        (if
         (get_local $$34)
         (call $_fatal
-         (i32.const 4790)
+         (i32.const 4779)
         )
        )
        (set_local $$35
@@ -49275,7 +49180,7 @@
        (drop
         (call $_fprintf
          (get_local $$35)
-         (i32.const 4821)
+         (i32.const 4810)
          (get_local $$vararg_buffer6)
         )
        )
@@ -49304,7 +49209,7 @@
        (set_local $$40
         (call $_strcmp
          (get_local $$39)
-         (i32.const 4693)
+         (i32.const 8455)
         )
        )
        (set_local $$41
@@ -49366,7 +49271,7 @@
            (set_local $$51
             (call $_fopen
              (get_local $$50)
-             (i32.const 4787)
+             (i32.const 4776)
             )
            )
            (i32.store
@@ -49428,7 +49333,7 @@
        (set_local $$62
         (call $_strcmp
          (get_local $$61)
-         (i32.const 4685)
+         (i32.const 8447)
         )
        )
        (set_local $$63
@@ -49498,7 +49403,7 @@
            (set_local $$73
             (call $_fopen
              (get_local $$72)
-             (i32.const 4787)
+             (i32.const 4776)
             )
            )
            (i32.store
@@ -49560,7 +49465,7 @@
        (set_local $$84
         (call $_strcmp
          (get_local $$83)
-         (i32.const 4862)
+         (i32.const 4851)
         )
        )
        (set_local $$85
@@ -49634,7 +49539,7 @@
          (set_local $$95
           (call $_fopen
            (get_local $$94)
-           (i32.const 4787)
+           (i32.const 4776)
           )
          )
          (i32.store
@@ -49721,7 +49626,7 @@
     )
     (drop
      (call $_printf
-      (i32.const 4843)
+      (i32.const 4832)
       (get_local $$vararg_buffer8)
      )
     )
@@ -49761,7 +49666,7 @@
      )
      (drop
       (call $_printf
-       (i32.const 4843)
+       (i32.const 4832)
        (get_local $$vararg_buffer11)
       )
      )
@@ -49801,7 +49706,7 @@
       )
       (drop
        (call $_printf
-        (i32.const 4843)
+        (i32.const 4832)
         (get_local $$vararg_buffer14)
        )
       )
@@ -49829,7 +49734,7 @@
        )
        (drop
         (call $_printf
-         (i32.const 4718)
+         (i32.const 4707)
          (get_local $$vararg_buffer17)
         )
        )
@@ -49861,12 +49766,12 @@
          (block
           (drop
            (call $_puts
-            (i32.const 4907)
+            (i32.const 4883)
            )
           )
           (drop
            (call $_puts
-            (i32.const 4960)
+            (i32.const 4936)
            )
           )
           (drop
@@ -49894,8 +49799,8 @@
         )
         (set_local $$108
          (call $_fopen
-          (i32.const 4865)
-          (i32.const 4787)
+          (i32.const 4677)
+          (i32.const 4776)
          )
         )
         (i32.store
@@ -49913,7 +49818,7 @@
          (block
           (drop
            (call $_printf
-            (i32.const 4878)
+            (i32.const 4854)
             (get_local $$vararg_buffer20)
            )
           )
@@ -49924,12 +49829,12 @@
          (block
           (drop
            (call $_puts
-            (i32.const 4907)
+            (i32.const 4883)
            )
           )
           (drop
            (call $_puts
-            (i32.const 4960)
+            (i32.const 4936)
            )
           )
           (drop
@@ -49965,7 +49870,7 @@
    (i32.const 0)
   )
  )
- (func $_find_dist (; 114 ;) (param $$0 i32) (result i32)
+ (func $_find_dist (; 113 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -50082,7 +49987,7 @@
    (get_local $$10)
   )
  )
- (func $_copy_list (; 115 ;) (param $$0 i32) (result i32)
+ (func $_copy_list (; 114 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -50302,7 +50207,7 @@
    (get_local $$24)
   )
  )
- (func $_inv_gamma (; 116 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_inv_gamma (; 115 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -50528,7 +50433,7 @@
   (drop
    (call $_fprintf
     (get_local $$19)
-    (i32.const 4997)
+    (i32.const 4973)
     (get_local $$vararg_buffer)
    )
   )
@@ -50545,7 +50450,7 @@
   (drop
    (call $_fprintf
     (get_local $$21)
-    (i32.const 5005)
+    (i32.const 4981)
     (get_local $$vararg_buffer1)
    )
   )
@@ -50592,7 +50497,7 @@
       (drop
        (call $_fprintf
         (get_local $$27)
-        (i32.const 8316)
+        (i32.const 8292)
         (get_local $$vararg_buffer3)
        )
       )
@@ -50639,7 +50544,7 @@
   (drop
    (call $_fprintf
     (get_local $$33)
-    (i32.const 7367)
+    (i32.const 7343)
     (get_local $$vararg_buffer5)
    )
   )
@@ -50705,7 +50610,7 @@
     (drop
      (call $_fprintf
       (get_local $$38)
-      (i32.const 5009)
+      (i32.const 4985)
       (get_local $$vararg_buffer7)
      )
     )
@@ -50722,7 +50627,7 @@
     (drop
      (call $_fprintf
       (get_local $$41)
-      (i32.const 5024)
+      (i32.const 5000)
       (get_local $$vararg_buffer11)
      )
     )
@@ -50739,7 +50644,7 @@
     (drop
      (call $_fprintf
       (get_local $$42)
-      (i32.const 5036)
+      (i32.const 5012)
       (get_local $$vararg_buffer13)
      )
     )
@@ -50775,7 +50680,7 @@
     (drop
      (call $_fprintf
       (get_local $$47)
-      (i32.const 7367)
+      (i32.const 7343)
       (get_local $$vararg_buffer15)
      )
     )
@@ -50828,7 +50733,7 @@
   (drop
    (call $_fprintf
     (get_local $$50)
-    (i32.const 5041)
+    (i32.const 5017)
     (get_local $$vararg_buffer17)
    )
   )
@@ -50842,7 +50747,7 @@
    (get_local $$54)
   )
  )
- (func $_build_vect (; 117 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_build_vect (; 116 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -51044,7 +50949,7 @@
   (drop
    (call $_sprintf
     (get_local $$24)
-    (i32.const 8318)
+    (i32.const 8294)
     (get_local $$vararg_buffer)
    )
   )
@@ -51190,7 +51095,7 @@
    (get_local $$49)
   )
  )
- (func $_check_zero (; 118 ;) (param $$0 i32) (result i32)
+ (func $_check_zero (; 117 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -51594,7 +51499,7 @@
    (get_local $$50)
   )
  )
- (func $_index_vect (; 119 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_index_vect (; 118 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -51762,7 +51667,7 @@
        (drop
         (call $_fprintf
          (get_local $$18)
-         (i32.const 8318)
+         (i32.const 8294)
          (get_local $$vararg_buffer2)
         )
        )
@@ -51839,7 +51744,7 @@
        (drop
         (call $_fprintf
          (get_local $$26)
-         (i32.const 8318)
+         (i32.const 8294)
          (get_local $$vararg_buffer5)
         )
        )
@@ -51872,7 +51777,7 @@
        (drop
         (call $_fprintf
          (get_local $$26)
-         (i32.const 8313)
+         (i32.const 8289)
          (get_local $$vararg_buffer8)
         )
        )
@@ -51940,7 +51845,7 @@
   (drop
    (call $_fprintf
     (get_local $$13)
-    (i32.const 5053)
+    (i32.const 5029)
     (get_local $$vararg_buffer)
    )
   )
@@ -51954,7 +51859,7 @@
    (get_local $$32)
   )
  )
- (func $_if_bounded (; 120 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (result i32)
+ (func $_if_bounded (; 119 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -52512,7 +52417,7 @@
   (drop
    (call $_fprintf
     (get_local $$66)
-    (i32.const 5060)
+    (i32.const 5036)
     (get_local $$vararg_buffer)
    )
   )
@@ -52549,7 +52454,7 @@
   (drop
    (call $_fprintf
     (get_local $$71)
-    (i32.const 5075)
+    (i32.const 5051)
     (get_local $$vararg_buffer4)
    )
   )
@@ -52608,7 +52513,7 @@
     (drop
      (call $_fprintf
       (get_local $$78)
-      (i32.const 5086)
+      (i32.const 5062)
       (get_local $$vararg_buffer6)
      )
     )
@@ -52618,7 +52523,7 @@
     (drop
      (call $_index_vect
       (get_local $$79)
-      (i32.const 5091)
+      (i32.const 5067)
      )
     )
     (set_local $$80
@@ -52629,7 +52534,7 @@
     (drop
      (call $_fprintf
       (get_local $$80)
-      (i32.const 7829)
+      (i32.const 7805)
       (get_local $$vararg_buffer8)
      )
     )
@@ -52639,7 +52544,7 @@
     (drop
      (call $_index_vect
       (get_local $$81)
-      (i32.const 5091)
+      (i32.const 5067)
      )
     )
     (set_local $$82
@@ -52650,7 +52555,7 @@
     (drop
      (call $_fprintf
       (get_local $$82)
-      (i32.const 5094)
+      (i32.const 5070)
       (get_local $$vararg_buffer10)
      )
     )
@@ -52713,7 +52618,7 @@
     (drop
      (call $_fprintf
       (get_local $$94)
-      (i32.const 7824)
+      (i32.const 7800)
       (get_local $$vararg_buffer18)
      )
     )
@@ -52741,7 +52646,7 @@
   (drop
    (call $_fprintf
     (get_local $$87)
-    (i32.const 5086)
+    (i32.const 5062)
     (get_local $$vararg_buffer12)
    )
   )
@@ -52751,7 +52656,7 @@
   (drop
    (call $_index_vect
     (get_local $$88)
-    (i32.const 5091)
+    (i32.const 5067)
    )
   )
   (set_local $$89
@@ -52762,7 +52667,7 @@
   (drop
    (call $_fprintf
     (get_local $$89)
-    (i32.const 5107)
+    (i32.const 5083)
     (get_local $$vararg_buffer14)
    )
   )
@@ -52772,7 +52677,7 @@
   (drop
    (call $_index_vect
     (get_local $$90)
-    (i32.const 5091)
+    (i32.const 5067)
    )
   )
   (set_local $$91
@@ -52783,7 +52688,7 @@
   (drop
    (call $_fprintf
     (get_local $$91)
-    (i32.const 5094)
+    (i32.const 5070)
     (get_local $$vararg_buffer16)
    )
   )
@@ -52815,7 +52720,7 @@
   (drop
    (call $_fprintf
     (get_local $$94)
-    (i32.const 7824)
+    (i32.const 7800)
     (get_local $$vararg_buffer18)
    )
   )
@@ -52829,7 +52734,7 @@
    (get_local $$95)
   )
  )
- (func $_close_while (; 121 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (result i32)
+ (func $_close_while (; 120 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -53108,7 +53013,7 @@
     (drop
      (call $_fprintf
       (get_local $$25)
-      (i32.const 5110)
+      (i32.const 5086)
       (get_local $$vararg_buffer)
      )
     )
@@ -53127,7 +53032,7 @@
     (drop
      (call $_fprintf
       (get_local $$27)
-      (i32.const 5086)
+      (i32.const 5062)
       (get_local $$vararg_buffer1)
      )
     )
@@ -53153,7 +53058,7 @@
     (drop
      (call $_fprintf
       (get_local $$31)
-      (i32.const 5107)
+      (i32.const 5083)
       (get_local $$vararg_buffer3)
      )
     )
@@ -53179,7 +53084,7 @@
     (drop
      (call $_fprintf
       (get_local $$35)
-      (i32.const 8068)
+      (i32.const 8044)
       (get_local $$vararg_buffer5)
      )
     )
@@ -53229,7 +53134,7 @@
     (drop
      (call $_fprintf
       (get_local $$42)
-      (i32.const 5115)
+      (i32.const 5091)
       (get_local $$vararg_buffer7)
      )
     )
@@ -53261,7 +53166,7 @@
   (drop
    (call $_fprintf
     (get_local $$45)
-    (i32.const 5110)
+    (i32.const 5086)
     (get_local $$vararg_buffer9)
    )
   )
@@ -53280,7 +53185,7 @@
   (drop
    (call $_fprintf
     (get_local $$47)
-    (i32.const 5086)
+    (i32.const 5062)
     (get_local $$vararg_buffer11)
    )
   )
@@ -53303,7 +53208,7 @@
   (drop
    (call $_fprintf
     (get_local $$50)
-    (i32.const 5107)
+    (i32.const 5083)
     (get_local $$vararg_buffer13)
    )
   )
@@ -53333,7 +53238,7 @@
   (drop
    (call $_fprintf
     (get_local $$53)
-    (i32.const 5120)
+    (i32.const 5096)
     (get_local $$vararg_buffer15)
    )
   )
@@ -53413,7 +53318,7 @@
     (drop
      (call $_fprintf
       (get_local $$66)
-      (i32.const 7824)
+      (i32.const 7800)
       (get_local $$vararg_buffer17)
      )
     )
@@ -53466,7 +53371,7 @@
   (drop
    (call $_fprintf
     (get_local $$71)
-    (i32.const 5133)
+    (i32.const 5109)
     (get_local $$vararg_buffer19)
    )
   )
@@ -53484,7 +53389,7 @@
    (get_local $$73)
   )
  )
- (func $_dist_lhs (; 122 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (param $$5 i32) (param $$6 i32) (param $$7 i32) (result i32)
+ (func $_dist_lhs (; 121 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (param $$5 i32) (param $$6 i32) (param $$7 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -54177,7 +54082,7 @@
     (drop
      (call $_fprintf
       (get_local $$50)
-      (i32.const 5060)
+      (i32.const 5036)
       (get_local $$vararg_buffer)
      )
     )
@@ -54225,7 +54130,7 @@
     (drop
      (call $_fprintf
       (get_local $$57)
-      (i32.const 5148)
+      (i32.const 5124)
       (get_local $$vararg_buffer1)
      )
     )
@@ -54242,7 +54147,7 @@
     (drop
      (call $_fprintf
       (get_local $$58)
-      (i32.const 5166)
+      (i32.const 5142)
       (get_local $$vararg_buffer3)
      )
     )
@@ -54259,7 +54164,7 @@
     (drop
      (call $_fprintf
       (get_local $$59)
-      (i32.const 5180)
+      (i32.const 5156)
       (get_local $$vararg_buffer5)
      )
     )
@@ -54293,7 +54198,7 @@
   (drop
    (call $_fprintf
     (get_local $$62)
-    (i32.const 5060)
+    (i32.const 5036)
     (get_local $$vararg_buffer7)
    )
   )
@@ -54330,7 +54235,7 @@
   (drop
    (call $_fprintf
     (get_local $$67)
-    (i32.const 5186)
+    (i32.const 5162)
     (get_local $$vararg_buffer9)
    )
   )
@@ -54347,7 +54252,7 @@
   (drop
    (call $_fprintf
     (get_local $$68)
-    (i32.const 5204)
+    (i32.const 5180)
     (get_local $$vararg_buffer11)
    )
   )
@@ -54705,7 +54610,7 @@
        (drop
         (call $_fprintf
          (get_local $$131)
-         (i32.const 5221)
+         (i32.const 5197)
          (get_local $$vararg_buffer13)
         )
        )
@@ -54717,7 +54622,7 @@
        (drop
         (call $_fprintf
          (get_local $$132)
-         (i32.const 5060)
+         (i32.const 5036)
          (get_local $$vararg_buffer15)
         )
        )
@@ -54772,7 +54677,7 @@
        (drop
         (call $_fprintf
          (get_local $$137)
-         (i32.const 5238)
+         (i32.const 5214)
          (get_local $$vararg_buffer17)
         )
        )
@@ -54784,7 +54689,7 @@
        (drop
         (call $_fprintf
          (get_local $$141)
-         (i32.const 5278)
+         (i32.const 5254)
          (get_local $$vararg_buffer19)
         )
        )
@@ -54792,7 +54697,7 @@
       (drop
        (call $_fprintf
         (get_local $$131)
-        (i32.const 5294)
+        (i32.const 5270)
         (get_local $$vararg_buffer21)
        )
       )
@@ -54833,7 +54738,7 @@
        (drop
         (call $_fprintf
          (get_local $$147)
-         (i32.const 5313)
+         (i32.const 5289)
          (get_local $$vararg_buffer23)
         )
        )
@@ -54845,7 +54750,7 @@
        (drop
         (call $_fprintf
          (get_local $$148)
-         (i32.const 5060)
+         (i32.const 5036)
          (get_local $$vararg_buffer25)
         )
        )
@@ -54900,7 +54805,7 @@
        (drop
         (call $_fprintf
          (get_local $$153)
-         (i32.const 5238)
+         (i32.const 5214)
          (get_local $$vararg_buffer27)
         )
        )
@@ -54912,7 +54817,7 @@
        (drop
         (call $_fprintf
          (get_local $$157)
-         (i32.const 5278)
+         (i32.const 5254)
          (get_local $$vararg_buffer30)
         )
        )
@@ -54920,7 +54825,7 @@
       (drop
        (call $_fprintf
         (get_local $$147)
-        (i32.const 5330)
+        (i32.const 5306)
         (get_local $$vararg_buffer32)
        )
       )
@@ -54961,7 +54866,7 @@
        (drop
         (call $_fprintf
          (get_local $$163)
-         (i32.const 5349)
+         (i32.const 5325)
          (get_local $$vararg_buffer34)
         )
        )
@@ -54973,7 +54878,7 @@
        (drop
         (call $_fprintf
          (get_local $$164)
-         (i32.const 5060)
+         (i32.const 5036)
          (get_local $$vararg_buffer36)
         )
        )
@@ -55028,7 +54933,7 @@
        (drop
         (call $_fprintf
          (get_local $$169)
-         (i32.const 5238)
+         (i32.const 5214)
          (get_local $$vararg_buffer38)
         )
        )
@@ -55040,7 +54945,7 @@
        (drop
         (call $_fprintf
          (get_local $$173)
-         (i32.const 5278)
+         (i32.const 5254)
          (get_local $$vararg_buffer41)
         )
        )
@@ -55048,7 +54953,7 @@
       (drop
        (call $_fprintf
         (get_local $$163)
-        (i32.const 5366)
+        (i32.const 5342)
         (get_local $$vararg_buffer43)
        )
       )
@@ -55089,7 +54994,7 @@
        (drop
         (call $_fprintf
          (get_local $$179)
-         (i32.const 5385)
+         (i32.const 5361)
          (get_local $$vararg_buffer45)
         )
        )
@@ -55101,7 +55006,7 @@
        (drop
         (call $_fprintf
          (get_local $$180)
-         (i32.const 5060)
+         (i32.const 5036)
          (get_local $$vararg_buffer47)
         )
        )
@@ -55156,7 +55061,7 @@
        (drop
         (call $_fprintf
          (get_local $$185)
-         (i32.const 5238)
+         (i32.const 5214)
          (get_local $$vararg_buffer49)
         )
        )
@@ -55168,7 +55073,7 @@
        (drop
         (call $_fprintf
          (get_local $$189)
-         (i32.const 5278)
+         (i32.const 5254)
          (get_local $$vararg_buffer52)
         )
        )
@@ -55178,7 +55083,7 @@
        (drop
         (call $_fprintf
          (get_local $$179)
-         (i32.const 5402)
+         (i32.const 5378)
          (get_local $$vararg_buffer54)
         )
        )
@@ -55198,7 +55103,7 @@
    (call $_vect_assign
     (get_local $$190)
     (get_local $$191)
-    (i32.const 7769)
+    (i32.const 7745)
    )
   )
   (set_local $$192
@@ -55211,7 +55116,7 @@
    (call $_vect_assign
     (get_local $$192)
     (get_local $$193)
-    (i32.const 7769)
+    (i32.const 7745)
    )
   )
   (set_local $$194
@@ -55240,7 +55145,7 @@
    (call $_vect_assign
     (get_local $$197)
     (get_local $$198)
-    (i32.const 7769)
+    (i32.const 7745)
    )
   )
   (set_local $$199
@@ -55278,7 +55183,7 @@
   (drop
    (call $_fprintf
     (get_local $$201)
-    (i32.const 5421)
+    (i32.const 5397)
     (get_local $$vararg_buffer56)
    )
   )
@@ -55290,7 +55195,7 @@
   (drop
    (call $_fprintf
     (get_local $$202)
-    (i32.const 5060)
+    (i32.const 5036)
     (get_local $$vararg_buffer58)
    )
   )
@@ -55327,7 +55232,7 @@
   (drop
    (call $_fprintf
     (get_local $$207)
-    (i32.const 5438)
+    (i32.const 5414)
     (get_local $$vararg_buffer60)
    )
   )
@@ -55339,7 +55244,7 @@
   (drop
    (call $_fprintf
     (get_local $$208)
-    (i32.const 5278)
+    (i32.const 5254)
     (get_local $$vararg_buffer62)
    )
   )
@@ -55351,7 +55256,7 @@
   (drop
    (call $_fprintf
     (get_local $$209)
-    (i32.const 5472)
+    (i32.const 5448)
     (get_local $$vararg_buffer64)
    )
   )
@@ -55363,7 +55268,7 @@
   (drop
    (call $_fprintf
     (get_local $$210)
-    (i32.const 5060)
+    (i32.const 5036)
     (get_local $$vararg_buffer66)
    )
   )
@@ -55400,7 +55305,7 @@
   (drop
    (call $_fprintf
     (get_local $$215)
-    (i32.const 5489)
+    (i32.const 5465)
     (get_local $$vararg_buffer68)
    )
   )
@@ -55412,7 +55317,7 @@
   (drop
    (call $_fprintf
     (get_local $$216)
-    (i32.const 5278)
+    (i32.const 5254)
     (get_local $$vararg_buffer70)
    )
   )
@@ -55424,7 +55329,7 @@
   (drop
    (call $_fprintf
     (get_local $$217)
-    (i32.const 5523)
+    (i32.const 5499)
     (get_local $$vararg_buffer72)
    )
   )
@@ -55436,7 +55341,7 @@
   (drop
    (call $_fprintf
     (get_local $$218)
-    (i32.const 5060)
+    (i32.const 5036)
     (get_local $$vararg_buffer74)
    )
   )
@@ -55473,7 +55378,7 @@
   (drop
    (call $_fprintf
     (get_local $$223)
-    (i32.const 5540)
+    (i32.const 5516)
     (get_local $$vararg_buffer76)
    )
   )
@@ -55485,7 +55390,7 @@
   (drop
    (call $_fprintf
     (get_local $$224)
-    (i32.const 5278)
+    (i32.const 5254)
     (get_local $$vararg_buffer78)
    )
   )
@@ -55499,7 +55404,7 @@
    (get_local $$225)
   )
  )
- (func $_dist_assign (; 123 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (param $$5 i32) (param $$6 i32) (result i32)
+ (func $_dist_assign (; 122 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (param $$5 i32) (param $$6 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -55815,7 +55720,7 @@
     )
     (set_local $$51
      (call $_build_vect
-      (i32.const 5574)
+      (i32.const 5550)
       (get_local $$50)
      )
     )
@@ -55849,7 +55754,7 @@
     )
     (set_local $$57
      (call $_build_vect
-      (i32.const 5578)
+      (i32.const 5554)
       (get_local $$56)
      )
     )
@@ -55883,7 +55788,7 @@
     )
     (set_local $$63
      (call $_build_vect
-      (i32.const 5582)
+      (i32.const 5558)
       (get_local $$62)
      )
     )
@@ -55906,7 +55811,7 @@
     )
     (set_local $$67
      (call $_build_vect
-      (i32.const 5586)
+      (i32.const 5562)
       (get_local $$66)
      )
     )
@@ -56072,7 +55977,7 @@
     (drop
      (call $_fprintf
       (get_local $$92)
-      (i32.const 5588)
+      (i32.const 5564)
       (get_local $$vararg_buffer)
      )
     )
@@ -56084,7 +55989,7 @@
     (drop
      (call $_fprintf
       (get_local $$93)
-      (i32.const 5611)
+      (i32.const 5587)
       (get_local $$vararg_buffer1)
      )
     )
@@ -56325,7 +56230,7 @@
    (get_local $$132)
   )
  )
- (func $_code_dist (; 124 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_code_dist (; 123 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -56934,7 +56839,7 @@
       )
       (set_local $$89
        (call $_build_vect
-        (i32.const 5636)
+        (i32.const 5612)
         (get_local $$88)
        )
       )
@@ -56968,7 +56873,7 @@
       )
       (set_local $$95
        (call $_build_vect
-        (i32.const 5639)
+        (i32.const 5615)
         (get_local $$94)
        )
       )
@@ -57002,7 +56907,7 @@
       )
       (set_local $$101
        (call $_build_vect
-        (i32.const 5642)
+        (i32.const 5618)
         (get_local $$100)
        )
       )
@@ -57036,7 +56941,7 @@
       )
       (set_local $$107
        (call $_build_vect
-        (i32.const 5645)
+        (i32.const 5621)
         (get_local $$106)
        )
       )
@@ -57093,7 +56998,7 @@
         )
         (set_local $$117
          (call $_build_vect
-          (i32.const 5647)
+          (i32.const 5623)
           (get_local $$116)
          )
         )
@@ -57289,7 +57194,7 @@
    (get_local $$150)
   )
  )
- (func $_code_global_int (; 125 ;) (param $$0 i32) (result i32)
+ (func $_code_global_int (; 124 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -57695,7 +57600,7 @@
     (drop
      (call $_fprintf
       (get_local $$56)
-      (i32.const 6017)
+      (i32.const 5993)
       (get_local $$vararg_buffer34)
      )
     )
@@ -57712,7 +57617,7 @@
     (drop
      (call $_fprintf
       (get_local $$57)
-      (i32.const 6038)
+      (i32.const 6014)
       (get_local $$vararg_buffer36)
      )
     )
@@ -57738,7 +57643,7 @@
     (drop
      (call $_fprintf
       (get_local $$58)
-      (i32.const 6065)
+      (i32.const 6041)
       (get_local $$vararg_buffer38)
      )
     )
@@ -57792,7 +57697,7 @@
         (drop
          (call $_fprintf
           (get_local $$66)
-          (i32.const 5703)
+          (i32.const 5679)
           (get_local $$vararg_buffer41)
          )
         )
@@ -57818,7 +57723,7 @@
       (drop
        (call $_fprintf
         (get_local $$67)
-        (i32.const 6092)
+        (i32.const 6068)
         (get_local $$vararg_buffer43)
        )
       )
@@ -57849,7 +57754,7 @@
         (drop
          (call $_fprintf
           (get_local $$71)
-          (i32.const 5764)
+          (i32.const 5740)
           (get_local $$vararg_buffer46)
          )
         )
@@ -57868,7 +57773,7 @@
         (drop
          (call $_fprintf
           (get_local $$72)
-          (i32.const 5777)
+          (i32.const 5753)
           (get_local $$vararg_buffer48)
          )
         )
@@ -57894,7 +57799,7 @@
       (drop
        (call $_fprintf
         (get_local $$73)
-        (i32.const 6119)
+        (i32.const 6095)
         (get_local $$vararg_buffer50)
        )
       )
@@ -57925,7 +57830,7 @@
         (drop
          (call $_fprintf
           (get_local $$77)
-          (i32.const 5764)
+          (i32.const 5740)
           (get_local $$vararg_buffer53)
          )
         )
@@ -57946,7 +57851,7 @@
     (drop
      (call $_fprintf
       (get_local $$78)
-      (i32.const 7824)
+      (i32.const 7800)
       (get_local $$vararg_buffer55)
      )
     )
@@ -57963,7 +57868,7 @@
     (drop
      (call $_fprintf
       (get_local $$79)
-      (i32.const 6148)
+      (i32.const 6124)
       (get_local $$vararg_buffer57)
      )
     )
@@ -58017,7 +57922,7 @@
         (drop
          (call $_fprintf
           (get_local $$86)
-          (i32.const 5843)
+          (i32.const 5819)
           (get_local $$vararg_buffer59)
          )
         )
@@ -58043,7 +57948,7 @@
       (drop
        (call $_fprintf
         (get_local $$87)
-        (i32.const 6158)
+        (i32.const 6134)
         (get_local $$vararg_buffer61)
        )
       )
@@ -58074,7 +57979,7 @@
         (drop
          (call $_fprintf
           (get_local $$91)
-          (i32.const 6184)
+          (i32.const 6160)
           (get_local $$vararg_buffer64)
          )
         )
@@ -58093,7 +57998,7 @@
         (drop
          (call $_fprintf
           (get_local $$92)
-          (i32.const 5843)
+          (i32.const 5819)
           (get_local $$vararg_buffer66)
          )
         )
@@ -58119,7 +58024,7 @@
       (drop
        (call $_fprintf
         (get_local $$93)
-        (i32.const 6210)
+        (i32.const 6186)
         (get_local $$vararg_buffer68)
        )
       )
@@ -58150,7 +58055,7 @@
         (drop
          (call $_fprintf
           (get_local $$97)
-          (i32.const 6184)
+          (i32.const 6160)
           (get_local $$vararg_buffer71)
          )
         )
@@ -58171,7 +58076,7 @@
     (drop
      (call $_fprintf
       (get_local $$98)
-      (i32.const 7824)
+      (i32.const 7800)
       (get_local $$vararg_buffer73)
      )
     )
@@ -58183,7 +58088,7 @@
     (drop
      (call $_fprintf
       (get_local $$99)
-      (i32.const 8046)
+      (i32.const 8022)
       (get_local $$vararg_buffer75)
      )
     )
@@ -58226,7 +58131,7 @@
   (drop
    (call $_fprintf
     (get_local $$8)
-    (i32.const 5649)
+    (i32.const 5625)
     (get_local $$vararg_buffer)
    )
   )
@@ -58286,7 +58191,7 @@
       (drop
        (call $_fprintf
         (get_local $$17)
-        (i32.const 5703)
+        (i32.const 5679)
         (get_local $$vararg_buffer1)
        )
       )
@@ -58318,7 +58223,7 @@
     (drop
      (call $_fprintf
       (get_local $$19)
-      (i32.const 5732)
+      (i32.const 5708)
       (get_local $$vararg_buffer3)
      )
     )
@@ -58355,7 +58260,7 @@
       (drop
        (call $_fprintf
         (get_local $$24)
-        (i32.const 5764)
+        (i32.const 5740)
         (get_local $$vararg_buffer6)
        )
       )
@@ -58385,7 +58290,7 @@
       (drop
        (call $_fprintf
         (get_local $$26)
-        (i32.const 5777)
+        (i32.const 5753)
         (get_local $$vararg_buffer8)
        )
       )
@@ -58417,7 +58322,7 @@
     (drop
      (call $_fprintf
       (get_local $$28)
-      (i32.const 5809)
+      (i32.const 5785)
       (get_local $$vararg_buffer10)
      )
     )
@@ -58454,7 +58359,7 @@
       (drop
        (call $_fprintf
         (get_local $$33)
-        (i32.const 5764)
+        (i32.const 5740)
         (get_local $$vararg_buffer13)
        )
       )
@@ -58481,7 +58386,7 @@
   (drop
    (call $_fprintf
     (get_local $$35)
-    (i32.const 7824)
+    (i32.const 7800)
     (get_local $$vararg_buffer15)
    )
   )
@@ -58535,7 +58440,7 @@
       (drop
        (call $_fprintf
         (get_local $$42)
-        (i32.const 5843)
+        (i32.const 5819)
         (get_local $$vararg_buffer17)
        )
       )
@@ -58561,7 +58466,7 @@
     (drop
      (call $_fprintf
       (get_local $$43)
-      (i32.const 5858)
+      (i32.const 5834)
       (get_local $$vararg_buffer19)
      )
     )
@@ -58594,7 +58499,7 @@
       (drop
        (call $_fprintf
         (get_local $$99)
-        (i32.const 8046)
+        (i32.const 8022)
         (get_local $$vararg_buffer75)
        )
       )
@@ -58617,7 +58522,7 @@
     (drop
      (call $_fprintf
       (get_local $$47)
-      (i32.const 5888)
+      (i32.const 5864)
       (get_local $$vararg_buffer22)
      )
     )
@@ -58629,7 +58534,7 @@
     (drop
      (call $_fprintf
       (get_local $$99)
-      (i32.const 8046)
+      (i32.const 8022)
       (get_local $$vararg_buffer75)
      )
     )
@@ -58655,7 +58560,7 @@
       (drop
        (call $_fprintf
         (get_local $$48)
-        (i32.const 5843)
+        (i32.const 5819)
         (get_local $$vararg_buffer24)
        )
       )
@@ -58681,7 +58586,7 @@
     (drop
      (call $_fprintf
       (get_local $$49)
-      (i32.const 5915)
+      (i32.const 5891)
       (get_local $$vararg_buffer26)
      )
     )
@@ -58705,7 +58610,7 @@
     (drop
      (call $_fprintf
       (get_local $$51)
-      (i32.const 5955)
+      (i32.const 5931)
       (get_local $$vararg_buffer29)
      )
     )
@@ -58733,7 +58638,7 @@
       (drop
        (call $_fprintf
         (get_local $$99)
-        (i32.const 8046)
+        (i32.const 8022)
         (get_local $$vararg_buffer75)
        )
       )
@@ -58761,7 +58666,7 @@
     (drop
      (call $_fprintf
       (get_local $$55)
-      (i32.const 5987)
+      (i32.const 5963)
       (get_local $$vararg_buffer32)
      )
     )
@@ -58773,7 +58678,7 @@
     (drop
      (call $_fprintf
       (get_local $$99)
-      (i32.const 8046)
+      (i32.const 8022)
       (get_local $$vararg_buffer75)
      )
     )
@@ -58789,7 +58694,7 @@
    )
   )
  )
- (func $_dist_array (; 126 ;) (param $$0 i32) (result i32)
+ (func $_dist_array (; 125 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -59362,7 +59267,7 @@
   )
   (set_local $$14
    (call $_build_vect
-    (i32.const 5645)
+    (i32.const 5621)
     (get_local $$13)
    )
   )
@@ -59436,7 +59341,7 @@
     (drop
      (call $_fprintf
       (get_local $$159)
-      (i32.const 5005)
+      (i32.const 4981)
       (get_local $$vararg_buffer34)
      )
     )
@@ -59483,7 +59388,7 @@
         (drop
          (call $_fprintf
           (get_local $$165)
-          (i32.const 8316)
+          (i32.const 8292)
           (get_local $$vararg_buffer36)
          )
         )
@@ -59541,7 +59446,7 @@
     (drop
      (call $_fprintf
       (get_local $$173)
-      (i32.const 7367)
+      (i32.const 7343)
       (get_local $$vararg_buffer38)
      )
     )
@@ -59558,7 +59463,7 @@
     (drop
      (call $_fprintf
       (get_local $$174)
-      (i32.const 6017)
+      (i32.const 5993)
       (get_local $$vararg_buffer40)
      )
     )
@@ -59590,7 +59495,7 @@
     (drop
      (call $_fprintf
       (get_local $$177)
-      (i32.const 6235)
+      (i32.const 6211)
       (get_local $$vararg_buffer42)
      )
     )
@@ -59637,7 +59542,7 @@
         (drop
          (call $_fprintf
           (get_local $$183)
-          (i32.const 8316)
+          (i32.const 8292)
           (get_local $$vararg_buffer44)
          )
         )
@@ -59719,7 +59624,7 @@
     (drop
      (call $_fprintf
       (get_local $$195)
-      (i32.const 7367)
+      (i32.const 7343)
       (get_local $$vararg_buffer46)
      )
     )
@@ -59743,7 +59648,7 @@
     (drop
      (call $_fprintf
       (get_local $$196)
-      (i32.const 6239)
+      (i32.const 6215)
       (get_local $$vararg_buffer48)
      )
     )
@@ -59760,7 +59665,7 @@
     (drop
      (call $_fprintf
       (get_local $$198)
-      (i32.const 6273)
+      (i32.const 6249)
       (get_local $$vararg_buffer51)
      )
     )
@@ -59777,7 +59682,7 @@
     (drop
      (call $_fprintf
       (get_local $$199)
-      (i32.const 5180)
+      (i32.const 5156)
       (get_local $$vararg_buffer53)
      )
     )
@@ -59878,7 +59783,7 @@
     (drop
      (call $_my_gamma2
       (get_local $$208)
-      (i32.const 6287)
+      (i32.const 6263)
       (get_local $$209)
       (get_local $$212)
       (get_local $$217)
@@ -59966,7 +59871,7 @@
     (drop
      (call $_my_gamma2
       (get_local $$224)
-      (i32.const 6291)
+      (i32.const 6267)
       (get_local $$225)
       (get_local $$228)
       (get_local $$233)
@@ -59985,7 +59890,7 @@
     (drop
      (call $_fprintf
       (get_local $$234)
-      (i32.const 6299)
+      (i32.const 6275)
       (get_local $$vararg_buffer55)
      )
     )
@@ -60014,7 +59919,7 @@
     (drop
      (call $_fprintf
       (get_local $$235)
-      (i32.const 6475)
+      (i32.const 6451)
       (get_local $$vararg_buffer57)
      )
     )
@@ -60045,7 +59950,7 @@
       (get_local $$238)
       (get_local $$239)
       (get_local $$242)
-      (i32.const 6384)
+      (i32.const 6360)
      )
     )
     (set_local $$243
@@ -60091,7 +59996,7 @@
     (drop
      (call $_fprintf
       (get_local $$247)
-      (i32.const 6148)
+      (i32.const 6124)
       (get_local $$vararg_buffer60)
      )
     )
@@ -60172,7 +60077,7 @@
       (drop
        (call $_fprintf
         (get_local $$257)
-        (i32.const 6514)
+        (i32.const 6490)
         (get_local $$vararg_buffer62)
        )
       )
@@ -60194,9 +60099,9 @@
       )
       (drop
        (call $_inv_gamma
-        (i32.const 6425)
+        (i32.const 6401)
         (get_local $$262)
-        (i32.const 5645)
+        (i32.const 5621)
        )
       )
       (set_local $$263
@@ -60263,7 +60168,7 @@
           (get_local $$268)
           (get_local $$271)
           (get_local $$274)
-          (i32.const 6430)
+          (i32.const 6406)
           (i32.const 2)
          )
         )
@@ -60285,7 +60190,7 @@
           (get_local $$268)
           (i32.const 0)
           (get_local $$276)
-          (i32.const 6430)
+          (i32.const 6406)
           (i32.const 2)
          )
         )
@@ -60316,7 +60221,7 @@
       (drop
        (call $_fprintf
         (get_local $$277)
-        (i32.const 6545)
+        (i32.const 6521)
         (get_local $$vararg_buffer65)
        )
       )
@@ -60350,7 +60255,7 @@
     (drop
      (call $_fprintf
       (get_local $$282)
-      (i32.const 7824)
+      (i32.const 7800)
       (get_local $$vararg_buffer68)
      )
     )
@@ -60384,7 +60289,7 @@
   (drop
    (call $_fprintf
     (get_local $$25)
-    (i32.const 5005)
+    (i32.const 4981)
     (get_local $$vararg_buffer)
    )
   )
@@ -60431,7 +60336,7 @@
       (drop
        (call $_fprintf
         (get_local $$31)
-        (i32.const 8316)
+        (i32.const 8292)
         (get_local $$vararg_buffer1)
        )
       )
@@ -60489,7 +60394,7 @@
   (drop
    (call $_fprintf
     (get_local $$39)
-    (i32.const 7367)
+    (i32.const 7343)
     (get_local $$vararg_buffer3)
    )
   )
@@ -60512,7 +60417,7 @@
   (drop
    (call $_fprintf
     (get_local $$41)
-    (i32.const 6235)
+    (i32.const 6211)
     (get_local $$vararg_buffer5)
    )
   )
@@ -60559,7 +60464,7 @@
       (drop
        (call $_fprintf
         (get_local $$47)
-        (i32.const 8316)
+        (i32.const 8292)
         (get_local $$vararg_buffer7)
        )
       )
@@ -60641,7 +60546,7 @@
   (drop
    (call $_fprintf
     (get_local $$59)
-    (i32.const 7367)
+    (i32.const 7343)
     (get_local $$vararg_buffer9)
    )
   )
@@ -60671,7 +60576,7 @@
   (drop
    (call $_fprintf
     (get_local $$61)
-    (i32.const 6239)
+    (i32.const 6215)
     (get_local $$vararg_buffer11)
    )
   )
@@ -60694,7 +60599,7 @@
   (drop
    (call $_fprintf
     (get_local $$64)
-    (i32.const 6273)
+    (i32.const 6249)
     (get_local $$vararg_buffer13)
    )
   )
@@ -60717,7 +60622,7 @@
   (drop
    (call $_fprintf
     (get_local $$66)
-    (i32.const 5180)
+    (i32.const 5156)
     (get_local $$vararg_buffer15)
    )
   )
@@ -60818,7 +60723,7 @@
   (drop
    (call $_my_gamma2
     (get_local $$75)
-    (i32.const 6287)
+    (i32.const 6263)
     (get_local $$76)
     (get_local $$79)
     (get_local $$84)
@@ -60906,7 +60811,7 @@
   (drop
    (call $_my_gamma2
     (get_local $$91)
-    (i32.const 6291)
+    (i32.const 6267)
     (get_local $$92)
     (get_local $$95)
     (get_local $$100)
@@ -60931,7 +60836,7 @@
   (drop
    (call $_fprintf
     (get_local $$102)
-    (i32.const 6299)
+    (i32.const 6275)
     (get_local $$vararg_buffer17)
    )
   )
@@ -60966,7 +60871,7 @@
   (drop
    (call $_fprintf
     (get_local $$104)
-    (i32.const 6340)
+    (i32.const 6316)
     (get_local $$vararg_buffer19)
    )
   )
@@ -60997,7 +60902,7 @@
     (get_local $$107)
     (get_local $$108)
     (get_local $$111)
-    (i32.const 6384)
+    (i32.const 6360)
    )
   )
   (set_local $$112
@@ -61028,7 +60933,7 @@
   (drop
    (call $_fprintf
     (get_local $$114)
-    (i32.const 5005)
+    (i32.const 4981)
     (get_local $$vararg_buffer22)
    )
   )
@@ -61075,7 +60980,7 @@
       (drop
        (call $_fprintf
         (get_local $$120)
-        (i32.const 8316)
+        (i32.const 8292)
         (get_local $$vararg_buffer24)
        )
       )
@@ -61133,7 +61038,7 @@
   (drop
    (call $_fprintf
     (get_local $$128)
-    (i32.const 7367)
+    (i32.const 7343)
     (get_local $$vararg_buffer26)
    )
   )
@@ -61199,7 +61104,7 @@
     (drop
      (call $_fprintf
       (get_local $$136)
-      (i32.const 6391)
+      (i32.const 6367)
       (get_local $$vararg_buffer28)
      )
     )
@@ -61230,9 +61135,9 @@
   )
   (drop
    (call $_inv_gamma
-    (i32.const 6425)
+    (i32.const 6401)
     (get_local $$141)
-    (i32.const 5645)
+    (i32.const 5621)
    )
   )
   (set_local $$142
@@ -61299,7 +61204,7 @@
       (get_local $$147)
       (get_local $$150)
       (get_local $$153)
-      (i32.const 6430)
+      (i32.const 6406)
       (i32.const 2)
      )
     )
@@ -61321,7 +61226,7 @@
       (get_local $$147)
       (i32.const 0)
       (get_local $$155)
-      (i32.const 6430)
+      (i32.const 6406)
       (i32.const 2)
      )
     )
@@ -61352,7 +61257,7 @@
   (drop
    (call $_fprintf
     (get_local $$156)
-    (i32.const 6433)
+    (i32.const 6409)
     (get_local $$vararg_buffer31)
    )
   )
@@ -61366,7 +61271,7 @@
    (get_local $$283)
   )
  )
- (func $_init_dist_arrays (; 127 ;) (param $$0 i32) (result i32)
+ (func $_init_dist_arrays (; 126 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -61598,7 +61503,7 @@
     (drop
      (call $_fprintf
       (get_local $$9)
-      (i32.const 6584)
+      (i32.const 6560)
       (get_local $$vararg_buffer)
      )
     )
@@ -61612,7 +61517,7 @@
   (drop
    (call $_fprintf
     (get_local $$10)
-    (i32.const 6625)
+    (i32.const 6601)
     (get_local $$vararg_buffer1)
    )
   )
@@ -61725,7 +61630,7 @@
         (drop
          (call $_fprintf
           (get_local $$25)
-          (i32.const 6665)
+          (i32.const 6641)
           (get_local $$vararg_buffer3)
          )
         )
@@ -61760,7 +61665,7 @@
         (drop
          (call $_fprintf
           (get_local $$30)
-          (i32.const 6680)
+          (i32.const 6656)
           (get_local $$vararg_buffer5)
          )
         )
@@ -61791,7 +61696,7 @@
       (drop
        (call $_fprintf
         (get_local $$31)
-        (i32.const 6698)
+        (i32.const 6674)
         (get_local $$vararg_buffer7)
        )
       )
@@ -61944,7 +61849,7 @@
              (drop
               (call $_fprintf
                (get_local $$58)
-               (i32.const 8316)
+               (i32.const 8292)
                (get_local $$vararg_buffer10)
               )
              )
@@ -62004,7 +61909,7 @@
          (drop
           (call $_fprintf
            (get_local $$66)
-           (i32.const 8321)
+           (i32.const 8297)
            (get_local $$vararg_buffer12)
           )
          )
@@ -62019,7 +61924,7 @@
       (drop
        (call $_fprintf
         (get_local $$67)
-        (i32.const 6721)
+        (i32.const 6697)
         (get_local $$vararg_buffer14)
        )
       )
@@ -62097,7 +62002,7 @@
   (drop
    (call $_fprintf
     (get_local $$78)
-    (i32.const 8046)
+    (i32.const 8022)
     (get_local $$vararg_buffer16)
    )
   )
@@ -62109,7 +62014,7 @@
   (drop
    (call $_fprintf
     (get_local $$79)
-    (i32.const 6740)
+    (i32.const 6716)
     (get_local $$vararg_buffer18)
    )
   )
@@ -62123,7 +62028,7 @@
    (get_local $$80)
   )
  )
- (func $_allocate_utils (; 128 ;) (result i32)
+ (func $_allocate_utils (; 127 ;) (result i32)
   (local $$0 i32)
   (local $$1 i32)
   (local $$10 i32)
@@ -62296,7 +62201,7 @@
   (drop
    (call $_fprintf
     (get_local $$2)
-    (i32.const 6763)
+    (i32.const 6739)
     (get_local $$vararg_buffer)
    )
   )
@@ -62308,7 +62213,7 @@
   (drop
    (call $_fprintf
     (get_local $$3)
-    (i32.const 6796)
+    (i32.const 6772)
     (get_local $$vararg_buffer1)
    )
   )
@@ -62329,7 +62234,7 @@
   (drop
    (call $_fprintf
     (get_local $$4)
-    (i32.const 6823)
+    (i32.const 6799)
     (get_local $$vararg_buffer3)
    )
   )
@@ -62350,7 +62255,7 @@
   (drop
    (call $_fprintf
     (get_local $$6)
-    (i32.const 6837)
+    (i32.const 6813)
     (get_local $$vararg_buffer5)
    )
   )
@@ -62371,7 +62276,7 @@
   (drop
    (call $_fprintf
     (get_local $$8)
-    (i32.const 6851)
+    (i32.const 6827)
     (get_local $$vararg_buffer8)
    )
   )
@@ -62392,7 +62297,7 @@
   (drop
    (call $_fprintf
     (get_local $$10)
-    (i32.const 6865)
+    (i32.const 6841)
     (get_local $$vararg_buffer11)
    )
   )
@@ -62413,7 +62318,7 @@
   (drop
    (call $_fprintf
     (get_local $$12)
-    (i32.const 6881)
+    (i32.const 6857)
     (get_local $$vararg_buffer14)
    )
   )
@@ -62434,7 +62339,7 @@
   (drop
    (call $_fprintf
     (get_local $$14)
-    (i32.const 6896)
+    (i32.const 6872)
     (get_local $$vararg_buffer17)
    )
   )
@@ -62455,7 +62360,7 @@
   (drop
    (call $_fprintf
     (get_local $$16)
-    (i32.const 6911)
+    (i32.const 6887)
     (get_local $$vararg_buffer20)
    )
   )
@@ -62476,7 +62381,7 @@
   (drop
    (call $_fprintf
     (get_local $$18)
-    (i32.const 6926)
+    (i32.const 6902)
     (get_local $$vararg_buffer23)
    )
   )
@@ -62497,7 +62402,7 @@
   (drop
    (call $_fprintf
     (get_local $$20)
-    (i32.const 6942)
+    (i32.const 6918)
     (get_local $$vararg_buffer26)
    )
   )
@@ -62518,7 +62423,7 @@
   (drop
    (call $_fprintf
     (get_local $$22)
-    (i32.const 6958)
+    (i32.const 6934)
     (get_local $$vararg_buffer29)
    )
   )
@@ -62600,7 +62505,7 @@
     (drop
      (call $_fprintf
       (get_local $$26)
-      (i32.const 6974)
+      (i32.const 6950)
       (get_local $$vararg_buffer32)
      )
     )
@@ -62663,7 +62568,7 @@
   (drop
    (call $_fprintf
     (get_local $$35)
-    (i32.const 7015)
+    (i32.const 6991)
     (get_local $$vararg_buffer38)
    )
   )
@@ -62675,7 +62580,7 @@
   (drop
    (call $_fprintf
     (get_local $$37)
-    (i32.const 7039)
+    (i32.const 7015)
     (get_local $$vararg_buffer41)
    )
   )
@@ -62689,7 +62594,7 @@
    (get_local $$38)
   )
  )
- (func $_dist_init (; 129 ;) (result i32)
+ (func $_dist_init (; 128 ;) (result i32)
   (local $$0 i32)
   (local $$1 i32)
   (local $$2 i32)
@@ -62735,7 +62640,7 @@
   (drop
    (call $_sprintf
     (get_local $$2)
-    (i32.const 7060)
+    (i32.const 7036)
     (get_local $$vararg_buffer)
    )
   )
@@ -62796,7 +62701,7 @@
    (get_local $$5)
   )
  )
- (func $_reduce_extended (; 130 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (result i32)
+ (func $_reduce_extended (; 129 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$5 i32)
@@ -62849,7 +62754,7 @@
    (get_local $$11)
   )
  )
- (func $_code_extended (; 131 ;) (param $$0 i32) (result i32)
+ (func $_code_extended (; 130 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$3 i32)
@@ -62886,7 +62791,7 @@
    (get_local $$3)
   )
  )
- (func $_mark_extended (; 132 ;) (param $$0 i32) (result i32)
+ (func $_mark_extended (; 131 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$3 i32)
@@ -62923,7 +62828,7 @@
    (get_local $$3)
   )
  )
- (func $_is_recursive (; 133 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_is_recursive (; 132 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -63304,7 +63209,7 @@
    (get_local $$53)
   )
  )
- (func $_reverse_list (; 134 ;) (param $$0 i32) (result i32)
+ (func $_reverse_list (; 133 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -63494,7 +63399,7 @@
    (get_local $$25)
   )
  )
- (func $_add_allocation (; 135 ;) (param $$0 i32) (result i32)
+ (func $_add_allocation (; 134 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -63603,7 +63508,7 @@
    (get_local $$14)
   )
  )
- (func $_get_tmp_mem (; 136 ;) (param $$0 i32) (result i32)
+ (func $_get_tmp_mem (; 135 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$3 i32)
@@ -63645,7 +63550,7 @@
    (get_local $$3)
   )
  )
- (func $_copy_expr (; 137 ;) (param $$0 i32) (result i32)
+ (func $_copy_expr (; 136 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$3 i32)
@@ -63789,7 +63694,7 @@
    (get_local $$6)
   )
  )
- (func $_get_expr_mem (; 138 ;) (param $$0 i32) (result i32)
+ (func $_get_expr_mem (; 137 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -63865,7 +63770,7 @@
    (block
     (drop
      (call $_puts
-      (i32.const 7067)
+      (i32.const 7043)
      )
     )
     (call $_exit
@@ -63904,7 +63809,7 @@
    (block
     (drop
      (call $_puts
-      (i32.const 7124)
+      (i32.const 7100)
      )
     )
     (call $_exit
@@ -64118,7 +64023,7 @@
    (i32.const 0)
   )
  )
- (func $_get_mem (; 139 ;) (param $$0 i32) (result i32)
+ (func $_get_mem (; 138 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$2 i32)
@@ -64165,7 +64070,7 @@
    (get_local $$5)
    (block
     (call $_error
-     (i32.const 7150)
+     (i32.const 7126)
     )
     (set_local $$1
      (i32.const 0)
@@ -64192,7 +64097,7 @@
     (if
      (get_local $$8)
      (call $_fatal
-      (i32.const 7182)
+      (i32.const 7158)
      )
     )
     (set_local $$9
@@ -64213,7 +64118,7 @@
    (get_local $$10)
   )
  )
- (func $_error (; 140 ;) (param $$0 i32)
+ (func $_error (; 139 ;) (param $$0 i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$vararg_buffer i32)
@@ -64252,7 +64157,7 @@
   )
   (drop
    (call $_printf
-    (i32.const 7208)
+    (i32.const 7184)
     (get_local $$vararg_buffer)
    )
   )
@@ -64261,7 +64166,7 @@
   )
   (return)
  )
- (func $_fatal (; 141 ;) (param $$0 i32)
+ (func $_fatal (; 140 ;) (param $$0 i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$vararg_buffer i32)
@@ -64300,7 +64205,7 @@
   )
   (drop
    (call $_printf
-    (i32.const 7197)
+    (i32.const 7173)
     (get_local $$vararg_buffer)
    )
   )
@@ -64308,7 +64213,7 @@
    (i32.const 1)
   )
  )
- (func $_addto_reduced (; 142 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_addto_reduced (; 141 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -64754,7 +64659,7 @@
    (get_local $$65)
   )
  )
- (func $_empty (; 143 ;) (param $$0 i32) (result i32)
+ (func $_empty (; 142 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -65022,7 +64927,7 @@
        (drop
         (call $_sprintf
          (get_local $$5)
-         (i32.const 8313)
+         (i32.const 8289)
          (get_local $$vararg_buffer)
         )
        )
@@ -65546,7 +65451,7 @@
    (get_local $$108)
   )
  )
- (func $_dup_expr (; 144 ;) (param $$0 i32) (result i32)
+ (func $_dup_expr (; 143 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -65804,7 +65709,7 @@
    )
   )
  )
- (func $_block_rav (; 145 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (param $$5 i32) (result i32)
+ (func $_block_rav (; 144 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (param $$5 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -66943,7 +66848,7 @@
    )
   )
   (call $_fatal
-   (i32.const 7234)
+   (i32.const 7210)
   )
   (set_local $$191
    (get_local $$6)
@@ -66955,7 +66860,7 @@
    (get_local $$191)
   )
  )
- (func $_red_rav (; 146 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_red_rav (; 145 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -68551,7 +68456,7 @@
                          (drop
                           (call $_sprintf
                            (get_local $$9)
-                           (i32.const 8168)
+                           (i32.const 8144)
                            (get_local $$vararg_buffer)
                           )
                          )
@@ -68579,7 +68484,7 @@
                            (drop
                             (call $_sprintf
                              (get_local $$9)
-                             (i32.const 8168)
+                             (i32.const 8144)
                              (get_local $$vararg_buffer1)
                             )
                            )
@@ -68609,7 +68514,7 @@
                            (drop
                             (call $_sprintf
                              (get_local $$9)
-                             (i32.const 8171)
+                             (i32.const 8147)
                              (get_local $$vararg_buffer4)
                             )
                            )
@@ -68658,7 +68563,7 @@
                     (block
                      (drop
                       (call $_puts
-                       (i32.const 8177)
+                       (i32.const 8153)
                       )
                      )
                      (call $_exit
@@ -69307,7 +69212,7 @@
     (block
      (drop
       (call $_puts
-       (i32.const 8191)
+       (i32.const 8167)
       )
      )
      (call $_exit
@@ -69332,7 +69237,7 @@
    (get_local $$334)
   )
  )
- (func $_s_op (; 147 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_s_op (; 146 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -69440,7 +69345,7 @@
    (get_local $$17)
   )
  )
- (func $_force_divide (; 148 ;) (param $$0 i32) (result i32)
+ (func $_force_divide (; 147 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -69891,7 +69796,7 @@
    (get_local $$63)
   )
  )
- (func $_s_vect (; 149 ;) (param $$0 i32) (result i32)
+ (func $_s_vect (; 148 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -70018,7 +69923,7 @@
    (get_local $$16)
   )
  )
- (func $_vect_cat (; 150 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_vect_cat (; 149 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -70378,7 +70283,7 @@
    )
   )
  )
- (func $_get_vect (; 151 ;) (result i32)
+ (func $_get_vect (; 150 ;) (result i32)
   (local $$0 i32)
   (local $$1 i32)
   (local $$10 i32)
@@ -70455,7 +70360,7 @@
    (block
     (drop
      (call $_puts
-      (i32.const 8146)
+      (i32.const 8122)
      )
     )
     (call $_exit
@@ -70604,7 +70509,7 @@
    (i32.const 0)
   )
  )
- (func $_assign (; 152 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (result i32)
+ (func $_assign (; 151 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -71530,7 +71435,7 @@
                            (drop
                             (call $_fprintf
                              (get_local $$41)
-                             (i32.const 8046)
+                             (i32.const 8022)
                              (get_local $$vararg_buffer)
                             )
                            )
@@ -71649,7 +71554,7 @@
                         )
                         (i32.store
                          (get_local $$56)
-                         (i32.const 7739)
+                         (i32.const 7715)
                         )
                         (set_local $$57
                          (get_local $$12)
@@ -72596,7 +72501,7 @@
              )
              (i32.store
               (get_local $$428)
-              (i32.const 7739)
+              (i32.const 7715)
              )
              (set_local $$429
               (get_local $$12)
@@ -73204,7 +73109,7 @@
     )
     (i32.store
      (get_local $$60)
-     (i32.const 7742)
+     (i32.const 7718)
     )
     (set_local $$61
      (get_local $$12)
@@ -73242,7 +73147,7 @@
      )
      (i32.store
       (get_local $$432)
-      (i32.const 7742)
+      (i32.const 7718)
      )
      (set_local $$433
       (get_local $$12)
@@ -73282,7 +73187,7 @@
     )
     (i32.store
      (get_local $$64)
-     (i32.const 7745)
+     (i32.const 7721)
     )
     (set_local $$65
      (get_local $$12)
@@ -73320,7 +73225,7 @@
      )
      (i32.store
       (get_local $$436)
-      (i32.const 7745)
+      (i32.const 7721)
      )
      (set_local $$437
       (get_local $$12)
@@ -73360,7 +73265,7 @@
     )
     (i32.store
      (get_local $$68)
-     (i32.const 7748)
+     (i32.const 7724)
     )
     (set_local $$69
      (get_local $$12)
@@ -73967,7 +73872,7 @@
        (drop
         (call $_sprintf
          (get_local $$164)
-         (i32.const 7751)
+         (i32.const 7727)
          (get_local $$vararg_buffer1)
         )
        )
@@ -74346,7 +74251,7 @@
         (i32.const 0)
         (get_local $$225)
         (get_local $$226)
-        (i32.const 7769)
+        (i32.const 7745)
        )
       )
       (set_local $$227
@@ -74360,7 +74265,7 @@
         (get_local $$227)
         (get_local $$228)
         (i32.const 1)
-        (i32.const 7769)
+        (i32.const 7745)
         (i32.const 0)
        )
       )
@@ -74617,7 +74522,7 @@
      )
      (i32.store
       (get_local $$440)
-      (i32.const 7748)
+      (i32.const 7724)
      )
      (set_local $$441
       (get_local $$12)
@@ -75327,7 +75232,7 @@
        (drop
         (call $_sprintf
          (get_local $$542)
-         (i32.const 7751)
+         (i32.const 7727)
          (get_local $$vararg_buffer3)
         )
        )
@@ -75442,7 +75347,7 @@
        (i32.const 0)
        (get_local $$559)
        (get_local $$560)
-       (i32.const 7769)
+       (i32.const 7745)
       )
      )
      (set_local $$561
@@ -75456,7 +75361,7 @@
        (get_local $$561)
        (get_local $$562)
        (i32.const 1)
-       (i32.const 7769)
+       (i32.const 7745)
        (i32.const 0)
       )
      )
@@ -75599,7 +75504,7 @@
    (get_local $$682)
   )
  )
- (func $_vect_drop (; 153 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_vect_drop (; 152 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -75942,7 +75847,7 @@
    (get_local $$42)
   )
  )
- (func $_make_s_expr (; 154 ;) (param $$0 i32) (result i32)
+ (func $_make_s_expr (; 153 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 f64)
@@ -77449,7 +77354,7 @@
    (get_local $$193)
   )
  )
- (func $_propagate_drop (; 155 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_propagate_drop (; 154 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -79042,7 +78947,7 @@
    (get_local $$202)
   )
  )
- (func $_update_locs (; 156 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_update_locs (; 155 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -79876,7 +79781,7 @@
    (get_local $$108)
   )
  )
- (func $_simplify_vect (; 157 ;) (param $$0 i32) (result i32)
+ (func $_simplify_vect (; 156 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -82293,7 +82198,7 @@
      )
     )
     (call $_fatal
-     (i32.const 7271)
+     (i32.const 7247)
     )
    )
   )
@@ -82313,7 +82218,7 @@
    (get_local $$329)
   )
  )
- (func $_static_value (; 158 ;) (param $$0 i32) (result i32)
+ (func $_static_value (; 157 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -83435,7 +83340,7 @@
    (get_local $$150)
   )
  )
- (func $_const_op (; 159 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (result i32)
+ (func $_const_op (; 158 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -88510,7 +88415,7 @@
      )
     )
     (call $_fatal
-     (i32.const 7315)
+     (i32.const 7291)
     )
    )
   )
@@ -88530,7 +88435,7 @@
    (get_local $$746)
   )
  )
- (func $_get_ident (; 160 ;) (result i32)
+ (func $_get_ident (; 159 ;) (result i32)
   (local $$0 i32)
   (local $$1 i32)
   (local $$10 i32)
@@ -88609,7 +88514,7 @@
    (block
     (drop
      (call $_puts
-      (i32.const 7708)
+      (i32.const 7684)
      )
     )
     (call $_exit
@@ -88769,7 +88674,7 @@
    (i32.const 0)
   )
  )
- (func $_make_ident (; 161 ;) (param $$0 i32) (result i32)
+ (func $_make_ident (; 160 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -88968,7 +88873,7 @@
         (drop
          (call $_sprintf
           (get_local $$4)
-          (i32.const 7354)
+          (i32.const 7330)
           (get_local $$vararg_buffer)
          )
         )
@@ -88994,7 +88899,7 @@
       (drop
        (call $_sprintf
         (get_local $$23)
-        (i32.const 7354)
+        (i32.const 7330)
         (get_local $$vararg_buffer1)
        )
       )
@@ -89018,7 +88923,7 @@
       (drop
        (call $_fprintf
         (get_local $$25)
-        (i32.const 7363)
+        (i32.const 7339)
         (get_local $$vararg_buffer4)
        )
       )
@@ -89044,7 +88949,7 @@
       (drop
        (call $_fprintf
         (get_local $$29)
-        (i32.const 7367)
+        (i32.const 7343)
         (get_local $$vararg_buffer7)
        )
       )
@@ -89179,7 +89084,7 @@
    (get_local $$44)
   )
  )
- (func $_dotab (; 162 ;) (param $$0 i32) (result i32)
+ (func $_dotab (; 161 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -89261,7 +89166,7 @@
     (drop
      (call $_fprintf
       (get_local $$9)
-      (i32.const 7705)
+      (i32.const 7681)
       (get_local $$vararg_buffer)
      )
     )
@@ -89290,7 +89195,7 @@
    (get_local $$12)
   )
  )
- (func $_print_s_expr (; 163 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_print_s_expr (; 162 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -89378,7 +89283,7 @@
     (drop
      (call $_fprintf
       (get_local $$10)
-      (i32.const 7827)
+      (i32.const 7803)
       (get_local $$vararg_buffer)
      )
     )
@@ -89432,7 +89337,7 @@
   (drop
    (call $_fprintf
     (get_local $$16)
-    (i32.const 7843)
+    (i32.const 7819)
     (get_local $$vararg_buffer1)
    )
   )
@@ -89446,7 +89351,7 @@
    (get_local $$17)
   )
  )
- (func $_simplify_s_expr (; 164 ;) (param $$0 i32) (result i32)
+ (func $_simplify_s_expr (; 163 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$2 i32)
@@ -89545,7 +89450,7 @@
    (get_local $$10)
   )
  )
- (func $_StandardizeSExpr (; 165 ;) (param $$0 i32) (result i32)
+ (func $_StandardizeSExpr (; 164 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -89849,7 +89754,7 @@
    (get_local $$37)
   )
  )
- (func $_compactor (; 166 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_compactor (; 165 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -92282,7 +92187,7 @@
                   (get_local $$281)
                   (block
                    (call $_fatal
-                    (i32.const 7370)
+                    (i32.const 7346)
                    )
                    (br $label$break$L5)
                   )
@@ -95052,7 +94957,7 @@
     (block
      (drop
       (call $_puts
-       (i32.const 7398)
+       (i32.const 7374)
       )
      )
      (call $_exit
@@ -95077,7 +94982,7 @@
    (get_local $$753)
   )
  )
- (func $_get_s_expr (; 167 ;) (result i32)
+ (func $_get_s_expr (; 166 ;) (result i32)
   (local $$0 i32)
   (local $$1 i32)
   (local $$10 i32)
@@ -95148,7 +95053,7 @@
    (block
     (drop
      (call $_puts
-      (i32.const 7445)
+      (i32.const 7421)
      )
     )
     (call $_exit
@@ -95258,7 +95163,7 @@
    (i32.const 0)
   )
  )
- (func $_bFindUniqueIdentifiers (; 168 ;) (param $$0 i32) (result i32)
+ (func $_bFindUniqueIdentifiers (; 167 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -95505,7 +95410,7 @@
    )
    (block
     (call $_error
-     (i32.const 7627)
+     (i32.const 7603)
     )
     (set_local $$1
      (i32.const 0)
@@ -95636,7 +95541,7 @@
    (i32.const 0)
   )
  )
- (func $_pfpSExprToFractionalPolygon (; 169 ;) (param $$0 i32) (result i32)
+ (func $_pfpSExprToFractionalPolygon (; 168 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -95785,7 +95690,7 @@
    (get_local $$12)
    (block
     (call $_error
-     (i32.const 7467)
+     (i32.const 7443)
     )
     (set_local $$1
      (i32.const 0)
@@ -96418,7 +96323,7 @@
    )
    (block
     (call $_error
-     (i32.const 7529)
+     (i32.const 7505)
     )
     (set_local $$1
      (i32.const 0)
@@ -96435,7 +96340,7 @@
    )
   )
  )
- (func $_psePolyToSExpr (; 170 ;) (param $$0 i32) (result i32)
+ (func $_psePolyToSExpr (; 169 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -97479,7 +97384,7 @@
    (get_local $$144)
   )
  )
- (func $_FreeFractionalPolygon (; 171 ;) (param $$0 i32)
+ (func $_FreeFractionalPolygon (; 170 ;) (param $$0 i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -97618,7 +97523,7 @@
   )
   (return)
  )
- (func $_free_poly (; 172 ;) (param $$0 i32)
+ (func $_free_poly (; 171 ;) (param $$0 i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -97776,7 +97681,7 @@
   )
   (return)
  )
- (func $_pidGetBinaryTreeByIndex (; 173 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_pidGetBinaryTreeByIndex (; 172 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -98019,7 +97924,7 @@
    (i32.const 0)
   )
  )
- (func $_bGetIdentValue (; 174 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_bGetIdentValue (; 173 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -98972,7 +98877,7 @@
    (get_local $$130)
   )
  )
- (func $_poly_constant (; 175 ;) (param $$0 f64) (param $$1 i32) (result i32)
+ (func $_poly_constant (; 174 ;) (param $$0 f64) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -99157,7 +99062,7 @@
    (get_local $$26)
   )
  )
- (func $_ppbtnGetBinaryTreeNode (; 176 ;) (param $$0 i32) (result i32)
+ (func $_ppbtnGetBinaryTreeNode (; 175 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -99380,7 +99285,7 @@
    (i32.const 0)
   )
  )
- (func $_poly_expand (; 177 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (result i32)
+ (func $_poly_expand (; 176 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -99700,7 +99605,7 @@
    (get_local $$48)
   )
  )
- (func $_pfpFractionalPolygonAdd (; 178 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_pfpFractionalPolygonAdd (; 177 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -100177,7 +100082,7 @@
    (get_local $$71)
   )
  )
- (func $_poly_times (; 179 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_poly_times (; 178 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -100845,7 +100750,7 @@
    (block
     (drop
      (call $_printf
-      (i32.const 7831)
+      (i32.const 7807)
       (get_local $$vararg_buffer)
      )
     )
@@ -100857,7 +100762,7 @@
     )
     (drop
      (call $_printf
-      (i32.const 8316)
+      (i32.const 8292)
       (get_local $$vararg_buffer1)
      )
     )
@@ -100869,7 +100774,7 @@
     )
     (drop
      (call $_printf
-      (i32.const 7769)
+      (i32.const 7745)
       (get_local $$vararg_buffer3)
      )
     )
@@ -100903,7 +100808,7 @@
    (get_local $$97)
   )
  )
- (func $_pfpFractionalPolygonTimes (; 180 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_pfpFractionalPolygonTimes (; 179 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -101229,7 +101134,7 @@
    (get_local $$47)
   )
  )
- (func $_poly_copy (; 181 ;) (param $$0 i32) (result i32)
+ (func $_poly_copy (; 180 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -101550,7 +101455,7 @@
    (get_local $$47)
   )
  )
- (func $_new_poly (; 182 ;) (param $$0 i32) (result i32)
+ (func $_new_poly (; 181 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -101665,7 +101570,7 @@
    (get_local $$15)
   )
  )
- (func $_poly_scale (; 183 ;) (param $$0 f64) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_poly_scale (; 182 ;) (param $$0 f64) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -102987,7 +102892,7 @@
   )
   (drop
    (call $_printf
-    (i32.const 7621)
+    (i32.const 7597)
     (get_local $$vararg_buffer)
    )
   )
@@ -103087,7 +102992,7 @@
       )
       (drop
        (call $_printf
-        (i32.const 7604)
+        (i32.const 7580)
         (get_local $$vararg_buffer2)
        )
       )
@@ -103110,7 +103015,7 @@
   )
   (drop
    (call $_printf
-    (i32.const 7624)
+    (i32.const 7600)
     (get_local $$vararg_buffer6)
    )
   )
@@ -103122,7 +103027,7 @@
   )
   (drop
    (call $_printf
-    (i32.const 7769)
+    (i32.const 7745)
     (get_local $$vararg_buffer8)
    )
   )
@@ -103148,7 +103053,7 @@
    (get_local $$207)
   )
  )
- (func $_poly_add (; 184 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_poly_add (; 183 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -104438,7 +104343,7 @@
    (block
     (drop
      (call $_printf
-      (i32.const 7831)
+      (i32.const 7807)
       (get_local $$vararg_buffer)
      )
     )
@@ -104450,7 +104355,7 @@
     )
     (drop
      (call $_printf
-      (i32.const 7619)
+      (i32.const 7595)
       (get_local $$vararg_buffer1)
      )
     )
@@ -104462,7 +104367,7 @@
     )
     (drop
      (call $_printf
-      (i32.const 7769)
+      (i32.const 7745)
       (get_local $$vararg_buffer3)
      )
     )
@@ -104496,7 +104401,7 @@
    (get_local $$189)
   )
  )
- (func $_poly_print (; 185 ;) (param $$0 i32)
+ (func $_poly_print (; 184 ;) (param $$0 i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -104691,7 +104596,7 @@
    (block
     (drop
      (call $_printf
-      (i32.const 7596)
+      (i32.const 7572)
       (get_local $$vararg_buffer)
      )
     )
@@ -104898,7 +104803,7 @@
        )
        (drop
         (call $_printf
-         (i32.const 7599)
+         (i32.const 7575)
          (get_local $$vararg_buffer2)
         )
        )
@@ -104998,7 +104903,7 @@
            )
            (drop
             (call $_printf
-             (i32.const 7604)
+             (i32.const 7580)
              (get_local $$vararg_buffer4)
             )
            )
@@ -105042,7 +104947,7 @@
              )
              (drop
               (call $_printf
-               (i32.const 7613)
+               (i32.const 7589)
                (get_local $$vararg_buffer8)
               )
              )
@@ -105337,7 +105242,7 @@
        (get_local $$104)
        (drop
         (call $_printf
-         (i32.const 7619)
+         (i32.const 7595)
          (get_local $$vararg_buffer11)
         )
        )
@@ -105349,7 +105254,7 @@
   )
   (drop
    (call $_printf
-    (i32.const 8046)
+    (i32.const 8022)
     (get_local $$vararg_buffer13)
    )
   )
@@ -105364,7 +105269,7 @@
   )
   (return)
  )
- (func $_IdentifierFound (; 186 ;) (param $$0 i32)
+ (func $_IdentifierFound (; 185 ;) (param $$0 i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -105534,7 +105439,7 @@
   )
   (return)
  )
- (func $_red_s_expr (; 187 ;) (param $$0 i32) (result i32)
+ (func $_red_s_expr (; 186 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -105808,7 +105713,7 @@
         (drop
          (call $_sprintf
           (get_local $$4)
-          (i32.const 7354)
+          (i32.const 7330)
           (get_local $$vararg_buffer)
          )
         )
@@ -105845,7 +105750,7 @@
       (drop
        (call $_sprintf
         (get_local $$36)
-        (i32.const 7354)
+        (i32.const 7330)
         (get_local $$vararg_buffer1)
        )
       )
@@ -105880,7 +105785,7 @@
       (drop
        (call $_fprintf
         (get_local $$38)
-        (i32.const 7363)
+        (i32.const 7339)
         (get_local $$vararg_buffer4)
        )
       )
@@ -105906,7 +105811,7 @@
       (drop
        (call $_fprintf
         (get_local $$44)
-        (i32.const 7367)
+        (i32.const 7343)
         (get_local $$vararg_buffer7)
        )
       )
@@ -106066,7 +105971,7 @@
    (get_local $$61)
   )
  )
- (func $_red_ident (; 188 ;) (param $$0 i32) (result i32)
+ (func $_red_ident (; 187 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -106562,7 +106467,7 @@
        (drop
         (call $_sprintf
          (get_local $$4)
-         (i32.const 7354)
+         (i32.const 7330)
          (get_local $$vararg_buffer)
         )
        )
@@ -106595,7 +106500,7 @@
      (drop
       (call $_fprintf
        (get_local $$58)
-       (i32.const 7729)
+       (i32.const 7705)
        (get_local $$vararg_buffer1)
       )
      )
@@ -106621,7 +106526,7 @@
      (drop
       (call $_fprintf
        (get_local $$62)
-       (i32.const 7367)
+       (i32.const 7343)
        (get_local $$vararg_buffer4)
       )
      )
@@ -106640,7 +106545,7 @@
      (drop
       (call $_sprintf
        (get_local $$63)
-       (i32.const 7354)
+       (i32.const 7330)
        (get_local $$vararg_buffer6)
       )
      )
@@ -106721,7 +106626,7 @@
    (get_local $$74)
   )
  )
- (func $_print_expr (; 189 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (result i32)
+ (func $_print_expr (; 188 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -107081,7 +106986,7 @@
     (drop
      (call $_fprintf
       (get_local $$22)
-      (i32.const 7937)
+      (i32.const 7913)
       (get_local $$vararg_buffer)
      )
     )
@@ -107135,7 +107040,7 @@
      (drop
       (call $_fprintf
        (get_local $$27)
-       (i32.const 7939)
+       (i32.const 7915)
        (get_local $$vararg_buffer2)
       )
      )
@@ -107182,7 +107087,7 @@
        (drop
         (call $_fprintf
          (get_local $$33)
-         (i32.const 7953)
+         (i32.const 7929)
          (get_local $$vararg_buffer4)
         )
        )
@@ -107263,7 +107168,7 @@
          (drop
           (call $_fprintf
            (get_local $$45)
-           (i32.const 7974)
+           (i32.const 7950)
            (get_local $$vararg_buffer6)
           )
          )
@@ -107476,7 +107381,7 @@
        (i32.const 16)
       )
       (call $_fatal
-       (i32.const 7992)
+       (i32.const 7968)
       )
      )
      (set_local $$77
@@ -107849,7 +107754,7 @@
      (drop
       (call $_fprintf
        (get_local $$134)
-       (i32.const 8021)
+       (i32.const 7997)
        (get_local $$vararg_buffer8)
       )
      )
@@ -107890,7 +107795,7 @@
      (drop
       (call $_fprintf
        (get_local $$139)
-       (i32.const 8029)
+       (i32.const 8005)
        (get_local $$vararg_buffer10)
       )
      )
@@ -107920,7 +107825,7 @@
      (drop
       (call $_fprintf
        (get_local $$142)
-       (i32.const 7843)
+       (i32.const 7819)
        (get_local $$vararg_buffer12)
       )
      )
@@ -107986,7 +107891,7 @@
      (drop
       (call $_fprintf
        (get_local $$150)
-       (i32.const 8021)
+       (i32.const 7997)
        (get_local $$vararg_buffer16)
       )
      )
@@ -108027,7 +107932,7 @@
      (drop
       (call $_fprintf
        (get_local $$155)
-       (i32.const 8029)
+       (i32.const 8005)
        (get_local $$vararg_buffer18)
       )
      )
@@ -108057,7 +107962,7 @@
      (drop
       (call $_fprintf
        (get_local $$158)
-       (i32.const 8036)
+       (i32.const 8012)
        (get_local $$vararg_buffer20)
       )
      )
@@ -108098,7 +108003,7 @@
      (drop
       (call $_fprintf
        (get_local $$163)
-       (i32.const 8046)
+       (i32.const 8022)
        (get_local $$vararg_buffer22)
       )
      )
@@ -108132,7 +108037,7 @@
    (get_local $$166)
   )
  )
- (func $_purify (; 190 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_purify (; 189 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -108553,7 +108458,7 @@
    (get_local $$65)
   )
  )
- (func $_vect_unop (; 191 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_vect_unop (; 190 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -108897,7 +108802,7 @@
    (get_local $$47)
   )
  )
- (func $_vect_op (; 192 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_vect_op (; 191 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -109067,7 +108972,7 @@
    (get_local $$26)
   )
  )
- (func $_red_scalar_extend (; 193 ;) (param $$0 i32) (result i32)
+ (func $_red_scalar_extend (; 192 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -109192,7 +109097,7 @@
    (get_local $$17)
   )
  )
- (func $_forall (; 194 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (result i32)
+ (func $_forall (; 193 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -110154,7 +110059,7 @@
     (drop
      (call $_fprintf
       (get_local $$134)
-      (i32.const 8046)
+      (i32.const 8022)
       (get_local $$vararg_buffer)
      )
     )
@@ -110210,7 +110115,7 @@
     (drop
      (call $_fprintf
       (get_local $$136)
-      (i32.const 7806)
+      (i32.const 7782)
       (get_local $$vararg_buffer1)
      )
     )
@@ -110256,7 +110161,7 @@
     (drop
      (call $_fprintf
       (get_local $$147)
-      (i32.const 7820)
+      (i32.const 7796)
       (get_local $$vararg_buffer3)
      )
     )
@@ -110741,7 +110646,7 @@
     (drop
      (call $_sprintf
       (get_local $$216)
-      (i32.const 7751)
+      (i32.const 7727)
       (get_local $$vararg_buffer5)
      )
     )
@@ -110794,7 +110699,7 @@
      (i32.const 1)
     )
     (set_local $$11
-     (i32.const 7769)
+     (i32.const 7745)
     )
     (set_local $$226
      (get_local $$13)
@@ -111108,7 +111013,7 @@
   (drop
    (call $_fprintf
     (get_local $$271)
-    (i32.const 7824)
+    (i32.const 7800)
     (get_local $$vararg_buffer8)
    )
   )
@@ -111132,7 +111037,7 @@
    (get_local $$273)
   )
  )
- (func $_red_take (; 195 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_red_take (; 194 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -111386,7 +111291,7 @@
    (get_local $$41)
   )
  )
- (func $_red_drop (; 196 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_red_drop (; 195 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -111591,7 +111496,7 @@
    (get_local $$33)
   )
  )
- (func $_red_ptake (; 197 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_red_ptake (; 196 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$2 i32)
   (local $$3 i32)
   (local $$4 i32)
@@ -111632,7 +111537,7 @@
    (get_local $$5)
   )
  )
- (func $_red_pdrop (; 198 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_red_pdrop (; 197 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -111811,7 +111716,7 @@
    (get_local $$29)
   )
  )
- (func $_red_reverse (; 199 ;) (param $$0 i32) (result i32)
+ (func $_red_reverse (; 198 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -112052,7 +111957,7 @@
    (get_local $$36)
   )
  )
- (func $_redall (; 200 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (result i32)
+ (func $_redall (; 199 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -112636,7 +112541,7 @@
     (drop
      (call $_fprintf
       (get_local $$70)
-      (i32.const 8046)
+      (i32.const 8022)
       (get_local $$vararg_buffer)
      )
     )
@@ -112692,7 +112597,7 @@
     (drop
      (call $_fprintf
       (get_local $$72)
-      (i32.const 7806)
+      (i32.const 7782)
       (get_local $$vararg_buffer1)
      )
     )
@@ -112738,7 +112643,7 @@
     (drop
      (call $_fprintf
       (get_local $$83)
-      (i32.const 7820)
+      (i32.const 7796)
       (get_local $$vararg_buffer3)
      )
     )
@@ -113223,7 +113128,7 @@
     (drop
      (call $_sprintf
       (get_local $$152)
-      (i32.const 7751)
+      (i32.const 7727)
       (get_local $$vararg_buffer5)
      )
     )
@@ -113276,7 +113181,7 @@
      (i32.const 1)
     )
     (set_local $$11
-     (i32.const 7769)
+     (i32.const 7745)
     )
     (set_local $$162
      (get_local $$13)
@@ -113610,7 +113515,7 @@
   (drop
    (call $_fprintf
     (get_local $$210)
-    (i32.const 7824)
+    (i32.const 7800)
     (get_local $$vararg_buffer8)
    )
   )
@@ -113634,7 +113539,7 @@
    (get_local $$212)
   )
  )
- (func $_assign_rav (; 201 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (param $$5 i32) (result i32)
+ (func $_assign_rav (; 200 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (param $$3 i32) (param $$4 i32) (param $$5 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -114026,7 +113931,7 @@
    )
   )
   (call $_fatal
-   (i32.const 7771)
+   (i32.const 7747)
   )
   (set_local $$66
    (get_local $$6)
@@ -114038,7 +113943,7 @@
    (get_local $$66)
   )
  )
- (func $_red_psi (; 202 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_red_psi (; 201 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -114368,7 +114273,7 @@
    (get_local $$53)
   )
  )
- (func $_red_cat (; 203 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_red_cat (; 202 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -115110,7 +115015,7 @@
    (get_local $$121)
   )
  )
- (func $_vect_take (; 204 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_vect_take (; 203 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -115431,7 +115336,7 @@
    (get_local $$38)
   )
  )
- (func $_vect_len (; 205 ;) (param $$0 i32) (result i32)
+ (func $_vect_len (; 204 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -115596,7 +115501,7 @@
    )
   )
  )
- (func $_propagate_take (; 206 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_propagate_take (; 205 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$100 f64)
   (local $$101 i32)
@@ -117476,7 +117381,7 @@
    (get_local $$239)
   )
  )
- (func $_make_vect (; 207 ;) (param $$0 i32) (result i32)
+ (func $_make_vect (; 206 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -118753,7 +118658,7 @@
   (drop
    (call $_sprintf
     (get_local $$175)
-    (i32.const 7758)
+    (i32.const 7734)
     (get_local $$vararg_buffer)
    )
   )
@@ -118838,7 +118743,7 @@
     (get_local $$189)
     (get_local $$190)
     (i32.const 1)
-    (i32.const 7769)
+    (i32.const 7745)
     (i32.const 0)
    )
   )
@@ -118879,7 +118784,7 @@
    (get_local $$201)
   )
  )
- (func $_real_expr (; 208 ;) (param $$0 i32) (result i32)
+ (func $_real_expr (; 207 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -119093,7 +118998,7 @@
    (get_local $$25)
   )
  )
- (func $_purify_vect (; 209 ;) (param $$0 i32) (result i32)
+ (func $_purify_vect (; 208 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -120246,7 +120151,7 @@
      (drop
       (call $_sprintf
        (get_local $$85)
-       (i32.const 7758)
+       (i32.const 7734)
        (get_local $$vararg_buffer)
       )
      )
@@ -120547,7 +120452,7 @@
       (call $_vect_assign
        (get_local $$203)
        (get_local $$204)
-       (i32.const 7769)
+       (i32.const 7745)
       )
      )
     )
@@ -120665,7 +120570,7 @@
    (get_local $$222)
   )
  )
- (func $_do_ptab (; 210 ;) (param $$0 i32) (result i32)
+ (func $_do_ptab (; 209 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -120747,7 +120652,7 @@
     (drop
      (call $_fprintf
       (get_local $$9)
-      (i32.const 7705)
+      (i32.const 7681)
       (get_local $$vararg_buffer)
      )
     )
@@ -120781,7 +120686,7 @@
    (get_local $$12)
   )
  )
- (func $_print_vector (; 211 ;) (param $$0 i32) (result i32)
+ (func $_print_vector (; 210 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -121243,7 +121148,7 @@
             (drop
              (call $_fprintf
               (get_local $$21)
-              (i32.const 7827)
+              (i32.const 7803)
               (get_local $$vararg_buffer)
              )
             )
@@ -121471,7 +121376,7 @@
                    (drop
                     (call $_fprintf
                      (get_local $$88)
-                     (i32.const 7827)
+                     (i32.const 7803)
                      (get_local $$vararg_buffer9)
                     )
                    )
@@ -121518,7 +121423,7 @@
                    (drop
                     (call $_fprintf
                      (get_local $$94)
-                     (i32.const 7838)
+                     (i32.const 7814)
                      (get_local $$vararg_buffer11)
                     )
                    )
@@ -121559,7 +121464,7 @@
                    (drop
                     (call $_fprintf
                      (get_local $$99)
-                     (i32.const 7843)
+                     (i32.const 7819)
                      (get_local $$vararg_buffer13)
                     )
                    )
@@ -121626,7 +121531,7 @@
                    (drop
                     (call $_fprintf
                      (get_local $$36)
-                     (i32.const 7829)
+                     (i32.const 7805)
                      (get_local $$vararg_buffer1)
                     )
                    )
@@ -121733,7 +121638,7 @@
                      (drop
                       (call $_fprintf
                        (get_local $$52)
-                       (i32.const 7831)
+                       (i32.const 7807)
                        (get_local $$vararg_buffer3)
                       )
                      )
@@ -121824,7 +121729,7 @@
                    (drop
                     (call $_fprintf
                      (get_local $$65)
-                     (i32.const 7833)
+                     (i32.const 7809)
                      (get_local $$vararg_buffer5)
                     )
                    )
@@ -121842,7 +121747,7 @@
                   (drop
                    (call $_fprintf
                     (get_local $$36)
-                    (i32.const 7835)
+                    (i32.const 7811)
                     (get_local $$vararg_buffer7)
                    )
                   )
@@ -121869,7 +121774,7 @@
                 (drop
                  (call $_fprintf
                   (get_local $$104)
-                  (i32.const 7845)
+                  (i32.const 7821)
                   (get_local $$vararg_buffer15)
                  )
                 )
@@ -121910,7 +121815,7 @@
                 (drop
                  (call $_fprintf
                   (get_local $$109)
-                  (i32.const 7843)
+                  (i32.const 7819)
                   (get_local $$vararg_buffer17)
                  )
                 )
@@ -121936,7 +121841,7 @@
                (drop
                 (call $_fprintf
                  (get_local $$111)
-                 (i32.const 7850)
+                 (i32.const 7826)
                  (get_local $$vararg_buffer19)
                 )
                )
@@ -121981,7 +121886,7 @@
               (drop
                (call $_fprintf
                 (get_local $$116)
-                (i32.const 7853)
+                (i32.const 7829)
                 (get_local $$vararg_buffer21)
                )
               )
@@ -122132,7 +122037,7 @@
         (drop
          (call $_fprintf
           (get_local $$136)
-          (i32.const 7856)
+          (i32.const 7832)
           (get_local $$vararg_buffer23)
          )
         )
@@ -122173,7 +122078,7 @@
         (drop
          (call $_fprintf
           (get_local $$141)
-          (i32.const 7861)
+          (i32.const 7837)
           (get_local $$vararg_buffer25)
          )
         )
@@ -122214,7 +122119,7 @@
         (drop
          (call $_fprintf
           (get_local $$146)
-          (i32.const 7843)
+          (i32.const 7819)
           (get_local $$vararg_buffer27)
          )
         )
@@ -122240,7 +122145,7 @@
        (drop
         (call $_fprintf
          (get_local $$148)
-         (i32.const 7863)
+         (i32.const 7839)
          (get_local $$vararg_buffer29)
         )
        )
@@ -122281,7 +122186,7 @@
        (drop
         (call $_fprintf
          (get_local $$153)
-         (i32.const 7861)
+         (i32.const 7837)
          (get_local $$vararg_buffer31)
         )
        )
@@ -122322,7 +122227,7 @@
        (drop
         (call $_fprintf
          (get_local $$158)
-         (i32.const 7843)
+         (i32.const 7819)
          (get_local $$vararg_buffer33)
         )
        )
@@ -122367,7 +122272,7 @@
       (drop
        (call $_fprintf
         (get_local $$163)
-        (i32.const 7868)
+        (i32.const 7844)
         (get_local $$vararg_buffer35)
        )
       )
@@ -122404,7 +122309,7 @@
      )
     )
     (call $_fatal
-     (i32.const 7871)
+     (i32.const 7847)
     )
    )
   )
@@ -122501,7 +122406,7 @@
             (drop
              (call $_fprintf
               (get_local $$183)
-              (i32.const 7843)
+              (i32.const 7819)
               (get_local $$vararg_buffer37)
              )
             )
@@ -122535,7 +122440,7 @@
    (get_local $$185)
   )
  )
- (func $_static_shps (; 212 ;) (param $$0 i32) (result i32)
+ (func $_static_shps (; 211 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -123020,7 +122925,7 @@
    (get_local $$58)
   )
  )
- (func $_print_gen_ident (; 213 ;) (param $$0 i32) (result i32)
+ (func $_print_gen_ident (; 212 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -123372,7 +123277,7 @@
           (drop
            (call $_fprintf
             (get_local $$21)
-            (i32.const 7920)
+            (i32.const 7896)
             (get_local $$vararg_buffer)
            )
           )
@@ -123414,7 +123319,7 @@
         (drop
          (call $_fprintf
           (get_local $$27)
-          (i32.const 7925)
+          (i32.const 7901)
           (get_local $$vararg_buffer1)
          )
         )
@@ -123448,7 +123353,7 @@
        (drop
         (call $_fprintf
          (get_local $$30)
-         (i32.const 7829)
+         (i32.const 7805)
          (get_local $$vararg_buffer4)
         )
        )
@@ -123577,7 +123482,7 @@
          (drop
           (call $_fprintf
            (get_local $$42)
-           (i32.const 7930)
+           (i32.const 7906)
            (get_local $$vararg_buffer6)
           )
          )
@@ -123609,7 +123514,7 @@
        (drop
         (call $_fprintf
          (get_local $$42)
-         (i32.const 7934)
+         (i32.const 7910)
          (get_local $$vararg_buffer9)
         )
        )
@@ -123643,7 +123548,7 @@
       (drop
        (call $_fprintf
         (get_local $$55)
-        (i32.const 7829)
+        (i32.const 7805)
         (get_local $$vararg_buffer11)
        )
       )
@@ -123692,7 +123597,7 @@
         (drop
          (call $_sprintf
           (get_local $$5)
-          (i32.const 8313)
+          (i32.const 8289)
           (get_local $$vararg_buffer13)
          )
         )
@@ -123774,7 +123679,7 @@
         (drop
          (call $_fprintf
           (get_local $$72)
-          (i32.const 7930)
+          (i32.const 7906)
           (get_local $$vararg_buffer16)
          )
         )
@@ -123806,7 +123711,7 @@
       (drop
        (call $_fprintf
         (get_local $$72)
-        (i32.const 7934)
+        (i32.const 7910)
         (get_local $$vararg_buffer19)
        )
       )
@@ -123840,7 +123745,7 @@
      (drop
       (call $_fprintf
        (get_local $$78)
-       (i32.const 7829)
+       (i32.const 7805)
        (get_local $$vararg_buffer21)
       )
      )
@@ -123971,7 +123876,7 @@
        (drop
         (call $_fprintf
          (get_local $$98)
-         (i32.const 7831)
+         (i32.const 7807)
          (get_local $$vararg_buffer23)
         )
        )
@@ -124003,7 +123908,7 @@
      (drop
       (call $_fprintf
        (get_local $$90)
-       (i32.const 7934)
+       (i32.const 7910)
        (get_local $$vararg_buffer25)
       )
      )
@@ -124041,7 +123946,7 @@
    )
   )
  )
- (func $_real_vect (; 214 ;) (param $$0 i32) (result i32)
+ (func $_real_vect (; 213 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -124255,7 +124160,7 @@
    (get_local $$25)
   )
  )
- (func $_vect_assign (; 215 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_vect_assign (; 214 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -124881,7 +124786,7 @@
    (get_local $$91)
   )
  )
- (func $_rec_print_expr (; 216 ;) (param $$0 i32) (result i32)
+ (func $_rec_print_expr (; 215 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -125269,7 +125174,7 @@
     (drop
      (call $_fprintf
       (get_local $$5)
-      (i32.const 8048)
+      (i32.const 8024)
       (get_local $$vararg_buffer)
      )
     )
@@ -125406,7 +125311,7 @@
                   (drop
                    (call $_fprintf
                     (get_local $$16)
-                    (i32.const 7827)
+                    (i32.const 7803)
                     (get_local $$vararg_buffer1)
                    )
                   )
@@ -125485,7 +125390,7 @@
                   (drop
                    (call $_fprintf
                     (get_local $$27)
-                    (i32.const 7843)
+                    (i32.const 7819)
                     (get_local $$vararg_buffer3)
                    )
                   )
@@ -125550,7 +125455,7 @@
                 (drop
                  (call $_fprintf
                   (get_local $$32)
-                  (i32.const 8046)
+                  (i32.const 8022)
                   (get_local $$vararg_buffer5)
                  )
                 )
@@ -125606,7 +125511,7 @@
                 (drop
                  (call $_fprintf
                   (get_local $$34)
-                  (i32.const 8053)
+                  (i32.const 8029)
                   (get_local $$vararg_buffer7)
                  )
                 )
@@ -125652,7 +125557,7 @@
                 (drop
                  (call $_fprintf
                   (get_local $$45)
-                  (i32.const 8068)
+                  (i32.const 8044)
                   (get_local $$vararg_buffer9)
                  )
                 )
@@ -125698,7 +125603,7 @@
                 (drop
                  (call $_fprintf
                   (get_local $$50)
-                  (i32.const 8046)
+                  (i32.const 8022)
                   (get_local $$vararg_buffer11)
                  )
                 )
@@ -125725,7 +125630,7 @@
                 (drop
                  (call $_fprintf
                   (get_local $$52)
-                  (i32.const 8073)
+                  (i32.const 8049)
                   (get_local $$vararg_buffer13)
                  )
                 )
@@ -125760,7 +125665,7 @@
               (drop
                (call $_fprintf
                 (get_local $$54)
-                (i32.const 7827)
+                (i32.const 7803)
                 (get_local $$vararg_buffer15)
                )
               )
@@ -125801,7 +125706,7 @@
               (drop
                (call $_fprintf
                 (get_local $$59)
-                (i32.const 7838)
+                (i32.const 7814)
                 (get_local $$vararg_buffer17)
                )
               )
@@ -125842,7 +125747,7 @@
               (drop
                (call $_fprintf
                 (get_local $$64)
-                (i32.const 7843)
+                (i32.const 7819)
                 (get_local $$vararg_buffer19)
                )
               )
@@ -125877,7 +125782,7 @@
             (drop
              (call $_fprintf
               (get_local $$66)
-              (i32.const 7827)
+              (i32.const 7803)
               (get_local $$vararg_buffer21)
              )
             )
@@ -125918,7 +125823,7 @@
             (drop
              (call $_fprintf
               (get_local $$71)
-              (i32.const 8075)
+              (i32.const 8051)
               (get_local $$vararg_buffer23)
              )
             )
@@ -125959,7 +125864,7 @@
             (drop
              (call $_fprintf
               (get_local $$76)
-              (i32.const 7843)
+              (i32.const 7819)
               (get_local $$vararg_buffer25)
              )
             )
@@ -125993,7 +125898,7 @@
            (drop
             (call $_fprintf
              (get_local $$78)
-             (i32.const 8080)
+             (i32.const 8056)
              (get_local $$vararg_buffer27)
             )
            )
@@ -126034,7 +125939,7 @@
            (drop
             (call $_fprintf
              (get_local $$83)
-             (i32.const 7843)
+             (i32.const 7819)
              (get_local $$vararg_buffer29)
             )
            )
@@ -126068,7 +125973,7 @@
           (drop
            (call $_fprintf
             (get_local $$85)
-            (i32.const 8086)
+            (i32.const 8062)
             (get_local $$vararg_buffer31)
            )
           )
@@ -126109,7 +126014,7 @@
           (drop
            (call $_fprintf
             (get_local $$90)
-            (i32.const 7843)
+            (i32.const 7819)
             (get_local $$vararg_buffer33)
            )
           )
@@ -126143,7 +126048,7 @@
          (drop
           (call $_fprintf
            (get_local $$92)
-           (i32.const 8092)
+           (i32.const 8068)
            (get_local $$vararg_buffer35)
           )
          )
@@ -126184,7 +126089,7 @@
          (drop
           (call $_fprintf
            (get_local $$97)
-           (i32.const 7843)
+           (i32.const 7819)
            (get_local $$vararg_buffer37)
           )
          )
@@ -126218,7 +126123,7 @@
         (drop
          (call $_fprintf
           (get_local $$99)
-          (i32.const 8098)
+          (i32.const 8074)
           (get_local $$vararg_buffer39)
          )
         )
@@ -126259,7 +126164,7 @@
         (drop
          (call $_fprintf
           (get_local $$104)
-          (i32.const 7843)
+          (i32.const 7819)
           (get_local $$vararg_buffer41)
          )
         )
@@ -126293,7 +126198,7 @@
        (drop
         (call $_fprintf
          (get_local $$106)
-         (i32.const 8104)
+         (i32.const 8080)
          (get_local $$vararg_buffer43)
         )
        )
@@ -126334,7 +126239,7 @@
        (drop
         (call $_fprintf
          (get_local $$111)
-         (i32.const 7843)
+         (i32.const 7819)
          (get_local $$vararg_buffer45)
         )
        )
@@ -126368,7 +126273,7 @@
       (drop
        (call $_fprintf
         (get_local $$113)
-        (i32.const 7827)
+        (i32.const 7803)
         (get_local $$vararg_buffer47)
        )
       )
@@ -126409,7 +126314,7 @@
       (drop
        (call $_fprintf
         (get_local $$118)
-        (i32.const 8109)
+        (i32.const 8085)
         (get_local $$vararg_buffer49)
        )
       )
@@ -126450,7 +126355,7 @@
       (drop
        (call $_fprintf
         (get_local $$123)
-        (i32.const 7843)
+        (i32.const 7819)
         (get_local $$vararg_buffer51)
        )
       )
@@ -126484,7 +126389,7 @@
      (drop
       (call $_fprintf
        (get_local $$125)
-       (i32.const 7827)
+       (i32.const 7803)
        (get_local $$vararg_buffer53)
       )
      )
@@ -126525,7 +126430,7 @@
      (drop
       (call $_fprintf
        (get_local $$130)
-       (i32.const 7868)
+       (i32.const 7844)
        (get_local $$vararg_buffer55)
       )
      )
@@ -126566,7 +126471,7 @@
      (drop
       (call $_fprintf
        (get_local $$135)
-       (i32.const 7843)
+       (i32.const 7819)
        (get_local $$vararg_buffer57)
       )
      )
@@ -126593,7 +126498,7 @@
    )
    (block
     (call $_fatal
-     (i32.const 8115)
+     (i32.const 8091)
     )
     (set_local $$137
      (get_local $$1)
@@ -126607,7 +126512,7 @@
    )
   )
  )
- (func $_propagate_cat (; 217 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_propagate_cat (; 216 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -127008,7 +126913,7 @@
    (get_local $$47)
   )
  )
- (func $_find_temp (; 218 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_find_temp (; 217 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -127407,7 +127312,7 @@
    (get_local $$57)
   )
  )
- (func $_check_combined_temps (; 219 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_check_combined_temps (; 218 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -127674,7 +127579,7 @@
          )
          (set_local $$34
           (call $_strncmp
-           (i32.const 8218)
+           (i32.const 8194)
            (get_local $$33)
            (i32.const 4)
           )
@@ -128165,7 +128070,7 @@
    (get_local $$110)
   )
  )
- (func $_combine_reduced (; 220 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_combine_reduced (; 219 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -129588,7 +129493,7 @@
              (set_local $$163
               (call $_strncmp
                (get_local $$162)
-               (i32.const 8218)
+               (i32.const 8194)
                (i32.const 4)
               )
              )
@@ -130272,7 +130177,7 @@
               (set_local $$272
                (call $_strncmp
                 (get_local $$271)
-                (i32.const 8218)
+                (i32.const 8194)
                 (i32.const 4)
                )
               )
@@ -130915,7 +130820,7 @@
    (get_local $$373)
   )
  )
- (func $_vect_compare (; 221 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_vect_compare (; 220 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -131100,7 +131005,7 @@
    )
   )
  )
- (func $_expand_vect (; 222 ;) (param $$0 i32) (result i32)
+ (func $_expand_vect (; 221 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -131243,7 +131148,7 @@
   (if
    (get_local $$8)
    (call $_fatal
-    (i32.const 8223)
+    (i32.const 8199)
    )
   )
   (set_local $$9
@@ -131843,7 +131748,7 @@
    (get_local $$96)
   )
  )
- (func $_ident_compare (; 223 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_ident_compare (; 222 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -136680,7 +136585,7 @@
    )
   )
  )
- (func $_s_compare (; 224 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_s_compare (; 223 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -136956,7 +136861,7 @@
    (get_local $$37)
   )
  )
- (func $_psi_reduce (; 225 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_psi_reduce (; 224 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -137687,7 +137592,7 @@
     (i32.const 0)
     (get_local $$105)
     (get_local $$106)
-    (i32.const 7769)
+    (i32.const 7745)
    )
   )
   (set_local $$107
@@ -137725,7 +137630,7 @@
     (get_local $$107)
     (get_local $$108)
     (i32.const 1)
-    (i32.const 7769)
+    (i32.const 7745)
     (get_local $$113)
    )
   )
@@ -137878,7 +137783,7 @@
    (get_local $$136)
   )
  )
- (func $_reduction_init (; 226 ;) (result i32)
+ (func $_reduction_init (; 225 ;) (result i32)
   (local $$0 i32)
   (local $$1 i32)
   (local $label i32)
@@ -137915,7 +137820,7 @@
    (get_local $$1)
   )
  )
- (func $_psi_init (; 227 ;) (result i32)
+ (func $_psi_init (; 226 ;) (result i32)
   (local $$0 i32)
   (local $$1 i32)
   (local $$10 i32)
@@ -138414,7 +138319,7 @@
   (drop
    (call $_sprintf
     (get_local $$51)
-    (i32.const 8251)
+    (i32.const 8227)
     (get_local $$vararg_buffer)
    )
   )
@@ -138525,7 +138430,7 @@
    (get_local $$65)
   )
  )
- (func $_psi_access (; 228 ;) (param $$0 i32) (result i32)
+ (func $_psi_access (; 227 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -139681,7 +139586,7 @@
    (get_local $$160)
   )
  )
- (func $_psi_iota (; 229 ;) (param $$0 i32) (result i32)
+ (func $_psi_iota (; 228 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -140130,7 +140035,7 @@
    (get_local $$63)
   )
  )
- (func $_psi_dim (; 230 ;) (param $$0 i32) (result i32)
+ (func $_psi_dim (; 229 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -140325,7 +140230,7 @@
    (get_local $$26)
   )
  )
- (func $_psi_tau (; 231 ;) (param $$0 i32) (result i32)
+ (func $_psi_tau (; 230 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -140743,7 +140648,7 @@
    (get_local $$61)
   )
  )
- (func $_psi_shp (; 232 ;) (param $$0 i32) (result i32)
+ (func $_psi_shp (; 231 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -140995,7 +140900,7 @@
    (get_local $$36)
   )
  )
- (func $_psi_rav (; 233 ;) (param $$0 i32) (result i32)
+ (func $_psi_rav (; 232 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -141510,7 +141415,7 @@
    (get_local $$76)
   )
  )
- (func $_psi_take (; 234 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_psi_take (; 233 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -141875,7 +141780,7 @@
    (get_local $$55)
   )
  )
- (func $_psi_drop (; 235 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_psi_drop (; 234 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -142347,7 +142252,7 @@
    (get_local $$72)
   )
  )
- (func $_psi_ptake (; 236 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_psi_ptake (; 235 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -142705,7 +142610,7 @@
    (get_local $$54)
   )
  )
- (func $_psi_pdrop (; 237 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_psi_pdrop (; 236 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -143170,7 +143075,7 @@
    (get_local $$71)
   )
  )
- (func $_psi_reverse (; 238 ;) (param $$0 i32) (result i32)
+ (func $_psi_reverse (; 237 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -143310,7 +143215,7 @@
    (get_local $$19)
   )
  )
- (func $_scalar_extend (; 239 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_scalar_extend (; 238 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -143453,7 +143358,7 @@
    (get_local $$20)
   )
  )
- (func $_psi_op (; 240 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_psi_op (; 239 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -144890,7 +144795,7 @@
    )
   )
   (call $_error
-   (i32.const 8257)
+   (i32.const 8233)
   )
   (set_local $$196
    (get_local $$3)
@@ -144943,7 +144848,7 @@
    (get_local $$203)
   )
  )
- (func $_psi_plus (; 241 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_psi_plus (; 240 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$2 i32)
   (local $$3 i32)
   (local $$4 i32)
@@ -144995,7 +144900,7 @@
    (get_local $$6)
   )
  )
- (func $_psi_minus (; 242 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_psi_minus (; 241 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$2 i32)
   (local $$3 i32)
   (local $$4 i32)
@@ -145047,7 +144952,7 @@
    (get_local $$6)
   )
  )
- (func $_psi_times (; 243 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_psi_times (; 242 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$2 i32)
   (local $$3 i32)
   (local $$4 i32)
@@ -145099,7 +145004,7 @@
    (get_local $$6)
   )
  )
- (func $_psi_div (; 244 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_psi_div (; 243 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$2 i32)
   (local $$3 i32)
   (local $$4 i32)
@@ -145151,7 +145056,7 @@
    (get_local $$6)
   )
  )
- (func $_psi_psi (; 245 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_psi_psi (; 244 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -145758,7 +145663,7 @@
    (get_local $$78)
   )
  )
- (func $_psi_cat (; 246 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_psi_cat (; 245 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -146689,7 +146594,7 @@
    (get_local $$113)
   )
  )
- (func $_psi_omega1 (; 247 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_psi_omega1 (; 246 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -147151,7 +147056,7 @@
   (drop
    (call $_sprintf
     (get_local $$60)
-    (i32.const 8302)
+    (i32.const 8278)
     (get_local $$vararg_buffer)
    )
   )
@@ -147834,7 +147739,7 @@
    (get_local $$176)
   )
  )
- (func $_rav_value (; 248 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result f64)
+ (func $_rav_value (; 247 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result f64)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -149293,7 +149198,7 @@
    (get_local $$210)
   )
  )
- (func $_psi_omega2 (; 249 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_psi_omega2 (; 248 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -150086,7 +149991,7 @@
   (drop
    (call $_sprintf
     (get_local $$112)
-    (i32.const 8302)
+    (i32.const 8278)
     (get_local $$vararg_buffer)
    )
   )
@@ -150125,7 +150030,7 @@
     (drop
      (call $_sprintf
       (get_local $$32)
-      (i32.const 8313)
+      (i32.const 8289)
       (get_local $$vararg_buffer6)
      )
     )
@@ -151147,7 +151052,7 @@
    (get_local $$290)
   )
  )
- (func $_psi_red_op (; 250 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_psi_red_op (; 249 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -151531,7 +151436,7 @@
   (drop
    (call $_sprintf
     (get_local $$42)
-    (i32.const 8302)
+    (i32.const 8278)
     (get_local $$vararg_buffer)
    )
   )
@@ -152355,7 +152260,7 @@
    (get_local $$177)
   )
  )
- (func $_psi_red_plus (; 251 ;) (param $$0 i32) (result i32)
+ (func $_psi_red_plus (; 250 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$3 i32)
@@ -152398,7 +152303,7 @@
    (get_local $$3)
   )
  )
- (func $_psi_red_minus (; 252 ;) (param $$0 i32) (result i32)
+ (func $_psi_red_minus (; 251 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$3 i32)
@@ -152441,7 +152346,7 @@
    (get_local $$3)
   )
  )
- (func $_psi_red_times (; 253 ;) (param $$0 i32) (result i32)
+ (func $_psi_red_times (; 252 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$3 i32)
@@ -152484,7 +152389,7 @@
    (get_local $$3)
   )
  )
- (func $_psi_red_div (; 254 ;) (param $$0 i32) (result i32)
+ (func $_psi_red_div (; 253 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$3 i32)
@@ -152527,7 +152432,7 @@
    (get_local $$3)
   )
  )
- (func $_force_vect (; 255 ;) (param $$0 i32) (result i32)
+ (func $_force_vect (; 254 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
@@ -152927,7 +152832,7 @@
       (drop
        (call $_sprintf
         (get_local $$47)
-        (i32.const 7758)
+        (i32.const 7734)
         (get_local $$vararg_buffer)
        )
       )
@@ -153230,7 +153135,7 @@
        (call $_vect_assign
         (get_local $$99)
         (get_local $$100)
-        (i32.const 7769)
+        (i32.const 7745)
        )
       )
      )
@@ -153273,7 +153178,7 @@
    (get_local $$103)
   )
  )
- (func $_vect2array (; 256 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_vect2array (; 255 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -153525,7 +153430,7 @@
     (drop
      (call $_sprintf
       (get_local $$29)
-      (i32.const 7758)
+      (i32.const 7734)
       (get_local $$vararg_buffer)
      )
     )
@@ -153556,7 +153461,7 @@
     (drop
      (call $_sprintf
       (get_local $$29)
-      (i32.const 8318)
+      (i32.const 8294)
       (get_local $$vararg_buffer1)
      )
     )
@@ -153634,7 +153539,7 @@
    (call $_vect_assign
     (get_local $$45)
     (get_local $$46)
-    (i32.const 7769)
+    (i32.const 7745)
    )
   )
   (set_local $$47
@@ -153653,7 +153558,7 @@
    (get_local $$49)
   )
  )
- (func $_tau (; 257 ;) (param $$0 i32) (param $$1 i32)
+ (func $_tau (; 256 ;) (param $$0 i32) (param $$1 i32)
   (local $$10 i32)
   (local $$100 i32)
   (local $$101 i32)
@@ -154018,7 +153923,7 @@
         (drop
          (call $_fprintf
           (get_local $$94)
-          (i32.const 8316)
+          (i32.const 8292)
           (get_local $$vararg_buffer10)
          )
         )
@@ -154094,7 +153999,7 @@
     (drop
      (call $_fprintf
       (get_local $$104)
-      (i32.const 8321)
+      (i32.const 8297)
       (get_local $$vararg_buffer12)
      )
     )
@@ -154184,7 +154089,7 @@
     (drop
      (call $_fprintf
       (get_local $$23)
-      (i32.const 8168)
+      (i32.const 8144)
       (get_local $$vararg_buffer)
      )
     )
@@ -154279,7 +154184,7 @@
       (drop
        (call $_fprintf
         (get_local $$29)
-        (i32.const 8168)
+        (i32.const 8144)
         (get_local $$vararg_buffer1)
        )
       )
@@ -154325,7 +154230,7 @@
      (drop
       (call $_fprintf
        (get_local $$38)
-       (i32.const 8318)
+       (i32.const 8294)
        (get_local $$vararg_buffer4)
       )
      )
@@ -154482,7 +154387,7 @@
     (drop
      (call $_fprintf
       (get_local $$67)
-      (i32.const 8168)
+      (i32.const 8144)
       (get_local $$vararg_buffer7)
      )
     )
@@ -154493,7 +154398,7 @@
    )
   )
  )
- (func $_expr_free (; 258 ;) (param $$0 i32) (result i32)
+ (func $_expr_free (; 257 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$3 i32)
@@ -154576,7 +154481,7 @@
    (get_local $$9)
   )
  )
- (func $_vect_free (; 259 ;) (param $$0 i32) (result i32)
+ (func $_vect_free (; 258 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$3 i32)
@@ -154659,7 +154564,7 @@
    (get_local $$9)
   )
  )
- (func $_ident_free (; 260 ;) (param $$0 i32) (result i32)
+ (func $_ident_free (; 259 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$3 i32)
@@ -154742,7 +154647,7 @@
    (get_local $$9)
   )
  )
- (func $_s_expr_free (; 261 ;) (param $$0 i32) (result i32)
+ (func $_s_expr_free (; 260 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$3 i32)
@@ -154825,7 +154730,7 @@
    (get_local $$9)
   )
  )
- (func $_free_tmp_mem (; 262 ;)
+ (func $_free_tmp_mem (; 261 ;)
   (local $$0 i32)
   (local $$1 i32)
   (local $$10 i32)
@@ -154932,7 +154837,7 @@
   )
   (return)
  )
- (func $_get_statement (; 263 ;) (param $$0 i32) (result i32)
+ (func $_get_statement (; 262 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -155125,7 +155030,7 @@
    )
   )
  )
- (func $_clear_saves (; 264 ;) (result i32)
+ (func $_clear_saves (; 263 ;) (result i32)
   (local $$0 i32)
   (local $$1 i32)
   (local $label i32)
@@ -155162,7 +155067,7 @@
    (get_local $$1)
   )
  )
- (func $_dotabf (; 265 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_dotabf (; 264 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -155303,7 +155208,7 @@
       (drop
        (call $_fprintf
         (get_local $$17)
-        (i32.const 7705)
+        (i32.const 7681)
         (get_local $$vararg_buffer)
        )
       )
@@ -155370,7 +155275,7 @@
       (drop
        (call $_fprintf
         (get_local $$25)
-        (i32.const 7705)
+        (i32.const 7681)
         (get_local $$vararg_buffer1)
        )
       )
@@ -155401,7 +155306,7 @@
    )
   )
  )
- (func $_mark_ident (; 266 ;) (param $$0 i32) (result i32)
+ (func $_mark_ident (; 265 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -156022,7 +155927,7 @@
    (get_local $$82)
   )
  )
- (func $_mark_s_expr (; 267 ;) (param $$0 i32) (result i32)
+ (func $_mark_s_expr (; 266 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -156173,7 +156078,7 @@
    (get_local $$17)
   )
  )
- (func $_mark_ident_list (; 268 ;) (param $$0 i32) (result i32)
+ (func $_mark_ident_list (; 267 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$3 i32)
@@ -156261,7 +156166,7 @@
    (get_local $$9)
   )
  )
- (func $_mark_vect (; 269 ;) (param $$0 i32) (result i32)
+ (func $_mark_vect (; 268 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -156478,7 +156383,7 @@
    (get_local $$26)
   )
  )
- (func $_mark_expr (; 270 ;) (param $$0 i32) (result i32)
+ (func $_mark_expr (; 269 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -156875,7 +156780,7 @@
    (get_local $$51)
   )
  )
- (func $_collect_reduced (; 271 ;) (param $$0 i32) (result i32)
+ (func $_collect_reduced (; 270 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -157181,7 +157086,7 @@
        )
       )
       (call $_fatal
-       (i32.const 8323)
+       (i32.const 8299)
       )
      )
     )
@@ -157215,7 +157120,7 @@
    (get_local $$41)
   )
  )
- (func $_collect_garbage (; 272 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
+ (func $_collect_garbage (; 271 ;) (param $$0 i32) (param $$1 i32) (param $$2 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -157762,7 +157667,7 @@
       )
      )
      (call $_fatal
-      (i32.const 8355)
+      (i32.const 8331)
      )
     )
     (set_local $$74
@@ -157798,7 +157703,7 @@
    (get_local $$77)
   )
  )
- (func $_collect_mem (; 273 ;) (result i32)
+ (func $_collect_mem (; 272 ;) (result i32)
   (local $$0 i32)
   (local $$1 i32)
   (local $$10 i32)
@@ -158643,7 +158548,7 @@
    (get_local $$92)
   )
  )
- (func $_mem_init (; 274 ;) (result i32)
+ (func $_mem_init (; 273 ;) (result i32)
   (local $$0 i32)
   (local $$1 i32)
   (local $$10 i32)
@@ -159453,7 +159358,7 @@
    (get_local $$90)
   )
  )
- (func $_add_rule (; 275 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_add_rule (; 274 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -159578,7 +159483,7 @@
    (get_local $$17)
   )
  )
- (func $_find_rule (; 276 ;) (param $$0 i32) (result i32)
+ (func $_find_rule (; 275 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -159825,7 +159730,7 @@
    (get_local $$27)
   )
  )
- (func $_build_rule (; 277 ;) (param $$0 i32) (param $$1 i32) (result i32)
+ (func $_build_rule (; 276 ;) (param $$0 i32) (param $$1 i32) (result i32)
   (local $$10 i32)
   (local $$11 i32)
   (local $$12 i32)
@@ -160070,7 +159975,7 @@
    (get_local $$37)
   )
  )
- (func $_resolve_rules (; 278 ;) (result i32)
+ (func $_resolve_rules (; 277 ;) (result i32)
   (local $$0 i32)
   (local $$1 i32)
   (local $$10 i32)
@@ -161663,7 +161568,7 @@
    (get_local $$213)
   )
  )
- (func $_partition_reduced (; 279 ;) (param $$0 i32) (result i32)
+ (func $_partition_reduced (; 278 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -161915,7 +161820,7 @@
        )
       )
       (call $_fatal
-       (i32.const 8387)
+       (i32.const 8363)
       )
      )
     )
@@ -161949,7 +161854,7 @@
    (get_local $$35)
   )
  )
- (func $_rec_partition (; 280 ;) (param $$0 i32) (result i32)
+ (func $_rec_partition (; 279 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$10 i32)
   (local $$11 i32)
@@ -162100,7 +162005,7 @@
       (br $switch)
      )
      (call $_fatal
-      (i32.const 8433)
+      (i32.const 8409)
      )
     )
     (set_local $$17
@@ -162133,7 +162038,7 @@
    (get_local $$20)
   )
  )
- (func $_partition (; 281 ;) (param $$0 i32) (result i32)
+ (func $_partition (; 280 ;) (param $$0 i32) (result i32)
   (local $$1 i32)
   (local $$2 i32)
   (local $$3 i32)
@@ -162189,6 +162094,101 @@
   (return
    (get_local $$5)
   )
+ )
+ (func $_mainJS (; 281 ;)
+  (local $$0 i32)
+  (local $$1 i32)
+  (local $$2 i32)
+  (local $$3 i32)
+  (local $$4 i32)
+  (local $$5 i32)
+  (local $label i32)
+  (local $sp i32)
+  (set_local $sp
+   (get_global $STACKTOP)
+  )
+  (set_global $STACKTOP
+   (i32.add
+    (get_global $STACKTOP)
+    (i32.const 32)
+   )
+  )
+  (if
+   (i32.ge_s
+    (get_global $STACKTOP)
+    (get_global $STACK_MAX)
+   )
+   (call $abortStackOverflow
+    (i32.const 32)
+   )
+  )
+  (set_local $$0
+   (get_local $sp)
+  )
+  (i32.store
+   (get_local $$0)
+   (i32.const 8439)
+  )
+  (set_local $$1
+   (i32.add
+    (get_local $$0)
+    (i32.const 4)
+   )
+  )
+  (i32.store
+   (get_local $$1)
+   (i32.const 8442)
+  )
+  (set_local $$2
+   (i32.add
+    (get_local $$0)
+    (i32.const 8)
+   )
+  )
+  (i32.store
+   (get_local $$2)
+   (i32.const 8447)
+  )
+  (set_local $$3
+   (i32.add
+    (get_local $$0)
+    (i32.const 12)
+   )
+  )
+  (i32.store
+   (get_local $$3)
+   (i32.const 8450)
+  )
+  (set_local $$4
+   (i32.add
+    (get_local $$0)
+    (i32.const 16)
+   )
+  )
+  (i32.store
+   (get_local $$4)
+   (i32.const 8455)
+  )
+  (set_local $$5
+   (i32.add
+    (get_local $$0)
+    (i32.const 20)
+   )
+  )
+  (i32.store
+   (get_local $$5)
+   (i32.const 8458)
+  )
+  (drop
+   (call $_main
+    (i32.const 6)
+    (get_local $$0)
+   )
+  )
+  (set_global $STACKTOP
+   (get_local $sp)
+  )
+  (return)
  )
  (func $_malloc (; 282 ;) (param $$0 i32) (result i32)
   (local $$$0 i32)

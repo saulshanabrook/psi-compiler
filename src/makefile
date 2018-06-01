@@ -10,7 +10,7 @@ EMCC=emcc -g -Wno-everything
 mc: code.o parse.o lex.o main.o dist.o extended.o libmoabase.a 
 	$(CC) $(CFLAGS) -o mc lex.o main.o code.o parse.o dist.o extended.o -lmoabase -lm
 
-mc.js: code.bc parse.bc lex.bc main.bc dist.bc extended.bc moabase.bc 
+mc.js: code.bc parse.bc lex.bc main.bc dist.bc extended.bc moabase.bc mainJS.bc
 	$(EMCC) -s WASM=1 -s NO_EXIT_RUNTIME=1 -s EXTRA_EXPORTED_RUNTIME_METHODS='["ccall"]' -o $@ $^
 
 libmoabase.a: psi.o moa_func.o vect.o ident.o sys.o part.o scalar.o poly.o values.o output.o 
@@ -23,6 +23,9 @@ main.o:	main.c parse.h
 	$(CC) $(CFLAGS) -c main.c
 
 main.bc: main.c
+	$(EMCC) -o $@ $^
+
+mainJS.bc: mainJS.c
 	$(EMCC) -o $@ $^
 
 extended.o: extended.c
