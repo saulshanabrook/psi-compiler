@@ -37,6 +37,15 @@
     <div class="row">
       <div class="col">
         <p class="lead">
+          The Mathematics of Arrays is an algebra for representing operations on arrays that was created
+          by Lenore Mullin, after she had worked on the APL interpreter. It seperates the Operational Normal Form
+          of the array computation, which just thinks about arrays as a shape and a function form indices to value,
+          from the Denotational Normal Form, which deals with memory layout (strides, etc). Her PSI calculus compiler
+          defines a number of reductions in the ONF, so that complex array operations can be reduced to basic indexing operations
+          and computation, which reduce the need for intermediate values. Then that ONF can be translated into different Implementations
+          dependending on the hardware requirements.
+        </p>
+        <p class="lead">
           I have compiled Lenore Mullin's PSI Compiler, explained in
           <i>
             <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.54.4307">
@@ -128,7 +137,7 @@
 
     <div class="row">
       <div class="col">
-        <h2>My perspective</h2>
+        <h2 class="display-3 text-center">Next Steps</h2>
         <p>How can we represent this MoA structure in Python? Can we create a friendly lazy array API that can then target different
           backends for the generated array code? These code be native Python, NumPy, XND, llvm, TVM, Tensorflow, PyTorch,
           Tensor Comprehensions, etc. What about a sparse or compressed array backend?
