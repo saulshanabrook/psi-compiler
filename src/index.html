@@ -175,8 +175,8 @@
         } catch (err) {
           console.log(err);
         }
-        c.setValue(FS.readFile('ex.c', { encoding: 'utf8' }));
-        r.setValue(FS.readFile('ex.r', { encoding: 'utf8' }));
+        c.setValue(FS.readFile('ex.c', { encoding: 'utf8' }).trim());
+        r.setValue(FS.readFile('ex.r', { encoding: 'utf8' }).trim());
         return false
       };
 
