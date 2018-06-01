@@ -16,15 +16,13 @@
       onRuntimeInitialized: () => resolve_()
     };
   </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.38.0/codemirror.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.38.0/codemirror.min.css" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.38.0/mode/clike/clike.min.js"></script>
   <script type="text/javascript" src="mc.js"></script>
   <style type="text/css">
-    .card-body {
-
-    }
-
-    .pre-scrollable {
-      height: 600px;
-      max-height: unset;
+    .CodeMirror {
+      height: auto;
     }
   </style>
 
@@ -94,8 +92,8 @@
               <button type="submit" class="btn btn-primary btn-sm">Compile</button>
             </form>
           </div>
-          <div class="card-body">
-            <pre class="pre-scrollable"><code id="ex.m" contenteditable></code></pre>
+          <div class="card-body p-0">
+            <textarea id="ex.m"></textarea>
           </div>
         </div>
       </div>
@@ -104,9 +102,9 @@
           <div class="card-header">
             Intermediate Reductions
           </div>
-          <div class="card-body">
-            <pre class="pre-scrollable"><code id="ex.r"></code></pre>
-          </div>
+          <div class="card-body p-0">
+              <textarea id="ex.r"></textarea>
+            </div>
         </div>
       </div>
       <div class="col-xl-4">
@@ -114,9 +112,9 @@
           <div class="card-header">
             Generated C Code
           </div>
-          <div class="card-body">
-            <pre class="pre-scrollable"><code id="ex.c"></code></pre>
-          </div>
+          <div class="card-body p-0">
+              <textarea id="ex.c"></textarea>
+            </div>
         </div>
       </div>
     </div>
@@ -145,20 +143,28 @@
 
   <script type="text/javascript">
     document.addEventListener('DOMContentLoaded', () => {
-      const m = document.getElementById('ex.m');
-      const c = document.getElementById("ex.c");
-      const r = document.getElementById("ex.r");
-    
+      var m = CodeMirror.fromTextArea(document.getElementById('ex.m'), {
+        lineNumbers: true
+      });
+      var c = CodeMirror.fromTextArea(document.getElementById('ex.c'), {
+        lineNumbers: true,
+        readOnly: 'nocursor'
+      });
+      var r = CodeMirror.fromTextArea(document.getElementById('ex.r'), {
+        lineNumbers: true,
+        readOnly: 'nocursor'
+      });
+
       async function selectExample(id) {
-        m.innerHTML = await (await fetch(`./examples/ex${id}.m`)).text();
+        m.setValue(await (await fetch(`./examples/ex${id}.m`)).text());
         window.ready.then(compile);
       }
-    
+
       selectExample('1');
       document.getElementById('inlineFormCustomSelectPref').onchange = e => selectExample(e.target.value);
 
       function compile() {
-        FS.writeFile('ex.m', m.textContent);
+        FS.writeFile('ex.m', m.getValue());
         try {
           Module.ccall(
             'mainJS', // name of C function 
@@ -169,8 +175,8 @@
         } catch (err) {
           console.log(err);
         }
-        c.innerHTML = FS.readFile('ex.c', { encoding: 'utf8' });
-        r.innerHTML = FS.readFile('ex.r', { encoding: 'utf8' });
+        c.setValue(FS.readFile('ex.c', { encoding: 'utf8' }));
+        r.setValue(FS.readFile('ex.r', { encoding: 'utf8' }));
         return false
       };
 
