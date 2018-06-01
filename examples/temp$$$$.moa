@@ -1,23 +1,17 @@
 /*******
-A=One drop (One take (Zero drop ((One drop C) cat (One take C))))
+b= *red ( +red a)
 ********/
 
-
-
-/*******
-B=D
-********/
-
-  shift=_B+0*12+0*4+0;
-  offset0=_D+0*12+0*4+0;
-  for (i0=0; i0<2; i0++) {
-    for (i1=0; i1<3; i1++) {
-      for (i2=0; i2<4; i2++) {
-        *(shift)= *(offset0);
-        offset0+=1;
-        shift+=1;
-      }
-    }
+  shift=_b+0;
+  for (i0=0; i0<5; i0++) {
+    *(shift)= 1.000000;
+    shift+=1;
   }
-
-
+  for (forall_i1[0]=0; forall_i1[0]<0+2; forall_i1[0]++) {
+    temp1=(double *) get_mem((5)*sizeof(double));
+    shift=temp1+0;
+    for (i1=0; i1<5; i1++) {
+      *(shift)= 0.000000;
+      shift+=1;
+    }
+    for (forall_i0[0]=

@@ -1,0 +1,183 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <!-- Required meta tags -->
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" integrity="sha384-WskhaSGFgHYWDcbwN70/dfYBj47jz9qbsMId/iRN3ewGhXQFZCSftd1LZCfmhktB"
+    crossorigin="anonymous">
+  <script type="text/javascript">
+    let resolve_;
+    window.ready = new Promise(resolve => resolve_ = resolve);
+    var Module = {
+      onRuntimeInitialized: () => resolve_()
+    };
+  </script>
+  <script type="text/javascript" src="mc.js"></script>
+  <style type="text/css">
+    .card-body {
+
+    }
+
+    .pre-scrollable {
+      height: 600px;
+      max-height: unset;
+    }
+  </style>
+
+  <title>Mathematics of Array - C Compiler</title>
+</head>
+
+<body>
+  <div class="container">
+
+    <h1 class="display-1 text-center">PSI Compiler</h1>
+    <div class="row">
+      <div class="col">
+        <p class="lead">
+          I have compiled Lenore Mullin's PSI Compiler, explained in
+          <i>
+            <a href="http://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.54.4307">
+              A Reduction Semantics for Array Expressions: The PSI Compiler (1994)
+            </a>
+          </i>, for Javascript and have embedded it below. On the left, you can select an example file or create your own. The
+          syntax is based on her Mathematics of Arrays. The arrays expressions are then reduced, as you can see from the
+          middle screen. Finally, optimized C code is produced from the reduced array expressions.
+        </p>
+      </div>
+    </div>
+  </div>
+  <div class="container-fluid">
+    <div class="row mb-4">
+      <div class="col">
+        <div class='text-center'>
+          <div class="btn-group " role="group" aria-label="Basic example">
+            <button type="button" class="btn btn-outline-primary">
+              <a href="http://www.cs.albany.edu/FacultyStaff/profiles/lenore.htm">Lenore Mullin</a>
+            </button>
+            <button type="button" class="btn btn-outline-primary">
+              <a href="../doc/v0.4_users_guide/moal.pdf">Mathematics of Array Language (MOAL) Guide</a>
+            </button>
+            <button type="button" class="btn btn-outline-primary">
+              <a href="../doc/compiler_theory2/compiler.pdf">Compiler Theory Guide</a>
+            </button>
+            <button type="button" class="btn btn-outline-primary">
+              <a href="../doc/prog_guide_2/pg2.pdf">Compiler Implementation Guide</a>
+            </button>
+            <button type="button" class="btn btn-outline-primary">
+              <a href="https://github.com/saulshanabrook/psi-compiler/blob/master/src/">Compiler Implementation Code</a>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-xl-4">
+        <div class="card">
+          <div class="card-header">
+            <form class="form-inline" id="form">
+              <label class="mr-2" for="inlineFormCustomSelectPref">Mathematics of Array Language (MOAL)</label>
+              <select class="custom-select-sm mr-sm-2" id="inlineFormCustomSelectPref">
+                <option selected value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="6">6</option>
+                <option value="7">7</option>
+                <option value="8">8</option>
+                <option value="9">9</option>
+              </select>
+              <button type="submit" class="btn btn-primary btn-sm">Compile</button>
+            </form>
+          </div>
+          <div class="card-body">
+            <pre class="pre-scrollable"><code id="ex.m" contenteditable></code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4">
+        <div class="card">
+          <div class="card-header">
+            Intermediate Reductions
+          </div>
+          <div class="card-body">
+            <pre class="pre-scrollable"><code id="ex.r"></code></pre>
+          </div>
+        </div>
+      </div>
+      <div class="col-xl-4">
+        <div class="card">
+          <div class="card-header">
+            Generated C Code
+          </div>
+          <div class="card-body">
+            <pre class="pre-scrollable"><code id="ex.c"></code></pre>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+
+    <div class="row">
+      <div class="col">
+        <h2>My perspective</h2>
+        <p>How can we represent this MoA structure in Python? Can we create a friendly lazy array API that can then target different
+          backends for the generated array code? These code be native Python, NumPy, XND, llvm, TVM, Tensorflow, PyTorch,
+          Tensor Comprehensions, etc.
+        </p>
+        <p>
+          Then, could we create a subset of the NumPy API on top of that? For example, starting with
+          <a href="https://github.com/pydata/sparse/issues/1">what xarray and sparse arrys need</a>.
+        </p>
+        <p>
+          Finally, could we extend this to variable dimension arrays? If we were able to support these, then we effectively have support
+          for arbitrary nested structures, and could see how this could be used to target the Parquet/Arrow/JSON use cases.
+        </p>
+      </div>
+    </div>
+  </div>
+
+
+  <script type="text/javascript">
+    document.addEventListener('DOMContentLoaded', () => {
+      const m = document.getElementById('ex.m');
+      const c = document.getElementById("ex.c");
+      const r = document.getElementById("ex.r");
+    
+      async function selectExample(id) {
+        m.innerHTML = await (await fetch(`./examples/ex${id}.m`)).text();
+        window.ready.then(compile);
+      }
+    
+      selectExample('1');
+      document.getElementById('inlineFormCustomSelectPref').onchange = e => selectExample(e.target.value);
+
+      function compile() {
+        FS.writeFile('ex.m', m.textContent);
+        try {
+          Module.ccall(
+            'mainJS', // name of C function 
+            null, // return type
+            null, // argument types
+            null  // arguments
+          );
+        } catch (err) {
+          console.log(err);
+        }
+        c.innerHTML = FS.readFile('ex.c', { encoding: 'utf8' });
+        r.innerHTML = FS.readFile('ex.r', { encoding: 'utf8' });
+        return false
+      };
+
+      document.getElementById('form').onsubmit = compile;
+      window.ready.then(compile);
+    }, false);
+  </script>
+</body>
+
+</html>

@@ -57,22 +57,22 @@ Amts=Y cat  omega <1.000000 1.000000> (Ams + RAMY)
 
   for (forall_i0[0]=0; forall_i0[0]<0+2; forall_i0[0]++) {
     for (forall_i0[1]=0; forall_i0[1]<0+3; forall_i0[1]++) {
-      shift=_Amts+forall_i0[0+0]*24+forall_i0[1+0]*8+0;
-      offset0=_Y+forall_i0[0+0]*12+forall_i0[1+0]*4+0;
+      shift=_Amts+forall_i0[0]*24+forall_i0[0]*8+0;
+      offset0=_Y+forall_i0[0]*12+forall_i0[0]*4+0;
       for (i2=0; i2<4; i2++) {
         *(shift)= *(offset0);
         offset0+=1;
         shift+=1;
       }
-      shift=_Amts+forall_i0[0+0]*24+forall_i0[1+0]*8+4;
-      offset0=_Ams+forall_i0[0+0]*12+forall_i0[1+0]*4+0;
+      shift=_Amts+forall_i0[0]*24+forall_i0[0]*8+4;
+      offset0=_Ams+forall_i0[0]*12+forall_i0[0]*4+0;
       for (i2=0; i2<4; i2++) {
         *(shift)= *(offset0);
         offset0+=1;
         shift+=1;
       }
-      shift=_Amts+forall_i0[0+0]*24+forall_i0[1+0]*8+4;
-      offset0=_RAMY+forall_i0[0+0]*12+forall_i0[1+0]*4+0;
+      shift=_Amts+forall_i0[0]*24+forall_i0[0]*8+4;
+      offset0=_RAMY+forall_i0[0]*12+forall_i0[0]*4+0;
       for (i2=0; i2<4; i2++) {
         *(shift)+= *(offset0);
         offset0+=1;

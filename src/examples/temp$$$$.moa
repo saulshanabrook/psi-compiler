@@ -1,0 +1,12 @@
+/*******
+res0=(i psi x) cat (j psi x)
+********/
+
+  shift=_res0+0;
+  offset0=_x+0;
+  *(shift)= *(offset0);
+  shift=_res0+1;
+  offset0=_x+1;
+  *(shift)= *(offset0);
+
+

@@ -7,7 +7,7 @@ SRC=$(HOME)/Compiler/mc/src
 RELEASE_SRC=$(HOME)/Compiler/mc/release
 
 mc: code.o parse.o lex.o main.o dist.o extended.o libmoabase.a 
-	$(CC) $(CFLAGS) -o mc lex.o main.o code.o parse.o dist.o extended.o -lmoabase -lljw -lm
+	$(CC) $(CFLAGS) -o mc lex.o main.o code.o parse.o dist.o extended.o -lmoabase -lm
 
 libmoabase.a: psi.o moa_func.o vect.o ident.o sys.o part.o scalar.o poly.o values.o output.o 
 	ar r libmoabase.a psi.o moa_func.o vect.o ident.o sys.o part.o scalar.o poly.o values.o output.o 

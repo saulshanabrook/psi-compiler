@@ -62,7 +62,7 @@ skip_line()
     if (generic) fputc(ch,rfile);
   }
   if (generic) fputc('\n',rfile);
-  if feof(infile) ch=ETX;
+  if (feof(infile)) ch=ETX;
   else {
     line_no++;
     syntax_report=TRUE;
@@ -81,7 +81,7 @@ nextchar()
     line_no++;
     syntax_report=TRUE;
   }
-  if feof(infile) ch=ETX;
+  if (feof(infile)) ch=ETX;
 }
 
 

@@ -72,6 +72,7 @@ long	ljw_qctr(char	*name, int line_number);
 	extern	FILE	*erf_file;
 #endif
 
+#undef DEBUG
 /*	-------------------------------------------------	*/
 /*	The debugging "q" macros:					*/
 /*	-------------------------------------------------	*/

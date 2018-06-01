@@ -1,0 +1,17 @@
+# Fdb version 3
+["pdflatex"] 1527567977 "/Users/saul/p/tarred_compiler/doc/misc/interface.tex" "interface.pdf" "interface" 1527567977
+  "/Users/saul/p/tarred_compiler/doc/misc/interface.tex" 750431234 5689 0bad475127ce8e534fe5ece6905f7823 ""
+  "/usr/local/texlive/2017/texmf-dist/tex/latex/base/article.cls" 1480098821 19821 310da678527a7dfe2a02c88af38079b7 ""
+  "/usr/local/texlive/2017/texmf-dist/tex/latex/base/latex209.def" 1480098821 12115 054ddb773c4007598b6e1cd3624fd32e ""
+  "/usr/local/texlive/2017/texmf-dist/tex/latex/base/latexsym.sty" 1480098821 2854 d9a09e80ec53a1710adc74c0e8300370 ""
+  "/usr/local/texlive/2017/texmf-dist/tex/latex/base/size10.clo" 1480098821 8292 e897c12e1e886ce77fe26afc5d470886 ""
+  "/usr/local/texlive/2017/texmf-dist/tex/latex/base/tracefnt.sty" 1480098821 8595 4b36794749ab83dd2a0dfe4fad56de48 ""
+  "/usr/local/texlive/2017/texmf-dist/web2c/texmf.cnf" 1494087824 32646 eadc4ca26cdbe7105ac7c593aa8c4f72 ""
+  "/usr/local/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt" 1495593487 4129592 0e6cfee100d68e6d96b92c0258f2ff73 ""
+  "/usr/local/texlive/2017/texmf.cnf" 1495593465 577 2b71d4d888f9e5560b2e99985915a9fa ""
+  "interface.aux" 1527567977 8 a94a2480d3289e625eea47cd1b285758 ""
+  "interface.tex" 750431234 5689 0bad475127ce8e534fe5ece6905f7823 ""
+  "margins.sty" 0 -1 0 ""
+  (generated)
+  "interface.log"
+  "interface.pdf"

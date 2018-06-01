@@ -1,5 +1,5 @@
-CC=cc
-CFLAGS=-g
+CC=emcc
+CFLAGS=-g -Wno-everything
 #MC=../mc_next
 MC=../mc
 MFLAGS=

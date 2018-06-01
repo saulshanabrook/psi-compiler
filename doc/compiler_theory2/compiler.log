@@ -1,106 +1,234 @@
-This is TeX, C Version 3.14t3 (format=lplain 92.1.30)  27 MAY 1995 19:53
+This is pdfTeX, Version 3.14159265-2.6-1.40.18 (TeX Live 2017) (preloaded format=pdflatex 2017.5.23)  28 MAY 2018 23:19
+entering extended mode
+ restricted \write18 enabled.
+ file:line:error style messages enabled.
+ %&-line parsing enabled.
 **compiler.tex
-(compiler.tex
-LaTeX Version 2.09 <14 January 1991>
-(/usr/local/lib/tex/inputs/latexdist/article.sty
-Document Style `article' <16 Mar 88>.
-(/usr/local/lib/tex/inputs/latexdist/art10.sty)
-\c@part=\count79
-\c@section=\count80
-\c@subsection=\count81
-\c@subsubsection=\count82
-\c@paragraph=\count83
-\c@subparagraph=\count84
-\c@figure=\count85
-\c@table=\count86
-) (margins.sty)
-\c@definition=\count87
- (compiler.aux
-(compiler.title.aux)) (compiler.title.tex (/usr/local/lib/tex/inputs/epsf.sty
-\epsffilein=\read0
-\epsfxsize=\dimen99
-\epsfysize=\dimen100
-\epsftsize=\dimen101
-\epsfrsize=\dimen102
-\epsftmp=\dimen103
-\pspoints=\dimen104
+(./compiler.tex
+LaTeX2e <2017-04-15>
+Babel <3.10> and hyphenation patterns for 84 language(s) loaded.
+(/usr/local/texlive/2017/texmf-dist/tex/latex/base/latex209.def
+File: latex209.def 2015/02/22 v0.53 Standard LaTeX file
+
+
+          Entering LaTeX 2.09 COMPATIBILITY MODE
+ *************************************************************
+    !!WARNING!!    !!WARNING!!    !!WARNING!!    !!WARNING!!   
+ 
+ This mode attempts to provide an emulation of the LaTeX 2.09
+ author environment so that OLD documents can be successfully
+ processed. It should NOT be used for NEW documents!
+ 
+ New documents should use Standard LaTeX conventions and start
+ with the \documentclass command.
+ 
+ Compatibility mode is UNLIKELY TO WORK with LaTeX 2.09 style
+ files that change any internal macros, especially not with
+ those that change the FONT SELECTION or OUTPUT ROUTINES.
+ 
+ Therefore such style files MUST BE UPDATED to use
+          Current Standard LaTeX: LaTeX2e.
+ If you suspect that you may be using such a style file, which
+ is probably very, very old by now, then you should attempt to
+ get it updated by sending a copy of this error message to the
+ author of that file.
+ *************************************************************
+
+\footheight=\dimen102
+\@maxsep=\dimen103
+\@dblmaxsep=\dimen104
+\@cla=\count79
+\@clb=\count80
+\mscount=\count81
+(/usr/local/texlive/2017/texmf-dist/tex/latex/base/tracefnt.sty
+Package: tracefnt 2015/02/21 v3.0k Standard LaTeX package (font tracing)
+\tracingfonts=\count82
+LaTeX Info: Redefining \selectfont on input line 106.
+)
+\symbold=\mathgroup4
+\symsans=\mathgroup5
+\symtypewriter=\mathgroup6
+\symitalic=\mathgroup7
+\symsmallcaps=\mathgroup8
+\symslanted=\mathgroup9
+LaTeX Font Info:    Redeclaring math alphabet \mathbf on input line 268.
+LaTeX Font Info:    Redeclaring math alphabet \mathsf on input line 269.
+LaTeX Font Info:    Redeclaring math alphabet \mathtt on input line 270.
+LaTeX Font Info:    Redeclaring math alphabet \mathit on input line 276.
+LaTeX Info: Redefining \em on input line 286.
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/base/latexsym.sty
+Package: latexsym 1998/08/17 v2.2e Standard LaTeX package (lasy symbols)
+\symlasy=\mathgroup10
+LaTeX Font Info:    Overwriting symbol font `lasy' in version `bold'
+(Font)                  U/lasy/m/n --> U/lasy/b/n on input line 52.
+)
+LaTeX Font Info:    Redeclaring math delimiter \lgroup on input line 332.
+LaTeX Font Info:    Redeclaring math delimiter \rgroup on input line 334.
+LaTeX Font Info:    Redeclaring math delimiter \bracevert on input line 336.
+)
+(/usr/local/texlive/2017/texmf-dist/tex/latex/base/article.cls
+Document Class: article 2014/09/29 v1.4h Standard LaTeX document class
+(/usr/local/texlive/2017/texmf-dist/tex/latex/base/size10.clo
+File: size10.clo 2014/09/29 v1.4h Standard LaTeX file (size option)
+)
+\c@part=\count83
+\c@section=\count84
+\c@subsection=\count85
+\c@subsubsection=\count86
+\c@paragraph=\count87
+\c@subparagraph=\count88
+\c@figure=\count89
+\c@table=\count90
+\abovecaptionskip=\skip41
+\belowcaptionskip=\skip42
+Compatibility mode: definition of \rm ignored.
+Compatibility mode: definition of \sf ignored.
+Compatibility mode: definition of \tt ignored.
+Compatibility mode: definition of \bf ignored.
+Compatibility mode: definition of \it ignored.
+Compatibility mode: definition of \sl ignored.
+Compatibility mode: definition of \sc ignored.
+LaTeX Info: Redefining \cal on input line 496.
+LaTeX Info: Redefining \mit on input line 497.
+\bibindent=\dimen105
+) (./margins.sty)
+\c@definition=\count91
+(./compiler.aux (./compiler.title.aux))
+\openout1 = `compiler.aux'.
+
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 25.
+LaTeX Font Info:    ... okay on input line 25.
+\openout2 = `compiler.title.aux'.
+
+ (./compiler.title.tex
+(/usr/local/texlive/2017/texmf-dist/tex/generic/epsf/epsf.sty
+This is `epsf.tex' v2.7.4 <14 February 2011>
+\epsffilein=\read1
+\epsfframemargin=\dimen106
+\epsfframethickness=\dimen107
+\epsfrsize=\dimen108
+\epsftmp=\dimen109
+\epsftsize=\dimen110
+\epsfxsize=\dimen111
+\epsfysize=\dimen112
+\pspoints=\dimen113
+)
+(logo.ps
 )
 [1
 
 
-]) [2
+{/usr/local/texlive/2017/texmf-var/fonts/map/pdftex/updmap/pdftex.map}
+Non-PDF special ignored!])
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <17.28> on input line 27.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <12> on input line 27.
+LaTeX Font Info:    Try loading font information for U+lasy on input line 27.
 
-] [3] [4]
+(/usr/local/texlive/2017/texmf-dist/tex/latex/base/ulasy.fd
+File: ulasy.fd 1998/08/17 v2.2e LaTeX symbol font definitions
+)
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <8> on input line 27.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <6> on input line 27.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 27.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 65.
+ [2
+
+]
+LaTeX Font Info:    Try loading font information for OMS+cmr on input line 88.
+
+(/usr/local/texlive/2017/texmf-dist/tex/latex/base/omscmr.fd
+File: omscmr.fd 2014/09/29 v2.5h Standard LaTeX font definitions
+)
+LaTeX Font Info:    Font shape `OMS/cmr/m/n' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 88.
+ [3] [4]
 Underfull \hbox (badness 10000) in paragraph at lines 295--295
-\tenrm array[]definition := "$ [] $" IN-TE-GER[]number "$\tenmi <$\tenrm " $\te
-nsy f$ \tenrm IN-TE-GER[]number []\tentt |
-
-\hbox(7.5+2.5)x448.07378, glue set 11.5092
-.\tenrm a
-.\tenrm r
-.\tenrm r
-.\tenrm a
-.\kern-0.27779
-.etc.
+\OT1/cmr/m/n/10 array[]definition := "$ [] $" IN-TE-GER[]number "$\OML/cmm/m/it
+/10 <$\OT1/cmr/m/n/10 " \OMS/cmsy/m/n/10 f \OT1/cmr/m/n/10 IN-TE-GER[]number []
+\OT1/cmtt/m/n/10 |
+ []
 
 
 Underfull \hbox (badness 10000) in paragraph at lines 295--295
 
-
-\hbox(0.0+0.0)x448.07378
-.\glue(\rightskip) 0.0
+ []
 
 
 Overfull \hbox (9.12256pt too wide) in paragraph at lines 295--296
 [][] 
-
-\hbox(189.65+184.65)x460.63243
-.\hbox(0.0+0.0)x0.0
-.\hbox(189.65+184.65)x469.75499
-..\hbox(374.29999+0.0)x469.75499, shifted 184.65
-...\vbox(374.29999+0.0)x469.75499 []
-.\penalty 10000
-.\glue(\parfillskip) 0.0 plus 1.0fil
-.\glue(\rightskip) 0.0
+ []
 
 [5] [6] [7]
 Overfull \hbox (9.12256pt too wide) in paragraph at lines 460--461
 [][] 
-
-\hbox(58.9+53.9)x460.63243
-.\hbox(0.0+0.0)x0.0
-.\hbox(58.9+53.9)x469.75499
-..\hbox(112.79999+0.0)x469.75499, shifted 53.9
-...\vbox(112.79999+0.0)x469.75499 []
-.\penalty 10000
-.\glue(\parfillskip) 0.0 plus 1.0fil
-.\glue(\rightskip) 0.0
+ []
 
 
 Overfull \hbox (9.12256pt too wide) in paragraph at lines 502--503
 [][] 
+ []
 
-\hbox(207.9+202.9)x460.63243
-.\hbox(0.0+0.0)x0.0
-.\hbox(207.9+202.9)x469.75499
-..\hbox(410.79999+0.0)x469.75499, shifted 202.9
-...\vbox(410.79999+0.0)x469.75499 []
-.\penalty 10000
-.\glue(\parfillskip) 0.0 plus 1.0fil
-.\glue(\rightskip) 0.0
 
-[8] [9] [10] (compiler.bbl) [11
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+[8] [9] [10] (./compiler.bbl) [11
 
 ] [12
 
-] [13] (compiler.aux (compiler.title.aux)) ) 
+]
+LaTeX Font Info:    Font shape `OMS/cmr/m/it' in size <10> not available
+(Font)              Font shape `OMS/cmsy/m/n' tried instead on input line 640.
+ [13] (./compiler.aux
+(./compiler.title.aux)) ) 
 Here is how much of TeX's memory you used:
- 249 strings out of 4463
- 2394 string characters out of 63209
- 51860 words of memory out of 262141
- 2169 multiletter control sequences out of 9500
- 19164 words of font info for 73 fonts, out of 72000 for 255
- 14 hyphenation exceptions out of 607
- 13i,9n,17p,186b,297s stack positions out of 300i,40n,60p,3000b,4000s
+ 540 strings out of 492995
+ 6515 string characters out of 6132704
+ 74806 words of memory out of 5000000
+ 4109 multiletter control sequences out of 15000+600000
+ 21106 words of font info for 77 fonts, out of 8000000 for 9000
+ 1141 hyphenation exceptions out of 8191
+ 25i,9n,19p,181b,234s stack positions out of 5000i,500n,10000p,200000b,80000s
+</usr/local/texlive/2017/texmf-dist/fonts/type1/public
+/amsfonts/cm/cmbx10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/
+amsfonts/cm/cmbx12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/a
+msfonts/cm/cmex10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/am
+sfonts/cm/cmmi10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/ams
+fonts/cm/cmmi5.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfo
+nts/cm/cmmi7.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfont
+s/cm/cmmi8.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/
+cm/cmr10.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm
+/cmr12.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/c
+mr17.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr
+6.pfb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr7.p
+fb></usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmr8.pfb>
+</usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy10.pfb><
+/usr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy6.pfb></u
+sr/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></usr
+/local/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy8.pfb></usr/l
+ocal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/lo
+cal/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt10.pfb></usr/loc
+al/texlive/2017/texmf-dist/fonts/type1/public/amsfonts/cm/cmtt8.pfb>
+Output written on compiler.pdf (13 pages, 248507 bytes).
+PDF statistics:
+ 127 PDF objects out of 1000 (max. 8388607)
+ 91 compressed objects within 1 object stream
+ 0 named destinations out of 1000 (max. 500000)
+ 1 words of extra memory for PDF output out of 10000 (max. 10000000)
 
-Output written on compiler.dvi (13 pages, 48140 bytes).

@@ -1,25 +1,25 @@
 \contentsline {section}{\numberline {1}Overview}{2}
 \contentsline {section}{\numberline {2}Programming Style}{3}
 \contentsline {section}{\numberline {3}Data Structures}{4}
-\contentsline {subsection}{\numberline {3.1}Tokens ({\ptt symbol\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t},{\ptt emit\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t})}{4}
+\contentsline {subsection}{\numberline {3.1}Tokens ({\tt symbol\_t},{\tt emit\_t})}{4}
 \contentsline {subsection}{\numberline {3.2}The Symbol Table}{4}
-\contentsline {subsection}{\numberline {3.3}Identifiers ({\ptt ident\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t})}{4}
-\contentsline {subsection}{\numberline {3.4}Scalar Expressions ({\ptt s\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}expr\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t})}{6}
-\contentsline {subsection}{\numberline {3.5}Vector Expressions ({\ptt vect\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t})}{6}
-\contentsline {subsection}{\numberline {3.6}Array Expressions ({\ptt expr\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t},{\ptt parser\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t},{\ptt forall\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t})}{7}
-\contentsline {subsection}{\numberline {3.7}Compound Operators ({\ptt op\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t})}{8}
-\contentsline {subsection}{\numberline {3.8}Statements ({\ptt assign\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t},{\ptt reduced\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t},{\ptt loop\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t},{\ptt statement\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t})}{8}
-\contentsline {subsection}{\numberline {3.9}Distributed Arrays ({\ptt rule\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t},{\ptt dist\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t})}{9}
-\contentsline {subsection}{\numberline {3.10}Normalized Polynomials ({\ptt poly\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t})}{9}
-\contentsline {subsection}{\numberline {3.11}Garbage Collection ({\ptt save\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t})}{10}
-\contentsline {subsection}{\numberline {3.12}Code Generation ({\ptt name\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t},{\ptt steps\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}t})}{10}
+\contentsline {subsection}{\numberline {3.3}Identifiers ({\tt ident\_t})}{4}
+\contentsline {subsection}{\numberline {3.4}Scalar Expressions ({\tt s\_expr\_t})}{6}
+\contentsline {subsection}{\numberline {3.5}Vector Expressions ({\tt vect\_t})}{6}
+\contentsline {subsection}{\numberline {3.6}Array Expressions ({\tt expr\_t},{\tt parser\_t},{\tt forall\_t})}{7}
+\contentsline {subsection}{\numberline {3.7}Compound Operators ({\tt op\_t})}{8}
+\contentsline {subsection}{\numberline {3.8}Statements ({\tt assign\_t},{\tt reduced\_t},{\tt loop\_t},{\tt statement\_t})}{8}
+\contentsline {subsection}{\numberline {3.9}Distributed Arrays ({\tt rule\_t},{\tt dist\_t})}{9}
+\contentsline {subsection}{\numberline {3.10}Normalized Polynomials ({\tt poly\_t})}{9}
+\contentsline {subsection}{\numberline {3.11}Garbage Collection ({\tt save\_t})}{10}
+\contentsline {subsection}{\numberline {3.12}Code Generation ({\tt name\_t},{\tt steps\_t})}{10}
 \contentsline {section}{\numberline {4}Module Descriptions}{10}
-\contentsline {subsection}{\numberline {4.1}{\pbf lex.c}}{10}
-\contentsline {subsection}{\numberline {4.2}{\pbf parser.c}}{10}
-\contentsline {subsection}{\numberline {4.3}{\pbf moa\unhbox \voidb@x \kern .06em \vbox {\hrule width.3em}func.c}}{11}
-\contentsline {subsection}{\numberline {4.4}{\pbf psi.c}}{11}
-\contentsline {subsection}{\numberline {4.5}{\pbf part.c}}{11}
-\contentsline {subsection}{\numberline {4.6}{\pbf code.c}}{12}
-\contentsline {subsection}{\numberline {4.7}{\pbf dist.c}}{12}
-\contentsline {subsection}{\numberline {4.8}{\pbf vect.c}}{13}
-\contentsline {subsection}{\numberline {4.9}\pbf ident.c}{15}
+\contentsline {subsection}{\numberline {4.1}{\bf lex.c}}{10}
+\contentsline {subsection}{\numberline {4.2}{\bf parser.c}}{10}
+\contentsline {subsection}{\numberline {4.3}{\bf moa\_func.c}}{11}
+\contentsline {subsection}{\numberline {4.4}{\bf psi.c}}{11}
+\contentsline {subsection}{\numberline {4.5}{\bf part.c}}{11}
+\contentsline {subsection}{\numberline {4.6}{\bf code.c}}{12}
+\contentsline {subsection}{\numberline {4.7}{\bf dist.c}}{12}
+\contentsline {subsection}{\numberline {4.8}{\bf vect.c}}{13}
+\contentsline {subsection}{\numberline {4.9}\bf ident.c}{15}

@@ -17,6 +17,7 @@
 #include "psi.h"
 #include "parse.h"
 #include "dist.h"
+#include <emscripten/emscripten.h>
 
 #include "dist.e"
 #define	DEBUG
@@ -44,11 +45,21 @@ void cleanup()
   unlink("junk$$$$.moa");
 }
 
+void EMSCRIPTEN_KEEPALIVE mainJS(){
+  const char *a[6];
+  a[0] = "mc";
+  a[1] = "ex.m";
+  a[2] = "-r";
+  a[3] = "ex.r";
+  a[4] = "-o";
+  a[5] = "ex.c";
+  main(6, a);
+}
+
 
 main(int argc, char *argv[])
 {
   int arg;
-
 printf("Starting main..\n");
 q1("Starting main..");
 

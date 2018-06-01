@@ -1,0 +1,16 @@
+PWD /Users/saul/p/tarred_compiler/doc/misc
+INPUT /usr/local/texlive/2017/texmf.cnf
+INPUT /usr/local/texlive/2017/texmf-dist/web2c/texmf.cnf
+INPUT /usr/local/texlive/2017/texmf-var/web2c/pdftex/pdflatex.fmt
+INPUT /Users/saul/p/tarred_compiler/doc/misc/interface.tex
+OUTPUT interface.log
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/latex209.def
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/latex209.def
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/tracefnt.sty
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/tracefnt.sty
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/latexsym.sty
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/latexsym.sty
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/article.cls
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/article.cls
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/size10.clo
+INPUT /usr/local/texlive/2017/texmf-dist/tex/latex/base/size10.clo
